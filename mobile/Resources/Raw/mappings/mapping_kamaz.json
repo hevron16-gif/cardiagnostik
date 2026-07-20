@@ -1,0 +1,43 @@
+{
+  "brand": "КАМАЗ",
+  "engine_name": "КАМАЗ 740 (дизель V8)",
+  "engine_type": "v8",
+  "layout": "дизельный V8, под кабиной",
+  "difference_notes": "V-образный 8-цилиндровый дизель. ТНВД слева, турбина справа. Два выпускных коллектора (по одному на полублок). Воздухозаборник через кабину. Пневмосистема тормозов.",
+  "views": [
+    {
+      "id": "top",
+      "name": "Вид сверху",
+      "background": "Двигатель КАМАЗ-740 (дизель V8, вид сверху)",
+      "components": [
+        {"id":"left_bank","name":"Левый полублок (цил. 1-4)","category":"engine","color":"#78909C","outline":[[0.15,0.20],[0.45,0.30],[0.45,0.60],[0.15,0.50]],"error_codes":["P0301","P0302","P0303","P0304"]},
+        {"id":"right_bank","name":"Правый полублок (цил. 5-8)","category":"engine","color":"#90A4AE","outline":[[0.55,0.30],[0.85,0.20],[0.85,0.50],[0.55,0.60]],"error_codes":["P0305","P0306","P0307","P0308"]},
+        {"id":"v_valley","name":"Развал блока (V-зона)","category":"engine","color":"#607D8B","outline":[[0.40,0.30],[0.60,0.30],[0.55,0.60],[0.45,0.60]],"error_codes":["P0300"]},
+        {"id":"injection_pump","name":"ТНВД (ЯЗДА / Bosch)","category":"fuel","color":"#EF9A9A","outline":[[0.10,0.24],[0.26,0.22],[0.28,0.38],[0.12,0.40]],"error_codes":["P0250","P0251","P0252","P0253","P0087","P0088","P1210"]},
+        {"id":"fuel_filter","name":"Топливный фильтр-отстойник","category":"fuel","color":"#E57373","outline":[[0.06,0.44],[0.16,0.44],[0.16,0.54],[0.06,0.54]],"error_codes":["P0087","P0089"]},
+        {"id":"fuel_lines","name":"Топливные магистрали","category":"fuel","color":"#FFCDD2","outline":[[0.14,0.34],[0.30,0.32],[0.30,0.36],[0.14,0.38]],"error_codes":["P0087","P0089","P0093"]},
+        {"id":"turbo_right","name":"Турбокомпрессор (правый)","category":"intake","color":"#FFCC80","outline":"circle(0.80,0.16,0.06)","error_codes":["P0234","P0235","P0236","P0299","P2262"]},
+        {"id":"turbo_left","name":"Турбокомпрессор (левый)","category":"intake","color":"#FFB74D","outline":"circle(0.38,0.14,0.05)","error_codes":["P0234","P0235","P0299"]},
+        {"id":"intercooler","name":"Интеркулер / Охладитель наддува","category":"intake","color":"#4FC3F7","outline":[[0.46,0.10],[0.66,0.10],[0.66,0.20],[0.46,0.20]],"error_codes":["P0234","P0263","P0299"]},
+        {"id":"air_filter_truck","name":"Воздушный фильтр","category":"intake","color":"#A5D6A7","outline":[[0.82,0.04],[0.94,0.04],[0.94,0.16],[0.82,0.16]],"error_codes":["P0100","P0101","P0102","P1101"]},
+        {"id":"exhaust_left","name":"Выпускной коллектор (левый)","category":"exhaust","color":"#B0BEC5","outline":[[0.08,0.50],[0.18,0.48],[0.20,0.62],[0.10,0.64]],"error_codes":["P0420","P0400","P0401"]},
+        {"id":"exhaust_right","name":"Выпускной коллектор (правый)","category":"exhaust","color":"#90A4AE","outline":[[0.78,0.48],[0.90,0.50],[0.88,0.64],[0.76,0.62]],"error_codes":["P0420","P0400","P0401"]},
+        {"id":"radiator_truck","name":"Радиатор","category":"cooling","color":"#B3E5FC","outline":[[0.30,0.66],[0.70,0.66],[0.70,0.76],[0.30,0.76]],"error_codes":["P0115","P0116","P0117","P0118","P0128","P0217"]},
+        {"id":"fan_clutch","name":"Вентилятор (вискомуфта)","category":"cooling","color":"#81D4FA","outline":"circle(0.50,0.68,0.05)","error_codes":["P0480","P0481","P0526"]},
+        {"id":"thermostat_truck","name":"Термостат","category":"cooling","color":"#4FC3F7","outline":[[0.44,0.28],[0.52,0.28],[0.52,0.36],[0.44,0.36]],"error_codes":["P0128","P0597","P0598"]},
+        {"id":"water_pump_truck","name":"Водяной насос","category":"cooling","color":"#29B6F6","outline":"circle(0.58,0.44,0.04)","error_codes":["P0115","P0116"]},
+        {"id":"alternator_truck","name":"Генератор (28В)","category":"electrical","color":"#FFE082","outline":[[0.16,0.10],[0.26,0.10],[0.26,0.20],[0.16,0.20]],"error_codes":["P0560","P0562","P0563","P0620"]},
+        {"id":"starter_truck","name":"Стартер","category":"electrical","color":"#FFD54F","outline":[[0.20,0.56],[0.30,0.56],[0.30,0.64],[0.20,0.64]],"error_codes":["P0615","P0616","P0617"]},
+        {"id":"ecu_truck","name":"ЭБУ (ISB CM800 / ЯЗДА)","category":"electrical","color":"#CE93D8","outline":[[0.02,0.04],[0.14,0.04],[0.14,0.16],[0.02,0.16]],"error_codes":["P0600","P0601","P0602","P0603","P0604","P0606","P0607"]},
+        {"id":"crank_truck","name":"ДПКВ","category":"sensor","color":"#E1BEE7","outline":"circle(0.50,0.58,0.03)","error_codes":["P0320","P0335","P0336","P0337"]},
+        {"id":"cam_truck","name":"ДПРВ","category":"sensor","color":"#CE93D8","outline":"circle(0.34,0.28,0.025)","error_codes":["P0340","P0341","P0342"]},
+        {"id":"cts_truck","name":"ДТОЖ","category":"sensor","color":"#90CAF9","outline":"circle(0.46,0.30,0.025)","error_codes":["P0115","P0116","P0117","P0118"]},
+        {"id":"boost_sensor","name":"Датчик давления наддува","category":"sensor","color":"#FFCC80","outline":"circle(0.62,0.20,0.025)","error_codes":["P0234","P0236","P0237","P0238"]},
+        {"id":"oil_press_sensor","name":"Датчик давления масла","category":"sensor","color":"#BCAAA4","outline":"circle(0.18,0.34,0.025)","error_codes":["P0520","P0521","P0522","P0523","P0524"]},
+        {"id":"air_compressor","name":"Пневмокомпрессор","category":"electrical","color":"#FFCC80","outline":[[0.66,0.08],[0.76,0.08],[0.76,0.18],[0.66,0.18]],"error_codes":["P0560","P0105"]},
+        {"id":"battery_truck","name":"АКБ (2×12В)","category":"electrical","color":"#FFF59D","outline":[[0.02,0.64],[0.14,0.64],[0.14,0.76],[0.02,0.76]],"error_codes":["P0560","P0562","P0563"]},
+        {"id":"gearbox_truck","name":"КПП","category":"transmission","color":"#8D6E63","outline":[[0.50,0.60],[0.62,0.60],[0.62,0.76],[0.50,0.76]],"error_codes":["P0700","P0705","P0715","P0720","P0730"]}
+      ]
+    }
+  ]
+}

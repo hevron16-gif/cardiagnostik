@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="CarDiagnosticApp.Pages.GraphPage"
+             Title="Графики"
+             Shell.PresentationMode="Modal">
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="0">
+
+        <!-- ── Заголовок ── -->
+        <Border Grid.Row="0"
+                BackgroundColor="{StaticResource Surface}"
+                Stroke="Transparent"
+                Padding="16,12">
+            <Grid ColumnDefinitions="*,Auto">
+                <VerticalStackLayout Grid.Column="0" Spacing="2">
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="📈" FontSize="20" VerticalOptions="Center" />
+                        <Label Text="Графики параметров"
+                               FontFamily="InterSemiBold" FontSize="18"
+                               TextColor="{StaticResource OnSurface}"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout x:Name="StatusBar" Spacing="12">
+                        <Label x:Name="LabelPidCount"
+                               Text="0 параметров"
+                               FontFamily="InterRegular" FontSize="11"
+                               TextColor="#9E9E9E" />
+                        <Label x:Name="LabelWindow"
+                               Text="Окно: 60с"
+                               FontFamily="InterRegular" FontSize="11"
+                               TextColor="#9E9E9E" />
+                        <Label x:Name="LabelPointCount"
+                               Text=""
+                               FontFamily="InterRegular" FontSize="11"
+                               TextColor="{StaticResource Primary}" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+                <!-- Кнопки управления -->
+                <HorizontalStackLayout Grid.Column="1" Spacing="6" VerticalOptions="Center">
+                    <Button x:Name="BtnPlayPause"
+                            Text="⏸" FontSize="16"
+                            Padding="8,4" CornerRadius="16"
+                            WidthRequest="44" HeightRequest="44"
+                            BackgroundColor="{StaticResource Primary}"
+                            TextColor="White"
+                            Clicked="OnPlayPauseClicked" />
+                    <Button Text="🗑" FontSize="16"
+                            Padding="8,4" CornerRadius="16"
+                            WidthRequest="44" HeightRequest="44"
+                            BackgroundColor="{StaticResource Surface}"
+                            TextColor="{StaticResource OnSurface}"
+                            BorderColor="{StaticResource Gray300}" BorderWidth="1"
+                            Clicked="OnClearClicked" />
+                </HorizontalStackLayout>
+            </Grid>
+        </Border>
+
+        <!-- ── Выбор PID ── -->
+        <ScrollView Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalScrollBarVisibility="Never"
+                    Padding="8,6">
+            <HorizontalStackLayout x:Name="PidChips"
+                                   Spacing="6" />
+        </ScrollView>
+
+        <!-- ── График ── -->
+        <Grid Grid.Row="2" Padding="8,4">
+            <lvc:CartesianChart x:Name="MainChart"
+                                ZoomMode="X"
+                                TooltipPosition="Top">
+                <lvc:CartesianChart.XAxes>
+                    <!-- Labeler задаётся в code-behind (строка "sec" ломала XAML/открытие) -->
+                    <lvc:Axis Name="Время"
+                              MinStep="5"
+                              ShowSeparatorLines="True" />
+                </lvc:CartesianChart.XAxes>
+                <lvc:CartesianChart.YAxes>
+                    <lvc:Axis Name="Значение"
+                              ShowSeparatorLines="True" />
+                </lvc:CartesianChart.YAxes>
+            </lvc:CartesianChart>
+
+            <!-- Оверлей: нет данных -->
+            <VerticalStackLayout x:Name="NoDataOverlay"
+                                 IsVisible="True"
+                                 VerticalOptions="Center"
+                                 HorizontalOptions="Center"
+                                 Spacing="8">
+                <Label Text="📊" FontSize="48" HorizontalOptions="Center" />
+                <Label Text="Нет данных для отображения"
+                       FontFamily="InterRegular" FontSize="14"
+                       TextColor="#9E9E9E"
+                       HorizontalOptions="Center" />
+                <Label Text="Подключитесь к ELM327 и выберите параметры"
+                       FontFamily="InterRegular" FontSize="12"
+                       TextColor="#9E9E9E"
+                       HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <!-- ── Нижняя панель ── -->
+        <Border Grid.Row="3"
+                BackgroundColor="{StaticResource Surface}"
+                Stroke="Transparent"
+                Padding="12,8">
+            <HorizontalStackLayout Spacing="12" HorizontalOptions="Center">
+                <Button x:Name="Btn30" Text="30с" FontSize="12" Padding="10,4" CornerRadius="12"
+                        BackgroundColor="{StaticResource Primary}" TextColor="White"
+                        Clicked="OnWindow30Clicked" />
+                <Button x:Name="Btn60" Text="60с" FontSize="12" Padding="10,4" CornerRadius="12"
+                        BackgroundColor="#E0E0E0" TextColor="#424242"
+                        Clicked="OnWindow60Clicked" />
+                <Button x:Name="Btn120" Text="120с" FontSize="12" Padding="10,4" CornerRadius="12"
+                        BackgroundColor="#E0E0E0" TextColor="#424242"
+                        Clicked="OnWindow120Clicked" />
+                <Button Text="📐 Шкала" FontSize="12" Padding="10,4" CornerRadius="12"
+                        BackgroundColor="{StaticResource Surface}"
+                        TextColor="{StaticResource OnSurface}"
+                        BorderColor="{StaticResource Gray300}" BorderWidth="1"
+                        Clicked="OnFitClicked" />
+            </HorizontalStackLayout>
+        </Border>
+
+    </Grid>
+
+</ContentPage>

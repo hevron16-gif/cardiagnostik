@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarDiagnosticApp.Pages.ResultPage"
+             Title="Результат диагностики">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="16" Padding="20">
+
+            <!-- === Результат диагностики (AI) === -->
+            <Label x:Name="ResultLabel"
+                   FontSize="15"
+                   LineHeight="1.5"
+                   TextColor="{AppThemeBinding Light={StaticResource DarkOnLightBackground}, Dark={StaticResource LightOnDarkBackground}}" />
+
+            <!-- ════════════════════════════════════════════ -->
+            <!-- Карточка: Код ошибки + Марка/Модель           -->
+            <!-- ════════════════════════════════════════════ -->
+
+            <Border Style="{StaticResource InfoCard}" Padding="16">
+                <VerticalStackLayout Spacing="10">
+
+                    <!-- Строка 1: Иконка + Код ошибки -->
+                    <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                        <Label Text="&#xe52a;"
+                               FontFamily="MaterialIcons"
+                               FontSize="28"
+                               TextColor="{StaticResource Primary}"
+                               VerticalOptions="Center" />
+                        <Label x:Name="LabelErrorCode"
+                               Text="P0340"
+                               Style="{StaticResource Title1}"
+                               TextColor="{StaticResource Primary}"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+
+                    <!-- Строка 2: Иконка + Марка/Модель -->
+                    <HorizontalStackLayout Spacing="8" HorizontalOptions="Center">
+                        <Label Text="&#xe8b6;"
+                               FontFamily="MaterialIcons"
+                               FontSize="18"
+                               TextColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray200}}"
+                               VerticalOptions="Center" />
+                        <Label x:Name="LabelCarInfo"
+                               Text="ВАЗ 2114"
+                               Style="{StaticResource SubHeadline}"
+                               TextColor="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray400}}"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+
+                    <!-- Строка 3: Статус-бейдж -->
+                    <HorizontalStackLayout HorizontalOptions="Center">
+                        <Border x:Name="BadgeStatus" Style="{StaticResource Badge}">
+                            <Label x:Name="LabelStatus"
+                                   Style="{StaticResource BadgeText}"
+                                   Text="Диагностика завершена" />
+                        </Border>
+                    </HorizontalStackLayout>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- ════════════════════════════════════════════ -->
+            <!-- Блок: Расшифровка ошибки                      -->
+            <!-- ════════════════════════════════════════════ -->
+
+            <Border Style="{StaticResource CardBorder}" Padding="20">
+                <VerticalStackLayout Spacing="12">
+
+                    <!-- Заголовок блока -->
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="&#xe903;"
+                               FontFamily="MaterialIcons"
+                               FontSize="20"
+                               TextColor="{StaticResource Primary}"
+                               VerticalOptions="Center" />
+                        <Label Text="Расшифровка ошибки"
+                               Style="{StaticResource Headline}"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+
+                    <BoxView Style="{StaticResource Divider}" />
+
+                    <!-- Текст расшифровки -->
+                    <Label x:Name="LabelExplanation"
+                           Text="Загрузка..."
+                           FontFamily="{OnPlatform WinUI=InterRegular, Default=''}"
+                           FontSize="15"
+                           LineHeight="1.5"
+                           TextColor="{AppThemeBinding Light={StaticResource DarkOnLightBackground}, Dark={StaticResource LightOnDarkBackground}}" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- ════════════════════════════════════════════ -->
+            <!-- Блок: Вероятные причины (3–5 пунктов)        -->
+            <!-- ════════════════════════════════════════════ -->
+
+            <Border Style="{StaticResource WarningCard}" Padding="20">
+                <VerticalStackLayout Spacing="12">
+
+                    <!-- Заголовок блока -->
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="&#xe002;"
+                               FontFamily="MaterialIcons"
+                               FontSize="20"
+                               TextColor="{StaticResource WarningAmber}"
+                               VerticalOptions="Center" />
+                        <Label Text="Вероятные причины"
+                               Style="{StaticResource Headline}"
+                               TextColor="{StaticResource WarningAmber}"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+
+                    <BoxView Style="{StaticResource Divider}" />
+
+                    <!-- Список причин (заполняется из кода) -->
+                    <VerticalStackLayout x:Name="CausesList" Spacing="10" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- ════════════════════════════════════════════ -->
+            <!-- Блок: Рекомендации по ремонту                -->
+            <!-- ════════════════════════════════════════════ -->
+
+            <Border Style="{StaticResource SuccessCard}" Padding="20">
+                <VerticalStackLayout Spacing="12">
+
+                    <!-- Заголовок блока -->
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="&#xe869;"
+                               FontFamily="MaterialIcons"
+                               FontSize="20"
+                               TextColor="{StaticResource SuccessGreen}"
+                               VerticalOptions="Center" />
+                        <Label Text="Рекомендации по ремонту"
+                               Style="{StaticResource Headline}"
+                               TextColor="{StaticResource SuccessGreen}"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+
+                    <BoxView Style="{StaticResource Divider}" />
+
+                    <!-- Список рекомендаций (заполняется из кода) -->
+                    <VerticalStackLayout x:Name="RepairList" Spacing="10" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- ════════════════════════════════════════════ -->
+            <!-- Блок: Источники (ссылки)                      -->
+            <!-- ════════════════════════════════════════════ -->
+
+            <Border Style="{StaticResource CardBorder}" Padding="20">
+                <VerticalStackLayout Spacing="12">
+
+                    <!-- Заголовок блока -->
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="&#xe157;"
+                               FontFamily="MaterialIcons"
+                               FontSize="20"
+                               TextColor="{StaticResource Primary}"
+                               VerticalOptions="Center" />
+                        <Label Text="Источники"
+                               Style="{StaticResource Headline}"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+
+                    <BoxView Style="{StaticResource Divider}" />
+
+                    <!-- Список ссылок (заполняется из кода) -->
+                    <VerticalStackLayout x:Name="SourcesList" Spacing="8" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- ════════════════════════════════════════════ -->
+            <!-- Обратная связь: Помогло / Не помогло         -->
+            <!-- ════════════════════════════════════════════ -->
+
+            <Border Style="{StaticResource CardBorder}" Padding="20">
+                <VerticalStackLayout Spacing="14">
+
+                    <Label Text="Помог ли ответ?"
+                           Style="{StaticResource SubHeadline}"
+                           FontFamily="InterMedium"
+                           HorizontalOptions="Center" />
+
+                    <!-- Кнопки Да / Нет -->
+                    <HorizontalStackLayout Spacing="16" HorizontalOptions="Center">
+
+                        <!-- Да, помогло -->
+                        <Border x:Name="BtnHelpful"
+                                Style="{StaticResource SuccessCard}"
+                                Padding="18,10"
+                                StrokeShape="RoundRectangle 12">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnHelpfulTapped" />
+                            </Border.GestureRecognizers>
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="&#xe8dc;"
+                                       FontFamily="MaterialIcons"
+                                       FontSize="22"
+                                       TextColor="{StaticResource SuccessGreen}"
+                                       VerticalOptions="Center" />
+                                <Label Text="Помогло"
+                                       FontFamily="InterSemiBold"
+                                       FontSize="15"
+                                       TextColor="{StaticResource SuccessGreen}"
+                                       VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                        </Border>
+
+                        <!-- Нет, не помогло -->
+                        <Border x:Name="BtnNotHelpful"
+                                Style="{StaticResource ErrorCard}"
+                                Padding="18,10"
+                                StrokeShape="RoundRectangle 12">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnNotHelpfulTapped" />
+                            </Border.GestureRecognizers>
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="&#xe8db;"
+                                       FontFamily="MaterialIcons"
+                                       FontSize="22"
+                                       TextColor="{StaticResource ErrorRed}"
+                                       VerticalOptions="Center" />
+                                <Label Text="Не помогло"
+                                       FontFamily="InterSemiBold"
+                                       FontSize="15"
+                                       TextColor="{StaticResource ErrorRed}"
+                                       VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                        </Border>
+
+                    </HorizontalStackLayout>
+
+                    <!-- Кнопка Схема узлов -->
+                    <Border x:Name="BtnDiagram"
+                            Style="{StaticResource CardBorder}"
+                            Padding="14,10"
+                            StrokeShape="RoundRectangle 12"
+                            HorizontalOptions="Center">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnDiagramTapped" />
+                        </Border.GestureRecognizers>
+                        <HorizontalStackLayout Spacing="8">
+                            <Label Text="&#xe40b;"
+                                   FontFamily="MaterialIcons"
+                                   FontSize="18"
+                                   TextColor="{StaticResource Primary}"
+                                   VerticalOptions="Center" />
+                            <Label Text="Схема узлов"
+                                   FontFamily="InterSemiBold"
+                                   FontSize="14"
+                                   TextColor="{StaticResource Primary}"
+                                   VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </Border>
+
+                    <!-- Кнопка Пошаговая инструкция (генерирует с картинками и схемами) -->
+                    <Border x:Name="BtnStepInstruction"
+                            Style="{StaticResource CardBorder}"
+                            Padding="14,10"
+                            StrokeShape="RoundRectangle 12"
+                            HorizontalOptions="Center"
+                            BackgroundColor="#1565C0">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnStepInstructionTapped" />
+                        </Border.GestureRecognizers>
+                        <HorizontalStackLayout Spacing="8">
+                            <Label Text="🛠️"
+                                   FontSize="18"
+                                   VerticalOptions="Center" />
+                            <Label Text="Пошаговая инструкция"
+                                   FontFamily="InterSemiBold"
+                                   FontSize="14"
+                                   TextColor="White"
+                                   VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </Border>
+
+                    <!-- Кнопка Ремонтное руководство -->
+                    <Border x:Name="BtnRepairGuide"
+                            Style="{StaticResource CardBorder}"
+                            Padding="14,10"
+                            StrokeShape="RoundRectangle 12"
+                            HorizontalOptions="Center"
+                            BackgroundColor="#1B5E20">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnRepairGuideTapped" />
+                        </Border.GestureRecognizers>
+                        <HorizontalStackLayout Spacing="8">
+                            <Label Text="📖"
+                                   FontSize="18"
+                                   VerticalOptions="Center" />
+                            <Label Text="Пошаговое руководство по ремонту"
+                                   FontFamily="InterSemiBold"
+                                   FontSize="14"
+                                   TextColor="White"
+                                   VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </Border>
+
+                    <!-- Кнопка Копировать -->
+                    <Border x:Name="BtnCopy"
+                            Style="{StaticResource CardBorder}"
+                            Padding="14,10"
+                            StrokeShape="RoundRectangle 12"
+                            HorizontalOptions="Center">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnCopyTapped" />
+                        </Border.GestureRecognizers>
+                        <HorizontalStackLayout Spacing="8">
+                            <Label Text="&#xe14d;"
+                                   x:Name="IconCopy"
+                                   FontFamily="MaterialIcons"
+                                   FontSize="18"
+                                   TextColor="{StaticResource Primary}"
+                                   VerticalOptions="Center" />
+                            <Label x:Name="LabelCopy"
+                                   Text="Копировать"
+                                   FontFamily="InterSemiBold"
+                                   FontSize="14"
+                                   TextColor="{StaticResource Primary}"
+                                   VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </Border>
+
+                    <!-- Сообщение после голосования -->
+                    <Label x:Name="LabelFeedback"
+                           Style="{StaticResource Caption1}"
+                           TextColor="{StaticResource Gray400}"
+                           HorizontalOptions="Center"
+                           IsVisible="False" />
+
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

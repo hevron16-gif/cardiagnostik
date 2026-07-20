@@ -1,0 +1,224 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CarDiagnosticApp"
+             x:Class="CarDiagnosticApp.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+                <ResourceDictionary Source="Resources/Styles/AppStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- ═══════════════════════════════════════════ -->
+            <!-- 4. Глобальные стили для всех элементов      -->
+            <!-- ═══════════════════════════════════════════ -->
+
+            <!-- ── Семантические текстовые стили ── -->
+
+            <Style x:Key="ErrorLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource ErrorRed}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontFamily" Value="{OnPlatform WinUI=InterSemiBold, Default=''}" />
+            </Style>
+
+            <Style x:Key="SuccessLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource SuccessGreen}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontFamily" Value="{OnPlatform WinUI=InterSemiBold, Default=''}" />
+            </Style>
+
+            <Style x:Key="WarningLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource WarningAmber}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontFamily" Value="{OnPlatform WinUI=InterSemiBold, Default=''}" />
+            </Style>
+
+            <Style x:Key="InfoLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+
+            <Style x:Key="SecondaryLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray200}}" />
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+
+            <Style x:Key="MutedLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}" />
+                <Setter Property="FontSize" Value="12" />
+            </Style>
+
+            <!-- ── Кнопки ── -->
+
+            <Style x:Key="PrimaryButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="TextColor" Value="{StaticResource White}" />
+                <Setter Property="FontFamily" Value="{OnPlatform WinUI=InterSemiBold, Default=''}" />
+                <Setter Property="CornerRadius" Value="12" />
+                <Setter Property="Padding" Value="16,12" />
+            </Style>
+
+            <Style x:Key="SecondaryButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                <Setter Property="FontFamily" Value="{OnPlatform WinUI=InterSemiBold, Default=''}" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="BorderColor" Value="{StaticResource Primary}" />
+                <Setter Property="BorderWidth" Value="2" />
+                <Setter Property="CornerRadius" Value="12" />
+                <Setter Property="Padding" Value="16,12" />
+                <Setter Property="MinimumHeightRequest" Value="44" />
+            </Style>
+
+            <Style x:Key="DangerButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource ErrorRed}" />
+                <Setter Property="TextColor" Value="{StaticResource White}" />
+                <Setter Property="FontFamily" Value="{OnPlatform WinUI=InterSemiBold, Default=''}" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="CornerRadius" Value="12" />
+                <Setter Property="Padding" Value="16,12" />
+                <Setter Property="MinimumHeightRequest" Value="44" />
+            </Style>
+
+            <Style x:Key="SuccessButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource SuccessGreen}" />
+                <Setter Property="TextColor" Value="{StaticResource White}" />
+                <Setter Property="FontFamily" Value="{OnPlatform WinUI=InterSemiBold, Default=''}" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="CornerRadius" Value="12" />
+                <Setter Property="Padding" Value="16,12" />
+                <Setter Property="MinimumHeightRequest" Value="44" />
+            </Style>
+
+            <Style x:Key="WarningButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource WarningAmber}" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource Black}}" />
+                <Setter Property="FontFamily" Value="{OnPlatform WinUI=InterSemiBold, Default=''}" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="CornerRadius" Value="12" />
+                <Setter Property="Padding" Value="16,12" />
+                <Setter Property="MinimumHeightRequest" Value="44" />
+            </Style>
+
+            <Style x:Key="TextButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                <Setter Property="FontFamily" Value="{OnPlatform WinUI=InterSemiBold, Default=''}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="BorderWidth" Value="0" />
+                <Setter Property="Padding" Value="8,4" />
+                <Setter Property="MinimumHeightRequest" Value="36" />
+            </Style>
+
+            <Style x:Key="IconButton" TargetType="ImageButton">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="Padding" Value="8" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="MinimumHeightRequest" Value="44" />
+                <Setter Property="MinimumWidthRequest" Value="44" />
+            </Style>
+
+            <!-- ── Карточки ── -->
+
+            <Style x:Key="CardBorder" TargetType="Border" BasedOn="{StaticResource CardStyle}">
+                <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource LightSecondaryBackground}, Dark={StaticResource DarkSecondaryBackground}}" />
+            </Style>
+
+            <Style x:Key="ErrorCard" TargetType="Border" BasedOn="{StaticResource CardStyle}">
+                <Setter Property="Stroke" Value="{StaticResource ErrorRed}" />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="Background" Value="{AppThemeBinding Light=#FFF5F5, Dark=#3D1F1F}" />
+            </Style>
+
+            <Style x:Key="SuccessCard" TargetType="Border" BasedOn="{StaticResource CardStyle}">
+                <Setter Property="Stroke" Value="{StaticResource SuccessGreen}" />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="Background" Value="{AppThemeBinding Light=#F1F8F2, Dark=#1F3D22}" />
+            </Style>
+
+            <Style x:Key="WarningCard" TargetType="Border" BasedOn="{StaticResource CardStyle}">
+                <Setter Property="Stroke" Value="{StaticResource WarningAmber}" />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="Background" Value="{AppThemeBinding Light=#FFFCF0, Dark=#3D3500}" />
+            </Style>
+
+            <Style x:Key="InfoCard" TargetType="Border" BasedOn="{StaticResource CardStyle}">
+                <Setter Property="Stroke" Value="{StaticResource Primary}" />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="Background" Value="{AppThemeBinding Light=#F0F7FF, Dark=#1A2440}" />
+            </Style>
+
+            <!-- ── Разделители ── -->
+
+            <Style x:Key="Divider" TargetType="BoxView">
+                <Setter Property="HeightRequest" Value="1" />
+                <Setter Property="HorizontalOptions" Value="Fill" />
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
+            </Style>
+
+            <Style x:Key="DividerVertical" TargetType="BoxView">
+                <Setter Property="WidthRequest" Value="1" />
+                <Setter Property="VerticalOptions" Value="Fill" />
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
+            </Style>
+
+            <!-- ── Бейджи / чипсы ── -->
+
+            <Style x:Key="Badge" TargetType="Border">
+                <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+                <Setter Property="StrokeThickness" Value="0" />
+                <Setter Property="Padding" Value="10,4" />
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+            </Style>
+
+            <Style x:Key="BadgeError" TargetType="Border" BasedOn="{StaticResource Badge}">
+                <Setter Property="BackgroundColor" Value="{StaticResource ErrorRed}" />
+            </Style>
+
+            <Style x:Key="BadgeSuccess" TargetType="Border" BasedOn="{StaticResource Badge}">
+                <Setter Property="BackgroundColor" Value="{StaticResource SuccessGreen}" />
+            </Style>
+
+            <Style x:Key="BadgeWarning" TargetType="Border" BasedOn="{StaticResource Badge}">
+                <Setter Property="BackgroundColor" Value="{StaticResource WarningAmber}" />
+            </Style>
+
+            <Style x:Key="BadgeText" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource White}" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontFamily" Value="{OnPlatform WinUI=InterSemiBold, Default=''}" />
+            </Style>
+
+            <Style x:Key="BadgeTextDark" TargetType="Label">
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource Black}}" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontFamily" Value="{OnPlatform WinUI=InterSemiBold, Default=''}" />
+            </Style>
+
+            <!-- ── Поля ввода ── -->
+
+            <Style x:Key="InputEntry" TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightSecondaryBackground}, Dark={StaticResource DarkSecondaryBackground}}" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource DarkOnLightBackground}, Dark={StaticResource LightOnDarkBackground}}" />
+                <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray500}}" />
+                <Setter Property="FontFamily" Value="{OnPlatform WinUI=InterRegular, Default=''}" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="MinimumHeightRequest" Value="48" />
+            </Style>
+
+            <!-- ── Индикаторы загрузки ── -->
+
+            <Style x:Key="LoadingIndicator" TargetType="ActivityIndicator">
+                <Setter Property="Color" Value="{StaticResource Primary}" />
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="WidthRequest" Value="40" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

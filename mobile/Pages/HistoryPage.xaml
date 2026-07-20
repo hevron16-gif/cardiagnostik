@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarDiagnosticApp.Pages.HistoryPage"
+             Title="История"
+             BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource DarkBackground}}">
+
+    <Grid RowDefinitions="Auto,*" Padding="0">
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- Заголовок                                   -->
+        <!-- ═══════════════════════════════════════════ -->
+
+        <Border Grid.Row="0"
+                Padding="20,16"
+                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource DarkSecondaryBackground}}">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <!-- Заголовок по центру -->
+                <VerticalStackLayout Grid.Column="1"
+                                     Spacing="4"
+                                     HorizontalOptions="Center">
+                    <HorizontalStackLayout Spacing="10"
+                                            HorizontalOptions="Center">
+                        <Label Text="&#xe889;"
+                               FontFamily="MaterialIcons"
+                               FontSize="28"
+                               TextColor="{StaticResource Primary}"
+                               VerticalOptions="Center" />
+                        <Label Text="История диагностик"
+                               Style="{StaticResource Title2}"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <Label x:Name="LabelCount"
+                           Style="{StaticResource Caption1}"
+                           TextColor="{StaticResource Gray400}"
+                           HorizontalOptions="Center" />
+
+                    <!-- Статистика -->
+                    <HorizontalStackLayout x:Name="StatsBar"
+                                           Spacing="14"
+                                           HorizontalOptions="Center"
+                                           IsVisible="False">
+                        <Label x:Name="StatTotal"
+                               FontFamily="InterSemiBold"
+                               FontSize="12"
+                               TextColor="{StaticResource Gray400}"
+                               VerticalOptions="Center" />
+                        <Label x:Name="StatSolved"
+                               FontFamily="InterSemiBold"
+                               FontSize="12"
+                               TextColor="#4CAF50"
+                               VerticalOptions="Center" />
+                        <Label x:Name="StatInProgress"
+                               FontFamily="InterSemiBold"
+                               FontSize="12"
+                               TextColor="#FFC107"
+                               VerticalOptions="Center" />
+                        <Label x:Name="StatUnsolved"
+                               FontFamily="InterSemiBold"
+                               FontSize="12"
+                               TextColor="#9E9E9E"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+                <!-- Кнопка очистки -->
+                <Border Grid.Column="2"
+                        Padding="10,8"
+                        BackgroundColor="{StaticResource ErrorRed}"
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="0"
+                        VerticalOptions="Center"
+                        HorizontalOptions="End">
+                    <HorizontalStackLayout Spacing="6">
+                        <Label Text="&#xe872;"
+                               FontFamily="MaterialIcons"
+                               FontSize="14"
+                               TextColor="White"
+                               VerticalOptions="Center" />
+                        <Label Text="Очистить"
+                               FontFamily="InterMedium"
+                               FontSize="13"
+                               TextColor="White"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnClearHistoryClicked" />
+                    </Border.GestureRecognizers>
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- Список истории                              -->
+        <!-- ═══════════════════════════════════════════ -->
+
+        <CollectionView Grid.Row="1"
+                        x:Name="HistoryList"
+                        Margin="16,12"
+                        SelectionMode="None">
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout Spacing="12"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center"
+                                     Padding="40">
+                    <Label Text="&#xe8c6;"
+                           FontFamily="MaterialIcons"
+                           FontSize="48"
+                           TextColor="{StaticResource Gray400}"
+                           HorizontalOptions="Center" />
+                    <Label Text="История пуста"
+                           Style="{StaticResource SubHeadline}"
+                           TextColor="{StaticResource Gray400}"
+                           HorizontalOptions="Center" />
+                    <Label Text="Здесь появятся результаты диагностик после первой проверки."
+                           FontFamily="{OnPlatform WinUI=InterRegular, Default=''}"
+                           FontSize="13"
+                           TextColor="{StaticResource Gray400}"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Style="{StaticResource CardBorder}"
+                            Padding="16"
+                            Margin="0,0,0,10"
+                            StrokeShape="RoundRectangle 12">
+
+                        <VerticalStackLayout Spacing="8">
+
+                            <!-- Код ошибки + дата -->
+                            <Grid ColumnDefinitions="*,Auto">
+                                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                                    <Label Text="&#xe52a;"
+                                           FontFamily="MaterialIcons"
+                                           FontSize="20"
+                                           TextColor="{StaticResource Primary}"
+                                           VerticalOptions="Center" />
+                                    <Label Text="{Binding error_code}"
+                                           FontFamily="InterBold"
+                                           FontSize="18"
+                                           TextColor="{StaticResource Primary}"
+                                           VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+                                <Label Grid.Column="1"
+                                       Text="{Binding DisplayDate}"
+                                       FontFamily="InterRegular"
+                                       FontSize="12"
+                                       TextColor="{StaticResource Gray400}"
+                                       VerticalOptions="Center" />
+                            </Grid>
+
+                            <!-- Марка + модель -->
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="&#xe8b6;"
+                                       FontFamily="MaterialIcons"
+                                       FontSize="14"
+                                       TextColor="{StaticResource Gray400}"
+                                       VerticalOptions="Center" />
+                                <Label Text="{Binding CarInfo}"
+                                       FontFamily="InterSemiBold"
+                                       FontSize="14"
+                                       TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}"
+                                       VerticalOptions="Center" />
+                             </HorizontalStackLayout>
+
+                             <!-- Статус -->
+                             <Border Padding="10,5"
+                                     BackgroundColor="{Binding StatusBackgroundColor}"
+                                     StrokeShape="RoundRectangle 8"
+                                     StrokeThickness="0"
+                                     HorizontalOptions="Start">
+                                 <HorizontalStackLayout Spacing="6">
+                                     <Ellipse WidthRequest="8"
+                                              HeightRequest="8"
+                                              Fill="{Binding StatusColor}"
+                                              VerticalOptions="Center" />
+                                     <Label Text="{Binding Status}"
+                                            FontFamily="InterMedium"
+                                            FontSize="12"
+                                            TextColor="{Binding StatusColor}"
+                                            VerticalOptions="Center" />
+                                 </HorizontalStackLayout>
+                                 <Border.GestureRecognizers>
+                                     <TapGestureRecognizer Tapped="OnStatusTapped"
+                                                           CommandParameter="{Binding .}" />
+                                 </Border.GestureRecognizers>
+                             </Border>
+
+                             <!-- Сниппет -->
+                            <Label Text="{Binding snippet}"
+                                   FontFamily="InterRegular"
+                                   FontSize="13"
+                                   LineHeight="1.4"
+                                   LineBreakMode="TailTruncation"
+                                   MaxLines="2"
+                                   TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}" />
+
+                            <!-- Разделитель -->
+                            <BoxView HeightRequest="1"
+                                     Color="{StaticResource Gray200}"
+                                     Margin="0,4,0,0" />
+
+                            <!-- Кнопка повторной проверки -->
+                            <HorizontalStackLayout Spacing="4"
+                                                   HorizontalOptions="End">
+                                <Label Text="&#xe421;"
+                                       FontFamily="MaterialIcons"
+                                       FontSize="14"
+                                       TextColor="{StaticResource Primary}"
+                                       VerticalOptions="Center" />
+                                <Label Text="Проверить снова"
+                                       FontFamily="InterMedium"
+                                       FontSize="13"
+                                       TextColor="{StaticResource Primary}"
+                                       VerticalOptions="Center" />
+                                <HorizontalStackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnRetryTapped"
+                                                          CommandParameter="{Binding .}" />
+                                </HorizontalStackLayout.GestureRecognizers>
+                            </HorizontalStackLayout>
+
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- Индикатор загрузки                          -->
+        <!-- ═══════════════════════════════════════════ -->
+
+        <ActivityIndicator Grid.Row="1"
+                           x:Name="LoadingIndicator"
+                           IsVisible="False"
+                           IsRunning="False"
+                           Color="{StaticResource Primary}"
+                           HeightRequest="40"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center" />
+
+    </Grid>
+
+</ContentPage>

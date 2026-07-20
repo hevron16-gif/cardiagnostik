@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarDiagnosticApp.Pages.CodingPage"
+             Title="🔧 Кодирование и скрытые функции"
+             BackgroundColor="{StaticResource DarkBackground}">
+
+    <Grid RowDefinitions="Auto,Auto,*" Padding="0">
+
+        <!-- ══════ Заголовок ══════ -->
+        <VerticalStackLayout Grid.Row="0" Padding="20,15,20,10" Spacing="4">
+            <Label Text="🔧 Кодирование и скрытые функции"
+                   FontFamily="InterBold"
+                   FontSize="22"
+                   TextColor="{StaticResource LightOnDarkBackground}" />
+            <Label x:Name="LabelStatus"
+                   FontFamily="Inter"
+                   FontSize="12"
+                   TextColor="{StaticResource Gray400}" />
+            <!-- Поиск -->
+            <Border Style="{StaticResource CardBorder}"
+                    Padding="12,8"
+                    StrokeShape="RoundRectangle 10"
+                    Margin="0,8,0,0">
+                <Entry x:Name="SearchEntry"
+                       Placeholder="Поиск функций..."
+                       PlaceholderColor="{StaticResource Gray500}"
+                       TextColor="{StaticResource LightOnDarkBackground}"
+                       BackgroundColor="Transparent"
+                       FontSize="14"
+                       ClearButtonVisibility="WhileEditing"
+                       TextChanged="OnSearchTextChanged" />
+            </Border>
+        </VerticalStackLayout>
+
+        <!-- ══════ Фильтры по брендам ══════ -->
+        <ScrollView Grid.Row="1" Orientation="Horizontal" HorizontalScrollBarVisibility="Never"
+                    Padding="20,0" Margin="0,0,0,10">
+            <HorizontalStackLayout x:Name="BrandFilters" Spacing="8" />
+        </ScrollView>
+
+        <!-- ══════ Список функций ══════ -->
+        <CollectionView x:Name="FeaturesList"
+                         Grid.Row="2"
+                         Margin="20,0"
+                         SelectionMode="None"
+                         RemainingItemsThreshold="5"
+                         RemainingItemsThresholdReached="OnLoadMore">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Style="{StaticResource CardBorder}"
+                            Padding="16,14"
+                            StrokeShape="RoundRectangle 12"
+                            Margin="0,6">
+                        <VerticalStackLayout Spacing="8">
+                            <!-- Заголовок -->
+                            <HorizontalStackLayout Spacing="10">
+                                <Label Text="{Binding FeatureName, StringFormat='{0} '}"
+                                       FontFamily="InterSemiBold"
+                                       FontSize="16"
+                                       TextColor="{StaticResource LightOnDarkBackground}"
+                                       HorizontalOptions="StartAndExpand" />
+                            </HorizontalStackLayout>
+
+                            <!-- Иконка + категория -->
+                            <HorizontalStackLayout Spacing="6">
+                                <Label Text="{Binding Icon}" FontSize="16" VerticalOptions="Center" />
+                                <Border BackgroundColor="{StaticResource Surface}"
+                                        Padding="8,3"
+                                        StrokeShape="RoundRectangle 6">
+                                    <Label Text="{Binding Category, StringFormat='{0}'}"
+                                           FontSize="10"
+                                           TextColor="{StaticResource OnSurface}" />
+                                </Border>
+                                <Border BackgroundColor="#2A2A2A"
+                                        Padding="8,3"
+                                        StrokeShape="RoundRectangle 6">
+                                    <Label Text="{Binding Brand, StringFormat='{0}'}"
+                                           FontSize="10"
+                                           TextColor="{StaticResource OnSurface}" />
+                                </Border>
+                            </HorizontalStackLayout>
+
+                            <!-- Описание -->
+                            <Label Text="{Binding Description}"
+                                   FontSize="12"
+                                   TextColor="{StaticResource Gray400}"
+                                   MaxLines="3"
+                                   LineBreakMode="TailTruncation" />
+
+                            <!-- Действия -->
+                            <HorizontalStackLayout Spacing="8" Margin="0,4,0,0">
+                                <Border x:Name="BtnActivate"
+                                        BackgroundColor="#2E7D32"
+                                        Padding="14,8"
+                                        StrokeShape="RoundRectangle 8">
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnActivateTapped"
+                                                              CommandParameter="{Binding .}" />
+                                    </Border.GestureRecognizers>
+                                    <HorizontalStackLayout Spacing="4">
+                                        <Label Text="▶" FontSize="12" TextColor="White" VerticalOptions="Center" />
+                                        <Label Text="Активировать"
+                                               FontSize="12"
+                                               FontFamily="InterSemiBold"
+                                               TextColor="White" />
+                                    </HorizontalStackLayout>
+                                </Border>
+
+                                <Border x:Name="BtnDeactivate"
+                                        BackgroundColor="#C62828"
+                                        Padding="14,8"
+                                        StrokeShape="RoundRectangle 8">
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnDeactivateTapped"
+                                                              CommandParameter="{Binding .}" />
+                                    </Border.GestureRecognizers>
+                                    <HorizontalStackLayout Spacing="4">
+                                        <Label Text="⏹" FontSize="12" TextColor="White" VerticalOptions="Center" />
+                                        <Label Text="Деактивировать"
+                                               FontSize="12"
+                                               FontFamily="InterSemiBold"
+                                               TextColor="White" />
+                                    </HorizontalStackLayout>
+                                </Border>
+                            </HorizontalStackLayout>
+
+                            <!-- Предупреждение для требующих SecurityAccess -->
+                            <HorizontalStackLayout x:Name="SecurityWarning"
+                                                   IsVisible="{Binding RequiresSecurity}"
+                                                   Spacing="4">
+                                <Label Text="🔐" FontSize="12" VerticalOptions="Center" />
+                                <Label Text="Требуется доступ защищённой зоны (SecurityAccess)"
+                                       FontSize="10"
+                                       TextColor="#FF9800" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="8" Padding="40">
+                    <Label Text="🔍" FontSize="48" HorizontalOptions="Center" />
+                    <Label Text="Функции не найдены"
+                           FontFamily="InterSemiBold"
+                           FontSize="16"
+                           TextColor="{StaticResource OnSurface}"
+                           HorizontalOptions="Center" />
+                    <Label Text="Для этого бренда пока нет скрытых функций в базе."
+                           FontSize="12"
+                           TextColor="{StaticResource Gray400}"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+        </CollectionView>
+
+    </Grid>
+</ContentPage>

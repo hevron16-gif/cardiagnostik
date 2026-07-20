@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.eggs/
+dist/
+build/
+*.db
+*.sqlite3
+chroma_db/
+.autodiag
+.integrity
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# .NET / MAUI
+**/bin/
+**/obj/
+**/.vs/
+*.user
+*.suo
+*.pfx
+*.apk
+*.aab
+*.msix
+*.appx
+TestResults/
+mobile/CarDiagnosticApp_TemporaryKey.pfx
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+*.zip
+*.log
+
+# Local nanobot / sessions
+.nanobot/
+sessions/
+memory/

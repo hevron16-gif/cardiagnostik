@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarDiagnosticApp.Pages.SchemePage"
+             Title="Схема узлов"
+             BackgroundColor="#121212">
+
+    <Grid RowDefinitions="Auto,Auto,Auto,*" Padding="0" BackgroundColor="#121212">
+
+        <!-- Заголовок -->
+        <Border Grid.Row="0"
+                BackgroundColor="#1E1E1E"
+                Stroke="Transparent"
+                Padding="16,12">
+            <Grid ColumnDefinitions="*,Auto">
+                <VerticalStackLayout Grid.Column="0" Spacing="4">
+                    <HorizontalStackLayout Spacing="8" HorizontalOptions="Start">
+                        <Label Text="🔧" FontSize="20" VerticalOptions="Center" />
+                        <Label x:Name="LabelPageTitle"
+                               Text="Схема узлов"
+                               FontFamily="InterSemiBold"
+                               FontSize="18"
+                               TextColor="#E0E0E0"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="8" HorizontalOptions="Start">
+                        <Label x:Name="LabelErrorCode"
+                               Text="P0340"
+                               FontFamily="InterSemiBold"
+                               FontSize="12"
+                               TextColor="{StaticResource Primary}"
+                               VerticalOptions="Center" />
+                        <Label Text="·" FontSize="12" TextColor="#9E9E9E" VerticalOptions="Center" />
+                        <Label x:Name="LabelCarInfo"
+                               Text="ВАЗ"
+                               FontFamily="InterRegular"
+                               FontSize="12"
+                               TextColor="#BDBDBD"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+                <Button x:Name="BtnSearchSchemes"
+                        Grid.Column="1"
+                        Text="📚 Библиотека"
+                        FontSize="11"
+                        FontFamily="InterSemiBold"
+                        Padding="12,6"
+                        CornerRadius="14"
+                        BackgroundColor="#1565C0"
+                        TextColor="White"
+                        VerticalOptions="Center"
+                        Clicked="OnSearchSchemesClicked" />
+            </Grid>
+        </Border>
+
+        <!-- Инфо-бар -->
+        <Border x:Name="InfoBar"
+                Grid.Row="1"
+                BackgroundColor="#1E1E1E"
+                Stroke="Transparent"
+                Padding="12,6"
+                IsVisible="False">
+            <Grid ColumnDefinitions="*,Auto">
+                <VerticalStackLayout Grid.Column="0" Spacing="2" VerticalOptions="Center">
+                    <Label x:Name="LabelHighlightedComp"
+                           Text=""
+                           FontFamily="InterSemiBold"
+                           FontSize="12"
+                           TextColor="{StaticResource Primary}"
+                           VerticalOptions="Center" />
+                    <Label x:Name="LabelHighlightedCodes"
+                           Text=""
+                           FontFamily="InterRegular"
+                           FontSize="11"
+                           TextColor="#BDBDBD"
+                           VerticalOptions="Center" />
+                </VerticalStackLayout>
+                <Button x:Name="BtnAiHighlight"
+                        Grid.Column="1"
+                        Text="🧠 AI"
+                        FontSize="10"
+                        Padding="8,2"
+                        CornerRadius="10"
+                        BackgroundColor="#7B1FA2"
+                        TextColor="White"
+                        IsVisible="False"
+                        VerticalOptions="Center"
+                        Clicked="OnAiHighlightClicked" />
+            </Grid>
+        </Border>
+
+        <!-- Табы -->
+        <ScrollView Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalScrollBarVisibility="Never"
+                    Padding="8,4">
+            <HorizontalStackLayout x:Name="ViewTabs" Spacing="6" />
+        </ScrollView>
+
+        <!-- Картинка СВЕРХУ (не внутри ScrollView — иначе на Windows Image не видно) + список снизу -->
+        <Grid Grid.Row="3" RowDefinitions="Auto,*" BackgroundColor="#121212">
+
+            <!-- Location PNG: фиксированная высота, всегда видна -->
+            <Border x:Name="LibraryImagePanel"
+                    Grid.Row="0"
+                    IsVisible="False"
+                    BackgroundColor="#FAFAFA"
+                    Stroke="#C62828"
+                    StrokeThickness="2"
+                    Margin="8,4,8,4"
+                    Padding="4"
+                    HeightRequest="340">
+                <Grid>
+                    <Image x:Name="LibrarySchemeImage"
+                           Aspect="AspectFit"
+                           BackgroundColor="#FAFAFA"
+                           HorizontalOptions="Fill"
+                           VerticalOptions="Fill" />
+                    <Label x:Name="LibraryImageCaption"
+                           Text=""
+                           FontSize="10"
+                           TextColor="#424242"
+                           BackgroundColor="#CCFFFFFF"
+                           Padding="6,2"
+                           VerticalOptions="End"
+                           HorizontalOptions="Fill" />
+                </Grid>
+            </Border>
+
+            <!-- Текст: сервер + локальные узлы -->
+            <ScrollView x:Name="ComponentListScroll"
+                        Grid.Row="1"
+                        IsVisible="False"
+                        BackgroundColor="#121212">
+                <VerticalStackLayout x:Name="ComponentList"
+                                     Spacing="6"
+                                     Padding="12,8,12,24" />
+            </ScrollView>
+
+            <!-- Заглушка -->
+            <VerticalStackLayout x:Name="DiagramPlaceholder"
+                                  Grid.Row="0"
+                                  Grid.RowSpan="2"
+                                  IsVisible="False"
+                                  HorizontalOptions="Center"
+                                  VerticalOptions="Center"
+                                  Spacing="12"
+                                  Padding="40">
+                <Label x:Name="PlaceholderIcon" Text="🔍" FontSize="48" HorizontalOptions="Center" />
+                <Label x:Name="PlaceholderTitle"
+                       Text="Схема не найдена"
+                       FontSize="16"
+                       FontFamily="InterSemiBold"
+                       HorizontalOptions="Center"
+                       TextColor="#E0E0E0" />
+                <Label x:Name="PlaceholderSubtitle"
+                       Text="Нет файла в Data/schemes"
+                       FontSize="12"
+                       FontFamily="InterRegular"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       TextColor="#9E9E9E" />
+            </VerticalStackLayout>
+
+            <!-- Скрытые/служебные (совместимость с кодом) -->
+            <Grid x:Name="ImageScrollView" IsVisible="False" />
+            <Image x:Name="DownloadedSchemeImage" IsVisible="False" />
+            <Border x:Name="SearchResultsScroll" IsVisible="False">
+                <VerticalStackLayout x:Name="SearchResultsStack">
+                    <HorizontalStackLayout x:Name="SearchLoadingIndicator" IsVisible="False" />
+                    <Label x:Name="SearchResultsHeader" IsVisible="False" />
+                    <Label x:Name="SearchResultsCount" IsVisible="False" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+    </Grid>
+</ContentPage>

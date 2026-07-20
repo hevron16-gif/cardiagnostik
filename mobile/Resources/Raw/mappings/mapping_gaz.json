@@ -1,0 +1,45 @@
+{
+  "brand": "ГАЗ",
+  "engine_name": "ГАЗ ЗМЗ-406 / УМЗ-4216",
+  "engine_type": "inline4",
+  "layout": "передний продольный",
+  "difference_notes": "Двигатель расположен продольно. Впуск справа, выпуск слева. Распределитель зажигания (трамблёр) вместо индивидуальных катушек на ранних версиях. Ремень/цепь ГРМ спереди.",
+  "views": [
+    {
+      "id": "top",
+      "name": "Вид сверху",
+      "background": "Моторный отсек ГАЗ (ЗМЗ-406, вид сверху)",
+      "components": [
+        {"id":"engine_block","name":"Блок цилиндров","category":"engine","color":"#78909C","outline":[[0.25,0.30],[0.75,0.30],[0.75,0.60],[0.25,0.60]],"error_codes":["P0300","P0301","P0302","P0303","P0304","P0320","P0325"]},
+        {"id":"cylinder_head","name":"ГБЦ","category":"engine","color":"#90A4AE","outline":[[0.25,0.20],[0.75,0.20],[0.75,0.30],[0.25,0.30]],"error_codes":["P0340","P0341","P0342","P0343","P0344"]},
+        {"id":"intake_manifold","name":"Впускной коллектор","category":"intake","color":"#66BB6A","outline":[[0.72,0.18],[0.82,0.22],[0.80,0.38],[0.70,0.34]],"error_codes":["P0105","P0106","P0171","P0172","P1102","P1294"]},
+        {"id":"throttle_body","name":"Дроссельная заслонка","category":"intake","color":"#81C784","outline":[[0.78,0.14],[0.86,0.16],[0.84,0.24],[0.76,0.22]],"error_codes":["P0120","P0121","P0122","P0123","P0505"]},
+        {"id":"air_filter","name":"Воздушный фильтр","category":"intake","color":"#A5D6A7","outline":[[0.80,0.04],[0.92,0.06],[0.90,0.16],[0.78,0.14]],"error_codes":["P0100","P0101","P0102","P0113"]},
+        {"id":"exhaust_manifold","name":"Выпускной коллектор","category":"exhaust","color":"#B0BEC5","outline":[[0.08,0.22],[0.22,0.18],[0.20,0.38],[0.06,0.42]],"error_codes":["P0420","P0421","P0400","P0401","P0402"]},
+        {"id":"distributor","name":"Трамблёр / Датчик-распределитель","category":"ignition","color":"#FFCA28","outline":"circle(0.22,0.18,0.04)","error_codes":["P0340","P0341","P0350","P0351","P0352","P0353","P0354"]},
+        {"id":"ignition_coil","name":"Катушка зажигания","category":"ignition","color":"#FFF9C4","outline":[[0.38,0.12],[0.46,0.12],[0.46,0.18],[0.38,0.18]],"error_codes":["P0350","P0351","P0352"]},
+        {"id":"fuel_rail","name":"Топливная рампа","category":"fuel","color":"#FFCDD2","outline":[[0.68,0.20],[0.80,0.22],[0.78,0.27],[0.66,0.25]],"error_codes":["P0170","P0171","P0172","P0201","P0202","P0203","P0204"]},
+        {"id":"injectors","name":"Форсунки","category":"fuel","color":"#EF9A9A","outline":[[0.70,0.21],[0.78,0.22],[0.77,0.26],[0.69,0.25]],"error_codes":["P0201","P0202","P0203","P0204","P0261","P0262","P0264","P0265"]},
+        {"id":"fuel_pump","name":"ТНВД / Бензонасос","category":"fuel","color":"#E57373","outline":[[0.12,0.50],[0.20,0.50],[0.20,0.58],[0.12,0.58]],"error_codes":["P0230","P0231","P0232","P0087","P0627"]},
+        {"id":"radiator","name":"Радиатор","category":"cooling","color":"#B3E5FC","outline":[[0.30,0.64],[0.70,0.64],[0.70,0.72],[0.30,0.72]],"error_codes":["P0115","P0116","P0117","P0118","P0128"]},
+        {"id":"radiator_fan","name":"Вентилятор (вискомуфта/электро)","category":"cooling","color":"#81D4FA","outline":[[0.74,0.46],[0.82,0.46],[0.82,0.58],[0.74,0.58]],"error_codes":["P0480","P0481","P0691"]},
+        {"id":"thermostat","name":"Термостат","category":"cooling","color":"#4FC3F7","outline":[[0.28,0.18],[0.34,0.18],[0.34,0.24],[0.28,0.24]],"error_codes":["P0128","P0597","P0598"]},
+        {"id":"water_pump","name":"Водяной насос","category":"cooling","color":"#29B6F6","outline":"circle(0.80,0.46,0.04)","error_codes":["P0115","P0116","P0117"]},
+        {"id":"alternator","name":"Генератор","category":"electrical","color":"#FFE082","outline":[[0.18,0.08],[0.26,0.08],[0.26,0.16],[0.18,0.16]],"error_codes":["P0560","P0562","P0563","P0620"]},
+        {"id":"starter","name":"Стартер","category":"electrical","color":"#FFD54F","outline":[[0.30,0.54],[0.38,0.54],[0.38,0.60],[0.30,0.60]],"error_codes":["P0615","P0616","P0617"]},
+        {"id":"ecu","name":"ЭБУ (МИКАС)","category":"electrical","color":"#CE93D8","outline":[[0.40,0.04],[0.50,0.04],[0.50,0.12],[0.40,0.12]],"error_codes":["P0600","P0601","P0602","P0603","P0604","P0605","P0606","P0630"]},
+        {"id":"crankshaft_sensor","name":"ДПКВ","category":"sensor","color":"#E1BEE7","outline":"circle(0.48,0.56,0.03)","error_codes":["P0320","P0321","P0335","P0336","P0337","P0338"]},
+        {"id":"camshaft_sensor","name":"ДПРВ (фаза)","category":"sensor","color":"#CE93D8","outline":"circle(0.22,0.14,0.025)","error_codes":["P0340","P0341","P0342","P0343","P0344"]},
+        {"id":"coolant_temp_sensor","name":"ДТОЖ","category":"sensor","color":"#90CAF9","outline":"circle(0.30,0.20,0.025)","error_codes":["P0115","P0116","P0117","P0118","P0119"]},
+        {"id":"o2_sensor","name":"Датчик кислорода (ДК)","category":"sensor","color":"#AED581","outline":"circle(0.12,0.34,0.025)","error_codes":["P0130","P0131","P0132","P0133","P0134","P0135","P0136","P0137","P0138","P0140","P0141"]},
+        {"id":"knock_sensor","name":"Датчик детонации","category":"sensor","color":"#FFE082","outline":"circle(0.34,0.38,0.025)","error_codes":["P0325","P0326","P0327","P0328"]},
+        {"id":"maf_sensor","name":"ДМРВ","category":"sensor","color":"#A5D6A7","outline":[[0.82,0.02],[0.90,0.03],[0.89,0.08],[0.81,0.07]],"error_codes":["P0100","P0101","P0102","P0103","P1101"]},
+        {"id":"battery","name":"АКБ","category":"electrical","color":"#FFF59D","outline":[[0.06,0.62],[0.14,0.62],[0.14,0.72],[0.06,0.72]],"error_codes":["P0560","P0562","P0563"]},
+        {"id":"oil_filter","name":"Масляный фильтр","category":"engine","color":"#BCAAA4","outline":"circle(0.14,0.46,0.03)","error_codes":["P0520","P0521","P0522"]},
+        {"id":"catalyst","name":"Катализатор / Пламегаситель","category":"exhaust","color":"#A1887F","outline":[[0.04,0.46],[0.12,0.44],[0.14,0.56],[0.06,0.58]],"error_codes":["P0420","P0421","P0422"]},
+        {"id":"timing_cover","name":"Крышка ГРМ (цепь)","category":"engine","color":"#90A4AE","outline":[[0.74,0.18],[0.84,0.18],[0.84,0.34],[0.74,0.34]],"error_codes":["P0010","P0011","P0012","P0016","P0017"]},
+        {"id":"fuel_filter","name":"Топливный фильтр","category":"fuel","color":"#E57373","outline":[[0.14,0.40],[0.20,0.40],[0.20,0.46],[0.14,0.46]],"error_codes":["P0087","P0089"]}
+      ]
+    }
+  ]
+}

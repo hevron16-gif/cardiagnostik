@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+             x:Class="CarDiagnosticApp.Pages.LiveChartsPage"
+             Title="LiveCharts"
+             Shell.PresentationMode="Modal"
+             BackgroundColor="{AppThemeBinding Dark=#121212, Light=#F5F5F5}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+
+            <!-- ═══ Заголовок ═══ -->
+            <Grid ColumnDefinitions="*,Auto" Padding="0,0,0,4">
+                <HorizontalStackLayout Grid.Column="0" Spacing="8">
+                    <Label Text="📊" FontSize="22" VerticalOptions="Center" />
+                    <Label x:Name="LabelHeader" Text="LiveCharts дашборд"
+                           FontFamily="InterSemiBold" FontSize="20"
+                           TextColor="{AppThemeBinding Dark=White, Light=#212121}"
+                           VerticalOptions="Center" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Grid.Column="1" Spacing="6">
+                    <Button x:Name="BtnPlayPause" Text="⏸" FontSize="16"
+                            Padding="8,4" CornerRadius="16"
+                            WidthRequest="44" HeightRequest="44"
+                            BackgroundColor="{StaticResource Primary}" TextColor="White"
+                            Clicked="OnPlayPauseClicked" />
+                    <Button x:Name="BtnClear" Text="🗑" FontSize="16"
+                            Padding="8,4" CornerRadius="16"
+                            WidthRequest="44" HeightRequest="44"
+                            BackgroundColor="{AppThemeBinding Dark=#2A2A2A, Light=#E0E0E0}"
+                            TextColor="{AppThemeBinding Dark=White, Light=#424242}"
+                            Clicked="OnClearClicked" />
+                </HorizontalStackLayout>
+            </Grid>
+
+            <!-- ═══ Статус-бар ═══ -->
+            <Border BackgroundColor="{AppThemeBinding Dark=#1E1E1E, Light=White}"
+                    Stroke="{AppThemeBinding Dark=#333, Light=#E0E0E0}" StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12" Padding="12,10">
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="12">
+                    <HorizontalStackLayout Grid.Column="0" Spacing="4">
+                        <Label Text="Параметров:" FontSize="11"
+                               TextColor="{AppThemeBinding Dark=#999, Light=#666}"
+                               VerticalOptions="Center" />
+                        <Label x:Name="LabelPidCount" Text="0"
+                               FontFamily="InterSemiBold" FontSize="13"
+                               TextColor="{StaticResource Primary}"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Grid.Column="1" Spacing="4" HorizontalOptions="Center">
+                        <Label Text="Цикл:" FontSize="11"
+                               TextColor="{AppThemeBinding Dark=#999, Light=#666}"
+                               VerticalOptions="Center" />
+                        <Label x:Name="LabelCycle" Text="—"
+                               FontFamily="InterSemiBold" FontSize="13"
+                               TextColor="{AppThemeBinding Dark=White, Light=#424242}"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Grid.Column="2" Spacing="4" HorizontalOptions="End">
+                        <Label Text="Точек:" FontSize="11"
+                               TextColor="{AppThemeBinding Dark=#999, Light=#666}"
+                               VerticalOptions="Center" />
+                        <Label x:Name="LabelPoints" Text="0"
+                               FontFamily="InterSemiBold" FontSize="13"
+                               TextColor="{AppThemeBinding Dark=White, Light=#424242}"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </Grid>
+            </Border>
+
+            <!-- ═══ Цифровые индикаторы ═══ -->
+            <Border BackgroundColor="{AppThemeBinding Dark=#1E1E1E, Light=White}"
+                    Stroke="{AppThemeBinding Dark=#333, Light=#E0E0E0}" StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12" Padding="12,10,12,8">
+                <VerticalStackLayout>
+                    <Label Text="🔢 Цифровые индикаторы" FontFamily="InterSemiBold" FontSize="14"
+                           TextColor="{AppThemeBinding Dark=White, Light=#212121}"
+                           Padding="0,0,0,6" />
+                    <FlexLayout x:Name="DigitalIndicators"
+                                Wrap="Wrap" AlignItems="Start"
+                                JustifyContent="Start" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- ═══ Радар датчиков (PolarChart) ═══ -->
+            <Border BackgroundColor="{AppThemeBinding Dark=#1E1E1E, Light=White}"
+                    Stroke="{AppThemeBinding Dark=#333, Light=#E0E0E0}" StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12" Padding="0">
+                <VerticalStackLayout>
+                    <Label Text="🎯 Радар датчиков" FontFamily="InterSemiBold" FontSize="14"
+                           TextColor="{AppThemeBinding Dark=White, Light=#212121}"
+                           Padding="12,10,12,0" />
+                    <lvc:PolarChart x:Name="RadarChart"
+                                    HeightRequest="280"
+                                    Margin="8,0,8,8">
+                        <lvc:PolarChart.AngleAxes>
+                            <lvc:PolarAxis MinStep="1" ForceStepToMin="True"
+                                           LabelsRotation="0"
+                                           TextSize="11"
+                                           ShowSeparatorLines="True" />
+                        </lvc:PolarChart.AngleAxes>
+                        <lvc:PolarChart.RadiusAxes>
+                            <lvc:PolarAxis MinLimit="0" MaxLimit="100"
+                                           ShowSeparatorLines="True" />
+                        </lvc:PolarChart.RadiusAxes>
+                    </lvc:PolarChart>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- ═══ Линейный график трендов ═══ -->
+            <Border BackgroundColor="{AppThemeBinding Dark=#1E1E1E, Light=White}"
+                    Stroke="{AppThemeBinding Dark=#333, Light=#E0E0E0}" StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12" Padding="0">
+                <VerticalStackLayout>
+                    <Grid Padding="12,10,12,0" ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0" Text="📈 Линейные графики"
+                               FontFamily="InterSemiBold" FontSize="14"
+                               VerticalOptions="Center"
+                               TextColor="{AppThemeBinding Dark=White, Light=#212121}" />
+                        <HorizontalStackLayout Grid.Column="1" Spacing="4">
+                            <Button x:Name="BtnTrend30" Text="30с" FontSize="11"
+                                    Padding="8,3" CornerRadius="10"
+                                    BackgroundColor="{StaticResource Primary}" TextColor="White"
+                                    Clicked="OnTrendWindowClicked" />
+                            <Button x:Name="BtnTrend60" Text="60с" FontSize="11"
+                                    Padding="8,3" CornerRadius="10"
+                                    BackgroundColor="{AppThemeBinding Dark=#333, Light=#E0E0E0}"
+                                    TextColor="{AppThemeBinding Dark=#999, Light=#666}"
+                                    Clicked="OnTrendWindowClicked" />
+                            <Button x:Name="BtnTrend120" Text="120с" FontSize="11"
+                                    Padding="8,3" CornerRadius="10"
+                                    BackgroundColor="{AppThemeBinding Dark=#333, Light=#E0E0E0}"
+                                    TextColor="{AppThemeBinding Dark=#999, Light=#666}"
+                                    Clicked="OnTrendWindowClicked" />
+                        </HorizontalStackLayout>
+                    </Grid>
+                    <!-- Чипсы выбора PID -->
+                    <FlexLayout x:Name="LinePidChips" Padding="12,6,12,0"
+                                Wrap="Wrap" AlignItems="Start"
+                                JustifyContent="Start" />
+                    <lvc:CartesianChart x:Name="TrendChart"
+                                        HeightRequest="260"
+                                        Margin="8,4,8,8"
+                                        ZoomMode="X"
+                                        TooltipPosition="Top">
+                        <lvc:CartesianChart.XAxes>
+                            <!-- Labeler задаётся в code-behind -->
+                            <lvc:Axis Name="Время"
+                                      MinStep="5"
+                                      TextSize="10"
+                                      ShowSeparatorLines="True" />
+                        </lvc:CartesianChart.XAxes>
+                        <lvc:CartesianChart.YAxes>
+                            <lvc:Axis Name="Значение"
+                                      TextSize="10"
+                                      ShowSeparatorLines="True" />
+                        </lvc:CartesianChart.YAxes>
+                    </lvc:CartesianChart>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- ═══ Столбчатая диаграмма ═══ -->
+            <Border BackgroundColor="{AppThemeBinding Dark=#1E1E1E, Light=White}"
+                    Stroke="{AppThemeBinding Dark=#333, Light=#E0E0E0}" StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12" Padding="0">
+                <VerticalStackLayout>
+                    <Label Text="📊 Столбчатая диаграмма" FontFamily="InterSemiBold" FontSize="14"
+                           TextColor="{AppThemeBinding Dark=White, Light=#212121}"
+                           Padding="12,10,12,0" />
+                    <Label x:Name="LabelColumnSubtitle"
+                           Text="Текущие значения поддерживаемых PID"
+                           FontSize="11"
+                           TextColor="{AppThemeBinding Dark=#777, Light=#999}"
+                           Padding="12,0,12,4" />
+                    <lvc:CartesianChart x:Name="ColumnChart"
+                                        HeightRequest="320"
+                                        Margin="8,4,8,8"
+                                        TooltipPosition="Top">
+                        <lvc:CartesianChart.XAxes>
+                            <lvc:Axis Name="Параметр"
+                                      TextSize="9"
+                                      LabelsRotation="45"
+                                      ShowSeparatorLines="False" />
+                        </lvc:CartesianChart.XAxes>
+                        <lvc:CartesianChart.YAxes>
+                            <lvc:Axis Name="Нормированное значение (%)"
+                                      MinLimit="0" MaxLimit="100"
+                                      TextSize="10"
+                                      ShowSeparatorLines="True" />
+                        </lvc:CartesianChart.YAxes>
+                    </lvc:CartesianChart>
+                    <!-- Цветовая легенда -->
+                    <FlexLayout Padding="12,0,12,8" Spacing="16" JustifyContent="Center"
+                                Wrap="Wrap">
+                        <HorizontalStackLayout Spacing="4">
+                            <BoxView WidthRequest="12" HeightRequest="12"
+                                     CornerRadius="3" Color="#4CAF50" />
+                            <Label Text="Норма" FontSize="11" TextColor="{AppThemeBinding Dark=#AAA, Light=#777}" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Spacing="4">
+                            <BoxView WidthRequest="12" HeightRequest="12"
+                                     CornerRadius="3" Color="#FF9800" />
+                            <Label Text="Внимание" FontSize="11" TextColor="{AppThemeBinding Dark=#AAA, Light=#777}" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Spacing="4">
+                            <BoxView WidthRequest="12" HeightRequest="12"
+                                     CornerRadius="3" Color="#F44336" />
+                            <Label Text="Опасно" FontSize="11" TextColor="{AppThemeBinding Dark=#AAA, Light=#777}" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </FlexLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- ═══ Круговая диаграмма состояний ═══ -->
+            <Border BackgroundColor="{AppThemeBinding Dark=#1E1E1E, Light=White}"
+                    Stroke="{AppThemeBinding Dark=#333, Light=#E0E0E0}" StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12" Padding="0">
+                <VerticalStackLayout>
+                    <Label Text="🍩 Распределение состояний" FontFamily="InterSemiBold" FontSize="14"
+                           TextColor="{AppThemeBinding Dark=White, Light=#212121}"
+                           Padding="12,10,12,0" />
+                    <lvc:PieChart x:Name="StatePieChart"
+                                  HeightRequest="240"
+                                  Margin="8,4,8,8">
+                    </lvc:PieChart>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- ═══ Нижний отступ ═══ -->
+            <BoxView HeightRequest="8" Color="Transparent" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:CarDiagnosticApp.Models"
+             x:Class="CarDiagnosticApp.Pages.KnowledgePage"
+             Title="База знаний OBD2"
+             BackgroundColor="{StaticResource DarkBackground}">
+
+    <Grid RowDefinitions="Auto,*" Padding="0">
+
+        <!-- Шапка -->
+        <VerticalStackLayout Grid.Row="0" Padding="20,15" Spacing="10">
+
+            <Label Text="📚 База знаний OBD2"
+                   FontFamily="InterBold"
+                   FontSize="24"
+                   TextColor="{StaticResource LightOnDarkBackground}" />
+
+            <Label Text="Справочник кодов ошибок с расшифровкой на русском"
+                   FontFamily="Inter"
+                   FontSize="14"
+                   TextColor="{StaticResource Gray400}" />
+
+            <!-- Поиск -->
+            <Border Stroke="{StaticResource Gray500}"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 10"
+                    BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                    Padding="4,0">
+                <SearchBar x:Name="SearchBar"
+                           Placeholder="Поиск по коду (например, P0171)"
+                           PlaceholderColor="{StaticResource Gray400}"
+                           TextColor="{StaticResource LightOnDarkBackground}"
+                           BackgroundColor="Transparent"
+                           CancelButtonColor="{StaticResource Primary}"
+                           FontFamily="Inter"
+                           FontSize="14"
+                           TextChanged="OnSearchTextChanged" />
+            </Border>
+
+            <!-- Счётчик результатов -->
+            <Label x:Name="LabelResultCount"
+                   FontFamily="Inter"
+                   FontSize="12"
+                   TextColor="{StaticResource Gray400}" />
+
+        </VerticalStackLayout>
+
+        <!-- Список -->
+        <CollectionView x:Name="KnowledgeList"
+                        Grid.Row="1"
+                        Margin="20,0"
+                        IsGrouped="True">
+
+            <!-- Шапка группы -->
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <Grid Padding="0,12,0,4">
+                        <Label Text="{Binding Key}"
+                               FontFamily="InterBold"
+                               FontSize="14"
+                               TextColor="{StaticResource Primary}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
+
+            <!-- Элемент -->
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:KnowledgeItem">
+                    <Border Stroke="{StaticResource Gray600}"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 10"
+                            BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                            Padding="14"
+                            Margin="0,4">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnItemTapped"
+                                                  CommandParameter="{Binding .}" />
+                        </Border.GestureRecognizers>
+
+                        <Grid RowDefinitions="Auto,Auto,Auto,Auto"
+                              ColumnDefinitions="Auto,*,Auto"
+                              ColumnSpacing="12"
+                              RowSpacing="6">
+
+                            <!-- Код -->
+                            <Border Grid.Row="0" Grid.Column="0"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 6"
+                                    BackgroundColor="{StaticResource Primary}"
+                                    Padding="8,2"
+                                    VerticalOptions="Center">
+                                <Label Text="{Binding Code}"
+                                       FontFamily="InterBold"
+                                       FontSize="13"
+                                       TextColor="White" />
+                            </Border>
+
+                            <!-- Описание -->
+                            <Label Grid.Row="0" Grid.Column="1"
+                                   Text="{Binding Description}"
+                                   FontFamily="InterSemiBold"
+                                   FontSize="14"
+                                   TextColor="{StaticResource LightOnDarkBackground}"
+                                   LineBreakMode="WordWrap"
+                                   MaxLines="2" />
+
+                            <!-- Стрелка раскрытия -->
+                            <Label Grid.Row="0" Grid.Column="2"
+                                   Text="›"
+                                   FontSize="20"
+                                   TextColor="{StaticResource Gray400}"
+                                   VerticalOptions="Center" />
+
+                            <!-- Секция причин и симптомов (раскрывается по тапу) -->
+                            <VerticalStackLayout Grid.Row="1" Grid.Column="1"
+                                                 Grid.ColumnSpan="2"
+                                                 IsVisible="{Binding IsExpanded}"
+                                                 Spacing="4">
+                                <Label Text="Причины:"
+                                       FontFamily="InterSemiBold"
+                                       FontSize="13"
+                                       TextColor="{StaticResource WarningAmber}" />
+                                <Label Text="{Binding Causes}"
+                                       FontFamily="Inter"
+                                       FontSize="13"
+                                       TextColor="{StaticResource Gray200}"
+                                       LineBreakMode="WordWrap" />
+
+                                <Label Text="Симптомы:"
+                                       FontFamily="InterSemiBold"
+                                       FontSize="13"
+                                       TextColor="#FF7043"
+                                       Margin="0,6,0,0" />
+                                <Label Text="{Binding Symptoms}"
+                                       FontFamily="Inter"
+                                       FontSize="13"
+                                       TextColor="{StaticResource Gray200}"
+                                       LineBreakMode="WordWrap" />
+                            </VerticalStackLayout>
+
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout VerticalOptions="Center"
+                                     HorizontalOptions="Center"
+                                     Spacing="10"
+                                     Padding="40">
+                    <Label Text="🔍"
+                           FontSize="48"
+                           HorizontalOptions="Center" />
+                    <Label Text="Ничего не найдено"
+                           FontFamily="InterSemiBold"
+                           FontSize="18"
+                           TextColor="{StaticResource Gray400}"
+                           HorizontalOptions="Center" />
+                    <Label Text="Попробуйте изменить поисковый запрос"
+                           FontFamily="Inter"
+                           FontSize="14"
+                           TextColor="{StaticResource Gray500}"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+        </CollectionView>
+
+    </Grid>
+</ContentPage>

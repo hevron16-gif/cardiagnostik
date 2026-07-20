@@ -1,0 +1,23 @@
+# CarDiagnostik AI — Render Blueprint
+# https://render.com  Root Directory can be left empty (uses server/)
+
+services:
+  - type: web
+    name: car-diagnostic-ai
+    runtime: python
+    region: frankfurt
+    plan: free
+    rootDir: server
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12"
+      - key: DEEPSEEK_API_KEY
+        sync: false
+      - key: LICENSE_SECRET
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false

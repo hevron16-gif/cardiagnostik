@@ -1,0 +1,1595 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarDiagnosticApp.Pages.AdminPanelPage"
+             Title="🛠 Панель администратора"
+             BackgroundColor="{StaticResource DarkBackground}">
+
+    <Grid RowDefinitions="Auto,*" Padding="0">
+
+        <!-- ══════ Заголовок ══════ -->
+        <VerticalStackLayout Grid.Row="0" Padding="20,15,20,5" Spacing="4">
+            <Label Text="🛠 Панель администратора"
+                   FontFamily="InterBold"
+                   FontSize="24"
+                   TextColor="{StaticResource LightOnDarkBackground}" />
+            <Label x:Name="LabelStatus"
+                   FontFamily="Inter"
+                   FontSize="12"
+                   TextColor="{StaticResource Gray400}" />
+        </VerticalStackLayout>
+
+        <!-- ══════ Основной контент ══════ -->
+        <ScrollView Grid.Row="1" Margin="0,8,0,0">
+            <VerticalStackLayout Spacing="0" Padding="0,0,0,40">
+
+                <!-- ══════════ Вкладки ══════════ -->
+                <ScrollView Orientation="Horizontal"
+                            HorizontalScrollBarVisibility="Never"
+                            Margin="20,0">
+                    <HorizontalStackLayout Spacing="6">
+                        <Button x:Name="BtnDashboard"
+                                Text="📊 Дашборд"
+                                Clicked="OnTabClicked"
+                                BackgroundColor="{StaticResource Primary}"
+                                TextColor="White"
+                                CornerRadius="8"
+                                FontFamily="InterSemiBold"
+                                FontSize="12"
+                                HeightRequest="36"
+                                Padding="14,0" />
+                        <Button x:Name="BtnKnowledge"
+                                Text="📚 Знания"
+                                Clicked="OnTabClicked"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                TextColor="{StaticResource Gray300}"
+                                CornerRadius="8"
+                                FontFamily="Inter"
+                                FontSize="12"
+                                HeightRequest="36"
+                                Padding="14,0" />
+                        <Button x:Name="BtnSchemes"
+                                Text="🖼️ Схемы"
+                                Clicked="OnTabClicked"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                TextColor="{StaticResource Gray300}"
+                                CornerRadius="8"
+                                FontFamily="Inter"
+                                FontSize="12"
+                                HeightRequest="36"
+                                Padding="14,0" />
+                        <Button x:Name="BtnFeedback"
+                                Text="⭐ Фидбек"
+                                Clicked="OnTabClicked"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                TextColor="{StaticResource Gray300}"
+                                CornerRadius="8"
+                                FontFamily="Inter"
+                                FontSize="12"
+                                HeightRequest="36"
+                                Padding="14,0" />
+                        <Button x:Name="BtnSearch"
+                                Text="🔍 Поиск"
+                                Clicked="OnTabClicked"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                TextColor="{StaticResource Gray300}"
+                                CornerRadius="8"
+                                FontFamily="Inter"
+                                FontSize="12"
+                                HeightRequest="36"
+                                Padding="14,0" />
+                        <Button x:Name="BtnBrowser"
+                                Text="🗄️ Все записи"
+                                Clicked="OnTabClicked"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                TextColor="{StaticResource Gray300}"
+                                CornerRadius="8"
+                                FontFamily="Inter"
+                                FontSize="12"
+                                HeightRequest="36"
+                                Padding="14,0" />
+                        <Button x:Name="BtnSystem"
+                                Text="⚙️ Система"
+                                Clicked="OnTabClicked"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                TextColor="{StaticResource Gray300}"
+                                CornerRadius="8"
+                                FontFamily="Inter"
+                                FontSize="12"
+                                HeightRequest="36"
+                                Padding="14,0" />
+                        <Button x:Name="BtnCompetitors"
+                                Text="🏢 Конкуренты"
+                                Clicked="OnTabClicked"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                TextColor="{StaticResource Gray300}"
+                                CornerRadius="8"
+                                FontFamily="Inter"
+                                FontSize="12"
+                                HeightRequest="36"
+                                Padding="14,0" />
+                        <Button x:Name="BtnAutoIndustry"
+                                 Text="🚗 Автопром"
+                                 Clicked="OnTabClicked"
+                                 BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                 TextColor="{StaticResource Gray300}"
+                                 CornerRadius="8"
+                                 FontFamily="Inter"
+                                 FontSize="12"
+                                 HeightRequest="36"
+                                 Padding="14,0" />
+                         <Button x:Name="BtnCoding"
+                                 Text="🔧 Кодирование"
+                                 Clicked="OnTabClicked"
+                                 BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                 TextColor="{StaticResource Gray300}"
+                                 CornerRadius="8"
+                                 FontFamily="Inter"
+                                 FontSize="12"
+                                 HeightRequest="36"
+                                 Padding="14,0" />
+                    </HorizontalStackLayout>
+                </ScrollView>
+
+                <!-- ══════════ Вкладка: Дашборд ══════════ -->
+                <VerticalStackLayout x:Name="PanelDashboard"
+                                     IsVisible="True"
+                                     Spacing="14"
+                                     Margin="20,16,20,0">
+
+                    <Label Text="Статистика приложения"
+                           FontFamily="InterSemiBold"
+                           FontSize="16"
+                           TextColor="{StaticResource LightOnDarkBackground}" />
+
+                    <!-- Карточки статистики 2×2 -->
+                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto"
+                          ColumnSpacing="10" RowSpacing="10">
+
+                        <Border Grid.Row="0" Grid.Column="0"
+                                Stroke="{StaticResource Gray600}" StrokeThickness="1"
+                                StrokeShape="RoundRectangle 12"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                Padding="14">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="📋 Всего диагнозов"
+                                       FontFamily="Inter" FontSize="12"
+                                       TextColor="{StaticResource Gray400}" />
+                                <Label x:Name="StatDiagnoses"
+                                       FontFamily="InterBold" FontSize="28"
+                                       TextColor="{StaticResource Primary}" Text="-" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border Grid.Row="0" Grid.Column="1"
+                                Stroke="{StaticResource Gray600}" StrokeThickness="1"
+                                StrokeShape="RoundRectangle 12"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                Padding="14">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="✅ Успешных"
+                                       FontFamily="Inter" FontSize="12"
+                                       TextColor="{StaticResource Gray400}" />
+                                <Label x:Name="StatSuccessful"
+                                       FontFamily="InterBold" FontSize="28"
+                                       TextColor="{StaticResource SuccessGreen}" Text="-" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border Grid.Row="1" Grid.Column="0"
+                                Stroke="{StaticResource Gray600}" StrokeThickness="1"
+                                StrokeShape="RoundRectangle 12"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                Padding="14"
+                                Margin="0,0,0,0">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="➕ Фидбек (👍)"
+                                       FontFamily="Inter" FontSize="12"
+                                       TextColor="{StaticResource Gray400}" />
+                                <Label x:Name="StatPositiveFeedback"
+                                       FontFamily="InterBold" FontSize="28"
+                                       TextColor="{StaticResource SuccessGreen}" Text="-" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border Grid.Row="1" Grid.Column="1"
+                                Stroke="{StaticResource Gray600}" StrokeThickness="1"
+                                StrokeShape="RoundRectangle 12"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                Padding="14">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="➖ Фидбек (👎)"
+                                       FontFamily="Inter" FontSize="12"
+                                       TextColor="{StaticResource Gray400}" />
+                                <Label x:Name="StatNegativeFeedback"
+                                       FontFamily="InterBold" FontSize="28"
+                                       TextColor="{StaticResource ErrorRed}" Text="-" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+
+                    <!-- Размеры БД -->
+                    <Label Text="Базы данных"
+                           FontFamily="InterSemiBold"
+                           FontSize="16"
+                           TextColor="{StaticResource LightOnDarkBackground}"
+                           Margin="0,8,0,0" />
+
+                    <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto"
+                          ColumnSpacing="10">
+                        <Border Grid.Column="0"
+                                Stroke="{StaticResource Gray600}" StrokeThickness="1"
+                                StrokeShape="RoundRectangle 12"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                Padding="12">
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="diag.db"
+                                       FontFamily="InterSemiBold" FontSize="12"
+                                       TextColor="{StaticResource LightOnDarkBackground}" />
+                                <Label x:Name="StatDiagDbSize"
+                                       FontFamily="Inter" FontSize="18"
+                                       TextColor="{StaticResource Gray200}" Text="-" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border Grid.Column="1"
+                                Stroke="{StaticResource Gray600}" StrokeThickness="1"
+                                StrokeShape="RoundRectangle 12"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                Padding="12">
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="offline.db"
+                                       FontFamily="InterSemiBold" FontSize="12"
+                                       TextColor="{StaticResource LightOnDarkBackground}" />
+                                <Label x:Name="StatOfflineDbSize"
+                                       FontFamily="Inter" FontSize="18"
+                                       TextColor="{StaticResource Gray200}" Text="-" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border Grid.Column="2"
+                                Stroke="{StaticResource Gray600}" StrokeThickness="1"
+                                StrokeShape="RoundRectangle 12"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                Padding="12">
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="diagrams.db"
+                                       FontFamily="InterSemiBold" FontSize="12"
+                                       TextColor="{StaticResource LightOnDarkBackground}" />
+                                <Label x:Name="StatDiagramsDbSize"
+                                       FontFamily="Inter" FontSize="18"
+                                       TextColor="{StaticResource Gray200}" Text="-" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+
+                    <!-- База знаний + Схемы -->
+                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto"
+                          ColumnSpacing="10">
+                        <Border Grid.Column="0"
+                                Stroke="{StaticResource Gray600}" StrokeThickness="1"
+                                StrokeShape="RoundRectangle 12"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                Padding="12">
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="📚 База знаний"
+                                       FontFamily="InterSemiBold" FontSize="12"
+                                       TextColor="{StaticResource LightOnDarkBackground}" />
+                                <Label x:Name="StatKnowledgeCount"
+                                       FontFamily="Inter" FontSize="18"
+                                       TextColor="{StaticResource Gray200}" Text="-" />
+                                <Label x:Name="StatKnowledgeAvgConf"
+                                       FontFamily="Inter" FontSize="11"
+                                       TextColor="{StaticResource Gray500}" Text="-" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border Grid.Column="1"
+                                Stroke="{StaticResource Gray600}" StrokeThickness="1"
+                                StrokeShape="RoundRectangle 12"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                Padding="12">
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="🖼️ Схемы (запросы)"
+                                       FontFamily="InterSemiBold" FontSize="12"
+                                       TextColor="{StaticResource LightOnDarkBackground}" />
+                                <Label x:Name="StatDiagramsCount"
+                                       FontFamily="Inter" FontSize="18"
+                                       TextColor="{StaticResource Gray200}" Text="-" />
+                                <Label x:Name="StatDiagramsBreakdown"
+                                       FontFamily="Inter" FontSize="11"
+                                       TextColor="{StaticResource Gray500}" Text="-" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+
+                    <!-- Топ ошибок + марок -->
+                    <Label Text="📊 Аналитика"
+                           FontFamily="InterSemiBold"
+                           FontSize="16"
+                           TextColor="{StaticResource LightOnDarkBackground}"
+                           Margin="0,4,0,0" />
+
+                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto"
+                          ColumnSpacing="10">
+                        <Border Grid.Column="0"
+                                Stroke="{StaticResource Gray600}" StrokeThickness="1"
+                                StrokeShape="RoundRectangle 12"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                Padding="12">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="🔝 Топ ошибок (месяц)"
+                                       FontFamily="InterSemiBold" FontSize="12"
+                                       TextColor="{StaticResource LightOnDarkBackground}" />
+                                <Label x:Name="StatTopErrors"
+                                       FontFamily="Inter" FontSize="12"
+                                       LineBreakMode="WordWrap"
+                                       TextColor="{StaticResource Gray400}" Text="—" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border Grid.Column="1"
+                                Stroke="{StaticResource Gray600}" StrokeThickness="1"
+                                StrokeShape="RoundRectangle 12"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                Padding="12">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="🚗 Топ марок (месяц)"
+                                       FontFamily="InterSemiBold" FontSize="12"
+                                       TextColor="{StaticResource LightOnDarkBackground}" />
+                                <Label x:Name="StatTopBrands"
+                                       FontFamily="Inter" FontSize="12"
+                                       LineBreakMode="WordWrap"
+                                       TextColor="{StaticResource Gray400}" Text="—" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+
+                    <!-- Отчёт -->
+                    <Label Text="📄 Отчёт"
+                           FontFamily="InterSemiBold"
+                           FontSize="16"
+                           TextColor="{StaticResource LightOnDarkBackground}"
+                           Margin="0,4,0,0" />
+
+                    <Button x:Name="BtnGenerateReport"
+                            Text="📄 Сформировать полный отчёт"
+                            Clicked="OnGenerateReport"
+                            BackgroundColor="{StaticResource Primary}"
+                            TextColor="White"
+                            CornerRadius="10"
+                            FontFamily="InterSemiBold"
+                            FontSize="14"
+                            HeightRequest="44"
+                            HorizontalOptions="Fill" />
+
+                    <ScrollView HeightRequest="400">
+                        <Border Stroke="{StaticResource Gray600}" StrokeThickness="1"
+                                StrokeShape="RoundRectangle 12"
+                                BackgroundColor="{StaticResource Surface}"
+                                Padding="14"
+                                IsVisible="False"
+                                x:Name="ReportContainer">
+                            <Label x:Name="ReportText"
+                                   FontFamily="Inter" FontSize="12"
+                                   TextColor="{StaticResource Gray300}"
+                                   LineBreakMode="WordWrap"
+                                   Text="" />
+                        </Border>
+                    </ScrollView>
+
+                    <!-- История отчётов -->
+                    <Label Text="📋 История отчётов"
+                           FontFamily="InterSemiBold"
+                           FontSize="14"
+                           TextColor="{StaticResource LightOnDarkBackground}"
+                           Margin="0,4,0,0" />
+                    <Label x:Name="LabelReportHistoryCount"
+                           FontFamily="Inter"
+                           FontSize="11"
+                           TextColor="{StaticResource Gray400}" />
+                    <CollectionView x:Name="ReportHistoryList"
+                                    HeightRequest="200"
+                                    SelectionMode="Single"
+                                    SelectionChanged="OnReportHistorySelected">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border Stroke="{StaticResource Gray600}"
+                                        StrokeThickness="1"
+                                        StrokeShape="RoundRectangle 8"
+                                        BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                        Padding="10,8"
+                                        Margin="0,2">
+                                    <Grid ColumnDefinitions="Auto,*,Auto"
+                                          ColumnSpacing="10">
+                                        <Label Grid.Column="0"
+                                               Text="📄"
+                                               FontSize="16"
+                                               VerticalOptions="Center" />
+                                        <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                            <Label Text="{Binding FileName}"
+                                                   FontFamily="InterSemiBold" FontSize="12"
+                                                   TextColor="{StaticResource LightOnDarkBackground}"
+                                                   LineBreakMode="TailTruncation" />
+                                            <Label Text="{Binding DisplayDate}"
+                                                   FontFamily="Inter" FontSize="10"
+                                                   TextColor="{StaticResource Gray500}" />
+                                        </VerticalStackLayout>
+                                        <Label Grid.Column="2"
+                                               Text="{Binding DisplaySize}"
+                                               FontFamily="Inter" FontSize="11"
+                                               TextColor="{StaticResource Gray400}"
+                                               VerticalOptions="Center" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.EmptyView>
+                            <Label Text="Нет сохранённых отчётов"
+                                   FontFamily="Inter" FontSize="12"
+                                   TextColor="{StaticResource Gray500}"
+                                   HorizontalOptions="Center"
+                                   Margin="0,8" />
+                        </CollectionView.EmptyView>
+                    </CollectionView>
+
+                    <!-- Кнопка обновления -->
+                    <Button x:Name="BtnRefreshDashboard"
+                            Text="🔄 Обновить статистику"
+                            Clicked="OnRefreshDashboard"
+                            BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                            TextColor="{StaticResource Primary}"
+                            CornerRadius="10"
+                            FontFamily="InterSemiBold"
+                            FontSize="14"
+                            HeightRequest="44"
+                            HorizontalOptions="Center"
+                            Margin="0,8,0,0" />
+                </VerticalStackLayout>
+
+                <!-- ══════════ Вкладка: Знания ══════════ -->
+                <VerticalStackLayout x:Name="PanelKnowledge"
+                                     IsVisible="False"
+                                     Spacing="12"
+                                     Margin="20,16,20,0">
+
+                    <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,8">
+                        <Label Grid.Column="0"
+                               Text="📚 База знаний (самообучение)"
+                               FontFamily="InterSemiBold"
+                               FontSize="16"
+                               TextColor="{StaticResource LightOnDarkBackground}"
+                               VerticalOptions="Center" />
+                        <Button Grid.Column="1"
+                                x:Name="BtnRefreshKnowledge"
+                                Text="🔄"
+                                Clicked="OnRefreshKnowledge"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                TextColor="{StaticResource Primary}"
+                                CornerRadius="8"
+                                FontSize="16"
+                                HeightRequest="36"
+                                WidthRequest="44"
+                                Padding="0" />
+                    </Grid>
+
+                    <!-- Фильтр -->
+                    <Border Stroke="{StaticResource Gray600}" StrokeThickness="1"
+                            StrokeShape="RoundRectangle 10"
+                            BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                            Padding="8,4">
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Уверенность >="
+                                   FontFamily="Inter" FontSize="13"
+                                   TextColor="{StaticResource Gray400}"
+                                   VerticalOptions="Center" />
+                            <Entry x:Name="KnowledgeConfidenceFilter"
+                                   Text="0.3"
+                                   Keyboard="Numeric"
+                                   WidthRequest="60"
+                                   FontFamily="Inter" FontSize="13"
+                                   TextColor="{StaticResource LightOnDarkBackground}"
+                                   BackgroundColor="Transparent" />
+                            <Button Text="Применить"
+                                    Clicked="OnApplyKnowledgeFilter"
+                                    BackgroundColor="{StaticResource Primary}"
+                                    TextColor="White"
+                                    CornerRadius="6"
+                                    FontSize="12"
+                                    HeightRequest="30"
+                                    Padding="10,0" />
+                        </HorizontalStackLayout>
+                    </Border>
+
+                    <Label x:Name="LabelKnowledgeCount"
+                           FontFamily="Inter"
+                           FontSize="12"
+                           TextColor="{StaticResource Gray400}" />
+
+                    <!-- Список знаний -->
+                    <CollectionView x:Name="KnowledgeList"
+                                    HeightRequest="400"
+                                    SelectionMode="Single">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border Stroke="{StaticResource Gray600}"
+                                        StrokeThickness="1"
+                                        StrokeShape="RoundRectangle 10"
+                                        BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                        Padding="12"
+                                        Margin="0,3">
+                                    <Grid RowDefinitions="Auto,Auto"
+                                          ColumnDefinitions="Auto,*,Auto"
+                                          ColumnSpacing="10" RowSpacing="6">
+                                        <Label Grid.Row="0" Grid.Column="0"
+                                               FontSize="18" Text="🧠" VerticalOptions="Center" />
+                                        <Label Grid.Row="0" Grid.Column="1"
+                                               Text="{Binding Key}"
+                                               FontFamily="InterSemiBold" FontSize="14"
+                                               TextColor="{StaticResource LightOnDarkBackground}" />
+                                        <Label Grid.Row="0" Grid.Column="2"
+                                               Text="{Binding Confidence, StringFormat='{0:P0}'}"
+                                               FontFamily="InterBold" FontSize="14"
+                                               TextColor="{StaticResource WarningAmber}" />
+                                        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                                               Text="{Binding Value}"
+                                               FontFamily="Inter" FontSize="12"
+                                               TextColor="{StaticResource Gray400}"
+                                               LineBreakMode="TailTruncation" MaxLines="2" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.EmptyView>
+                            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center"
+                                                  Spacing="8" Padding="40">
+                                <Label Text="📭" FontSize="48" HorizontalOptions="Center" />
+                                <Label Text="Нет знаний" FontFamily="InterSemiBold" FontSize="16"
+                                       TextColor="{StaticResource Gray400}" HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </CollectionView.EmptyView>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+                <!-- ══════════ Вкладка: Схемы ══════════ -->
+                <VerticalStackLayout x:Name="PanelSchemes"
+                                     IsVisible="False"
+                                     Spacing="12"
+                                     Margin="20,16,20,0">
+
+                    <Label Text="🖼️ Управление схемами"
+                           FontFamily="InterSemiBold"
+                           FontSize="16"
+                           TextColor="{StaticResource LightOnDarkBackground}" />
+
+                    <Label x:Name="LabelSchemesCount"
+                           FontFamily="Inter"
+                           FontSize="12"
+                           TextColor="{StaticResource Gray400}" />
+
+                    <!-- Pending запросы -->
+                    <Border Stroke="{StaticResource WarningAmber}" StrokeThickness="1"
+                            StrokeShape="RoundRectangle 10"
+                            BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                            Padding="12">
+                        <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="6">
+                            <Label Grid.Row="0"
+                                   Text="⏳ Ожидающие запросы схем"
+                                   FontFamily="InterSemiBold" FontSize="14"
+                                   TextColor="{StaticResource WarningAmber}" />
+                            <Label x:Name="LabelPendingCount" Grid.Row="1"
+                                   FontFamily="Inter" FontSize="12"
+                                   TextColor="{StaticResource Gray400}" />
+                            <Button Grid.Row="2"
+                                    x:Name="BtnRetryPending"
+                                    Text="🔁 Повторить все"
+                                    Clicked="OnRetryPending"
+                                    BackgroundColor="{StaticResource WarningAmber}"
+                                    TextColor="{StaticResource OffBlack}"
+                                    CornerRadius="8"
+                                    FontFamily="InterSemiBold"
+                                    FontSize="12"
+                                    HeightRequest="32"
+                                    Padding="14,0"
+                                    HorizontalOptions="Start" />
+                        </Grid>
+                    </Border>
+
+                    <!-- Список схем -->
+                    <CollectionView x:Name="SchemeList"
+                                    HeightRequest="400"
+                                    SelectionMode="Single">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border Stroke="{StaticResource Gray600}"
+                                        StrokeThickness="1"
+                                        StrokeShape="RoundRectangle 10"
+                                        BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                        Padding="12"
+                                        Margin="0,3">
+                                    <Grid ColumnDefinitions="Auto,*,Auto"
+                                          ColumnSpacing="10">
+                                        <Label Grid.Column="0" FontSize="20" Text="🖼️" VerticalOptions="Center" />
+                                        <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                            <Label Text="{Binding ErrorCode}"
+                                                   FontFamily="InterSemiBold" FontSize="14"
+                                                   TextColor="{StaticResource LightOnDarkBackground}" />
+                                            <Label Text="{Binding BrandModel}"
+                                                   FontFamily="Inter" FontSize="11"
+                                                   TextColor="{StaticResource Gray400}" />
+                                        </VerticalStackLayout>
+                                        <Label Grid.Column="2"
+                                               Text="{Binding Source}"
+                                               FontFamily="Inter" FontSize="10"
+                                               TextColor="{StaticResource Gray500}"
+                                               VerticalOptions="Center" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.EmptyView>
+                            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center"
+                                                  Spacing="8" Padding="40">
+                                <Label Text="🖼️" FontSize="48" HorizontalOptions="Center" />
+                                <Label Text="Нет сохранённых схем" FontFamily="InterSemiBold" FontSize="16"
+                                       TextColor="{StaticResource Gray400}" HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </CollectionView.EmptyView>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+                <!-- ══════════ Вкладка: Фидбек ══════════ -->
+                <VerticalStackLayout x:Name="PanelFeedback"
+                                     IsVisible="False"
+                                     Spacing="12"
+                                     Margin="20,16,20,0">
+
+                    <Label Text="⭐ Оценки пользователей"
+                           FontFamily="InterSemiBold"
+                           FontSize="16"
+                           TextColor="{StaticResource LightOnDarkBackground}" />
+
+                    <!-- Сводка -->
+                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto"
+                          ColumnSpacing="10">
+                        <Border Grid.Column="0"
+                                Stroke="{StaticResource SuccessGreen}" StrokeThickness="1"
+                                StrokeShape="RoundRectangle 12"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                Padding="14">
+                            <VerticalStackLayout Spacing="4" HorizontalOptions="Center">
+                                <Label Text="👍 Полезно"
+                                       FontFamily="Inter" FontSize="12"
+                                       TextColor="{StaticResource SuccessGreen}"
+                                       HorizontalOptions="Center" />
+                                <Label x:Name="FeedbackHelpfulCount"
+                                       FontFamily="InterBold" FontSize="24"
+                                       TextColor="{StaticResource SuccessGreen}"
+                                       HorizontalOptions="Center" Text="0" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border Grid.Column="1"
+                                Stroke="{StaticResource ErrorRed}" StrokeThickness="1"
+                                StrokeShape="RoundRectangle 12"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                Padding="14">
+                            <VerticalStackLayout Spacing="4" HorizontalOptions="Center">
+                                <Label Text="👎 Бесполезно"
+                                       FontFamily="Inter" FontSize="12"
+                                       TextColor="{StaticResource ErrorRed}"
+                                       HorizontalOptions="Center" />
+                                <Label x:Name="FeedbackNotHelpfulCount"
+                                       FontFamily="InterBold" FontSize="24"
+                                       TextColor="{StaticResource ErrorRed}"
+                                       HorizontalOptions="Center" Text="0" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+
+                    <Label x:Name="LabelFeedbackEntries"
+                           FontFamily="Inter"
+                           FontSize="12"
+                           TextColor="{StaticResource Gray400}" />
+
+                    <!-- Список фидбека -->
+                    <CollectionView x:Name="FeedbackList"
+                                    HeightRequest="400"
+                                    SelectionMode="Single">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border Stroke="{StaticResource Gray600}"
+                                        StrokeThickness="1"
+                                        StrokeShape="RoundRectangle 10"
+                                        BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                        Padding="12"
+                                        Margin="0,3">
+                                    <Grid RowDefinitions="Auto,Auto,Auto"
+                                          RowSpacing="4">
+                                        <HorizontalStackLayout Grid.Row="0" Spacing="6">
+                                            <Label FontSize="14"
+                                                   Text="{Binding RatingIcon}"
+                                                   VerticalOptions="Center" />
+                                            <Label Text="{Binding ErrorCode}"
+                                                   FontFamily="InterSemiBold" FontSize="14"
+                                                   TextColor="{StaticResource LightOnDarkBackground}" />
+                                            <Label Text="{Binding CarBrand}"
+                                                   FontFamily="Inter" FontSize="11"
+                                                   TextColor="{StaticResource Gray400}"
+                                                   VerticalOptions="Center" />
+                                        </HorizontalStackLayout>
+                                        <Label Grid.Row="1"
+                                               Text="{Binding Comment}"
+                                               FontFamily="Inter" FontSize="12"
+                                               TextColor="{StaticResource Gray300}"
+                                               LineBreakMode="TailTruncation" MaxLines="2" />
+                                        <Label Grid.Row="2"
+                                               Text="{Binding Timestamp}"
+                                               FontFamily="Inter" FontSize="10"
+                                               TextColor="{StaticResource Gray500}" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.EmptyView>
+                            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center"
+                                                  Spacing="8" Padding="40">
+                                <Label Text="⭐" FontSize="48" HorizontalOptions="Center" />
+                                <Label Text="Нет оценок" FontFamily="InterSemiBold" FontSize="16"
+                                       TextColor="{StaticResource Gray400}" HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </CollectionView.EmptyView>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+                <!-- ══════════ Вкладка: Поиск ══════════ -->
+                <VerticalStackLayout x:Name="PanelSearch"
+                                     IsVisible="False"
+                                     Spacing="12"
+                                     Margin="20,16,20,0">
+
+                    <Label Text="🔍 Ручной поиск схем"
+                           FontFamily="InterSemiBold"
+                           FontSize="16"
+                           TextColor="{StaticResource LightOnDarkBackground}" />
+
+                    <!-- Поля ввода -->
+                    <Border Stroke="{StaticResource Gray600}" StrokeThickness="1"
+                            StrokeShape="RoundRectangle 10"
+                            BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                            Padding="14">
+                        <VerticalStackLayout Spacing="10">
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                                <Label Grid.Column="0" Text="Код:"
+                                       FontFamily="Inter" FontSize="13"
+                                       TextColor="{StaticResource Gray400}"
+                                       VerticalOptions="Center" />
+                                <Entry x:Name="SearchErrorCode"
+                                       Grid.Column="1"
+                                       Placeholder="P0100"
+                                       PlaceholderColor="{StaticResource Gray500}"
+                                       FontFamily="Inter" FontSize="14"
+                                       TextColor="{StaticResource LightOnDarkBackground}"
+                                       BackgroundColor="Transparent" />
+                            </Grid>
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                                <Label Grid.Column="0" Text="Марка:"
+                                       FontFamily="Inter" FontSize="13"
+                                       TextColor="{StaticResource Gray400}"
+                                       VerticalOptions="Center" />
+                                <Entry x:Name="SearchBrand"
+                                       Grid.Column="1"
+                                       Placeholder="Toyota"
+                                       PlaceholderColor="{StaticResource Gray500}"
+                                       FontFamily="Inter" FontSize="14"
+                                       TextColor="{StaticResource LightOnDarkBackground}"
+                                       BackgroundColor="Transparent" />
+                            </Grid>
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                                <Label Grid.Column="0" Text="Модель:"
+                                       FontFamily="Inter" FontSize="13"
+                                       TextColor="{StaticResource Gray400}"
+                                       VerticalOptions="Center" />
+                                <Entry x:Name="SearchModel"
+                                       Grid.Column="1"
+                                       Placeholder="Camry"
+                                       PlaceholderColor="{StaticResource Gray500}"
+                                       FontFamily="Inter" FontSize="14"
+                                       TextColor="{StaticResource LightOnDarkBackground}"
+                                       BackgroundColor="Transparent" />
+                            </Grid>
+                            <Button x:Name="BtnSearchRun"
+                                    Text="🔍 Искать схему"
+                                    Clicked="OnSearchRun"
+                                    BackgroundColor="{StaticResource Primary}"
+                                    TextColor="White"
+                                    CornerRadius="10"
+                                    FontFamily="InterSemiBold"
+                                    FontSize="14"
+                                    HeightRequest="44" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Результаты поиска -->
+                    <Label x:Name="LabelSearchResults"
+                           FontFamily="Inter"
+                           FontSize="12"
+                           TextColor="{StaticResource Gray400}"
+                           IsVisible="False" />
+                    <CollectionView x:Name="SearchResultList"
+                                    HeightRequest="400"
+                                    IsVisible="False"
+                                    SelectionMode="Single">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border Stroke="{StaticResource Gray600}"
+                                        StrokeThickness="1"
+                                        StrokeShape="RoundRectangle 10"
+                                        BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                        Padding="12"
+                                        Margin="0,3">
+                                    <Grid RowDefinitions="Auto,Auto"
+                                          ColumnDefinitions="Auto,*"
+                                          ColumnSpacing="10" RowSpacing="4">
+                                        <Label Grid.Column="0" Grid.Row="0"
+                                               FontSize="16" Text="🔗" VerticalOptions="Center" />
+                                        <VerticalStackLayout Grid.Column="1" Grid.Row="0" Spacing="2">
+                                            <Label Text="{Binding Title}"
+                                                   FontFamily="InterSemiBold" FontSize="13"
+                                                   TextColor="{StaticResource Primary}" />
+                                            <Label Text="{Binding Url}"
+                                                   FontFamily="Inter" FontSize="10"
+                                                   TextColor="{StaticResource Gray500}"
+                                                   LineBreakMode="TailTruncation" />
+                                        </VerticalStackLayout>
+                                        <Label Grid.Column="1" Grid.Row="1"
+                                               Text="{Binding Snippet}"
+                                               FontFamily="Inter" FontSize="11"
+                                               TextColor="{StaticResource Gray300}"
+                                               LineBreakMode="TailTruncation" MaxLines="2" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.EmptyView>
+                            <Label Text="Ничего не найдено"
+                                   FontFamily="Inter" FontSize="14"
+                                   TextColor="{StaticResource Gray400}"
+                                   HorizontalOptions="Center"
+                                   Margin="0,20" />
+                        </CollectionView.EmptyView>
+                    </CollectionView>
+
+                    <!-- Индикатор загрузки -->
+                    <ActivityIndicator x:Name="SearchLoader"
+                                       IsVisible="False"
+                                       IsRunning="False"
+                                       Color="{StaticResource Primary}"
+                                       HorizontalOptions="Center"
+                                       Margin="0,20" />
+                </VerticalStackLayout>
+
+                <!-- ══════════ Вкладка: Все записи ══════════ -->
+                <VerticalStackLayout x:Name="PanelBrowser"
+                                      IsVisible="False"
+                                      Spacing="12"
+                                      Margin="20,16,20,0">
+
+                    <Grid ColumnDefinitions="*,Auto,Auto" Margin="0,0,0,4">
+                        <Label Grid.Column="0"
+                               Text="🗄️ Все записи базы данных"
+                               FontFamily="InterSemiBold"
+                               FontSize="16"
+                               TextColor="{StaticResource LightOnDarkBackground}"
+                               VerticalOptions="Center" />
+                        <Button Grid.Column="2"
+                                 x:Name="BtnRefreshBrowser"
+                                 Text="🔄"
+                                 Clicked="OnRefreshBrowser"
+                                 BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                 TextColor="{StaticResource Primary}"
+                                 CornerRadius="8"
+                                 FontSize="16"
+                                 HeightRequest="36"
+                                 WidthRequest="44"
+                                 Padding="0" />
+                        <Button Grid.Column="1"
+                                 x:Name="BtnAddManual"
+                                 Text="➕ Добавить"
+                                 Clicked="OnAddManualClicked"
+                                 BackgroundColor="{StaticResource Primary}"
+                                 TextColor="White"
+                                 CornerRadius="8"
+                                 FontFamily="InterSemiBold"
+                                 FontSize="12"
+                                 HeightRequest="36"
+                                 Padding="12,0"
+                                 Margin="0,0,6,0" />
+                    </Grid>
+
+                    <!-- ═══ Форма добавления записи (изначально скрыта) ═══ -->
+                    <Border x:Name="AddFormPanel"
+                            IsVisible="False"
+                            Stroke="{StaticResource Primary}"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 10"
+                            BackgroundColor="{StaticResource DarkTertiaryBackground}"
+                            Padding="14">
+                        <VerticalStackLayout Spacing="10">
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="✏️ Новая запись"
+                                       FontFamily="InterSemiBold" FontSize="14"
+                                       TextColor="{StaticResource Primary}"
+                                       VerticalOptions="Center" />
+                                <Label x:Name="AddFormSectionLabel"
+                                       FontFamily="Inter" FontSize="12"
+                                       TextColor="{StaticResource Gray400}"
+                                       VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+
+                            <!-- Тип записи -->
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="Тип:" FontFamily="InterSemiBold" FontSize="13"
+                                       TextColor="{StaticResource Gray300}" VerticalOptions="Center" WidthRequest="80" />
+                                <Picker x:Name="AddFormType"
+                                        FontFamily="Inter" FontSize="13"
+                                        TextColor="{StaticResource LightOnDarkBackground}"
+                                        BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                        WidthRequest="200">
+                                    <Picker.Items>
+                                        <x:String>Ошибка (история)</x:String>
+                                        <x:String>Решение (база знаний)</x:String>
+                                        <x:String>Схема (запрос)</x:String>
+                                    </Picker.Items>
+                                </Picker>
+                            </HorizontalStackLayout>
+
+                            <!-- Код ошибки -->
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="Код:" FontFamily="InterSemiBold" FontSize="13"
+                                       TextColor="{StaticResource Gray300}" VerticalOptions="Center" WidthRequest="80" />
+                                <Entry x:Name="AddFormCode"
+                                       Placeholder="P0300, P0420..."
+                                       FontFamily="Inter" FontSize="13"
+                                       TextColor="{StaticResource LightOnDarkBackground}"
+                                       BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                       WidthRequest="200" />
+                            </HorizontalStackLayout>
+
+                            <!-- Марка + Модель -->
+                            <Grid ColumnDefinitions="80,Auto,*,Auto,*" ColumnSpacing="8">
+                                <Label Grid.Column="0" Text="Авто:" FontFamily="InterSemiBold" FontSize="13"
+                                       TextColor="{StaticResource Gray300}" VerticalOptions="Center" />
+                                <Entry Grid.Column="1" x:Name="AddFormBrand"
+                                       Placeholder="Марка"
+                                       FontFamily="Inter" FontSize="13"
+                                       TextColor="{StaticResource LightOnDarkBackground}"
+                                       BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                       WidthRequest="140" />
+                                <Label Grid.Column="2" Text="/" FontFamily="Inter" FontSize="13"
+                                       TextColor="{StaticResource Gray500}" VerticalOptions="Center" HorizontalOptions="Center" />
+                                <Entry Grid.Column="3" x:Name="AddFormModel"
+                                       Placeholder="Модель"
+                                       FontFamily="Inter" FontSize="13"
+                                       TextColor="{StaticResource LightOnDarkBackground}"
+                                       BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                       WidthRequest="140" />
+                            </Grid>
+
+                            <!-- Текст описания/решения -->
+                            <Label Text="Описание / решение:" FontFamily="InterSemiBold" FontSize="13"
+                                   TextColor="{StaticResource Gray300}" />
+                            <Editor x:Name="AddFormDescription"
+                                    Placeholder="Введите текст диагноза, решения или описания схемы..."
+                                    FontFamily="Inter" FontSize="12"
+                                    TextColor="{StaticResource LightOnDarkBackground}"
+                                    BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                    HeightRequest="100" />
+
+                            <!-- Кнопки -->
+                            <HorizontalStackLayout Spacing="8" HorizontalOptions="End">
+                                <Button x:Name="BtnCancelAdd"
+                                        Text="Отмена"
+                                        Clicked="OnCancelAdd"
+                                        BackgroundColor="{StaticResource Gray600}"
+                                        TextColor="White"
+                                        CornerRadius="8"
+                                        FontFamily="Inter" FontSize="12"
+                                        HeightRequest="34" Padding="14,0" />
+                                <Button x:Name="BtnSaveAdd"
+                                        Text="💾 Сохранить"
+                                        Clicked="OnSaveAdd"
+                                        BackgroundColor="{StaticResource Primary}"
+                                        TextColor="White"
+                                        CornerRadius="8"
+                                        FontFamily="InterSemiBold" FontSize="12"
+                                        HeightRequest="34" Padding="14,0" />
+                            </HorizontalStackLayout>
+
+                            <Label x:Name="AddFormStatus"
+                                   FontFamily="Inter" FontSize="11"
+                                   TextColor="{StaticResource Gray400}"
+                                   IsVisible="False" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Фильтр по разделу -->
+                    <HorizontalStackLayout Spacing="6">
+                        <Button x:Name="BtnSectionErrors"
+                                Text="🔴 Ошибки"
+                                Clicked="OnBrowserSectionClicked"
+                                BackgroundColor="{StaticResource Primary}"
+                                TextColor="White"
+                                CornerRadius="8"
+                                FontFamily="InterSemiBold"
+                                FontSize="12"
+                                HeightRequest="32"
+                                Padding="12,0" />
+                        <Button x:Name="BtnSectionKnowledge"
+                                Text="📚 Решения"
+                                Clicked="OnBrowserSectionClicked"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                TextColor="{StaticResource Gray300}"
+                                CornerRadius="8"
+                                FontFamily="Inter"
+                                FontSize="12"
+                                HeightRequest="32"
+                                Padding="12,0" />
+                        <Button x:Name="BtnSectionSchemes"
+                                Text="🖼️ Схемы"
+                                Clicked="OnBrowserSectionClicked"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                TextColor="{StaticResource Gray300}"
+                                CornerRadius="8"
+                                FontFamily="Inter"
+                                FontSize="12"
+                                HeightRequest="32"
+                                Padding="12,0" />
+                    </HorizontalStackLayout>
+
+                    <Label x:Name="LabelBrowserCount"
+                            FontFamily="Inter"
+                            FontSize="12"
+                            TextColor="{StaticResource Gray400}" />
+
+                    <!-- Список записей -->
+                    <CollectionView x:Name="BrowserList"
+                                     HeightRequest="500"
+                                     SelectionMode="Single">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border Stroke="{StaticResource Gray600}"
+                                        StrokeThickness="1"
+                                        StrokeShape="RoundRectangle 10"
+                                        BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                        Padding="12"
+                                        Margin="0,3">
+                                    <Grid RowDefinitions="Auto,Auto,Auto"
+                                          ColumnDefinitions="Auto,*,Auto"
+                                          ColumnSpacing="10" RowSpacing="4">
+                                        <!-- Иконка и заголовок -->
+                                        <Label Grid.Column="0" Grid.Row="0"
+                                               FontSize="16"
+                                               Text="{Binding Icon}"
+                                               VerticalOptions="Start" />
+                                        <VerticalStackLayout Grid.Column="1" Grid.Row="0" Spacing="2">
+                                            <HorizontalStackLayout Spacing="8">
+                                                <Label Text="{Binding Code}"
+                                                       FontFamily="InterBold" FontSize="14"
+                                                       TextColor="{StaticResource LightOnDarkBackground}" />
+                                                <Border StrokeThickness="0"
+                                                        StrokeShape="RoundRectangle 4"
+                                                        BackgroundColor="{Binding BadgeColor}"
+                                                        Padding="6,2">
+                                                    <Label Text="{Binding Section}"
+                                                           FontFamily="InterSemiBold" FontSize="9"
+                                                           TextColor="White" />
+                                                </Border>
+                                            </HorizontalStackLayout>
+                                            <Label Text="{Binding Title}"
+                                                   FontFamily="InterSemiBold" FontSize="12"
+                                                   TextColor="{StaticResource Gray200}" />
+                                        </VerticalStackLayout>
+                                        <!-- Кнопки ✏️ и 🗑️ -->
+                                        <VerticalStackLayout Grid.Column="2" Grid.Row="0" Grid.RowSpan="3"
+                                                              Spacing="4" VerticalOptions="Start">
+                                            <Button Text="✏️"
+                                                    FontSize="14"
+                                                    BackgroundColor="Transparent"
+                                                    TextColor="{StaticResource Gray500}"
+                                                    WidthRequest="36" HeightRequest="36"
+                                                    Padding="0"
+                                                    Clicked="OnEditEntryClicked" />
+                                            <Button Text="🗑️"
+                                                    FontSize="14"
+                                                    BackgroundColor="Transparent"
+                                                    TextColor="{StaticResource ErrorRed}"
+                                                    WidthRequest="36" HeightRequest="36"
+                                                    Padding="0"
+                                                    Clicked="OnDeleteEntryClicked" />
+                                        </VerticalStackLayout>
+                                        <!-- Детали -->
+                                        <Label Grid.Column="1" Grid.Row="1"
+                                               Text="{Binding Details}"
+                                               FontFamily="Inter" FontSize="11"
+                                               TextColor="{StaticResource Gray400}"
+                                               LineBreakMode="WordWrap" MaxLines="2" />
+                                        <!-- Дата/источник -->
+                                        <Label Grid.Column="1" Grid.Row="2"
+                                               Text="{Binding Meta}"
+                                               FontFamily="Inter" FontSize="10"
+                                               TextColor="{StaticResource Gray500}" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.EmptyView>
+                            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center"
+                                                  Spacing="8" Padding="40">
+                                <Label Text="📭" FontSize="48" HorizontalOptions="Center" />
+                                <Label Text="Нет записей" FontFamily="InterSemiBold" FontSize="16"
+                                       TextColor="{StaticResource Gray400}" HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </CollectionView.EmptyView>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+                <!-- ══════════ Вкладка: Система ══════════ -->
+                <VerticalStackLayout x:Name="PanelSystem"
+                                     IsVisible="False"
+                                     Spacing="14"
+                                     Margin="20,16,20,0">
+
+                    <Label Text="⚙️ Системные агенты"
+                           FontFamily="InterSemiBold"
+                           FontSize="16"
+                           TextColor="{StaticResource LightOnDarkBackground}" />
+
+                    <!-- BackgroundAgent -->
+                    <Border Stroke="{StaticResource Gray600}" StrokeThickness="1"
+                            StrokeShape="RoundRectangle 12"
+                            BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                            Padding="14">
+                        <VerticalStackLayout Spacing="8">
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="🤖 BackgroundAgent"
+                                       FontFamily="InterSemiBold" FontSize="14"
+                                       TextColor="{StaticResource LightOnDarkBackground}" />
+                                <Border StrokeThickness="0" StrokeShape="RoundRectangle 4"
+                                        BackgroundColor="{StaticResource SuccessGreen}"
+                                        Padding="6,2">
+                                    <Label x:Name="AgentBgStatus"
+                                           Text="Запущен"
+                                           FontFamily="InterSemiBold" FontSize="10"
+                                           TextColor="White" />
+                                </Border>
+                            </HorizontalStackLayout>
+                            <Label x:Name="AgentBgInfo"
+                                   FontFamily="Inter" FontSize="12"
+                                   TextColor="{StaticResource Gray400}" />
+                            <Button x:Name="BtnBgForceRun"
+                                    Text="▶ ForceRun"
+                                    Clicked="OnBgForceRun"
+                                    BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                    TextColor="{StaticResource WarningAmber}"
+                                    BorderColor="{StaticResource WarningAmber}"
+                                    BorderWidth="1"
+                                    CornerRadius="8"
+                                    FontFamily="InterSemiBold"
+                                    FontSize="12"
+                                    HeightRequest="32"
+                                    Padding="14,0"
+                                    HorizontalOptions="Start" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- ═══ Настройки синхронизации ═══ -->
+                    <Label Text="📡 Настройки синхронизации"
+                           FontFamily="InterSemiBold"
+                           FontSize="16"
+                           TextColor="{StaticResource LightOnDarkBackground}"
+                           Margin="0,8,0,0" />
+
+                    <Border Stroke="{StaticResource Gray600}" StrokeThickness="1"
+                            StrokeShape="RoundRectangle 12"
+                            BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                            Padding="14">
+                        <VerticalStackLayout Spacing="12">
+
+                            <!-- Период синхронизации -->
+                            <VerticalStackLayout Spacing="4">
+                                <HorizontalStackLayout Spacing="8">
+                                    <Label Text="🔄 Период:"
+                                           FontFamily="InterSemiBold" FontSize="13"
+                                           TextColor="{StaticResource LightOnDarkBackground}"
+                                           VerticalOptions="Center" />
+                                    <Label x:Name="LblSyncPeriod"
+                                           Text="24 часа"
+                                           FontFamily="InterSemiBold" FontSize="14"
+                                           TextColor="{StaticResource Primary}"
+                                           VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+                                <Slider x:Name="SliderSyncPeriod"
+                                        Minimum="1" Maximum="168" Value="24"
+                                        ValueChanged="OnSyncPeriodChanged"
+                                        ThumbColor="{StaticResource Primary}"
+                                        MinimumTrackColor="{StaticResource Primary}"
+                                        MaximumTrackColor="{StaticResource Gray600}" />
+                                <HorizontalStackLayout Spacing="4">
+                                    <Label Text="1 ч" FontFamily="Inter" FontSize="10"
+                                           TextColor="{StaticResource Gray400}" />
+                                    <Label Text="12 ч" FontFamily="Inter" FontSize="10"
+                                           TextColor="{StaticResource Gray400}"
+                                           HorizontalOptions="CenterAndExpand" />
+                                    <Label Text="24 ч" FontFamily="Inter" FontSize="10"
+                                           TextColor="{StaticResource Gray400}"
+                                           HorizontalOptions="CenterAndExpand" />
+                                    <Label Text="3 д" FontFamily="Inter" FontSize="10"
+                                           TextColor="{StaticResource Gray400}"
+                                           HorizontalOptions="CenterAndExpand" />
+                                    <Label Text="7 д" FontFamily="Inter" FontSize="10"
+                                           TextColor="{StaticResource Gray400}" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+
+                            <!-- Авто-синхронизация -->
+                            <Grid ColumnDefinitions="*,Auto" Padding="0">
+                                <Label Text="📡 Авто-синхронизация"
+                                       FontFamily="InterSemiBold" FontSize="13"
+                                       TextColor="{StaticResource LightOnDarkBackground}"
+                                       VerticalOptions="Center" />
+                                <Switch x:Name="SwitchSyncEnabled"
+                                        Grid.Column="1"
+                                        IsToggled="True"
+                                        Toggled="OnSyncEnabledToggled"
+                                        OnColor="{StaticResource Primary}"
+                                        ThumbColor="{StaticResource LightOnDarkBackground}" />
+                            </Grid>
+
+                            <!-- Офлайн-режим -->
+                            <Grid ColumnDefinitions="*,Auto" Padding="0">
+                                <Label Text="📴 Офлайн-режим"
+                                       FontFamily="InterSemiBold" FontSize="13"
+                                       TextColor="{StaticResource LightOnDarkBackground}"
+                                       VerticalOptions="Center" />
+                                <Switch x:Name="SwitchOffline"
+                                        Grid.Column="1"
+                                        IsToggled="False"
+                                        Toggled="OnOfflineToggled"
+                                        OnColor="{StaticResource WarningAmber}"
+                                        ThumbColor="{StaticResource LightOnDarkBackground}" />
+                            </Grid>
+
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- UpdateAgent -->
+                    <Border Stroke="{StaticResource Gray600}" StrokeThickness="1"
+                            StrokeShape="RoundRectangle 12"
+                            BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                            Padding="14">
+                        <VerticalStackLayout Spacing="8">
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="🔄 UpdateAgent"
+                                       FontFamily="InterSemiBold" FontSize="14"
+                                       TextColor="{StaticResource LightOnDarkBackground}" />
+                                <Border StrokeThickness="0" StrokeShape="RoundRectangle 4"
+                                        BackgroundColor="{StaticResource SuccessGreen}"
+                                        Padding="6,2">
+                                    <Label x:Name="AgentUpStatus"
+                                           Text="Запущен"
+                                           FontFamily="InterSemiBold" FontSize="10"
+                                           TextColor="White" />
+                                </Border>
+                            </HorizontalStackLayout>
+                            <Label x:Name="AgentUpInfo"
+                                   FontFamily="Inter" FontSize="12"
+                                   TextColor="{StaticResource Gray400}" />
+                            <Button x:Name="BtnUpForceRun"
+                                    Text="▶ ForceRun"
+                                    Clicked="OnUpForceRun"
+                                    BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                    TextColor="{StaticResource WarningAmber}"
+                                    BorderColor="{StaticResource WarningAmber}"
+                                    BorderWidth="1"
+                                    CornerRadius="8"
+                                    FontFamily="InterSemiBold"
+                                    FontSize="12"
+                                    HeightRequest="32"
+                                    Padding="14,0"
+                                    HorizontalOptions="Start" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Логи (последние строки) -->
+                    <Label Text="📋 Последние события"
+                           FontFamily="InterSemiBold"
+                           FontSize="14"
+                           TextColor="{StaticResource LightOnDarkBackground}"
+                           Margin="0,6,0,0" />
+                    <Border Stroke="{StaticResource Gray600}" StrokeThickness="1"
+                            StrokeShape="RoundRectangle 10"
+                            BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                            Padding="10"
+                            HeightRequest="200">
+                        <ScrollView>
+                            <Label x:Name="SystemLog"
+                                   FontFamily="Inter" FontSize="11"
+                                   TextColor="{StaticResource Gray300}"
+                                   LineBreakMode="WordWrap" />
+                        </ScrollView>
+                    </Border>
+
+                    <Button x:Name="BtnRefreshSystem"
+                            Text="🔄 Обновить"
+                            Clicked="OnRefreshSystem"
+                            BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                            TextColor="{StaticResource Primary}"
+                            CornerRadius="10"
+                            FontFamily="InterSemiBold"
+                            FontSize="14"
+                            HeightRequest="44"
+                            HorizontalOptions="Center" />
+                </VerticalStackLayout>
+
+                <!-- ══════════ Вкладка: Конкуренты ══════════ -->
+                <VerticalStackLayout x:Name="PanelCompetitors"
+                                     IsVisible="False"
+                                     Spacing="14"
+                                     Padding="20,5">
+
+                    <!-- Заголовок -->
+                    <Label Text="🏢 Мониторинг конкурентов"
+                           FontFamily="InterBold"
+                           FontSize="18"
+                           TextColor="{StaticResource LightOnDarkBackground}" />
+
+                    <Label x:Name="LblCompStatus"
+                           FontFamily="Inter"
+                           FontSize="12"
+                           TextColor="{StaticResource Gray400}" />
+
+                    <!-- Сводка -->
+                    <Border Stroke="{StaticResource Gray600}" StrokeThickness="1"
+                            StrokeShape="RoundRectangle 12"
+                            BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                            Padding="14">
+                        <Label x:Name="LblCompSummary"
+                               FontFamily="Inter"
+                               FontSize="12"
+                               TextColor="{StaticResource LightOnDarkBackground}"
+                               LineBreakMode="WordWrap" />
+                    </Border>
+
+                    <!-- Кнопки действий -->
+                    <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                        <Button x:Name="BtnRefreshCompetitors"
+                                Text="🔄 Обновить данные"
+                                Clicked="OnRefreshCompetitors"
+                                BackgroundColor="{StaticResource Primary}"
+                                TextColor="White"
+                                CornerRadius="10"
+                                FontFamily="InterSemiBold"
+                                FontSize="13"
+                                HeightRequest="40"
+                                Padding="18,0" />
+                        <Button x:Name="BtnCompReport"
+                                Text="📄 Отчёт"
+                                Clicked="OnCompReport"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                TextColor="{StaticResource Primary}"
+                                CornerRadius="10"
+                                FontFamily="InterSemiBold"
+                                FontSize="13"
+                                HeightRequest="40"
+                                Padding="18,0" />
+                    </HorizontalStackLayout>
+
+                    <!-- Список конкурентов -->
+                    <Label Text="📋 Список конкурентов"
+                           FontFamily="InterSemiBold"
+                           FontSize="14"
+                           TextColor="{StaticResource LightOnDarkBackground}"
+                           Margin="0,8,0,0" />
+
+                    <VerticalStackLayout x:Name="CompListStack"
+                                         Spacing="8" />
+
+                </VerticalStackLayout>
+
+                <!-- ══════════ Вкладка: Автопром ══════════ -->
+                <VerticalStackLayout x:Name="PanelAutoIndustry"
+                                     IsVisible="False"
+                                     Spacing="14"
+                                     Padding="20,5">
+
+                    <!-- Заголовок -->
+                    <Label Text="🚗 Мониторинг автопрома"
+                           FontFamily="InterBold"
+                           FontSize="18"
+                           TextColor="{StaticResource LightOnDarkBackground}" />
+
+                    <Label x:Name="LblAutoStatus"
+                           FontFamily="Inter"
+                           FontSize="12"
+                           TextColor="{StaticResource Gray400}" />
+
+                    <!-- Сводка -->
+                    <Border Stroke="{StaticResource Gray600}" StrokeThickness="1"
+                            StrokeShape="RoundRectangle 12"
+                            BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                            Padding="14">
+                        <Label x:Name="LblAutoSummary"
+                               FontFamily="Inter"
+                               FontSize="12"
+                               TextColor="{StaticResource LightOnDarkBackground}"
+                               LineBreakMode="WordWrap" />
+                    </Border>
+
+                    <!-- Кнопки действий -->
+                    <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                        <Button x:Name="BtnRefreshAutoIndustry"
+                                Text="🔄 Запустить проверку"
+                                Clicked="OnRefreshAutoIndustry"
+                                BackgroundColor="{StaticResource Primary}"
+                                TextColor="White"
+                                CornerRadius="10"
+                                FontFamily="InterSemiBold"
+                                FontSize="13"
+                                HeightRequest="40"
+                                Padding="18,0" />
+                        <Button x:Name="BtnAutoReport"
+                                Text="📄 Отчёт"
+                                Clicked="OnAutoReport"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                TextColor="{StaticResource Primary}"
+                                CornerRadius="10"
+                                FontFamily="InterSemiBold"
+                                FontSize="13"
+                                HeightRequest="40"
+                                Padding="18,0" />
+                    </HorizontalStackLayout>
+
+                    <!-- Фильтры -->
+                    <HorizontalStackLayout Spacing="8" HorizontalOptions="Center" Margin="0,8,0,0">
+                        <Button x:Name="BtnAutoFilterAll"
+                                Text="Все"
+                                Clicked="OnAutoIndustryFilter"
+                                BackgroundColor="{StaticResource Primary}"
+                                TextColor="White"
+                                CornerRadius="8"
+                                FontFamily="InterSemiBold"
+                                FontSize="11"
+                                HeightRequest="32"
+                                Padding="12,0" />
+                        <Button x:Name="BtnAutoFilterRecall"
+                                Text="Отзывы"
+                                Clicked="OnAutoIndustryFilter"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                TextColor="{StaticResource Gray300}"
+                                CornerRadius="8"
+                                FontFamily="Inter"
+                                FontSize="11"
+                                HeightRequest="32"
+                                Padding="12,0" />
+                        <Button x:Name="BtnAutoFilterStandards"
+                                Text="Стандарты"
+                                Clicked="OnAutoIndustryFilter"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                TextColor="{StaticResource Gray300}"
+                                CornerRadius="8"
+                                FontFamily="Inter"
+                                FontSize="11"
+                                HeightRequest="32"
+                                Padding="12,0" />
+                        <Button x:Name="BtnAutoFilterModels"
+                                Text="Модели"
+                                Clicked="OnAutoIndustryFilter"
+                                BackgroundColor="{StaticResource DarkSecondaryBackground}"
+                                TextColor="{StaticResource Gray300}"
+                                CornerRadius="8"
+                                FontFamily="Inter"
+                                FontSize="11"
+                                HeightRequest="32"
+                                Padding="12,0" />
+                    </HorizontalStackLayout>
+
+                    <!-- Список новостей -->
+                    <Label Text="📰 Последние события"
+                           FontFamily="InterSemiBold"
+                           FontSize="14"
+                           TextColor="{StaticResource LightOnDarkBackground}"
+                           Margin="0,8,0,0" />
+
+                    <VerticalStackLayout x:Name="AutoNewsListStack"
+                                         Spacing="8" />
+
+                </VerticalStackLayout>
+
+                <!-- ══════════ Вкладка: Кодирование ══════════ -->
+                <VerticalStackLayout x:Name="PanelCoding"
+                                     IsVisible="False"
+                                     Spacing="14"
+                                     Padding="20,5">
+                    <Label Text="Статистика кодирования"
+                           FontFamily="InterSemiBold"
+                           FontSize="16"
+                           TextColor="{StaticResource LightOnDarkBackground}" />
+
+                    <!-- Общая статистика -->
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10" RowSpacing="10">
+                        <Border Grid.Column="0" Style="{StaticResource CardBorder}" Padding="14" StrokeShape="RoundRectangle 10">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="Всего функций"
+                                       FontSize="11" TextColor="{StaticResource Gray400}" />
+                                <Label x:Name="LblCodingTotalFeatures"
+                                       FontSize="24" FontFamily="InterBold"
+                                       TextColor="{StaticResource Primary}" Text="0" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border Grid.Column="1" Style="{StaticResource CardBorder}" Padding="14" StrokeShape="RoundRectangle 10">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="Сессий кодирования"
+                                       FontSize="11" TextColor="{StaticResource Gray400}" />
+                                <Label x:Name="LblCodingTotalSessions"
+                                       FontSize="24" FontFamily="InterBold"
+                                       TextColor="{StaticResource Primary}" Text="0" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+
+                    <!-- Кнопки управления -->
+                    <HorizontalStackLayout Spacing="10">
+                        <Button Text="🔄 Обновить"
+                                BackgroundColor="{StaticResource Surface}"
+                                TextColor="{StaticResource OnSurface}"
+                                CornerRadius="8" FontSize="13"
+                                Clicked="OnCodingRefreshClicked" />
+                        <Button Text="Сидировать базу"
+                                BackgroundColor="{StaticResource Surface}"
+                                TextColor="{StaticResource OnSurface}"
+                                CornerRadius="8" FontSize="13"
+                                Clicked="OnCodingSeedClicked" />
+                    </HorizontalStackLayout>
+
+                    <!-- Последние сессии -->
+                    <Label Text="Последние сессии кодирования"
+                           FontFamily="InterSemiBold"
+                           FontSize="14"
+                           TextColor="{StaticResource LightOnDarkBackground}"
+                           Margin="0,8,0,0" />
+
+                    <CollectionView x:Name="CodingSessionsList"
+                                    HeightRequest="300">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border Style="{StaticResource CardBorder}"
+                                        Padding="12,10"
+                                        StrokeShape="RoundRectangle 8"
+                                        Margin="0,4">
+                                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                                        <Label Text="{Binding Action, StringFormat='{0}'}"
+                                               FontSize="14" VerticalOptions="Center"
+                                               Grid.Column="0" />
+                                        <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                            <Label Text="{Binding FeatureName}"
+                                                   FontSize="13" FontFamily="InterSemiBold"
+                                                   TextColor="{StaticResource LightOnDarkBackground}" />
+                                            <Label Text="{Binding PerformedAt, StringFormat='{0:dd.MM HH:mm}'}"
+                                                   FontSize="10" TextColor="{StaticResource Gray400}" />
+                                        </VerticalStackLayout>
+                                        <Label Text="{Binding Success, StringFormat='{0}'}"
+                                               FontSize="20" VerticalOptions="Center"
+                                               Grid.Column="2" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.EmptyView>
+                            <Label Text="Сессий кодирования пока нет"
+                                   TextColor="{StaticResource Gray400}"
+                                   FontSize="12"
+                                   HorizontalOptions="Center" Margin="0,20" />
+                        </CollectionView.EmptyView>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

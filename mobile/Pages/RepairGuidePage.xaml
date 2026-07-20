@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarDiagnosticApp.Pages.RepairGuidePage"
+             Title="Ремонтное руководство"
+             BackgroundColor="#121212">
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="0">
+
+        <!-- ══════════════ Шапка ══════════════ -->
+        <VerticalStackLayout Grid.Row="0" Padding="16,16,16,8" Spacing="6">
+            <!-- Код ошибки + авто -->
+            <HorizontalStackLayout Spacing="8">
+                <Border BackgroundColor="#E53935" StrokeShape="RoundRectangle 4" Padding="8,3" StrokeThickness="0">
+                    <Label x:Name="ErrorCodeLabel" Text="P0300" TextColor="White" FontSize="16" FontAttributes="Bold"/>
+                </Border>
+                <Label x:Name="CarLabel" Text="LADA Vesta" TextColor="#B0B0B0" FontSize="14" VerticalOptions="Center"/>
+                <!-- Сложность -->
+                <Border x:Name="DifficultyBadge" BackgroundColor="#FF9800" StrokeShape="RoundRectangle 4" Padding="8,3" StrokeThickness="0">
+                    <Label x:Name="DifficultyLabel" Text="Средне" TextColor="White" FontSize="12"/>
+                </Border>
+                <!-- Время -->
+                <Label x:Name="TimeLabel" Text="≈ 60 мин" TextColor="#888" FontSize="12" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+
+            <!-- Заголовок -->
+            <Label x:Name="TitleLabel" Text="Заголовок руководства" TextColor="White" FontSize="18" FontAttributes="Bold" LineBreakMode="TailTruncation" MaxLines="2"/>
+
+            <!-- Прогресс-бар -->
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                <ProgressBar x:Name="ProgressBar" Progress="0" ProgressColor="#4CAF50" VerticalOptions="Center"/>
+                <Label x:Name="ProgressLabel" Grid.Column="1" Text="0/0" TextColor="#888" FontSize="12" VerticalOptions="Center"/>
+            </Grid>
+        </VerticalStackLayout>
+
+        <!-- ══════════════ Содержимое шага ══════════════ -->
+        <ScrollView Grid.Row="1" Padding="16,8">
+            <VerticalStackLayout Spacing="12">
+
+                <!-- Номер и заголовок шага -->
+                <HorizontalStackLayout Spacing="8">
+                    <Border BackgroundColor="#1E3A5F" StrokeShape="RoundRectangle 20" Padding="10,4" StrokeThickness="0">
+                        <Label x:Name="StepNumberLabel" Text="Шаг 1" TextColor="#64B5F6" FontSize="14" FontAttributes="Bold"/>
+                    </Border>
+                    <Label x:Name="StepTitleLabel" Text="Заголовок шага" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <!-- Предупреждение -->
+                <Border x:Name="WarningBox" IsVisible="False" BackgroundColor="#332200" StrokeShape="RoundRectangle 6" Padding="10" StrokeThickness="1" Stroke="#FF9800">
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="⚠️" FontSize="16" VerticalOptions="Start"/>
+                        <Label x:Name="WarningLabel" Text="" TextColor="#FFB74D" FontSize="13" LineBreakMode="WordWrap"/>
+                    </HorizontalStackLayout>
+                </Border>
+
+                <!-- Инструкция -->
+                <Border BackgroundColor="#1E1E1E" StrokeShape="RoundRectangle 8" Padding="14" StrokeThickness="1" Stroke="#333">
+                    <Label x:Name="InstructionLabel" Text="Инструкция шага" TextColor="#E0E0E0" FontSize="15" LineBreakMode="WordWrap" LineHeight="1.5"/>
+                </Border>
+
+                <!-- Подсказка (что искать визуально) -->
+                <Border x:Name="HintBox" IsVisible="False" BackgroundColor="#1A2E1A" StrokeShape="RoundRectangle 6" Padding="10" StrokeThickness="1" Stroke="#4CAF50">
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="👁" FontSize="16" VerticalOptions="Start"/>
+                        <Label x:Name="HintLabel" Text="" TextColor="#A5D6A7" FontSize="13" LineBreakMode="WordWrap"/>
+                    </HorizontalStackLayout>
+                </Border>
+
+                <!-- Ожидаемый результат -->
+                <Border x:Name="ResultBox" IsVisible="False" BackgroundColor="#1A1A2E" StrokeShape="RoundRectangle 6" Padding="10" StrokeThickness="1" Stroke="#3F51B5">
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="✓" FontSize="16" VerticalOptions="Start"/>
+                        <Label x:Name="ResultLabel" Text="" TextColor="#9FA8DA" FontSize="13" LineBreakMode="WordWrap"/>
+                    </HorizontalStackLayout>
+                </Border>
+
+                <!-- Кнопки решений (да/нет) — только для точек решения -->
+                <Grid x:Name="DecisionButtons" IsVisible="False" ColumnDefinitions="*,16,*" Margin="0,8">
+                    <Button x:Name="BtnSuccess" Grid.Column="0" Text="✅ Да" 
+                            BackgroundColor="#2E7D32" TextColor="White" FontSize="16"
+                            CornerRadius="8" Clicked="OnSuccessClicked"/>
+                    <Button x:Name="BtnFailure" Grid.Column="2" Text="❌ Нет" 
+                            BackgroundColor="#C62828" TextColor="White" FontSize="16"
+                            CornerRadius="8" Clicked="OnFailureClicked"/>
+                </Grid>
+
+                <!-- Плейсхолдер изображения -->
+                <Border x:Name="ImagePlaceholder" IsVisible="False" BackgroundColor="#1A1A1A"
+                        StrokeShape="RoundRectangle 8" HeightRequest="180" StrokeThickness="1" Stroke="#444">
+                    <Label Text="🖼️ Схема/фото узла" TextColor="#666" HorizontalOptions="Center" VerticalOptions="Center" FontSize="14"/>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- ══════════════ Нижняя панель ══════════════ -->
+        <Grid Grid.Row="2" ColumnDefinitions="*,*,*" Padding="16,8" ColumnSpacing="8">
+            <Button x:Name="BtnPrev" Grid.Column="0" Text="◀ Назад" 
+                    BackgroundColor="#333" TextColor="White" FontSize="14" CornerRadius="8"
+                    Clicked="OnPrevClicked"/>
+            <Button x:Name="BtnNext" Grid.Column="1" Grid.ColumnSpan="2" Text="Далее ▶"
+                    BackgroundColor="#1565C0" TextColor="White" FontSize="16" FontAttributes="Bold" CornerRadius="8"
+                    Clicked="OnNextClicked"/>
+        </Grid>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarDiagnosticApp.Pages.LiveDataPage"
+             Title="Живые данные">
+
+    <Grid RowDefinitions="Auto,Auto,*" Padding="0">
+
+        <!-- ── Верхняя панель: индикатор + заголовок + кнопки ── -->
+        <Border Grid.Row="0"
+                BackgroundColor="{StaticResource Surface}"
+                Stroke="Transparent"
+                Padding="16,12">
+             <Grid ColumnDefinitions="Auto,*,Auto,Auto,Auto,Auto,Auto" RowDefinitions="Auto">
+                <!-- Индикатор состояния -->
+                <BoxView x:Name="StatusDot"
+                         Grid.Column="0"
+                         WidthRequest="12"
+                         HeightRequest="12"
+                         CornerRadius="6"
+                         Color="#9E9E9E"
+                         Margin="0,0,10,0"
+                         VerticalOptions="Center" />
+
+                <VerticalStackLayout Grid.Column="1">
+                    <HorizontalStackLayout Spacing="6">
+                        <Label x:Name="LabelHeader"
+                               Text="Live Data"
+                               FontFamily="InterSemiBold"
+                               FontSize="20"
+                               TextColor="{StaticResource OnSurface}" />
+                    </HorizontalStackLayout>
+                    <Label x:Name="LabelStatus"
+                           Text="Не подключено"
+                           FontFamily="InterRegular"
+                           FontSize="12"
+                           TextColor="#9E9E9E" />
+                </VerticalStackLayout>
+
+                <Button x:Name="BtnConnect"
+                        Grid.Column="2"
+                        Text="▶ Подключить"
+                        FontFamily="InterSemiBold"
+                        FontSize="13"
+                        Padding="12,6"
+                        CornerRadius="8"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White"
+                        Margin="0,0,8,0"
+                        Clicked="OnConnectClicked" />
+
+                <Button x:Name="BtnStop"
+                        Grid.Column="3"
+                        Text="■"
+                        FontFamily="InterSemiBold"
+                        FontSize="14"
+                        Padding="8,6"
+                        CornerRadius="8"
+                        BackgroundColor="{StaticResource Error}"
+                        TextColor="White"
+                        IsVisible="False"
+                        Clicked="OnStopClicked" />
+
+                <Button x:Name="BtnAi"
+                        Grid.Column="4"
+                        Text="🧠 Анализ"
+                        FontFamily="InterSemiBold"
+                        FontSize="11"
+                        Padding="10,6"
+                        CornerRadius="8"
+                        BackgroundColor="Purple"
+                        TextColor="White"
+                        IsVisible="False"
+                        Margin="8,0,0,0"
+                        Clicked="OnAiAnalyzeClicked" />
+
+                <Button x:Name="BtnGraph"
+                        Grid.Column="5"
+                        Text="📈 Графики"
+                        FontFamily="InterSemiBold"
+                        FontSize="11"
+                        Padding="10,6"
+                        CornerRadius="8"
+                        BackgroundColor="#1565C0"
+                        TextColor="White"
+                        IsVisible="False"
+                        Margin="8,0,0,0"
+                        Clicked="OnGraphClicked" />
+
+                <Button x:Name="BtnDashboard"
+                        Grid.Column="6"
+                        Text="📊 Дашборд"
+                        FontFamily="InterSemiBold"
+                        FontSize="11"
+                        Padding="10,6"
+                        CornerRadius="8"
+                        BackgroundColor="#7C4DFF"
+                        TextColor="White"
+                        IsVisible="False"
+                        Margin="8,0,0,0"
+                        Clicked="OnDashboardClicked" />
+            </Grid>
+        </Border>
+
+        <!-- ── Легенда цветовой индикации ── -->
+        <Border x:Name="LegendBar"
+                Grid.Row="1"
+                BackgroundColor="{StaticResource Surface}"
+                Stroke="Transparent"
+                Padding="16,6"
+                IsVisible="False">
+            <HorizontalStackLayout Spacing="16" HorizontalOptions="Center">
+                <HorizontalStackLayout Spacing="4">
+                    <BoxView WidthRequest="10" HeightRequest="10"
+                             Color="#4CAF50" CornerRadius="5"
+                             VerticalOptions="Center" />
+                    <Label Text="Норма" FontSize="11"
+                           TextColor="#9E9E9E"
+                           VerticalOptions="Center" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="4">
+                    <BoxView WidthRequest="10" HeightRequest="10"
+                             Color="#FF9800" CornerRadius="5"
+                             VerticalOptions="Center" />
+                    <Label Text="Внимание" FontSize="11"
+                           TextColor="#9E9E9E"
+                           VerticalOptions="Center" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="4">
+                    <BoxView WidthRequest="10" HeightRequest="10"
+                             Color="#F44336" CornerRadius="5"
+                             VerticalOptions="Center" />
+                    <Label Text="Опасно" FontSize="11"
+                           TextColor="#9E9E9E"
+                           VerticalOptions="Center" />
+                </HorizontalStackLayout>
+                <!-- Счётчик проблемных PID -->
+                <Label x:Name="LabelWarnings"
+                       Text=""
+                       FontSize="11"
+                       FontFamily="InterSemiBold"
+                       TextColor="#F44336"
+                       VerticalOptions="Center" />
+            </HorizontalStackLayout>
+        </Border>
+
+        <!-- ── Сетка значений ── -->
+        <ScrollView Grid.Row="2" Padding="12,8">
+            <FlexLayout x:Name="GaugesLayout"
+                        Wrap="Wrap"
+                        JustifyContent="Start"
+                        AlignItems="Start" />
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:CarDiagnosticApp.Models"
+             x:Class="CarDiagnosticApp.Pages.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+
+             <Label Text="🔧 АвтоДиагностика AI"
+                    FontSize="32"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"/>
+
+            <!-- ⚠️ Офлайн-баннер -->
+            <Frame x:Name="OfflineBanner"
+                   IsVisible="False"
+                   BackgroundColor="#FFF3E0"
+                   BorderColor="#FF9800"
+                   CornerRadius="10"
+                   Padding="12"
+                   HasShadow="False">
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="⚠️"
+                           FontSize="24"
+                           VerticalOptions="Center"/>
+                    <VerticalStackLayout VerticalOptions="Center">
+                        <Label Text="Офлайн-режим"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#E65100"/>
+                        <Label Text="Интернет недоступен. Используются локальные данные."
+                               FontSize="12"
+                               TextColor="#BF360C"/>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </Frame>
+
+            <Label Text="Подключите адаптер ELM327 и нажмите сканировать"
+                   FontSize="16"
+                   HorizontalOptions="Center"/>
+
+            <Button x:Name="ScanButton"
+                    Text="🔍 Сканировать ошибки"
+                    BackgroundColor="#4CAF50"
+                    TextColor="White"
+                    FontSize="18"/>
+
+             <Label x:Name="StatusLabel"
+                    Text="Статус: готов"
+                    FontSize="14"
+                    TextColor="Gray"/>
+
+             <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                 <BoxView x:Name="ConnectivityDot"
+                          WidthRequest="10"
+                          HeightRequest="10"
+                          CornerRadius="5"
+                          Color="#4CAF50"
+                          VerticalOptions="Center"/>
+                 <Label x:Name="ConnectivityLabel"
+                        Text="Онлайн"
+                        FontSize="12"
+                        TextColor="Gray"
+                        VerticalOptions="Center"/>
+             </HorizontalStackLayout>
+
+             <Label x:Name="VinLabel"
+                    FontFamily="InterRegular"
+                    FontSize="12"
+                    TextColor="#6E6E6E"
+                    IsVisible="False"/>
+
+             <Border x:Name="VehicleInfoCard"
+                     IsVisible="False"
+                     StrokeThickness="1"
+                     Stroke="#1565C0"
+                     BackgroundColor="#E3F2FD"
+                     Padding="12,8"
+                     StrokeShape="RoundRectangle 10">
+                 <VerticalStackLayout Spacing="2">
+                     <Label Text="Авто определено по VIN"
+                            FontSize="12"
+                            FontAttributes="Bold"
+                            TextColor="#1565C0"/>
+                     <Label x:Name="VehicleInfoLabel"
+                            FontSize="14"
+                            TextColor="#0D47A1"/>
+                 </VerticalStackLayout>
+             </Border>
+
+             <CollectionView x:Name="ErrorsList"
+                             HeightRequest="100"
+                             IsVisible="False">
+                 <CollectionView.ItemTemplate>
+                     <DataTemplate x:DataType="x:String">
+                         <HorizontalStackLayout Spacing="8" Padding="6">
+                             <Frame BackgroundColor="{StaticResource ErrorRed}"
+                                    CornerRadius="6" Padding="10,5" HasShadow="False">
+                                 <Label Text="{Binding .}"
+                                        FontFamily="InterBold" FontSize="14" TextColor="White"/>
+                             </Frame>
+                         </HorizontalStackLayout>
+                     </DataTemplate>
+                 </CollectionView.ItemTemplate>
+             </CollectionView>
+
+             <!-- 🔴 Текущие ошибки -->
+             <Label x:Name="CurrentErrorsHeader"
+                    FontFamily="InterBold"
+                    FontSize="16"
+                    TextColor="#F44336"
+                    IsVisible="False"/>
+
+             <CollectionView x:Name="CurrentErrorsList"
+                             HeightRequest="100"
+                             IsVisible="False">
+                 <CollectionView.ItemTemplate>
+                     <DataTemplate x:DataType="models:ObdError"
+                                   xmlns:models="clr-namespace:CarDiagnosticApp.Models">
+                         <HorizontalStackLayout Spacing="8" Padding="6">
+                             <Border BackgroundColor="#F44336"
+                                     StrokeThickness="0"
+                                     Padding="10,5"
+                                     StrokeShape="RoundRectangle 6">
+                                 <Label Text="{Binding Code}"
+                                        FontFamily="InterBold" FontSize="14" TextColor="White"/>
+                             </Border>
+                         </HorizontalStackLayout>
+                     </DataTemplate>
+                 </CollectionView.ItemTemplate>
+             </CollectionView>
+
+              <!-- 🟡 Исторические (сохранённые) ошибки -->
+             <Label x:Name="PendingErrorsHeader"
+                    FontFamily="InterBold"
+                    FontSize="16"
+                    TextColor="#FFC107"
+                    IsVisible="False"/>
+
+             <CollectionView x:Name="PendingErrorsList"
+                             HeightRequest="100"
+                             IsVisible="False">
+                 <CollectionView.ItemTemplate>
+                     <DataTemplate x:DataType="models:ObdError"
+                                   xmlns:models="clr-namespace:CarDiagnosticApp.Models">
+                         <HorizontalStackLayout Spacing="8" Padding="6">
+                             <Frame BackgroundColor="#FFC107"
+                                    CornerRadius="6" Padding="10,5" HasShadow="False">
+                                 <Label Text="{Binding Code}"
+                                        FontFamily="InterBold" FontSize="14" TextColor="Black"/>
+                             </Frame>
+                         </HorizontalStackLayout>
+                     </DataTemplate>
+                 </CollectionView.ItemTemplate>
+             </CollectionView>
+
+              <!-- 🔵 Подтверждённые ошибки -->
+             <Label x:Name="PermanentErrorsHeader"
+                    FontFamily="InterBold"
+                    FontSize="16"
+                    TextColor="#64B5F6"
+                    IsVisible="False"/>
+
+             <CollectionView x:Name="PermanentErrorsList"
+                             HeightRequest="100"
+                             IsVisible="False">
+                 <CollectionView.ItemTemplate>
+                     <DataTemplate x:DataType="models:ObdError"
+                                   xmlns:models="clr-namespace:CarDiagnosticApp.Models">
+                         <HorizontalStackLayout Spacing="8" Padding="6">
+                             <Frame BackgroundColor="#1565C0"
+                                    CornerRadius="6" Padding="10,5" HasShadow="False">
+                                 <Label Text="{Binding Code}"
+                                        FontFamily="InterBold" FontSize="14" TextColor="White"/>
+                             </Frame>
+                         </HorizontalStackLayout>
+                     </DataTemplate>
+                 </CollectionView.ItemTemplate>
+             </CollectionView>
+
+            <Label Text="Марка автомобиля" FontSize="14" FontAttributes="Bold"/>
+
+            <Picker x:Name="pickerBrand"
+                    Title="Выберите марку"
+                    FontSize="16"
+                    SelectedIndexChanged="OnBrandSelected"/>
+
+            <Label Text="Модель" FontSize="14" FontAttributes="Bold"/>
+
+            <Picker x:Name="pickerModel"
+                    Title="Сначала выберите марку"
+                    FontSize="16"
+                    IsEnabled="False"/>
+
+             <Button x:Name="DiagnoseButton"
+                      Text="🤖 Диагностика AI"
+                      BackgroundColor="#2196F3"
+                      TextColor="White"
+                      FontSize="18"
+                      IsEnabled="False"/>
+
+              <Button x:Name="TestModeButton"
+                       Text="🧪 Тестовый режим (без авто)"
+                       BackgroundColor="#FF9800"
+                       TextColor="White"
+                       FontSize="18"/>
+
+             <Button x:Name="ClearButton"
+                     Text="🔄 Сбросить ошибки (Mode 04)"
+                     BackgroundColor="#2D2D2D"
+                     TextColor="#FFC107"
+                     FontSize="16"
+                     BorderColor="#FFC107"
+                     BorderWidth="1"
+                     CornerRadius="10"
+                     IsEnabled="False"
+                     Clicked="OnClearClicked"/>
+
+              <Button x:Name="LiveDataButton"
+                       Text="📊 Живые данные"
+                       BackgroundColor="#1565C0"
+                       TextColor="White"
+                       FontSize="16"
+                       CornerRadius="10"
+                       Clicked="OnLiveDataClicked"/>
+
+              <Button x:Name="DashboardButton"
+                       Text="📊 Дашборд"
+                       BackgroundColor="#7C4DFF"
+                       TextColor="White"
+                       FontSize="16"
+                       CornerRadius="10"
+                       IsEnabled="False"
+                       Clicked="OnDashboardClicked"/>
+
+              <Button x:Name="GraphButton"
+                       Text="📈 Графики"
+                       BackgroundColor="#1565C0"
+                       TextColor="White"
+                       FontSize="16"
+                       CornerRadius="10"
+                       IsEnabled="False"
+                       Clicked="OnGraphClicked"/>
+
+               <Button x:Name="HistoryButton"
+                       Text="📋 История диагностик"
+                      BackgroundColor="#2D2D2D"
+                      TextColor="#1565C0"
+                      FontSize="16"
+                      BorderColor="#1565C0"
+                      BorderWidth="1"
+                      CornerRadius="10"
+                      Clicked="OnHistoryClicked"/>
+
+                <Button x:Name="AnalysisButton"
+                        Text="📈 Анализ истории ошибок"
+                        BackgroundColor="#00BCD4"
+                        TextColor="White"
+                        FontSize="16"
+                        CornerRadius="10"
+                        IsEnabled="False"
+                        Clicked="OnAnalysisClicked"/>
+
+                <Button x:Name="HistoryErrorsButton"
+                        Text="📋 Анализ сохранённых ошибок"
+                        BackgroundColor="#9C27B0"
+                        TextColor="White"
+                        FontSize="16"
+                        CornerRadius="10"
+                        IsEnabled="False"
+                        Clicked="OnHistoryErrorsClicked"/>
+
+              <Button x:Name="KnowledgeButton"
+                      Text="📚 База знаний OBD2"
+                      BackgroundColor="#2D2D2D"
+                      TextColor="#1565C0"
+                      FontSize="16"
+                      BorderColor="#1565C0"
+                      BorderWidth="1"
+                      CornerRadius="10"
+                      Clicked="OnKnowledgeClicked"/>
+
+               <Button x:Name="SchemeButton"
+                        Text="🔧 Схема узлов"
+                        BackgroundColor="#2D2D2D"
+                        TextColor="#1565C0"
+                        FontSize="16"
+                        BorderColor="#1565C0"
+                        BorderWidth="1"
+                        CornerRadius="10"
+                        Clicked="OnSchemeClicked"/>
+
+               <Button x:Name="CodingButton"
+                        Text="🔧 Скрытые функции"
+                        BackgroundColor="#2D2D2D"
+                        TextColor="#1565C0"
+                        FontSize="16"
+                        BorderColor="#1565C0"
+                        BorderWidth="1"
+                        CornerRadius="10"
+                        Clicked="OnCodingClicked"/>
+
+               <Button x:Name="AdminButton"
+                       Text="⚙️ Панель администратора"
+                       BackgroundColor="Transparent"
+                       TextColor="#6E6E6E"
+                       FontSize="14"
+                       CornerRadius="10"
+                       Clicked="OnAdminClicked"/>
+
+               <Button x:Name="ManualUpdateButton"
+                       Text="🔄 Обновить вручную"
+                       BackgroundColor="Transparent"
+                       TextColor="#6E6E6E"
+                       FontSize="14"
+                       CornerRadius="10"
+                        Clicked="OnManualUpdateClicked"/>
+
+                <Button x:Name="SyncButton"
+                        Text="☁️ Синхронизация"
+                        BackgroundColor="#1565C0"
+                        TextColor="White"
+                        FontSize="14"
+                        CornerRadius="10"
+                        Clicked="OnSyncClicked"/>
+
+                <ActivityIndicator x:Name="LoadingIndicator"
+                                IsRunning="False"
+                                Color="#2196F3"/>
+
+         </VerticalStackLayout>
+     </ScrollView>
+ </ContentPage>

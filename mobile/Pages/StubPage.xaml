@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarDiagnosticApp.Pages.StubPage"
+             Title="В разработке"
+             Shell.PresentationMode="Modal"
+             BackgroundColor="{AppThemeBinding Dark=#121212, Light=#F5F5F5}">
+
+    <Grid VerticalOptions="Center" HorizontalOptions="Center" Padding="32">
+        <VerticalStackLayout Spacing="16" HorizontalOptions="Center">
+            <Label Text="🚧"
+                   FontSize="64"
+                   HorizontalOptions="Center" />
+            <Label x:Name="LabelTitle"
+                   Text="В разработке"
+                   FontFamily="InterSemiBold"
+                   FontSize="24"
+                   HorizontalOptions="Center"
+                   TextColor="{AppThemeBinding Dark=White, Light=#212121}" />
+            <Label x:Name="LabelSubtitle"
+                   Text="Этот раздел появится в следующем обновлении"
+                   FontFamily="InterRegular"
+                   FontSize="14"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   TextColor="{AppThemeBinding Dark=#999, Light=#666}" />
+            <Button Text="← Назад"
+                    FontSize="14"
+                    Padding="24,10"
+                    CornerRadius="12"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="White"
+                    HorizontalOptions="Center"
+                    Clicked="OnBackClicked" />
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>

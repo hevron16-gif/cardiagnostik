@@ -1,0 +1,15 @@
+# CarDiagnosticApp — EditorConfig
+# Все файлы проекта должны сохраняться в UTF-8.
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = crlf
+insert_final_newline = true
+trim_trailing_whitespace = false
+
+[*.{cs,xaml,csproj,xml,json,md,txt}]
+charset = utf-8
+indent_style = space
+indent_size = 4

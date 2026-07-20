@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<!-- Сеть -->
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+
+	<!-- Bluetooth (Android 12+) -->
+	<uses-permission android:name="android.permission.BLUETOOTH_SCAN"
+	                 android:usesPermissionFlags="neverForLocation" />
+	<uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+	<uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+
+	<!-- Bluetooth (legacy, Android 11 и ниже) -->
+	<uses-permission android:name="android.permission.BLUETOOTH"
+	                 android:maxSdkVersion="30" />
+	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN"
+	                 android:maxSdkVersion="30" />
+
+	<!-- Location: discovery classic BT на Android 11-; на 12+ иногда тоже помогает -->
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+	<!-- Хранилище (сохранение отчётов/бэкапов на Android 12 и ниже) -->
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+	                 android:maxSdkVersion="32" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+	                 android:maxSdkVersion="29" />
+
+	<!-- Аппаратные фичи (необязательные — приложение работает и без них) -->
+	<uses-feature android:name="android.hardware.bluetooth" android:required="false" />
+	<uses-feature android:name="android.hardware.bluetooth_le" android:required="false" />
+	<uses-feature android:name="android.hardware.location" android:required="false" />
+	<uses-feature android:name="android.hardware.location.gps" android:required="false" />
+
+	<application
+		android:allowBackup="true"
+		android:icon="@mipmap/appicon"
+		android:roundIcon="@mipmap/appicon_round"
+		android:supportsRtl="true"
+		android:usesCleartextTraffic="true"
+		android:requestLegacyExternalStorage="true">
+
+	</application>
+
+</manifest>
