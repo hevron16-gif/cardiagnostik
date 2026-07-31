@@ -9,6 +9,7 @@ namespace CarDiagnosticApp.Services;
 /// </summary>
 public class LocalDatabase
 {
+    public static LocalDatabase Instance { get; } = new();
     private SQLiteAsyncConnection? _db;
     private bool _initialized;
 
