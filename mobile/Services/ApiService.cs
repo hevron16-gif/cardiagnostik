@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Text;
@@ -546,6 +546,36 @@ namespace CarDiagnosticApp.Services
         public async Task<string?> GetSchemasLibraryJsonAsync()
         {
             return await GetRawAsync("/schemas");
+        }
+
+        // ═══════════════════════════════════════════════════════════
+        // ИСПРАВЛЕНИЯ: добавлены GetAsync и DownloadAsync
+        // ═══════════════════════════════════════════════════════════
+
+        /// <summary>
+        /// GET-запрос к произвольному относительному URL.
+        /// Возвращает строку ответа или null при ошибке.
+        /// </summary>
+        public async Task<string?> GetAsync(string relativeUrl)
+        {
+            return await GetRawAsync(relativeUrl);
+        }
+
+        /// <summary>
+        /// Скачивает файл/данные по URL.
+        /// Возвращает массив байт или null при ошибке.
+        /// </summary>
+        public async Task<byte[]?> DownloadAsync(string url)
+        {
+            try
+            {
+                using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
+                var response = await _httpClient.GetAsync(url, cts.Token);
+                if (response.IsSuccessStatusCode)
+                    return await response.Content.ReadAsByteArrayAsync(cts.Token);
+            }
+            catch { }
+            return null;
         }
     }
 }
