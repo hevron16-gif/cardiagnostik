@@ -254,3 +254,38 @@ async def mark_synced(sync_id: int) -> bool:
         return True
     finally:
         conn.close()
+
+
+# ==================== ADMIN STUBS ====================
+async def auto_update_codes(codes: List[Dict[str, Any]]) -> int:
+    """Автоматическое обновление кодов ошибок"""
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        cursor = conn.cursor()
+        updated = 0
+        for code_data in codes:
+            cursor.execute(
+                "INSERT OR REPLACE INTO errors (code, brand, description, causes, solutions) VALUES (?, ?, ?, ?, ?)",
+                (code_data.get('code', '').upper(), code_data.get('brand'), 
+                 code_data.get('description'), json.dumps(code_data.get('causes', [])), 
+                 json.dumps(code_data.get('solutions', [])))
+            )
+            updated += 1
+        conn.commit()
+        return updated
+    finally:
+        conn.close()
+
+async def set_user_tier(device_id: str, tier: str) -> bool:
+    """Установка тарифа пользователя"""
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        cursor = conn.cursor()
+        cursor.execute(
+            "INSERT INTO users (device_id, tier) VALUES (?, ?) ON CONFLICT(device_id) DO UPDATE SET tier=excluded.tier",
+            (device_id, tier)
+        )
+        conn.commit()
+        return True
+    finally:
+        conn.close()
