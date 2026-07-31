@@ -11,6 +11,10 @@ namespace CarDiagnosticApp.Services;
 /// </summary>
 public class SyncService
 {
+
+    private static SyncService? _instance;
+public static SyncService Instance => 
+    _instance ??= IPlatformApplication.Current!.Services.GetRequiredService<SyncService>();
     private readonly ApiService _api;
     private readonly LocalDatabase _db;
     private readonly OfflineDatabase _offlineDb;
