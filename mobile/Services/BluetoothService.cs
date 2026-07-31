@@ -10,6 +10,10 @@ namespace CarDiagnosticApp.Services;
 /// </summary>
 public class BluetoothService
 {
+
+    private static BluetoothService? _instance;
+public static BluetoothService Instance => 
+    _instance ??= IPlatformApplication.Current!.Services.GetRequiredService<BluetoothService>();
     private readonly IBluetoothTransport _transport;
     private readonly TimeSpan _cmdDelay = TimeSpan.FromMilliseconds(250);
 
