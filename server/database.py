@@ -39,6 +39,14 @@ async def init():
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
             CREATE INDEX IF NOT EXISTS idx_ai_cache_lookup ON ai_cache(code, brand);
+                        CREATE TABLE IF NOT EXISTS sync_queue (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                device_id TEXT,
+                data TEXT,
+                status TEXT DEFAULT 'pending',
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+            CREATE INDEX IF NOT EXISTS idx_sync_queue_device ON sync_queue(device_id, status);
             CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 device_id TEXT UNIQUE, tier TEXT DEFAULT 'free',
@@ -209,3 +217,40 @@ async def get_user_features(device_id: str) -> List[str]:
 
 async def search_cars(query: str, brand: Optional[str] = None, limit: int = 20) -> List[Dict[str, Any]]:
     return [{"title": f"Результат поиска: {query}", "url": "", "source": "internal"}]
+
+
+# ==================== SYNC STUBS (для совместимости) ====================
+async def queue_sync(device_id: str, data: dict) -> bool:
+    """Добавление данных в очередь синхронизации"""
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO sync_queue (device_id, data, status) VALUES (?, ?, 'pending')",
+            (device_id, json.dumps(data, ensure_ascii=False)))
+        conn.commit()
+        return True
+    finally:
+        conn.close()
+
+async def get_sync_queue(device_id: str, limit: int = 100) -> List[Dict[str, Any]]:
+    """Получение очереди синхронизации"""
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM sync_queue WHERE device_id = ? AND status = 'pending' LIMIT ?",
+            (device_id, limit))
+        return [dict(row) for row in cursor.fetchall()]
+    finally:
+        conn.close()
+
+async def mark_synced(sync_id: int) -> bool:
+    """Отметка элемента как синхронизированного"""
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        cursor = conn.cursor()
+        cursor.execute("UPDATE sync_queue SET status = 'synced' WHERE id = ?", (sync_id,))
+        conn.commit()
+        return True
+    finally:
+        conn.close()
