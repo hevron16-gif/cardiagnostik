@@ -91,20 +91,10 @@
                     <Label Text="🎯 Радар датчиков" FontFamily="InterSemiBold" FontSize="14"
                            TextColor="{AppThemeBinding Dark=White, Light=#212121}"
                            Padding="12,10,12,0" />
+                    <!-- Axis/PolarAxis — в code-behind (сборка SkiaSharpView, не Maui) -->
                     <lvc:PolarChart x:Name="RadarChart"
                                     HeightRequest="280"
-                                    Margin="8,0,8,8">
-                        <lvc:PolarChart.AngleAxes>
-                            <lvc:PolarAxis MinStep="1" ForceStepToMin="True"
-                                           LabelsRotation="0"
-                                           TextSize="11"
-                                           ShowSeparatorLines="True" />
-                        </lvc:PolarChart.AngleAxes>
-                        <lvc:PolarChart.RadiusAxes>
-                            <lvc:PolarAxis MinLimit="0" MaxLimit="100"
-                                           ShowSeparatorLines="True" />
-                        </lvc:PolarChart.RadiusAxes>
-                    </lvc:PolarChart>
+                                    Margin="8,0,8,8" />
                 </VerticalStackLayout>
             </Border>
 
@@ -143,20 +133,7 @@
                                         HeightRequest="260"
                                         Margin="8,4,8,8"
                                         ZoomMode="X"
-                                        TooltipPosition="Top">
-                        <lvc:CartesianChart.XAxes>
-                            <!-- Labeler задаётся в code-behind -->
-                            <lvc:Axis Name="Время"
-                                      MinStep="5"
-                                      TextSize="10"
-                                      ShowSeparatorLines="True" />
-                        </lvc:CartesianChart.XAxes>
-                        <lvc:CartesianChart.YAxes>
-                            <lvc:Axis Name="Значение"
-                                      TextSize="10"
-                                      ShowSeparatorLines="True" />
-                        </lvc:CartesianChart.YAxes>
-                    </lvc:CartesianChart>
+                                        TooltipPosition="Top" />
                 </VerticalStackLayout>
             </Border>
 
@@ -176,20 +153,7 @@
                     <lvc:CartesianChart x:Name="ColumnChart"
                                         HeightRequest="320"
                                         Margin="8,4,8,8"
-                                        TooltipPosition="Top">
-                        <lvc:CartesianChart.XAxes>
-                            <lvc:Axis Name="Параметр"
-                                      TextSize="9"
-                                      LabelsRotation="45"
-                                      ShowSeparatorLines="False" />
-                        </lvc:CartesianChart.XAxes>
-                        <lvc:CartesianChart.YAxes>
-                            <lvc:Axis Name="Нормированное значение (%)"
-                                      MinLimit="0" MaxLimit="100"
-                                      TextSize="10"
-                                      ShowSeparatorLines="True" />
-                        </lvc:CartesianChart.YAxes>
-                    </lvc:CartesianChart>
+                                        TooltipPosition="Top" />
                     <!-- Цветовая легенда -->
                     <FlexLayout Padding="12,0,12,8" Spacing="16" JustifyContent="Center"
                                 Wrap="Wrap">

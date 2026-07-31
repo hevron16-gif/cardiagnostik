@@ -46,3 +46,18 @@ Thumbs.db
 .nanobot/
 sessions/
 memory/
+
+# Upload scripts / local deploy helpers
+_upload*.py
+_deploy*.py
+**/_upload*.py
+**/_deploy*.py
+*.jks
+*.keystore
+key.properties
+**/key.properties
+.deploy_secrets.json
+**/.deploy_secrets.json
+downloads/
+**/*.apk
+**/*.aab

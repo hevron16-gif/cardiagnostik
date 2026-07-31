@@ -104,15 +104,38 @@ public partial class LiveChartsPage : ContentPage, IDisposable
 
         RadarChart.Series = new ObservableCollection<ISeries> { _radarSeries };
 
-        // ── Настройка угловых осей радара (подписи) ──
-        var angleAxis = RadarChart.AngleAxes?.FirstOrDefault() as PolarAxis;
-        if (angleAxis != null)
+        // Оси Polar/Cartesian задаём в C# (тип Axis не в assembly .Maui — XAML падает)
+        try
         {
-            angleAxis.Labeler = value =>
+            RadarChart.AngleAxes = new[]
             {
-                int idx = (int)Math.Round(value);
-                return idx >= 0 && idx < RadarPidNames.Length ? RadarPidNames[idx] : "";
+                new PolarAxis
+                {
+                    MinStep = 1,
+                    ForceStepToMin = true,
+                    LabelsRotation = 0,
+                    TextSize = 11,
+                    ShowSeparatorLines = true,
+                    Labeler = value =>
+                    {
+                        int idx = (int)Math.Round(value);
+                        return idx >= 0 && idx < RadarPidNames.Length ? RadarPidNames[idx] : "";
+                    }
+                }
             };
+            RadarChart.RadiusAxes = new[]
+            {
+                new PolarAxis
+                {
+                    MinLimit = 0,
+                    MaxLimit = 100,
+                    ShowSeparatorLines = true,
+                }
+            };
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"[LiveCharts] radar axis: {ex.Message}");
         }
 
         // ── Тренд ──
@@ -128,10 +151,48 @@ public partial class LiveChartsPage : ContentPage, IDisposable
                     ShowSeparatorLines = true,
                 }
             };
+            TrendChart.YAxes = new[]
+            {
+                new Axis
+                {
+                    Name = "Значение",
+                    TextSize = 10,
+                    ShowSeparatorLines = true,
+                }
+            };
         }
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"[LiveCharts] trend axis: {ex.Message}");
+        }
+
+        try
+        {
+            ColumnChart.XAxes = new[]
+            {
+                new Axis
+                {
+                    Name = "Параметр",
+                    TextSize = 9,
+                    LabelsRotation = 45,
+                    ShowSeparatorLines = false,
+                }
+            };
+            ColumnChart.YAxes = new[]
+            {
+                new Axis
+                {
+                    Name = "Нормированное значение (%)",
+                    MinLimit = 0,
+                    MaxLimit = 100,
+                    TextSize = 10,
+                    ShowSeparatorLines = true,
+                }
+            };
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"[LiveCharts] column axis: {ex.Message}");
         }
 
         // ── Круговая диаграмма ──

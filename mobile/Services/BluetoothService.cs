@@ -406,60 +406,82 @@ public class BluetoothService
     {
         var codes = new List<ObdError>();
         if (string.IsNullOrEmpty(raw)) return codes;
+        if (raw.Contains("NO DATA", StringComparison.OrdinalIgnoreCase)) return codes;
 
-        var clean = raw.Replace("\r", " ").Replace("\n", " ").Replace(">", " ");
-        var parts = clean.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        // Нормализуем: убираем заголовки CAN (7Ex), разбиваем слитный hex на байты
+        var clean = raw.Replace("\r", " ").Replace("\n", " ").Replace(">", " ").Replace("\t", " ");
+        var tokens = clean.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        var parts = new List<string>();
+        foreach (var token in tokens)
+        {
+            var t = token.Trim().ToUpperInvariant();
+            // CAN-заголовок / PCI length часто 3 hex-символа (7E8) — пропускаем
+            if (t.Length == 3 && IsHexByte("0" + t[0]) && t.StartsWith("7E"))
+                continue;
+            if (t.Length > 2 && t.Length % 2 == 0 && t.All(c =>
+                    (c >= '0' && c <= '9') || (c >= 'A' && c <= 'F')))
+            {
+                for (int k = 0; k < t.Length; k += 2)
+                    parts.Add(t.Substring(k, 2));
+            }
+            else if (IsHexByte(t))
+            {
+                parts.Add(t);
+            }
+        }
 
         var hexPairs = new List<(string, string)>();
 
-        for (int i = 0; i < parts.Length - 1; i++)
+        for (int i = 0; i < parts.Count; i++)
         {
-            if (parts[i] == modePrefix && i + 1 < parts.Length)
+            if (parts[i] != modePrefix) continue;
+
+            // После 43/47/4A: опционально число DTC, затем пары байт
+            int j = i + 1;
+            int? expected = null;
+            if (j < parts.Count &&
+                int.TryParse(parts[j], System.Globalization.NumberStyles.HexNumber, null, out var count) &&
+                count <= 40)
             {
-                var next = parts[i + 1];
-                if (int.TryParse(next, System.Globalization.NumberStyles.HexNumber, null, out var count) && count <= 100)
-                {
-                    i++;
-                    while (i + 1 < parts.Length && hexPairs.Count < count)
-                    {
-                        if (IsHexByte(parts[i]) && IsHexByte(parts[i + 1]) && parts[i] != modePrefix)
-                            hexPairs.Add((parts[i], parts[i + 1]));
-                        i += 2;
-                    }
-                }
-                else
-                {
-                    i++;
-                    while (i + 1 < parts.Length)
-                    {
-                        if (IsHexByte(parts[i]) && IsHexByte(parts[i + 1]) && parts[i] != "00")
-                            hexPairs.Add((parts[i], parts[i + 1]));
-                        i += 2;
-                    }
-                }
+                // count — число DTC (не часть кода): пропускаем байт
+                expected = count;
+                j++;
             }
-            else if (parts[i].EndsWith(":") && parts[i].Length <= 3)
+
+            int added = 0;
+            while (j + 1 < parts.Count)
             {
-                i++;
-                while (i + 1 < parts.Length)
-                {
-                    if (IsHexByte(parts[i]) && IsHexByte(parts[i + 1]) && parts[i] != modePrefix)
-                        hexPairs.Add((parts[i], parts[i + 1]));
-                    i += 2;
-                }
+                if (parts[j] == modePrefix || parts[j] == "43" || parts[j] == "47" || parts[j] == "4A")
+                    break;
+
+                var high = parts[j];
+                var low = parts[j + 1];
+                j += 2;
+
+                // Паддинг 00 00 — не код
+                if (high == "00" && low == "00") continue;
+                if (!IsHexByte(high) || !IsHexByte(low)) continue;
+
+                hexPairs.Add((high, low));
+                added++;
+                if (expected.HasValue && added >= expected.Value)
+                    break;
             }
+
+            i = Math.Max(i, j - 1);
         }
 
         foreach (var (high, low) in hexPairs)
         {
             var code = DecodeDTC(high, low);
-            if (!string.IsNullOrEmpty(code))
+            if (!string.IsNullOrEmpty(code) && code is not ("P0000" or "C0000" or "B0000" or "U0000"))
                 codes.Add(new ObdError { Code = code, Type = type });
         }
 
         return codes.DistinctBy(c => c.Code).ToList();
     }
 
+    /// <summary>Стандартный SAE J2012: 2 байта → P0xxx / C0xxx / B0xxx / U0xxx.</summary>
     private static string DecodeDTC(string highHex, string lowHex)
     {
         if (!int.TryParse(highHex, System.Globalization.NumberStyles.HexNumber, null, out var high)) return "";
@@ -472,8 +494,8 @@ public class BluetoothService
         };
 
         var firstDigit = (high >> 4) & 0x03;
-        var remaining = ((high & 0x0F) << 8) | low;
-        return $"{categoryChar}{firstDigit}{remaining:X4}";
+        var secondNibble = high & 0x0F;
+        return $"{categoryChar}{firstDigit}{secondNibble:X}{low:X2}";
     }
 
     private static bool IsHexByte(string s)

@@ -460,6 +460,11 @@ public class ObdSimulator
         _coolantTempTarget = 20;
         _dtcCounter = 0;
         lock (_lock) _injected.Clear();
+        // Демо-DTC после сброса — симулятор не должен вечно отдавать «ошибок нет»
+        InjectError("P0134", ObdErrorType.Current, "O2 sensor no activity");
+        InjectError("P0301", ObdErrorType.Current, "Cylinder 1 misfire");
+        InjectError("P0171", ObdErrorType.Pending, "System too lean");
+        InjectError("P0420", ObdErrorType.Permanent, "Catalyst efficiency");
     }
 
     // ══════════════ Внутренние типы ══════════════

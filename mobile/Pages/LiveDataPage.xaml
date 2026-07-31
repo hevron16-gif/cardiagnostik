@@ -56,7 +56,7 @@
                         FontSize="14"
                         Padding="8,6"
                         CornerRadius="8"
-                        BackgroundColor="{StaticResource Error}"
+                        BackgroundColor="{StaticResource ErrorRed}"
                         TextColor="White"
                         IsVisible="False"
                         Clicked="OnStopClicked" />

@@ -23,8 +23,8 @@
 		<ApplicationId>com.companyname.cardiagnosticapp</ApplicationId>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0.13</ApplicationDisplayVersion>
-		<ApplicationVersion>113</ApplicationVersion>
+		<ApplicationDisplayVersion>1.0.14</ApplicationDisplayVersion>
+		<ApplicationVersion>114</ApplicationVersion>
 
 		<WindowsPackageType>None</WindowsPackageType>
 

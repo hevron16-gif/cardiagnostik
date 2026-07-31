@@ -25,7 +25,7 @@ namespace CarDiagnosticApp.Services
             // User-Agent: Cloudflare WAF блокирует запросы без UA или с подозрительным UA
             _httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
                 "User-Agent",
-                "AutoDiag/1.0.13 (Android; .NET MAUI) AppleWebKit/537.36"
+                "AutoDiag/1.0 (Android; .NET MAUI) AppleWebKit/537.36"
             );
             // Accept: Cloudflare проверяет Accept-заголовок
             _httpClient.DefaultRequestHeaders.TryAddWithoutValidation(

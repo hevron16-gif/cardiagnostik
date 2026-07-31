@@ -70,20 +70,10 @@
 
         <!-- ── График ── -->
         <Grid Grid.Row="2" Padding="8,4">
+            <!-- Оси (Axis) задаются в code-behind: тип Axis живёт в LiveChartsCore.SkiaSharpView, не в .Maui -->
             <lvc:CartesianChart x:Name="MainChart"
                                 ZoomMode="X"
-                                TooltipPosition="Top">
-                <lvc:CartesianChart.XAxes>
-                    <!-- Labeler задаётся в code-behind (строка "sec" ломала XAML/открытие) -->
-                    <lvc:Axis Name="Время"
-                              MinStep="5"
-                              ShowSeparatorLines="True" />
-                </lvc:CartesianChart.XAxes>
-                <lvc:CartesianChart.YAxes>
-                    <lvc:Axis Name="Значение"
-                              ShowSeparatorLines="True" />
-                </lvc:CartesianChart.YAxes>
-            </lvc:CartesianChart>
+                                TooltipPosition="Top" />
 
             <!-- Оверлей: нет данных -->
             <VerticalStackLayout x:Name="NoDataOverlay"
