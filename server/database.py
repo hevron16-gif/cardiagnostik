@@ -289,3 +289,11 @@ async def set_user_tier(device_id: str, tier: str) -> bool:
         return True
     finally:
         conn.close()
+
+
+# ==================== CONNECTION STUB ====================
+def get_conn():
+    """Получение соединения с БД (для совместимости)"""
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    return conn
