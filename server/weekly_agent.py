@@ -582,7 +582,17 @@ class WeeklyAgent:
         except Exception as e:
             logger.error(f"Repair search failed: {e}")
             results["repairs"] = {"error": str(e)}
-
+        # 4. Скачивание картинок схем
+        try:
+            from schema_image_scraper import run_full_scrape, AUTO_REGISTRY
+            scrape_res = await run_full_scrape(AUTO_REGISTRY)
+            results["schema_images"] = {
+                "total_images": scrape_res.get("total_images", 0),
+                "scraped_at": scrape_res.get("time"),
+            }
+        except Exception as e:
+            logger.error(f"Schema image scrape failed: {e}")
+            results["schema_images"] = {"error": str(e)}
         # Финал
         elapsed = time.time() - start_time
         total_found = sum(
