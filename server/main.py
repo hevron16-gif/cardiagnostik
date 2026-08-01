@@ -413,7 +413,13 @@ async def search_cars(request: Request, q: str = Query(..., min_length=2, max_le
     except Exception as e:
         logger.error(f"Search error: {e}")
         raise HTTPException(status_code=500, detail="Ошибка поиска")
-
+@app.post("/admin/schemas/scrape", tags=["admin"])
+@limiter.limit("3/minute")
+async def admin_scrape_schemas(request: Request, admin_key: str = Query(...)):
+    if admin_key != os.getenv("ADMIN_KEY", ""):
+        raise HTTPException(status_code=403, detail="Invalid key")
+    asyncio.create_task(run_full_scrape(AUTO_REGISTRY))
+    return {"status": "started", "message": "Scraping started in background. Check schema_images/ in ~5 min."}
 if __name__ == "__main__":
     import uvicorn
     port = int(os.getenv("PORT", 8000))
