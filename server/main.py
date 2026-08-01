@@ -52,7 +52,7 @@ from sync import cloud
 from pricing import router as pricing_router, require_feature, is_paid, get_paid_features
 from license import router as license_router
 from admin import router as admin_router
-
+from schema_image_scraper import run_full_scrape, AUTO_REGISTRY
 import integrity
 from device import get_device_id, verify_device_binding
 
