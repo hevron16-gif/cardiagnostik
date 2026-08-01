@@ -74,7 +74,31 @@ public partial class LiveChartsPage : ContentPage, IDisposable
 
     public LiveChartsPage(BluetoothService? bt = null)
     {
-        InitializeComponent();
+        try
+        {
+            InitializeComponent();
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"[LiveChartsPage] XAML init: {ex}");
+            Content = new VerticalStackLayout
+            {
+                Padding = 24,
+                Children =
+                {
+                    new Label
+                    {
+                        Text = "Не удалось открыть дашборд графиков.\n" + ex.Message,
+                        TextColor = Colors.White
+                    }
+                }
+            };
+            _bt = bt;
+            _radarValues = new ObservableCollection<ObservablePoint>();
+            _radarSeries = new PolarLineSeries<ObservablePoint> { Values = _radarValues };
+            return;
+        }
+
         _bt = bt;
 
         // Если BT не передан — страница в режиме просмотра (без live-данных)
@@ -102,7 +126,14 @@ public partial class LiveChartsPage : ContentPage, IDisposable
             EasingFunction = LiveChartsCore.EasingFunctions.CubicInOut,
         };
 
-        RadarChart.Series = new ObservableCollection<ISeries> { _radarSeries };
+        try
+        {
+            RadarChart.Series = new ObservableCollection<ISeries> { _radarSeries };
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"[LiveCharts] radar series: {ex.Message}");
+        }
 
         // Оси Polar/Cartesian задаём в C# (тип Axis не в assembly .Maui — XAML падает)
         try
@@ -642,45 +673,60 @@ public partial class LiveChartsPage : ContentPage, IDisposable
 
     private void OnLiveValueUpdated(LiveDataPid pid, double value)
     {
-        if (!_isRunning) return;
+        if (!_isRunning || _disposed) return;
 
-        var now = DateTime.Now;
+        // LiveCharts/SkiaSharp на Android падают, если трогать Series с фонового потока
+        MainThread.BeginInvokeOnMainThread(() => ApplyLiveValueOnUi(pid, value));
+    }
 
-        // ── Обновление радара (in-place для плавной анимации) ──
-        var radarIdx = Array.IndexOf(RadarPidHexes, pid.PidHex);
-        if (radarIdx >= 0 && _radarValues.Count > radarIdx)
+    private void ApplyLiveValueOnUi(LiveDataPid pid, double value)
+    {
+        if (!_isRunning || _disposed) return;
+
+        try
         {
-            var normalized = NormalizePidValue(pid.PidHex, value);
-            var pt = _radarValues[radarIdx];
-            pt.X = radarIdx;
-            pt.Y = normalized;
-        }
+            var now = DateTime.Now;
 
-        // ── Обновление тренда ──
-        if (_pidTrendValues.TryGetValue(pid.PidHex, out var trendValues))
+            // ── Обновление радара (in-place для плавной анимации) ──
+            var radarIdx = Array.IndexOf(RadarPidHexes, pid.PidHex);
+            if (radarIdx >= 0 && _radarValues.Count > radarIdx)
+            {
+                var normalized = NormalizePidValue(pid.PidHex, value);
+                var pt = _radarValues[radarIdx];
+                pt.X = radarIdx;
+                pt.Y = normalized;
+            }
+
+            // ── Обновление тренда ──
+            if (_pidTrendValues.TryGetValue(pid.PidHex, out var trendValues))
+            {
+                trendValues.Add(new DateTimePoint(now, value));
+                var cutoff = now.AddSeconds(-_trendWindowSec);
+                while (trendValues.Count > 0 && trendValues[0].DateTime < cutoff)
+                    trendValues.RemoveAt(0);
+            }
+
+            // ── Цифровой индикатор ──
+            UpdateDigitalIndicator(pid.PidHex, value);
+
+            // ── Столбчатая диаграмма ──
+            _pidLastValue[pid.PidHex] = value;
+            _pidState[pid.PidHex] = ClassifyPidValue(pid.PidHex, value);
+            if (_tickCounter % 3 == 0)
+                UpdateColumnChart();
+
+            // ── Круговая диаграмма ──
+            UpdatePieCounts(pid, value);
+
+            _tickCounter++;
+
+            if (_tickCounter % 5 == 0)
+                UpdateStatusBar();
+        }
+        catch (Exception ex)
         {
-            trendValues.Add(new DateTimePoint(now, value));
-            var cutoff = now.AddSeconds(-_trendWindowSec);
-            while (trendValues.Count > 0 && trendValues[0].DateTime < cutoff)
-                trendValues.RemoveAt(0);
+            System.Diagnostics.Debug.WriteLine($"[LiveChartsPage] UI update: {ex.Message}");
         }
-
-        // ── Обновление цифрового индикатора (каждый тик) ──
-        MainThread.BeginInvokeOnMainThread(() => UpdateDigitalIndicator(pid.PidHex, value));
-
-        // ── Обновление столбчатой диаграммы ──
-        _pidLastValue[pid.PidHex] = value;
-        _pidState[pid.PidHex] = ClassifyPidValue(pid.PidHex, value);
-        if (_tickCounter % 3 == 0)
-            MainThread.BeginInvokeOnMainThread(UpdateColumnChart);
-
-        // ── Обновление круговой диаграммы ──
-        UpdatePieCounts(pid, value);
-
-        _tickCounter++;
-
-        if (_tickCounter % 5 == 0)
-            MainThread.BeginInvokeOnMainThread(UpdateStatusBar);
     }
 
     /// <summary>
@@ -744,11 +790,11 @@ public partial class LiveChartsPage : ContentPage, IDisposable
 
         _pidLastState[pid.PidHex] = (state, severity);
 
-        // Обновляем UI каждые ~20 тиков или при изменении
+        // Обновляем UI каждые ~20 тиков (уже на main thread из ApplyLiveValueOnUi)
         if (_tickCounter - _lastPieUpdateTick > 20)
         {
             _lastPieUpdateTick = _tickCounter;
-            MainThread.BeginInvokeOnMainThread(UpdatePieChart);
+            UpdatePieChart();
         }
     }
 

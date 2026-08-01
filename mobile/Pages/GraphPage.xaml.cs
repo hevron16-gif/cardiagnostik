@@ -47,9 +47,29 @@ public partial class GraphPage : ContentPage, IDisposable
 
     public GraphPage(BluetoothService bt)
     {
-        InitializeComponent();
         _bt = bt;
-        MainChart.Series = _series;
+        try
+        {
+            InitializeComponent();
+            MainChart.Series = _series;
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"[GraphPage] XAML init: {ex}");
+            Content = new VerticalStackLayout
+            {
+                Padding = 24,
+                Children =
+                {
+                    new Label
+                    {
+                        Text = "Не удалось открыть графики.\n" + ex.Message,
+                        TextColor = Colors.White
+                    }
+                }
+            };
+            return;
+        }
 
         // DateTimePoint требует DateTimeAxis (строковый Labeler="sec" в XAML крашил открытие)
         try
@@ -206,22 +226,32 @@ public partial class GraphPage : ContentPage, IDisposable
 
     private void OnLiveValueUpdated(LiveDataPid pid, double value)
     {
-        if (!_isRunning) return;
-        if (!_pidValues.TryGetValue(pid.PidHex, out var values)) return;
+        if (!_isRunning || _disposed) return;
 
-        var now = DateTime.Now;
-        values.Add(new DateTimePoint(now, value));
+        // ObservableCollection LiveCharts только с UI-потока (иначе crash Android)
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            if (!_isRunning || _disposed) return;
+            if (!_pidValues.TryGetValue(pid.PidHex, out var values)) return;
 
-        // Обрезка старых точек
-        var cutoff = now.AddSeconds(-_timeWindowSec);
-        while (values.Count > 0 && values[0].DateTime < cutoff)
-            values.RemoveAt(0);
+            try
+            {
+                var now = DateTime.Now;
+                values.Add(new DateTimePoint(now, value));
 
-        _tickCounter++;
+                var cutoff = now.AddSeconds(-_timeWindowSec);
+                while (values.Count > 0 && values[0].DateTime < cutoff)
+                    values.RemoveAt(0);
 
-        // Обновляем статус-бар каждые ~10 тиков
-        if (_tickCounter % 10 == 0)
-            MainThread.BeginInvokeOnMainThread(UpdateStatusBar);
+                _tickCounter++;
+                if (_tickCounter % 10 == 0)
+                    UpdateStatusBar();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[GraphPage] UI update: {ex.Message}");
+            }
+        });
     }
 
     private void UpdateStatusBar()

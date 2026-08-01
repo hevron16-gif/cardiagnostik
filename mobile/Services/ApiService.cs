@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Text;
@@ -44,24 +44,83 @@ namespace CarDiagnosticApp.Services
         }
 
         /// <summary>
+        /// Нормализует ответ /diagnose: JSON {diagnosis|result} → читаемый текст.
+        /// </summary>
+        private static string? NormalizeDiagnosisResponse(string? raw)
+        {
+            if (string.IsNullOrWhiteSpace(raw)) return null;
+            var t = raw.Trim();
+            if (!t.StartsWith("{") && !t.StartsWith("["))
+                return t;
+
+            try
+            {
+                var jo = JObject.Parse(t);
+                var diagnosis = jo["diagnosis"]?.ToString()
+                             ?? jo["text"]?.ToString()
+                             ?? jo["message"]?.ToString();
+                if (!string.IsNullOrWhiteSpace(diagnosis))
+                    return diagnosis;
+
+                var resultToken = jo["result"];
+                if (resultToken is JObject resultObj)
+                {
+                    var desc = resultObj["description"]?.ToString()
+                            ?? resultObj["diagnosis"]?.ToString();
+                    if (!string.IsNullOrWhiteSpace(desc))
+                    {
+                        var code = jo["error_code"]?.ToString()
+                                ?? jo["code"]?.ToString()
+                                ?? resultObj["code"]?.ToString()
+                                ?? "";
+                        var brand = jo["car_brand"]?.ToString() ?? jo["brand"]?.ToString() ?? "";
+                        var model = jo["car_model"]?.ToString() ?? jo["model"]?.ToString() ?? "";
+                        var sb = new StringBuilder();
+                        sb.AppendLine("ОБЩАЯ ОЦЕНКА");
+                        if (!string.IsNullOrWhiteSpace(brand) || !string.IsNullOrWhiteSpace(model))
+                            sb.AppendLine($"Авто: {brand} {model}".Trim());
+                        if (!string.IsNullOrWhiteSpace(code))
+                            sb.AppendLine($"Код: {code}");
+                        sb.AppendLine();
+                        sb.AppendLine("ОПИСАНИЕ");
+                        sb.AppendLine(desc);
+                        return sb.ToString().Trim();
+                    }
+                }
+
+                if (resultToken is JValue jv && jv.Type == JTokenType.String)
+                    return jv.ToString();
+            }
+            catch
+            {
+                // не JSON — вернём как есть
+            }
+
+            return t;
+        }
+
+        /// <summary>
         /// Диагностика с обходом Cloudflare WAF.
         /// Стратегии (по порядку):
         ///   1. GET /diagnose (WAF не блокирует GET)
-        ///   2. POST + ?payload=&lt;base64&gt; (JSON в query-параметре)
-        ///   3. POST + text/plain body (base64 JSON, не триггерит SQL-эвристики)
-        ///   4. POST + JSON body (фолбэк, может быть заблокирован WAF)
+        ///   2. POST JSON с полями code/brand + error_code/car_brand (совместимость)
+        ///   3. POST + text/plain body (base64 JSON)
+        ///   4. POST + ?payload=&lt;base64&gt;
         /// </summary>
-        public async Task<string> Diagnose(string errorCode, string brand, string model, string? analyticsContext = null)
+        public async Task<string?> Diagnose(string errorCode, string brand, string model, string? analyticsContext = null)
         {
             var errorCodeEscaped = Uri.EscapeDataString(errorCode ?? "");
             var brandEscaped = Uri.EscapeDataString(brand ?? "");
             var modelEscaped = Uri.EscapeDataString(model ?? "");
             var contextEscaped = Uri.EscapeDataString(analyticsContext ?? "");
 
-            // --- Стратегия 1: GET (самая надёжная) ---
+            // --- Стратегия 1: GET (самая надёжная для WAF) ---
             var getUrl = $"{_baseUrl}/diagnose?error_code={errorCodeEscaped}"
                        + $"&car_brand={brandEscaped}"
-                       + $"&car_model={modelEscaped}";
+                       + $"&car_model={modelEscaped}"
+                       + $"&code={errorCodeEscaped}"
+                       + $"&brand={brandEscaped}"
+                       + $"&model={modelEscaped}";
             if (!string.IsNullOrEmpty(analyticsContext))
                 getUrl += $"&context={contextEscaped}";
 
@@ -71,14 +130,10 @@ namespace CarDiagnosticApp.Services
                 if (getResponse.IsSuccessStatusCode)
                 {
                     var bytes = await getResponse.Content.ReadAsByteArrayAsync();
-                    return Encoding.UTF8.GetString(bytes);
+                    return NormalizeDiagnosisResponse(Encoding.UTF8.GetString(bytes));
                 }
-                if (getResponse.StatusCode == System.Net.HttpStatusCode.NotFound
-                    || getResponse.StatusCode == System.Net.HttpStatusCode.MethodNotAllowed)
-                {
-                    System.Diagnostics.Debug.WriteLine(
-                        $"[ApiService] GET /diagnose → {getResponse.StatusCode}, пробуем POST-обход");
-                }
+                System.Diagnostics.Debug.WriteLine(
+                    $"[ApiService] GET /diagnose → {getResponse.StatusCode}, пробуем POST");
             }
             catch (HttpRequestException ex)
             {
@@ -89,9 +144,13 @@ namespace CarDiagnosticApp.Services
                 System.Diagnostics.Debug.WriteLine("[ApiService] GET timeout, пробуем POST");
             }
 
-            // Собираем JSON-пейлоад
+            // Пелоад: сервер v1.0.15+ ждёт code/brand/model;
+            // старые клиенты/WAF-обходы — error_code/car_brand/car_model.
             var jsonPayload = System.Text.Json.JsonSerializer.Serialize(new
             {
+                code = errorCode ?? "",
+                brand = brand ?? "",
+                model = model ?? "",
                 error_code = errorCode ?? "",
                 car_brand = brand ?? "",
                 car_model = model ?? "",
@@ -101,31 +160,31 @@ namespace CarDiagnosticApp.Services
             var base64Payload = Convert.ToBase64String(jsonBytes)
                 .Replace('+', '-').Replace('/', '_').TrimEnd('=');
 
-            // --- Стратегия 2: POST с ?payload=<base64> ---
+            // --- Стратегия 2: POST application/json (основной путь API) ---
             try
             {
-                var bypassUrl = $"{_baseUrl}/diagnose?payload={base64Payload}";
-                var content = new StringContent("", Encoding.UTF8, "application/json");
-                var bypassResponse = await _httpClient.PostAsync(bypassUrl, content);
-                if (bypassResponse.IsSuccessStatusCode)
+                var jsonContent = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+                var jsonResponse = await _httpClient.PostAsync(
+                    $"{_baseUrl}/diagnose", jsonContent);
+                if (jsonResponse.IsSuccessStatusCode)
                 {
-                    var bytes = await bypassResponse.Content.ReadAsByteArrayAsync();
-                    return Encoding.UTF8.GetString(bytes);
+                    var bytes = await jsonResponse.Content.ReadAsByteArrayAsync();
+                    return NormalizeDiagnosisResponse(Encoding.UTF8.GetString(bytes));
                 }
                 System.Diagnostics.Debug.WriteLine(
-                    $"[ApiService] POST bypass (query) → {bypassResponse.StatusCode}");
+                    $"[ApiService] POST JSON → {jsonResponse.StatusCode}");
             }
             catch (HttpRequestException ex)
             {
                 System.Diagnostics.Debug.WriteLine(
-                    $"[ApiService] POST bypass (query) failed: {ex.Message}");
+                    $"[ApiService] POST JSON failed: {ex.Message}");
             }
             catch (TaskCanceledException)
             {
-                System.Diagnostics.Debug.WriteLine("[ApiService] POST bypass (query) timeout");
+                System.Diagnostics.Debug.WriteLine("[ApiService] POST JSON timeout");
             }
 
-            // --- Стратегия 3: POST с text/plain body (base64) ---
+            // --- Стратегия 3: POST text/plain (base64) — обход WAF ---
             try
             {
                 var textContent = new StringContent(base64Payload, Encoding.UTF8, "text/plain");
@@ -134,7 +193,7 @@ namespace CarDiagnosticApp.Services
                 if (textResponse.IsSuccessStatusCode)
                 {
                     var bytes = await textResponse.Content.ReadAsByteArrayAsync();
-                    return Encoding.UTF8.GetString(bytes);
+                    return NormalizeDiagnosisResponse(Encoding.UTF8.GetString(bytes));
                 }
                 System.Diagnostics.Debug.WriteLine(
                     $"[ApiService] POST bypass (text/plain) → {textResponse.StatusCode}");
@@ -149,28 +208,28 @@ namespace CarDiagnosticApp.Services
                 System.Diagnostics.Debug.WriteLine("[ApiService] POST bypass (text/plain) timeout");
             }
 
-            // --- Стратегия 4: обычный POST JSON (фолбэк) ---
+            // --- Стратегия 4: POST с ?payload=<base64> ---
             try
             {
-                var jsonContent = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
-                var jsonResponse = await _httpClient.PostAsync(
-                    $"{_baseUrl}/diagnose", jsonContent);
-                if (jsonResponse.IsSuccessStatusCode)
+                var bypassUrl = $"{_baseUrl}/diagnose?payload={base64Payload}";
+                var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+                var bypassResponse = await _httpClient.PostAsync(bypassUrl, content);
+                if (bypassResponse.IsSuccessStatusCode)
                 {
-                    var bytes = await jsonResponse.Content.ReadAsByteArrayAsync();
-                    return Encoding.UTF8.GetString(bytes);
+                    var bytes = await bypassResponse.Content.ReadAsByteArrayAsync();
+                    return NormalizeDiagnosisResponse(Encoding.UTF8.GetString(bytes));
                 }
                 System.Diagnostics.Debug.WriteLine(
-                    $"[ApiService] POST JSON → {jsonResponse.StatusCode}");
+                    $"[ApiService] POST bypass (query) → {bypassResponse.StatusCode}");
             }
             catch (HttpRequestException ex)
             {
                 System.Diagnostics.Debug.WriteLine(
-                    $"[ApiService] POST JSON failed: {ex.Message}");
+                    $"[ApiService] POST bypass (query) failed: {ex.Message}");
             }
             catch (TaskCanceledException)
             {
-                System.Diagnostics.Debug.WriteLine("[ApiService] POST JSON timeout");
+                System.Diagnostics.Debug.WriteLine("[ApiService] POST bypass (query) timeout");
             }
 
             return null;
@@ -546,36 +605,6 @@ namespace CarDiagnosticApp.Services
         public async Task<string?> GetSchemasLibraryJsonAsync()
         {
             return await GetRawAsync("/schemas");
-        }
-
-        // ═══════════════════════════════════════════════════════════
-        // ИСПРАВЛЕНИЯ: добавлены GetAsync и DownloadAsync
-        // ═══════════════════════════════════════════════════════════
-
-        /// <summary>
-        /// GET-запрос к произвольному относительному URL.
-        /// Возвращает строку ответа или null при ошибке.
-        /// </summary>
-        public async Task<string?> GetAsync(string relativeUrl)
-        {
-            return await GetRawAsync(relativeUrl);
-        }
-
-        /// <summary>
-        /// Скачивает файл/данные по URL.
-        /// Возвращает массив байт или null при ошибке.
-        /// </summary>
-        public async Task<byte[]?> DownloadAsync(string url)
-        {
-            try
-            {
-                using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
-                var response = await _httpClient.GetAsync(url, cts.Token);
-                if (response.IsSuccessStatusCode)
-                    return await response.Content.ReadAsByteArrayAsync(cts.Token);
-            }
-            catch { }
-            return null;
         }
     }
 }

@@ -1,7 +1,7 @@
 """
-AutoDiag AI v1.0.15 — Главный модуль
+AutoDiag AI v1.0.16 — Главный модуль
 CarDiagnosticAI: ИИ-диагностика автомобилей OBD2
-Версия: 1.0.15 (Security, Stability & Performance fix)
+Версия: 1.0.16 (API compat: error_code aliases, GET /diagnose, await cache)
 """
 import asyncio
 import json
@@ -18,7 +18,7 @@ from fastapi import FastAPI, HTTPException, Query, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import JSONResponse, Response
-from pydantic import BaseModel, field_validator, Field
+from pydantic import BaseModel, field_validator, Field, ConfigDict
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from fastapi.exceptions import RequestValidationError
 from slowapi import Limiter, _rate_limit_exceeded_handler
@@ -61,11 +61,15 @@ _APP_TAMPER_MODE = "normal"
 limiter = Limiter(key_func=get_remote_address)
 
 class DiagnosisRequest(BaseModel):
-    code: str = Field(..., min_length=1, max_length=10)
-    brand: Optional[str] = Field(None, max_length=50)
-    model: Optional[str] = Field(None, max_length=100)
+    """Принимает и новые поля (code/brand/model), и старые (error_code/car_brand/car_model)."""
+    model_config = ConfigDict(populate_by_name=True, extra="ignore")
+
+    code: str = Field(..., min_length=1, max_length=10, alias="error_code")
+    brand: Optional[str] = Field(None, max_length=50, alias="car_brand")
+    model: Optional[str] = Field(None, max_length=100, alias="car_model")
     year: Optional[int] = Field(None, ge=1900, le=2030)
     vin: Optional[str] = Field(None, max_length=17)
+    context: Optional[str] = Field(None, max_length=8000)
 
     @field_validator('vin')
     @classmethod
@@ -81,6 +85,95 @@ class DiagnosisRequest(BaseModel):
     def validate_code(cls, v):
         return v.upper().strip()
 
+
+def _format_diagnosis_text(code: str, brand: Optional[str], model: Optional[str], result: dict) -> str:
+    """Текстовый диагноз для Android/Windows-клиента (не сырой JSON)."""
+    car = " ".join(x for x in (brand or "", model or "") if x).strip() or "автомобиль"
+    desc = (result.get("description") or result.get("diagnosis") or "").strip()
+    if not desc:
+        desc = f"Код {code}: требуется диагностика по симптомам."
+
+    def _as_list(val) -> list:
+        if val is None:
+            return []
+        if isinstance(val, list):
+            return [str(x) for x in val if x]
+        if isinstance(val, str):
+            try:
+                parsed = json.loads(val)
+                if isinstance(parsed, list):
+                    return [str(x) for x in parsed if x]
+            except Exception:
+                pass
+            return [val] if val.strip() else []
+        return [str(val)]
+
+    causes = _as_list(result.get("causes"))
+    solutions = _as_list(result.get("solutions") or result.get("recommendations"))
+    severity = (result.get("severity") or "").strip()
+
+    lines = [
+        f"ОБЩАЯ ОЦЕНКА",
+        f"Авто: {car}",
+        f"Код: {code}",
+    ]
+    if severity:
+        lines.append(f"Критичность: {severity}")
+    lines += ["", "ОПИСАНИЕ", desc]
+    if causes:
+        lines += ["", "ВЕРОЯТНЫЕ ПРИЧИНЫ"]
+        lines += [f"• {c}" for c in causes[:12]]
+    if solutions:
+        lines += ["", "РЕКОМЕНДАЦИИ"]
+        lines += [f"• {s}" for s in solutions[:12]]
+    lines += [
+        "",
+        "🟢 База сервера AutoDiag. При отсутствии интернета клиент использует офлайн-справочник.",
+    ]
+    return "\n".join(lines)
+
+
+async def _run_diagnose(data: DiagnosisRequest, client_host: Optional[str]) -> dict:
+    if _APP_TAMPER_MODE == "shutdown":
+        raise HTTPException(status_code=503, detail="Сервис временно недоступен")
+    if not check_ai_rate_limit(client_host or "unknown"):
+        raise HTTPException(status_code=429, detail="Превышен лимит AI-запросов")
+
+    # Важно: await — иначе coroutine всегда truthy и ответ падает с 500
+    cached = await lookup_ai_cache(data.code, data.brand)
+    if cached:
+        text = _format_diagnosis_text(data.code, data.brand, data.model, cached if isinstance(cached, dict) else {"description": str(cached)})
+        return {
+            "source": "cache",
+            "error_code": data.code,
+            "car_brand": data.brand,
+            "car_model": data.model,
+            "diagnosis": text,
+            "result": cached,
+        }
+
+    result = await lookup_error(data.code, brand=data.brand)
+    if not isinstance(result, dict):
+        result = {"code": data.code, "description": str(result)}
+
+    await save_diagnosis(
+        code=data.code,
+        brand=data.brand,
+        model=data.model,
+        vin=data.vin,
+        result=result,
+        ip=client_host,
+    )
+    text = _format_diagnosis_text(data.code, data.brand, data.model, result)
+    return {
+        "source": "database",
+        "error_code": data.code,
+        "car_brand": data.brand,
+        "car_model": data.model,
+        "diagnosis": text,
+        "result": result,
+    }
+
 class BatchRequest(BaseModel):
     codes: List[str] = Field(..., min_length=1, max_length=50)
     brand: Optional[str] = Field(None, max_length=50)
@@ -93,11 +186,11 @@ class BatchRequest(BaseModel):
 class SyncRequest(BaseModel):
     device_id: str = Field(..., min_length=8, max_length=128)
     data: dict = Field(default_factory=dict)
-    version: str = Field(default="1.0.15", max_length=20)
+    version: str = Field(default="1.0.16", max_length=20)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    logger.info("AutoDiag AI v1.0.15 запускается...")
+    logger.info("AutoDiag AI v1.0.16 запускается...")
     global _APP_COMPROMISED, _APP_TAMPER_MODE
     try:
         integrity_result = integrity.verify()
@@ -124,7 +217,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="AutoDiag AI", description="ИИ-диагностика автомобилей OBD2",
-    version="1.0.15", lifespan=lifespan,
+    version="1.0.16", lifespan=lifespan,
     docs_url="/docs" if os.getenv("ENVIRONMENT") != "production" else None,
     redoc_url="/redoc" if os.getenv("ENVIRONMENT") != "production" else None,
 )
@@ -172,7 +265,7 @@ async def health_check():
     except: db_status = "error"
     return {
         "status": "healthy" if db_status == "ok" else "degraded",
-        "version": "1.0.15", "timestamp": datetime.now(timezone.utc).isoformat(),
+        "version": "1.0.16", "timestamp": datetime.now(timezone.utc).isoformat(),
         "database": db_status, "compromised": _APP_COMPROMISED,
         "tamper_mode": _APP_TAMPER_MODE,
         "environment": os.getenv("ENVIRONMENT", "development")
@@ -193,24 +286,43 @@ async def general_exception_handler(request: Request, exc: Exception):
     logger.error(f"Unhandled exception: {str(exc)}", exc_info=True)
     return JSONResponse(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content={"detail": "Внутренняя ошибка сервера"})
 
+@app.get("/diagnose", tags=["diagnosis"], response_model=dict)
+@limiter.limit("10/minute")
+async def diagnose_get(
+    request: Request,
+    error_code: str = Query(default="", alias="error_code"),
+    car_brand: Optional[str] = Query(default=None, alias="car_brand"),
+    car_model: Optional[str] = Query(default=None, alias="car_model"),
+    code: str = Query(default=""),
+    brand: Optional[str] = Query(default=None),
+    model: Optional[str] = Query(default=None),
+    context: Optional[str] = Query(default=None),
+):
+    """GET для клиента / WAF-обхода: ?error_code=P0301&car_brand=ВАЗ&car_model=Granta"""
+    try:
+        data = DiagnosisRequest(
+            code=(code or error_code or "").strip(),
+            brand=brand or car_brand,
+            model=model or car_model,
+            context=context,
+        )
+        return await _run_diagnose(data, request.client.host if request.client else None)
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Diagnosis GET error: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail="Ошибка при диагностике")
+
+
 @app.post("/diagnose", tags=["diagnosis"], response_model=dict)
 @limiter.limit("10/minute")
 async def diagnose(request: Request, data: DiagnosisRequest):
-    if _APP_TAMPER_MODE == "shutdown":
-        raise HTTPException(status_code=503, detail="Сервис временно недоступен")
     try:
-        if not check_ai_rate_limit(request.client.host):
-            raise HTTPException(status_code=429, detail="Превышен лимит AI-запросов")
-        cached = lookup_ai_cache(data.code, data.brand)
-        if cached:
-            logger.info(f"Cache hit for {data.code}")
-            return {"source": "cache", "result": cached}
-        result = await lookup_error(data.code, brand=data.brand)
-        await save_diagnosis(code=data.code, brand=data.brand, model=data.model, vin=data.vin, result=result, ip=request.client.host)
-        return {"source": "database", "result": result}
-    except HTTPException: raise
+        return await _run_diagnose(data, request.client.host if request.client else None)
+    except HTTPException:
+        raise
     except Exception as e:
-        logger.error(f"Diagnosis error: {e}")
+        logger.error(f"Diagnosis error: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail="Ошибка при диагностике")
 
 @app.post("/diagnose/batch", tags=["diagnosis"], response_model=dict)
@@ -287,7 +399,7 @@ async def sync_data(request: Request, data: SyncRequest):
 @app.get("/version", tags=["version"], response_model=dict)
 async def get_version():
     return {
-        "version": "1.0.15", "min_app_version": "1.0.10",
+        "version": "1.0.16", "min_app_version": "1.0.10",
         "latest_apk_url": os.getenv("LATEST_APK_URL", ""),
         "changelog": ["Исправлены SQL-инъекции", "Добавлен rate limiting", "Улучшена безопасность CORS", "Добавлен health check", "Исправлены утечки памяти"]
     }
