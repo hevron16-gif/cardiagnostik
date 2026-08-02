@@ -64,7 +64,7 @@ def validate_key_format(key: str) -> Optional[str]:
 
 # ════════════════ Активация ════════════════
 
-def activate_license(key: str, user_id: str, device_id: str) -> dict:
+async def activate_license(key: str, user_id: str, device_id: str) -> dict:
     """
     Активировать лицензионный ключ на устройство.
     Возвращает результат активации.
@@ -118,7 +118,7 @@ def activate_license(key: str, user_id: str, device_id: str) -> dict:
     conn.commit()
 
     # Обновляем tier пользователя
-    db.set_user_tier(user_id, tier, valid_until)
+    await db.set_user_tier(user_id, tier, valid_until)
 
     conn.close()
 
@@ -126,17 +126,17 @@ def activate_license(key: str, user_id: str, device_id: str) -> dict:
         "success": True,
         "tier": tier,
         "valid_until": valid_until,
-        "features": db.get_user_features(user_id),
+        "features": await db.get_user_features(user_id),
         "message": f"Лицензия {tier.upper()} успешно активирована!"
     }
 
 
 # ════════════════ Проверка ════════════════
 
-def get_license_status(user_id: str, device_id: str) -> dict:
+async def get_license_status(user_id: str, device_id: str) -> dict:
     """Получить статус лицензии для пользователя и устройства."""
-    tier = db.get_user_tier(user_id)
-    features = db.get_user_features(user_id)
+    tier = await db.get_user_tier(user_id)
+    features = await db.get_user_features(user_id)
 
     if tier == "free":
         return {
@@ -218,28 +218,28 @@ class ActivateRequest(BaseModel):
 
 
 @router.post("/activate")
-def activate(req: ActivateRequest, user_id: str = Query(..., description="ID пользователя")):
+async def activate(req: ActivateRequest, user_id: str = Query(..., description="ID пользователя")):
     """Активировать лицензионный ключ."""
     if not req.key or not req.key.strip():
         raise HTTPException(status_code=400, detail="Лицензионный ключ обязателен.")
     if not req.device_id:
         raise HTTPException(status_code=400, detail="device_id обязателен для привязки ключа.")
 
-    result = activate_license(req.key.strip(), user_id, req.device_id.strip())
+    result = await activate_license(req.key.strip(), user_id, req.device_id.strip())
     if not result["success"]:
         raise HTTPException(status_code=400, detail=result)
     return result
 
 
 @router.get("/status")
-def status(user_id: str = Query(..., description="ID пользователя"),
+async def status(user_id: str = Query(..., description="ID пользователя"),
            device_id: str = Query(default="", description="ID устройства")):
     """Проверить статус лицензии."""
-    return get_license_status(user_id, device_id)
+    return await get_license_status(user_id, device_id)
 
 
 @router.get("/features")
-def features(user_id: str = Query(..., description="ID пользователя")):
+async def features(user_id: str = Query(..., description="ID пользователя")):
     """Получить доступные и недоступные фичи."""
     from pricing import get_paid_features
-    return get_paid_features(user_id)
+    return await get_paid_features(user_id)

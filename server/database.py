@@ -50,7 +50,45 @@ async def init():
             CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 device_id TEXT UNIQUE, tier TEXT DEFAULT 'free',
-                features TEXT, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                features TEXT, valid_until TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+            CREATE TABLE IF NOT EXISTS license_keys (
+                key_hash TEXT PRIMARY KEY,
+                tier TEXT, user_id TEXT, device_id TEXT,
+                activated_at TEXT, valid_until TEXT,
+                is_active INTEGER DEFAULT 0
+            );
+            CREATE TABLE IF NOT EXISTS error_codes (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                code TEXT NOT NULL UNIQUE,
+                description TEXT, severity TEXT, recommendations TEXT,
+                category TEXT, source TEXT,
+                russian_cars_only INTEGER DEFAULT 0,
+                gas_equipment INTEGER DEFAULT 0,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+            CREATE INDEX IF NOT EXISTS idx_error_codes_code ON error_codes(code);
+            CREATE TABLE IF NOT EXISTS paid_users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id TEXT UNIQUE, tier TEXT DEFAULT 'free',
+                valid_until TEXT, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+            CREATE TABLE IF NOT EXISTS diagnostics (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                code TEXT, brand TEXT, model TEXT, result TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+            CREATE TABLE IF NOT EXISTS historical_codes (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                code TEXT, car_brand TEXT, mode TEXT, data TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+            CREATE TABLE IF NOT EXISTS meta (
+                key TEXT PRIMARY KEY,
+                value TEXT,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
         """)
         conn.commit()
@@ -150,12 +188,16 @@ async def save_historical_code(code: str, data: dict) -> bool:
     finally:
         conn.close()
 
-async def get_historical_codes(limit: int = 100) -> List[Dict[str, Any]]:
+async def get_historical_codes(car_brand: Optional[str] = None, mode: Optional[str] = None, limit: int = 100) -> List[Dict[str, Any]]:
+    # mode принят для совместимости с admin API (колонки нет — фильтр не применяется)
     conn = sqlite3.connect(DB_PATH)
     try:
         conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM errors LIMIT ?", (limit,))
+        if car_brand:
+            cursor.execute("SELECT * FROM errors WHERE brand = ? LIMIT ?", (car_brand, limit))
+        else:
+            cursor.execute("SELECT * FROM errors LIMIT ?", (limit,))
         return [dict(row) for row in cursor.fetchall()]
     finally:
         conn.close()
@@ -232,14 +274,17 @@ async def queue_sync(device_id: str, data: dict) -> bool:
     finally:
         conn.close()
 
-async def get_sync_queue(device_id: str, limit: int = 100) -> List[Dict[str, Any]]:
-    """Получение очереди синхронизации"""
+async def get_sync_queue(device_id: Optional[str] = None, limit: int = 100) -> List[Dict[str, Any]]:
+    """Получение очереди синхронизации (device_id=None — по всем устройствам)"""
     conn = sqlite3.connect(DB_PATH)
     try:
         conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM sync_queue WHERE device_id = ? AND status = 'pending' LIMIT ?",
-            (device_id, limit))
+        if device_id:
+            cursor.execute("SELECT * FROM sync_queue WHERE device_id = ? AND status = 'pending' LIMIT ?",
+                (device_id, limit))
+        else:
+            cursor.execute("SELECT * FROM sync_queue WHERE status = 'pending' LIMIT ?", (limit,))
         return [dict(row) for row in cursor.fetchall()]
     finally:
         conn.close()
@@ -257,8 +302,9 @@ async def mark_synced(sync_id: int) -> bool:
 
 
 # ==================== ADMIN STUBS ====================
-async def auto_update_codes(codes: List[Dict[str, Any]]) -> int:
+async def auto_update_codes(codes: Optional[List[Dict[str, Any]]] = None) -> int:
     """Автоматическое обновление кодов ошибок"""
+    codes = codes or []
     conn = sqlite3.connect(DB_PATH)
     try:
         cursor = conn.cursor()
@@ -276,14 +322,14 @@ async def auto_update_codes(codes: List[Dict[str, Any]]) -> int:
     finally:
         conn.close()
 
-async def set_user_tier(device_id: str, tier: str) -> bool:
+async def set_user_tier(device_id: str, tier: str, valid_until: Optional[str] = None) -> bool:
     """Установка тарифа пользователя"""
     conn = sqlite3.connect(DB_PATH)
     try:
         cursor = conn.cursor()
         cursor.execute(
-            "INSERT INTO users (device_id, tier) VALUES (?, ?) ON CONFLICT(device_id) DO UPDATE SET tier=excluded.tier",
-            (device_id, tier)
+            "INSERT INTO users (device_id, tier, valid_until) VALUES (?, ?, ?) ON CONFLICT(device_id) DO UPDATE SET tier=excluded.tier, valid_until=excluded.valid_until",
+            (device_id, tier, valid_until)
         )
         conn.commit()
         return True

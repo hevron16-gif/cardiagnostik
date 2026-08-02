@@ -38,8 +38,8 @@ class UserTierUpdate(BaseModel):
 
 # ================ Проверка прав ================
 
-def verify_admin(user_id: str = Query(..., description="ID пользователя")):
-    tier = get_user_tier(user_id)
+async def verify_admin(user_id: str = Query(..., description="ID пользователя")):
+    tier = await get_user_tier(user_id)
     if tier != "enterprise":
         raise HTTPException(status_code=403, detail="Доступ запрещён. Требуется Enterprise-подписка.")
     return user_id
@@ -128,25 +128,25 @@ def update_code(update: CodeUpdate, admin_id: str = Depends(verify_admin)):
 # ================ История диагностик ================
 
 @router.get("/history")
-def admin_history(limit: int = 100, admin_id: str = Depends(verify_admin)):
+async def admin_history(limit: int = 100, admin_id: str = Depends(verify_admin)):
     """Получить всю историю диагностик."""
-    return {"diagnostics": get_all_history(limit)}
+    return {"diagnostics": await get_all_history(limit)}
 
 
 @router.get("/stats")
-def admin_stats(admin_id: str = Depends(verify_admin)):
+async def admin_stats(admin_id: str = Depends(verify_admin)):
     """Статистика по ошибкам."""
-    return {"error_stats": get_error_stats()}
+    return {"error_stats": await get_error_stats()}
 
 
 @router.get("/historical")
-def admin_historical(
+async def admin_historical(
     car_brand: Optional[str] = None,
     mode: Optional[str] = None,
     admin_id: str = Depends(verify_admin),
 ):
     """Исторические коды (03/07/0A) с частотностью."""
-    return {"historical_codes": get_historical_codes(car_brand, mode)}
+    return {"historical_codes": await get_historical_codes(car_brand, mode)}
 
 
 # ================ Пользователи ================
@@ -162,18 +162,18 @@ def list_users(admin_id: str = Depends(verify_admin)):
 
 
 @router.put("/users/tier")
-def update_user_tier(update: UserTierUpdate, admin_id: str = Depends(verify_admin)):
+async def update_user_tier(update: UserTierUpdate, admin_id: str = Depends(verify_admin)):
     """Изменить уровень подписки пользователя."""
-    set_user_tier(update.user_id, update.tier, update.valid_until)
+    await set_user_tier(update.user_id, update.tier, update.valid_until)
     return {"status": "updated", "user_id": update.user_id, "tier": update.tier}
 
 
 # ================ Автообновление ================
 
 @router.post("/auto-update")
-def trigger_auto_update(admin_id: str = Depends(verify_admin)):
+async def trigger_auto_update(admin_id: str = Depends(verify_admin)):
     """Запустить автообновление базы кодов."""
-    updated = auto_update_codes()
+    updated = await auto_update_codes()
     return {"status": "ok", "updated_count": updated}
 
 

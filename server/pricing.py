@@ -1,4 +1,7 @@
-TESTING_UNLOCK_ALL = True
+import os
+
+# Тестовый режим: все Pro-функции открыты (перед продом выставить false)
+TESTING_UNLOCK_ALL = os.getenv("TESTING_UNLOCK_ALL", "true").lower() == "true"
 
 """
 AutoDiag AI v1.0 — Модуль разделения free/paid
@@ -87,8 +90,8 @@ PLANS = {
 
 def require_feature(feature: str):
     """Dependency: проверить, что у пользователя есть фича."""
-    def checker(user_id: str = Query(..., description="ID пользователя")):
-        features = get_user_features(user_id)
+    async def checker(user_id: str = Query(..., description="ID пользователя")):
+        features = await get_user_features(user_id)
         if feature not in features:
             raise HTTPException(
                 status_code=402,
@@ -107,11 +110,11 @@ def require_feature(feature: str):
 
 def is_paid(user_id: str = "anonymous") -> bool:
     # Testing: always paid so /schemas and AI work without license key
-    return True
-def get_paid_features(user_id: str) -> dict:
+    return TESTING_UNLOCK_ALL
+async def get_paid_features(user_id: str) -> dict:
     """Получить информацию о доступных и недоступных фичах."""
-    tier = get_user_tier(user_id)
-    features = get_user_features(user_id)
+    tier = await get_user_tier(user_id)
+    features = await get_user_features(user_id)
     all_features = {
         "elm327": "📡 Чтение ошибок через ELM327",
         "offline": "📖 Офлайн-расшифровка (SQLite)",
@@ -162,16 +165,16 @@ def get_plans():
 
 
 @router.get("/features")
-def get_features(user_id: str = Query(..., description="ID пользователя")):
+async def get_features(user_id: str = Query(..., description="ID пользователя")):
     """Получить статус всех фич для пользователя."""
-    return get_paid_features(user_id)
+    return await get_paid_features(user_id)
 
 
 @router.get("/status")
-def check_status(user_id: str = Query(..., description="ID пользователя")):
+async def check_status(user_id: str = Query(..., description="ID пользователя")):
     """Проверить статус подписки."""
-    tier = get_user_tier(user_id)
-    features = get_user_features(user_id)
+    tier = await get_user_tier(user_id)
+    features = await get_user_features(user_id)
     return {
         "user_id": user_id,
         "tier": tier,
@@ -179,10 +182,4 @@ def check_status(user_id: str = Query(..., description="ID пользовате�
         "feature_count": len(features),
         "features": features,
     }
-
-
-# force unlock
-def is_paid(user_id: str = "anonymous") -> bool:
-    # Testing: always paid so /schemas and AI work without license key
-    return True
 

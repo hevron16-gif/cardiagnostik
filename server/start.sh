@@ -2,7 +2,7 @@
 set -e
 cd "$(dirname "$0")"
 echo "=========================================="
-echo "  AutoDiag AI Server v1.0.15"
+echo "  AutoDiag AI Server v1.0.16"
 echo "  Starting..."
 echo "=========================================="
 if [ -z "$PORT" ]; then export PORT=8000; fi

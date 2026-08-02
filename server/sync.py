@@ -25,6 +25,19 @@ class CloudSync:
         self.api_url = api_url
         self.api_key = api_key
 
+    async def sync(self, data: dict, device_id: str = None, version: str = None) -> dict:
+        """Синхронизация данных устройства: в локальную очередь + попытка отправки."""
+        payload = {
+            "type": "sync",
+            "device_id": device_id,
+            "version": version,
+            "data": data,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+        }
+        await queue_sync(device_id or "unknown", payload)
+        sent = await self._send(payload)
+        return {"queued": True, "sent": sent}
+
     async def push_diagnosis(self, user_id: str, error_code: str, car_brand: str,
                              diagnosis: str, solution: str = None) -> bool:
         """Отправить результат диагностики в облако."""
@@ -38,7 +51,7 @@ class CloudSync:
             "timestamp": datetime.now(timezone.utc).isoformat(),
         }
         # Сохраняем в локальную очередь
-        queue_sync(payload)
+        await queue_sync(user_id, payload)
         # Отправляем в облако (если доступно)
         return await self._send(payload)
 
@@ -56,7 +69,7 @@ class CloudSync:
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "shared": True,
         }
-        queue_sync(payload)
+        await queue_sync(user_id, payload)
         return await self._send(payload)
 
     async def pull_shared_cases(self, error_code: str = None,
@@ -73,16 +86,17 @@ class CloudSync:
 
     async def flush_queue(self) -> int:
         """Отправить все неотправленные записи из локальной очереди."""
-        queue = get_sync_queue(limit=50)
+        queue = await get_sync_queue(limit=50)
         if not queue:
             return 0
         synced = []
         for item in queue:
-            payload = json.loads(item["payload"])
+            payload = json.loads(item["data"])
             success = await self._send(payload)
             if success:
                 synced.append(item["id"])
-        mark_synced(synced)
+        for sync_id in synced:
+            await mark_synced(sync_id)
         return len(synced)
 
     async def _send(self, payload: dict) -> bool:

@@ -4,6 +4,7 @@ CarDiagnosticAI: ИИ-диагностика автомобилей OBD2
 Версия: 1.0.16 (API compat: error_code aliases, GET /diagnose, await cache)
 """
 import asyncio
+import hmac
 import json
 import logging
 import os
@@ -259,9 +260,9 @@ async def log_requests(request: Request, call_next):
     logger.info(f"{request.method} {request.url.path} — {response.status_code} ({time.time()-start:.3f}s)")
     return response
 
-app.include_router(pricing_router, prefix="/pricing", tags=["pricing"])
-app.include_router(license_router, prefix="/license", tags=["license"])
-app.include_router(admin_router, prefix="/admin", tags=["admin"])
+app.include_router(pricing_router, tags=["pricing"])
+app.include_router(license_router, tags=["license"])
+app.include_router(admin_router, tags=["admin"])
 
 @app.get("/health", tags=["health"])
 async def health_check():
@@ -361,7 +362,9 @@ async def get_statistics():
 async def get_live_data(pid: str, device_id: Optional[str] = None):
     try:
         if device_id: verify_device_binding(device_id)
-        data = await collector.get_pid(pid)
+        # Метода get_pid у коллектора нет — берём историю и вытаскиваем ряд по PID
+        history = collector.get_history(limit=100)
+        data = [{"timestamp": s["timestamp"], "value": s.get(pid)} for s in history]
         return {"pid": pid, "data": data, "timestamp": datetime.now(timezone.utc).isoformat()}
     except Exception as e:
         logger.error(f"Live data error: {e}")
@@ -375,7 +378,10 @@ async def list_schemas():
 async def get_schema(schema_id: str, format: str = Query("json", enum=["json", "svg"])):
     try:
         if format == "svg":
-            svg = render_schema_svg(schema_id)
+            schema = get_schema_data(schema_id)
+            if not schema:
+                raise HTTPException(status_code=404, detail="Схема не найдена")
+            svg = render_schema_svg(schema_id, schema)
             return Response(content=svg, media_type="image/svg+xml")
         return get_schema_or_upgrade(schema_id)
     except Exception as e:
@@ -383,9 +389,12 @@ async def get_schema(schema_id: str, format: str = Query("json", enum=["json", "
         raise HTTPException(status_code=404, detail="Схема не найдена")
 
 @app.post("/schemas/refresh", tags=["schemas"])
-async def refresh_schemas():
+async def refresh_schemas(admin_key: str = Query("")):
+    expected = os.getenv("ADMIN_KEY", "")
+    if not expected or not hmac.compare_digest(admin_key or "", expected):
+        raise HTTPException(status_code=403, detail="Forbidden")
     try:
-        result = refresh_all_schemas()
+        result = await refresh_all_schemas(_SCHEMAS)
         return {"refreshed": result}
     except Exception as e:
         logger.error(f"Refresh error: {e}")
@@ -421,8 +430,9 @@ async def search_cars(request: Request, q: str = Query(..., min_length=2, max_le
 @app.post("/admin/schemas/scrape", tags=["admin"])
 @limiter.limit("3/minute")
 async def admin_scrape_schemas(request: Request, admin_key: str = Query(...)):
-    if admin_key != os.getenv("ADMIN_KEY", ""):
-        raise HTTPException(status_code=403, detail="Invalid key")
+    expected = os.getenv("ADMIN_KEY", "")
+    if not expected or not hmac.compare_digest(admin_key or "", expected):
+        raise HTTPException(status_code=403, detail="Forbidden")
     asyncio.create_task(run_full_scrape(AUTO_REGISTRY))
     return {"status": "started", "message": "Scraping started in background. Check schema_images/ in ~5 min."}
 if __name__ == "__main__":
