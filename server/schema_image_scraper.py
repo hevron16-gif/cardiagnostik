@@ -112,56 +112,8 @@ def optimize_image(img_bytes: bytes, max_width: int = 1200) -> Optional[bytes]:
 # ═══ DEEPSEEK ВАЛИДАЦИЯ ═════════════════════════════════════════════
 
 async def deepseek_validate(img_bytes: bytes, query: str) -> bool:
-    """Отправить картинку в DeepSeek. True = похоже на схему."""
-    if not DEEPSEEK_API_KEY:
-        return True
-    
-    try:
-        header = img_bytes[:4]
-        mime = "image/png"
-        if header[:2] == b'\xff\xd8':
-            mime = "image/jpeg"
-        
-        b64 = base64.b64encode(img_bytes).decode()
-        
-        payload = {
-            "model": "deepseek-chat",
-            "messages": [
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": (f"На изображении результат поиска по запросу: '{query}'. "
-                                   f"Это техническая схема, чертёж или разрез двигателя/датчика автомобиля? "
-                                   f"Ответь кратко: ДА или НЕТ.")
-                        },
-                        {
-                            "type": "image_url",
-                            "image_url": {"url": f"data:{mime};base64,{b64}"}
-                        }
-                    ]
-                }
-            ],
-            "max_tokens": 20,
-            "temperature": 0.1
-        }
-        
-        async with httpx.AsyncClient(timeout=45) as client:
-            resp = await client.post(
-                DEEPSEEK_URL,
-                json=payload,
-                headers={"Authorization": f"Bearer {DEEPSEEK_API_KEY}", "Content-Type": "application/json"}
-            )
-            resp.raise_for_status()
-            ans = resp.json()["choices"][0]["message"]["content"].strip().lower()
-            ok = any(w in ans for w in ("да", "yes", "схема", "чертёж", "двигател"))
-            logger.info(f"DeepSeek: {ans} -> {'PASS' if ok else 'REJECT'}")
-            return ok
-            
-    except Exception as e:
-        logger.warning(f"DeepSeek validation error: {e}")
-        return True
+    """Валидация через DeepSeek отключена: тариф не поддерживает vision."""
+    return True
 
 # ═══ ПОИСК И СКАЧИВАНИЕ ═════════════════════════════════════════════
 
