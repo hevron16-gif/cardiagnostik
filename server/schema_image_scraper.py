@@ -31,47 +31,131 @@ DEEPSEEK_URL = "https://api.deepseek.com/v1/chat/completions"
 AUTO_REGISTRY = [
     # Легковые
     {"brand": "Lada", "model": "Granta", "engine": "1.6_8V", "category": "passenger",
-     "queries": ["схема двигателя Lada Granta 1.6 8V разрез", "Lada Granta 11186 схема"]},
+     "queries": [
+         "Lada Granta 11186 engine diagram",
+         "Lada Granta 1.6 engine cross section",
+         "схема двигателя Lada Granta 1.6 8V разрез",
+         "Lada Granta 11186 схема"
+     ]},
     {"brand": "Lada", "model": "Vesta", "engine": "1.6_16V", "category": "passenger",
-     "queries": ["схема двигателя Lada Vesta 1.6 16V", "Веста 21129 схема двигателя"]},
+     "queries": [
+         "Lada Vesta 21129 engine diagram",
+         "Lada Vesta 1.6 16V engine scheme",
+         "схема двигателя Lada Vesta 1.6 16V",
+         "Веста 21129 схема двигателя"
+     ]},
     {"brand": "Lada", "model": "Niva", "engine": "1.7_8V", "category": "passenger",
-     "queries": ["схема двигателя Нива 21214 1.7", "ВАЗ 21214 схема"]},
+     "queries": [
+         "Lada Niva 21214 engine diagram",
+         "VAZ 21214 1.7 engine scheme",
+         "схема двигателя Нива 21214 1.7",
+         "ВАЗ 21214 схема"
+     ]},
     {"brand": "UAZ", "model": "Patriot", "engine": "ZMZ_409", "category": "passenger",
-     "queries": ["схема двигателя УАЗ Патриот ЗМЗ 409", "UAZ Patriot engine diagram"]},
+     "queries": [
+         "UAZ Patriot ZMZ 409 engine diagram",
+         "UAZ Patriot engine cross section",
+         "схема двигателя УАЗ Патриот ЗМЗ 409",
+         "UAZ Patriot engine scheme"
+     ]},
     
     # Грузовики / дизель
     {"brand": "GAZ", "model": "Gazel_NEXT", "engine": "Cummins_2.8", "category": "truck",
-     "queries": ["схема двигателя ГАЗель NEXT Cummins 2.8 ISF", "ГАЗон NEXT схема двигателя"]},
+     "queries": [
+         "GAZelle NEXT Cummins 2.8 ISF engine diagram",
+         "GAZon NEXT engine scheme",
+         "схема двигателя ГАЗель NEXT Cummins 2.8 ISF",
+         "ГАЗон NEXT схема двигателя"
+     ]},
     {"brand": "KAMAZ", "model": "5490", "engine": "Cummins_ISG", "category": "truck",
-     "queries": ["схема двигателя КАМАЗ 5490 Cummins ISG", "КАМАЗ Евро-5 схема двигателя"]},
+     "queries": [
+         "KAMAZ 5490 Cummins ISG engine diagram",
+         "KAMAZ Euro 5 engine scheme",
+         "схема двигателя КАМАЗ 5490 Cummins ISG",
+         "КАМАЗ Евро-5 схема двигателя"
+     ]},
     {"brand": "KAMAZ", "model": "65115", "engine": "Cummins_6.7", "category": "truck",
-     "queries": ["схема двигателя КАМАЗ 65115", "КАМАЗ Cummins 6.7 схема"]},
+     "queries": [
+         "KAMAZ 65115 Cummins 6.7 engine diagram",
+         "KAMAZ Cummins engine scheme",
+         "схема двигателя КАМАЗ 65115",
+         "КАМАЗ Cummins 6.7 схема"
+     ]},
     {"brand": "MMZ", "model": "D245", "engine": "diesel", "category": "truck",
-     "queries": ["схема двигателя ММЗ Д-245 разрез", "Д-245 Евро-3 схема двигателя"]},
+     "queries": [
+         "MMZ D-245 engine diagram",
+         "D-245 diesel engine cross section",
+         "схема двигателя ММЗ Д-245 разрез",
+         "Д-245 Евро-3 схема двигателя"
+     ]},
     {"brand": "MMZ", "model": "D260", "engine": "diesel", "category": "truck",
-     "queries": ["схема двигателя ММЗ Д-260", "Д-260 Евро-2 схема"]},
+     "queries": [
+         "MMZ D-260 engine diagram",
+         "D-260 diesel engine scheme",
+         "схема двигателя ММЗ Д-260",
+         "Д-260 Евро-2 схема"
+     ]},
     {"brand": "MAZ", "model": "4370", "engine": "YMZ_236", "category": "truck",
-     "queries": ["схема двигателя МАЗ 4370 ЯМЗ 236", "ЯМЗ 236 схема разрез"]},
+     "queries": [
+         "MAZ 4370 YMZ 236 engine diagram",
+         "YMZ 236 engine cross section",
+         "схема двигателя МАЗ 4370 ЯМЗ 236",
+         "ЯМЗ 236 схема разрез"
+     ]},
     {"brand": "MAZ", "model": "5440", "engine": "YMZ_238", "category": "truck",
-     "queries": ["схема двигателя МАЗ 5440 ЯМЗ 238", "ЯМЗ 238 турбо схема"]},
+     "queries": [
+         "MAZ 5440 YMZ 238 engine diagram",
+         "YMZ 238 turbo engine scheme",
+         "схема двигателя МАЗ 5440 ЯМЗ 238",
+         "ЯМЗ 238 турбо схема"
+     ]},
     {"brand": "Ural", "model": "4320", "engine": "YMZ_236", "category": "truck",
-     "queries": ["схема двигателя Урал 4320 ЯМЗ 236", "Урал схема двигателя"]},
+     "queries": [
+         "Ural 4320 YMZ 236 engine diagram",
+         "Ural truck engine scheme",
+         "схема двигателя Урал 4320 ЯМЗ 236",
+         "Урал схема двигателя"
+     ]},
     
     # Автобусы
     {"brand": "PAZ", "model": "Vector", "engine": "MMZ_D245", "category": "bus",
-     "queries": ["схема двигателя ПАЗ Вектор ММЗ Д-245", "ПАЗ 3204 схема двигателя"]},
+     "queries": [
+         "PAZ Vector MMZ D-245 engine diagram",
+         "PAZ 3204 engine scheme",
+         "схема двигателя ПАЗ Вектор ММЗ Д-245",
+         "ПАЗ 3204 схема двигателя"
+     ]},
     {"brand": "PAZ", "model": "3205", "engine": "ZMZ_5234", "category": "bus",
-     "queries": ["схема двигателя ПАЗ 3205 ЗМЗ 5234", "ПАЗ-3205 схема"]},
+     "queries": [
+         "PAZ 3205 ZMZ 5234 engine diagram",
+         "PAZ 3205 engine scheme",
+         "схема двигателя ПАЗ 3205 ЗМЗ 5234",
+         "ПАЗ-3205 схема"
+     ]},
     {"brand": "LiAZ", "model": "5292", "engine": "Cummins_6.7", "category": "bus",
-     "queries": ["схема двигателя ЛиАЗ 5292 Cummins", "ЛиАЗ схема двигателя"]},
+     "queries": [
+         "LiAZ 5292 Cummins engine diagram",
+         "LiAZ bus engine scheme",
+         "схема двигателя ЛиАЗ 5292 Cummins",
+         "ЛиАЗ схема двигателя"
+     ]},
     {"brand": "NefAZ", "model": "5299", "engine": "YMZ_536", "category": "bus",
-     "queries": ["схема двигателя НефАЗ 5299 ЯМЗ 536", "НефАЗ автобус схема двигателя"]},
+     "queries": [
+         "NefAZ 5299 YMZ 536 engine diagram",
+         "NefAZ bus engine scheme",
+         "схема двигателя НефАЗ 5299 ЯМЗ 536",
+         "НефАЗ автобус схема двигателя"
+     ]},
     
     # Спецтехника
     {"brand": "KAMAZ", "model": "6520", "engine": "Cummins_6.7", "category": "special",
-     "queries": ["схема двигателя КАМАЗ 6520 самосвал", "КАМАЗ карьерный схема"]},
+     "queries": [
+         "KAMAZ 6520 Cummins 6.7 engine diagram",
+         "KAMAZ 6520 dump truck engine",
+         "схема двигателя КАМАЗ 6520 самосвал",
+         "КАМАЗ карьерный схема"
+     ]},
 ]
-
 # ═══ СЖАТИЕ ════════════════════════════════════════════════════════
 
 def optimize_image(img_bytes: bytes, max_width: int = 1200) -> Optional[bytes]:
