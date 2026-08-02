@@ -222,6 +222,9 @@ app = FastAPI(
     docs_url="/docs" if os.getenv("ENVIRONMENT") != "production" else None,
     redoc_url="/redoc" if os.getenv("ENVIRONMENT") != "production" else None,
 )
+
+# Раздача статических схем (PNG/JPG)
+app.mount("/schema_images", StaticFiles(directory="schema_images"), name="schema_images")
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
