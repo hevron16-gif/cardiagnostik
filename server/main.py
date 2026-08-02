@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 from typing import Optional, List
 
 import httpx
-from fastapi import FastAPI, HTTPException, Query, Request, status
+from fastapi import FastAPI, HTTPException, Query, Request,StaticFiles, status 
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import JSONResponse, Response
