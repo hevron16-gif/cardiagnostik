@@ -1,5 +1,5 @@
 {
-  "time": "2026-08-02T14:41:54.460245+00:00",
+  "time": "2026-08-02T16:40:24.207559+00:00",
   "total_cars": 17,
   "total_images": 3,
   "results": [
@@ -13,7 +13,9 @@
       "brand": "Lada",
       "model": "Vesta",
       "engine": "1.6_16V",
-      "saved": []
+      "saved": [
+        "schema_images/Lada/Vesta_1.6_16V_1.png"
+      ]
     },
     {
       "brand": "Lada",
@@ -25,7 +27,9 @@
       "brand": "UAZ",
       "model": "Patriot",
       "engine": "ZMZ_409",
-      "saved": []
+      "saved": [
+        "schema_images/UAZ/Patriot_ZMZ_409_1.png"
+      ]
     },
     {
       "brand": "GAZ",
@@ -49,9 +53,7 @@
       "brand": "MMZ",
       "model": "D245",
       "engine": "diesel",
-      "saved": [
-        "schema_images/MMZ/D245_diesel_1.png"
-      ]
+      "saved": []
     },
     {
       "brand": "MMZ",
@@ -63,9 +65,7 @@
       "brand": "MAZ",
       "model": "4370",
       "engine": "YMZ_236",
-      "saved": [
-        "schema_images/MAZ/4370_YMZ_236_1.png"
-      ]
+      "saved": []
     },
     {
       "brand": "MAZ",
@@ -95,15 +95,15 @@
       "brand": "LiAZ",
       "model": "5292",
       "engine": "Cummins_6.7",
-      "saved": []
+      "saved": [
+        "schema_images/LiAZ/5292_Cummins_6.7_1.png"
+      ]
     },
     {
       "brand": "NefAZ",
       "model": "5299",
       "engine": "YMZ_536",
-      "saved": [
-        "schema_images/NefAZ/5299_YMZ_536_1.png"
-      ]
+      "saved": []
     },
     {
       "brand": "KAMAZ",
