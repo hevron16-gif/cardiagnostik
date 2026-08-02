@@ -61,3 +61,4 @@ key.properties
 downloads/
 **/*.apk
 **/*.aab
+*.bak.*
