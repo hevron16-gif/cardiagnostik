@@ -1,0 +1,115 @@
+{
+  "time": "2026-08-02T14:41:54.460245+00:00",
+  "total_cars": 17,
+  "total_images": 3,
+  "results": [
+    {
+      "brand": "Lada",
+      "model": "Granta",
+      "engine": "1.6_8V",
+      "saved": []
+    },
+    {
+      "brand": "Lada",
+      "model": "Vesta",
+      "engine": "1.6_16V",
+      "saved": []
+    },
+    {
+      "brand": "Lada",
+      "model": "Niva",
+      "engine": "1.7_8V",
+      "saved": []
+    },
+    {
+      "brand": "UAZ",
+      "model": "Patriot",
+      "engine": "ZMZ_409",
+      "saved": []
+    },
+    {
+      "brand": "GAZ",
+      "model": "Gazel_NEXT",
+      "engine": "Cummins_2.8",
+      "saved": []
+    },
+    {
+      "brand": "KAMAZ",
+      "model": "5490",
+      "engine": "Cummins_ISG",
+      "saved": []
+    },
+    {
+      "brand": "KAMAZ",
+      "model": "65115",
+      "engine": "Cummins_6.7",
+      "saved": []
+    },
+    {
+      "brand": "MMZ",
+      "model": "D245",
+      "engine": "diesel",
+      "saved": [
+        "schema_images/MMZ/D245_diesel_1.png"
+      ]
+    },
+    {
+      "brand": "MMZ",
+      "model": "D260",
+      "engine": "diesel",
+      "saved": []
+    },
+    {
+      "brand": "MAZ",
+      "model": "4370",
+      "engine": "YMZ_236",
+      "saved": [
+        "schema_images/MAZ/4370_YMZ_236_1.png"
+      ]
+    },
+    {
+      "brand": "MAZ",
+      "model": "5440",
+      "engine": "YMZ_238",
+      "saved": []
+    },
+    {
+      "brand": "Ural",
+      "model": "4320",
+      "engine": "YMZ_236",
+      "saved": []
+    },
+    {
+      "brand": "PAZ",
+      "model": "Vector",
+      "engine": "MMZ_D245",
+      "saved": []
+    },
+    {
+      "brand": "PAZ",
+      "model": "3205",
+      "engine": "ZMZ_5234",
+      "saved": []
+    },
+    {
+      "brand": "LiAZ",
+      "model": "5292",
+      "engine": "Cummins_6.7",
+      "saved": []
+    },
+    {
+      "brand": "NefAZ",
+      "model": "5299",
+      "engine": "YMZ_536",
+      "saved": [
+        "schema_images/NefAZ/5299_YMZ_536_1.png"
+      ]
+    },
+    {
+      "brand": "KAMAZ",
+      "model": "6520",
+      "engine": "Cummins_6.7",
+      "saved": []
+    }
+  ]
+}
