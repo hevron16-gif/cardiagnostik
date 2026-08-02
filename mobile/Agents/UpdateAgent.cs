@@ -1,4 +1,4 @@
-﻿using CarDiagnosticApp.Services;
+using CarDiagnosticApp.Services;
 using System.Diagnostics;
 
 namespace CarDiagnosticApp.Agents;
@@ -306,7 +306,7 @@ public class UpdateAgent
 
             // Запрашиваем метаданные последнего релиза с GitHub
             var json = await client.GetStringAsync(
-                "https://api.github.com/repos/hevron16-gif/3d-bot/releases/latest");
+                "https://api.github.com/repos/hevron16-gif/cardiagnostik/releases/latest");
 
             // Простой парсинг tag_name без Newtonsoft.Json
             var tagMatch = System.Text.RegularExpressions.Regex.Match(json, @"""tag_name""\s*:\s*""([^""]+)""");

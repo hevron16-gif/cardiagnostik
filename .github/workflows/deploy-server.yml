@@ -24,4 +24,4 @@ jobs:
       - name: Verify deployment
         run: |
           sleep 30
-          curl -f ${{ secrets.SERVER_HEALTH_URL }}/health || echo "Health check failed"
+          curl -f ${{ secrets.SERVER_HEALTH_URL }}/health

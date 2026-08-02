@@ -10,8 +10,6 @@ DRY_RUN = os.getenv("DRY_RUN", "true").lower() == "true"
 TO_REMOVE = [
     "server/main.py.bak.*",
     "mobile/**/*.bak.*",
-    "mobile/Data/schemes/*_location.png",
-    "mobile/Resources/Raw/schemes/*_location.png",
     "**/*.tmp",
     "**/*.temp",
     "**/*.log",
