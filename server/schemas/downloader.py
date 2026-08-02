@@ -5,14 +5,17 @@ Saves images to schemas/downloaded/ with metadata.
 """
 
 import re
+import io
 import json
 import asyncio
 import logging
 from pathlib import Path
 from typing import Optional
 from datetime import datetime, timezone
+from urllib.parse import urlparse
 
 import httpx
+from PIL import Image
 
 logger = logging.getLogger("schemas.downloader")
 
@@ -72,6 +75,9 @@ async def _search_bing(client: httpx.AsyncClient, query: str, limit: int = 5) ->
 
     # Bing stores image data in an inline murl/turl JSON-like pattern
     images = re.findall(r'"murl"\s*:\s*"(https?://[^"]+)"', html, re.IGNORECASE)
+    # Bing отдаёт метаданные и HTML-закодированными: &quot;murl&quot;:&quot;...&quot;
+    images += [u.replace("&amp;", "&") for u in re.findall(
+        r'&quot;murl&quot;:&quot;(https?://.+?)&quot;', html, re.IGNORECASE)]
     # Deduplicate
     seen = set()
     result = []
@@ -150,6 +156,45 @@ async def _search_wikimedia(client: httpx.AsyncClient, query: str, limit: int = 
 
 # ─── HELPERS ─────────────────────────────────────────────────────────
 
+# Стоки, киносайты, соцсети — технических схем там нет
+JUNK_DOMAINS = (
+    "shutterstock.com", "dreamstime.com", "123rf.com", "depositphotos.com",
+    "freepik.com", "alamy.com", "gettyimages.com", "istockphoto.com",
+    "vectorstock.com", "stock.adobe.com",
+    "kinopoisk.ru", "imdb.com",
+    "pinterest.com", "instagram.com", "facebook.com", "twitter.com",
+    "x.com", "tiktok.com", "youtube.com", "ytimg.com",
+    "vk.com", "ok.ru", "avito.ru",
+    # Маркетплейсы — белый фон, но это фото товара, а не схема
+    "media-amazon.com", "alicdn.com", "ebayimg.com",
+    "walmartimages.com", "wildberries.ru", "ozon.ru",
+)
+
+
+def _is_junk_domain(url: str) -> bool:
+    """True, если URL ведёт на сток/соцсеть/киносайт (сравнение по hostname)."""
+    host = (urlparse(url).hostname or "").lower()
+    return any(host == d or host.endswith("." + d) for d in JUNK_DOMAINS)
+
+
+def _validate_schema_image(raw: bytes) -> bool:
+    """Реальное изображение, не иконка, не постер, светлый фон (схема)."""
+    try:
+        img = Image.open(io.BytesIO(raw))
+        img.load()
+        if img.width < 300 or img.height < 200:
+            return False
+        if not (0.3 <= img.width / img.height <= 3.3):
+            return False
+        # Доля почти белых пикселей: у схем фон светлый, у фото/постеров — нет
+        small = img.convert("RGB").resize((64, 64))
+        white = sum(1 for r, g, b in small.getdata()
+                    if r >= 235 and g >= 235 and b >= 235)
+        return (white / (64 * 64)) >= 0.30
+    except Exception:
+        return False
+
+
 def _is_valid_image_url(url: str) -> bool:
     """Basic check that URL looks like an image."""
     bad_patterns = [
@@ -164,6 +209,9 @@ def _is_valid_image_url(url: str) -> bool:
             return False
     # Must have an image extension
     if not re.search(r'\.(jpg|jpeg|png|gif|webp|bmp)(\?|$)', low):
+        return False
+    # Стоки/соцсети/киносайты отсекаем по домену
+    if _is_junk_domain(url):
         return False
     return True
 
@@ -208,7 +256,7 @@ async def search_and_download(
     query_bus = f"схема {error_code} ПАЗ ЛиАЗ автобус датчик"
     query_maz = f"ошибка {error_code} МАЗ ЯМЗ схема"
 
-    async with httpx.AsyncClient(timeout=20, follow_redirects=True) as client:
+    async with httpx.AsyncClient(timeout=20, follow_redirects=True, trust_env=False) as client:
         # Try all sources in parallel (общие + РФ грузовики/автобусы)
         tasks = [
             _search_bing(client, query_ru, max_images * 2),
@@ -250,7 +298,7 @@ async def search_and_download(
             save_path = DOWNLOAD_DIR / filename
 
             img_bytes = await download_image(client, url)
-            if img_bytes and len(img_bytes) > 500:
+            if img_bytes and len(img_bytes) > 500 and _validate_schema_image(img_bytes):
                 save_path.write_bytes(img_bytes)
                 downloaded.append(save_path)
                 logger.info(f"Downloaded: {filename} ({len(img_bytes)} bytes)")

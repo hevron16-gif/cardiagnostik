@@ -11,8 +11,9 @@ import asyncio
 import logging
 import base64
 import re
+from html import unescape
 from pathlib import Path
-from typing import Optional, List
+from typing import Optional, List, Tuple
 from datetime import datetime, timezone
 
 import httpx
@@ -26,6 +27,77 @@ SCHEMA_DIR.mkdir(parents=True, exist_ok=True)
 
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY", "")
 DEEPSEEK_URL = "https://api.deepseek.com/v1/chat/completions"
+
+# ═══ ФИЛЬТРАЦИЯ МУСОРА ═════════════════════════════════════════════
+# Стоки, киносайты, соцсети, обои — технических схем двигателей там нет
+JUNK_DOMAINS = (
+    "shutterstock.com", "dreamstime.com", "123rf.com", "depositphotos.com",
+    "freepik.com", "alamy.com", "gettyimages.com", "istockphoto.com",
+    "vectorstock.com", "stock.adobe.com",
+    "kinopoisk.ru", "imdb.com", "filmibeat.com",
+    "wallpapercave.com", "wallpapers.com", "wallpaperflare.com",
+    "pinterest.com", "instagram.com", "facebook.com", "twitter.com",
+    "x.com", "tiktok.com", "youtube.com", "ytimg.com",
+    "vk.com", "ok.ru", "avito.ru",
+    # Маркетплейсы — белый фон, но это фото товара, а не схема
+    "media-amazon.com", "alicdn.com", "ebayimg.com",
+    "walmartimages.com", "wildberries.ru", "ozon.ru",
+)
+
+# Минимальные требования к «схеме»: реальное изображение, не иконка,
+# не вертикальный постер, светлый фон (чертежи рисуют на белом)
+MIN_IMG_W, MIN_IMG_H = 400, 300
+ASPECT_MIN, ASPECT_MAX = 0.4, 2.8
+WHITE_BG_MIN = 0.30
+
+
+def _is_junk_domain(url: str) -> bool:
+    """True, если URL ведёт на сток/соцсеть/киносайт (сравнение по hostname)."""
+    from urllib.parse import urlparse
+    host = (urlparse(url).hostname or "").lower()
+    return any(host == d or host.endswith("." + d) for d in JUNK_DOMAINS)
+
+
+def validate_schema_image(raw: bytes) -> bool:
+    """Эвристика «похоже на техническую схему» вместо vision-валидации."""
+    try:
+        img = Image.open(io.BytesIO(raw))
+        img.load()
+        if img.width < MIN_IMG_W or img.height < MIN_IMG_H:
+            return False
+        if not (ASPECT_MIN <= img.width / img.height <= ASPECT_MAX):
+            return False
+        # Доля почти белых пикселей: у схем/чертежей фон светлый,
+        # у постеров и фотографий — нет
+        small = img.convert("RGB").resize((64, 64))
+        white = sum(1 for r, g, b in small.getdata()
+                    if r >= 235 and g >= 235 and b >= 235)
+        return (white / (64 * 64)) >= WHITE_BG_MIN
+    except Exception:
+        return False
+
+
+# Признаки, что картинка/страница-источник вообще про авто
+RELEVANCE_TERMS = (
+    "engine", "dvigat", "двигат", "схема", "shema", "schema",
+    "sensor", "датчик", "motor", "avto", "авто", "truck",
+    "дизел", "diesel", "бензин", "lada", "ваз", "vaz",
+    "kamaz", "камаз", "uaz", "уаз", "gaz",
+    "mmz", "ммз", "yamz", "ямз", "zmz", "змз",
+    "liaz", "лиаз", "cummins", "granta", "vesta", "niva", "patriot",
+)
+
+
+def _is_relevant(url: str, page: str, query: str) -> bool:
+    """Отсев оффтопика: Bing часто возвращает картинки не по теме
+    (инструменты, IT-диаграммы). Смотрим URL картинки и страницы-источника."""
+    text = f"{url} {page}".lower()
+    if any(t in text for t in RELEVANCE_TERMS):
+        return True
+    # Токены запроса с цифрами (коды моделей/двигателей: 21129, Д245, 409...)
+    # Общие слова типа "engine"/"diagram" не считаем — они есть в любом оффтопике
+    return any(any(c.isdigit() for c in t) and len(t) >= 3 and t.lower() in text
+               for t in query.split())
 
 # ═══ РЕЕСТР АВТО (добавляйте сюда новые) ═══════════════════════════
 AUTO_REGISTRY = [
@@ -196,13 +268,15 @@ def optimize_image(img_bytes: bytes, max_width: int = 1200) -> Optional[bytes]:
 # ═══ DEEPSEEK ВАЛИДАЦИЯ ═════════════════════════════════════════════
 
 async def deepseek_validate(img_bytes: bytes, query: str) -> bool:
-    """Валидация через DeepSeek отключена: тариф не поддерживает vision."""
+    """Vision-валидация отключена: DeepSeek API не принимает изображения (400).
+    Вместо неё работает эвристика validate_schema_image() в scrape_car.
+    Чтобы вернуть контентную проверку — нужен провайдер с vision-моделью."""
     return True
 
 # ═══ ПОИСК И СКАЧИВАНИЕ ═════════════════════════════════════════════
 
-async def search_bing_images(query: str, limit: int = 5) -> List[str]:
-    """Парсинг Bing Images."""
+async def search_bing_images(query: str, limit: int = 5) -> List[Tuple[str, str]]:
+    """Парсинг Bing Images. Возвращает пары (url картинки, url страницы-источника)."""
     from urllib.parse import quote_plus
     url = f"https://www.bing.com/images/search?q={quote_plus(query)}&first=1"
     
@@ -213,27 +287,43 @@ async def search_bing_images(query: str, limit: int = 5) -> List[str]:
     }
     
     try:
-        async with httpx.AsyncClient(timeout=20, follow_redirects=True) as client:
+        async with httpx.AsyncClient(timeout=20, follow_redirects=True, trust_env=False) as client:
             resp = await client.get(url, headers=headers)
             resp.raise_for_status()
             html = resp.text
             
-            urls = re.findall(r'"murl"\s*:\s*"(https?://[^"]+)"', html, re.IGNORECASE)
-            urls += re.findall(r'https?://[^\s"<>\']+\.(?:jpg|jpeg|png|webp)', html, re.IGNORECASE)
+            # Метаданные результатов — JSON в атрибутах m="{...}" (HTML-encoded).
+            # Берём только их: жадный regex по всему HTML выдёргивал картинки
+            # из оформления страницы Bing (главный источник мусора).
+            found = []  # (murl, purl)
+            for block in re.findall(r'\bm="(\{&quot;.+?\})"', html):
+                try:
+                    meta = json.loads(unescape(block))
+                except Exception:
+                    continue
+                murl = meta.get("murl", "")
+                if murl.startswith("http"):
+                    found.append((murl, meta.get("purl", "")))
+            if not found:
+                # Фолбэк: старый незакодированный формат murl
+                found = [(u, "") for u in re.findall(
+                    r'"murl"\s*:\s*"(https?://[^"]+)"', html, re.IGNORECASE)]
             
             valid = []
             seen = set()
             bad = ["/icon", "/logo", "/avatar", "/thumb", "favicon", "google", "bing", "yandex", "facebook", "twitter"]
             
-            for u in urls:
+            for u, page in found:
                 low = u.lower()
                 if any(b in low for b in bad):
+                    continue
+                if _is_junk_domain(u) or (page and _is_junk_domain(page)):
                     continue
                 if not re.search(r'\.(jpg|jpeg|png|webp)(\?|$)', low):
                     continue
                 if u not in seen:
                     seen.add(u)
-                    valid.append(u)
+                    valid.append((u, page))
                 if len(valid) >= limit:
                     break
             return valid
@@ -247,7 +337,7 @@ async def download_image(url: str) -> Optional[bytes]:
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36",
             "Referer": "https://www.bing.com/"
         }
-        async with httpx.AsyncClient(timeout=30, follow_redirects=True) as client:
+        async with httpx.AsyncClient(timeout=30, follow_redirects=True, trust_env=False) as client:
             resp = await client.get(url, headers=headers)
             resp.raise_for_status()
             if len(resp.content) < 3000:
@@ -269,14 +359,22 @@ async def scrape_car(brand: str, model: str, engine: str, queries: List[str], ma
         if len(saved) >= max_images:
             break
             
-        urls = await search_bing_images(query, limit=max_images + 2)
+        found = await search_bing_images(query, limit=max_images + 3)
         
-        for url in urls:
+        for url, page in found:
             if len(saved) >= max_images:
                 break
+            
+            if not _is_relevant(url, page, query):
+                logger.info(f"Rejected (off-topic): {url[:80]}")
+                continue
                 
             raw = await download_image(url)
             if not raw:
+                continue
+            
+            if not validate_schema_image(raw):
+                logger.info(f"Rejected (not schema-like): {url[:80]}")
                 continue
             
             opt = optimize_image(raw)
