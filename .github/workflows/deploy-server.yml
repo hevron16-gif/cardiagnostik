@@ -23,5 +23,14 @@ jobs:
 
       - name: Verify deployment
         run: |
-          sleep 30
-          curl -f ${{ secrets.SERVER_HEALTH_URL }}/health
+          # Render собирает и перезапускает сервис 2-10 минут — ждём с ретраями
+          for i in $(seq 1 60); do
+            if curl -sf "${{ secrets.SERVER_HEALTH_URL }}/health" > /dev/null; then
+              echo "Deploy OK"
+              exit 0
+            fi
+            echo "Ожидание деплоя... ($i/60)"
+            sleep 10
+          done
+          echo "Деплой не подтвердился за 10 минут"
+          exit 1
