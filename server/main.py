@@ -56,6 +56,7 @@ from pricing import router as pricing_router, require_feature, is_paid, get_paid
 from license import router as license_router
 from admin import router as admin_router
 from schema_image_scraper import run_full_scrape, AUTO_REGISTRY
+from dtc import get_code as dtc_get_code, search_codes as dtc_search_codes, stats as dtc_stats
 import integrity
 from device import get_device_id, verify_device_binding
 
@@ -427,6 +428,26 @@ async def search_cars(request: Request, q: str = Query(..., min_length=2, max_le
     except Exception as e:
         logger.error(f"Search error: {e}")
         raise HTTPException(status_code=500, detail="Ошибка поиска")
+
+# ═══ DTC-справочник (12 000+ кодов OBD-II, MIT + русская надстройка) ════
+@app.get("/dtc/stats", tags=["dtc"], response_model=dict)
+async def dtc_statistics():
+    """Статистика справочника кодов ошибок."""
+    return dtc_stats()
+
+@app.get("/dtc/search", tags=["dtc"], response_model=dict)
+async def dtc_search(q: str = Query(..., min_length=2, max_length=50), limit: int = Query(20, ge=1, le=100)):
+    """Поиск по кодам ошибок (по коду или тексту описания)."""
+    return {"query": q, "results": dtc_search_codes(q, limit)}
+
+@app.get("/dtc/{code}", tags=["dtc"], response_model=dict)
+async def dtc_lookup(code: str, manufacturer: Optional[str] = Query(None, max_length=30)):
+    """Расшифровка кода: русское описание (если есть), английское, причины и решения."""
+    result = dtc_get_code(code, manufacturer)
+    if not result:
+        raise HTTPException(status_code=404, detail="Код не найден")
+    return result
+
 @app.post("/admin/schemas/scrape", tags=["admin"])
 @limiter.limit("3/minute")
 async def admin_scrape_schemas(request: Request, admin_key: str = Query(...)):

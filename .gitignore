@@ -62,3 +62,6 @@ downloads/
 **/*.apk
 **/*.aab
 *.bak.*
+
+# DTC-справочник (MIT) — бинарный, но часть продукта
+!server/data/dtc_codes.db
