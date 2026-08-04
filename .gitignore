@@ -65,3 +65,4 @@ downloads/
 
 # DTC-справочник (MIT) — бинарный, но часть продукта
 !server/data/dtc_codes.db
+!mobile/Resources/Raw/dtc/dtc_codes.db

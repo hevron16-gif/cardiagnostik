@@ -13,6 +13,9 @@ public partial class App : Application
     private static ErrorCodeDbService? _errorCodes;
     public static ErrorCodeDbService ErrorCodes => _errorCodes ??= new ErrorCodeDbService();
 
+    private static DtcReferenceService? _dtc;
+    public static DtcReferenceService Dtc => _dtc ??= new DtcReferenceService();
+
     private static UserRepository? _userRepo;
     public static UserRepository UserRepo => _userRepo ??= new UserRepository();
 

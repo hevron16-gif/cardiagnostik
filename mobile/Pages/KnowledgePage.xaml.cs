@@ -1,4 +1,4 @@
-﻿using CarDiagnosticApp.Data;
+using CarDiagnosticApp.Data;
 using CarDiagnosticApp.Models;
 
 namespace CarDiagnosticApp.Pages;
@@ -17,7 +17,7 @@ public partial class KnowledgePage : ContentPage
     /// <summary>
     /// Фильтрация по поисковому запросу (код или часть описания).
     /// </summary>
-    private void OnSearchTextChanged(object? sender, TextChangedEventArgs e)
+    private async void OnSearchTextChanged(object? sender, TextChangedEventArgs e)
     {
         var query = e.NewTextValue?.Trim() ?? "";
 
@@ -33,8 +33,20 @@ public partial class KnowledgePage : ContentPage
                      || i.Causes.Contains(query, StringComparison.OrdinalIgnoreCase))
             .ToList();
 
+        // Не нашли локально — ищем в офлайн-справочнике на 12 000+ кодов
+        if (filtered.Count == 0 && IsDtcCode(query))
+        {
+            var found = await App.Dtc.GetAsync(query);
+            if (found != null)
+                filtered = new List<KnowledgeItem> { found };
+        }
+
         RefreshList(filtered);
     }
+
+    /// <summary>Похоже ли на код неисправности (P0300, B0123, C1ABC, U0100).</summary>
+    private static bool IsDtcCode(string s)
+        => System.Text.RegularExpressions.Regex.IsMatch(s, @"^[PBUCpbuc]\d[0-9A-Fa-f]{3}$");
 
     /// <summary>
     /// Раскрытие/скрытие деталей по тапу.

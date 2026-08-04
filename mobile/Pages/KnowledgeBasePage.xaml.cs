@@ -1,4 +1,4 @@
-﻿using CarDiagnosticApp.Data;
+using CarDiagnosticApp.Data;
 using CarDiagnosticApp.Models;
 using CarDiagnosticApp.Services;
 
@@ -65,7 +65,7 @@ public partial class KnowledgeBasePage : ContentPage
     /// <summary>
     /// Применяет оба фильтра: поиск + марка.
     /// </summary>
-    private void ApplyFilters()
+    private async void ApplyFilters()
     {
         var items = _allItems.AsEnumerable();
 
@@ -90,8 +90,22 @@ public partial class KnowledgeBasePage : ContentPage
                 i.Causes.Contains(q, StringComparison.OrdinalIgnoreCase));
         }
 
-        ShowItems(items.ToList());
+        var list = items.ToList();
+
+        // 3. Не нашли локально — ищем в офлайн-справочнике на 12 000+ кодов
+        if (list.Count == 0 && IsDtcCode(q))
+        {
+            var found = await App.Dtc.GetAsync(q);
+            if (found != null)
+                list = new List<KnowledgeItem> { found };
+        }
+
+        ShowItems(list);
     }
+
+    /// <summary>Похоже ли на код неисправности (P0300, B0123, C1ABC, U0100).</summary>
+    private static bool IsDtcCode(string s)
+        => System.Text.RegularExpressions.Regex.IsMatch(s, @"^[PBUCpbuc]\d[0-9A-Fa-f]{3}$");
 
     /// <summary>
     /// Раскрытие/сворачивание карточки с деталями.
