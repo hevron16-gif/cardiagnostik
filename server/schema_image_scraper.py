@@ -123,6 +123,27 @@ AUTO_REGISTRY = [
          "схема двигателя Нива 21214 1.7",
          "ВАЗ 21214 схема"
      ]},
+    {"brand": "Lada", "model": "Kalina", "engine": "11189_1.6_8V", "category": "passenger",
+     "queries": [
+         "Lada Kalina 11189 engine diagram",
+         "VAZ 11189 engine sensors scheme",
+         "схема двигателя Лада Калина 11189",
+         "ВАЗ 11189 схема датчиков ЭСУД"
+     ]},
+    {"brand": "Lada", "model": "Priora", "engine": "21126_1.6_16V", "category": "passenger",
+     "queries": [
+         "Lada Priora 21126 engine diagram",
+         "VAZ 21126 engine sensors scheme",
+         "схема двигателя Лада Приора 21126",
+         "ВАЗ 21126 схема датчиков ЭСУД"
+     ]},
+    {"brand": "Lada", "model": "Largus", "engine": "11189_1.6_8V", "category": "passenger",
+     "queries": [
+         "Lada Largus 11189 engine diagram",
+         "схема двигателя Лада Ларгус 11189",
+         "ВАЗ 11189 схема датчиков ЭСУД",
+         "Lada Largus K7M engine sensors"
+     ]},
     {"brand": "UAZ", "model": "Patriot", "engine": "ZMZ_409", "category": "passenger",
      "queries": [
          "UAZ Patriot ZMZ 409 engine diagram",
