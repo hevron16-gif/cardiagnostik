@@ -15,7 +15,8 @@
   "ecu": "Bosch EDC16",
   "category": "turbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P0238": {
@@ -36,7 +37,8 @@
   "ecu": "Bosch EDC16",
   "category": "turbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P0243": {
@@ -56,7 +58,8 @@
   "ecu": "Bosch EDC16",
   "category": "turbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P0401": {
@@ -78,7 +81,8 @@
   "sources": [
    "kim",
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0402": {
@@ -98,7 +102,8 @@
   "sources": [
    "kim",
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0420": {
@@ -120,7 +125,8 @@
   "sources": [
    "kim",
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0470": {
@@ -141,7 +147,8 @@
   "ecu": "Bosch EDC16",
   "category": "emission",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P0471": {
@@ -161,7 +168,8 @@
   "ecu": "Bosch EDC16",
   "category": "emission",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P0480": {
@@ -182,7 +190,8 @@
   "ecu": "Bosch EDC16",
   "category": "cooling",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P0500": {
@@ -205,7 +214,8 @@
   "sources": [
    "kim",
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0562": {
@@ -226,7 +236,8 @@
   "ecu": "Bosch EDC16",
   "category": "electrical",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P0563": {
@@ -246,7 +257,8 @@
   "ecu": "Bosch EDC16",
   "category": "electrical",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P0606": {
@@ -268,7 +280,8 @@
   "sources": [
    "kim",
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0628": {
@@ -365,7 +378,8 @@
   "ecu": "Bosch EDC16",
   "category": "transmission",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P0850": {
@@ -427,7 +441,8 @@
   "category": "gbo",
   "sources": [
    "kim",
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P1603": {
@@ -448,7 +463,8 @@
   "ecu": "ГБО Lovato",
   "category": "gbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P1604": {
@@ -469,7 +485,8 @@
   "ecu": "ГБО Lovato",
   "category": "gbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P1605": {
@@ -490,7 +507,8 @@
   "ecu": "ГБО Lovato",
   "category": "gbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P1606": {
@@ -510,7 +528,8 @@
   "ecu": "ГБО BRC",
   "category": "gbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P1607": {
@@ -634,7 +653,8 @@
   "ecu": "ГБО",
   "category": "gbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P1613": {
@@ -797,7 +817,8 @@
   "ecu": "ГБО",
   "category": "gbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P1621": {
@@ -817,7 +838,8 @@
   "ecu": "ГБО",
   "category": "gbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P1622": {
@@ -837,7 +859,8 @@
   "ecu": "ГБО",
   "category": "gbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P1623": {
@@ -919,7 +942,8 @@
   "ecu": "ГБО",
   "category": "gbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P1627": {
@@ -980,7 +1004,8 @@
   "ecu": "ГБО Stag",
   "category": "gbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P1630": {
@@ -1104,7 +1129,8 @@
   "ecu": "ГБО Stag",
   "category": "gbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P1636": {
@@ -1206,7 +1232,8 @@
   "ecu": "ГБО Stag",
   "category": "gbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P1641": {
@@ -1227,7 +1254,8 @@
   "ecu": "ГБО Stag",
   "category": "gbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P1642": {
@@ -1434,7 +1462,8 @@
   "ecu": "ГБО Digitronic",
   "category": "gbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P1652": {
@@ -1455,7 +1484,8 @@
   "ecu": "ГБО Digitronic",
   "category": "gbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P1653": {
@@ -1495,7 +1525,8 @@
   "ecu": "ГБО Digitronic",
   "category": "gbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P1655": {
@@ -1515,7 +1546,8 @@
   "ecu": "ГБО Digitronic",
   "category": "gbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P1656": {
@@ -1660,7 +1692,8 @@
   "ecu": "ГБО Lovato",
   "category": "gbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P1663": {
@@ -1681,7 +1714,8 @@
   "ecu": "ГБО Lovato",
   "category": "gbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P1664": {
@@ -1845,7 +1879,8 @@
   "ecu": "ГБО Lovato",
   "category": "gbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P1672": {
@@ -1866,7 +1901,8 @@
   "ecu": "ГБО Lovato",
   "category": "gbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P1673": {
@@ -1928,7 +1964,8 @@
   "ecu": "ГБО BRC",
   "category": "gbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P1676": {
@@ -2216,7 +2253,8 @@
   "ecu": "ГБО OMVL",
   "category": "gbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P1690": {
@@ -2237,7 +2275,8 @@
   "ecu": "ГБО OMVL",
   "category": "gbo",
   "sources": [
-   "kim"
+   "kim",
+   "chiptuner"
   ]
  },
  "P1691": {
@@ -2590,6 +2629,3411 @@
    "kim"
   ]
  },
+ "SPN1569-FMI31": {
+  "description_ru": "Двигатель ограничен по мощности (дерейт)",
+  "causes": [
+   "аварийный режим из-за серьёзной активной ошибки"
+  ],
+  "solutions": [
+   "проверить активные коды, устранить первопричину"
+  ],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Cummins ISG/ISBe",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN3251-FMI0": {
+  "description_ru": "Высокий уровень сажи в сажевом фильтре DPF",
+  "causes": [
+   "засорение сажевого фильтра"
+  ],
+  "solutions": [
+   "инициировать регенерацию или заменить DPF"
+  ],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Cummins ISG/ISBe (DPF)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN27-FMI2": {
+  "description_ru": "Ошибка положения заслонки EGR; заклинивание пневмопривода заслонки EGR",
+  "causes": [
+   "управляющий сигнал ниже допустимого",
+   "коэффициент подстройки за пределами"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN27-FMI3": {
+  "description_ru": "Ошибка положения заслонки EGR",
+  "causes": [
+   "управляющий сигнал выше допустимого",
+   "напряжение выше допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN27-FMI4": {
+  "description_ru": "Ошибка положения заслонки EGR",
+  "causes": [
+   "напряжение ниже допустимого",
+   "низкая величина обратной связи"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN27-FMI12": {
+  "description_ru": "Заклинивание пневматического привода заслонки EGR",
+  "causes": [
+   "общая ошибка"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN29-FMI2": {
+  "description_ru": "Неисправность датчиков положения педали газа",
+  "causes": [
+   "недостоверный сигнал"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN29-FMI3": {
+  "description_ru": "Неисправность датчиков положения педали газа",
+  "causes": [
+   "напряжение выше допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN29-FMI4": {
+  "description_ru": "Неисправность датчиков положения педали газа",
+  "causes": [
+   "напряжение ниже допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN51-FMI2": {
+  "description_ru": "Неисправность клапана управления дроссельной заслонки впускного воздуха",
+  "causes": [
+   "заклинивание заслонки",
+   "управляющий сигнал ниже допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN51-FMI3": {
+  "description_ru": "Неисправность клапана/датчика дроссельной заслонки впускного воздуха",
+  "causes": [
+   "управляющий сигнал выше допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN51-FMI4": {
+  "description_ru": "Неисправность клапана/датчика дроссельной заслонки впускного воздуха",
+  "causes": [
+   "управляющий сигнал ниже допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN84-FMI0": {
+  "description_ru": "Неисправность датчика скорости автомобиля",
+  "causes": [
+   "превышена максимальная скорость"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN84-FMI2": {
+  "description_ru": "Неисправность датчика скорости автомобиля",
+  "causes": [
+   "скорость не согласуется с подачей топлива и оборотами"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN84-FMI12": {
+  "description_ru": "Неисправность датчика скорости автомобиля",
+  "causes": [
+   "сигнал с датчика недостоверный"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN91-FMI3": {
+  "description_ru": "Неисправность датчиков положения педали газа",
+  "causes": [
+   "напряжение выше допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN91-FMI4": {
+  "description_ru": "Неисправность датчиков положения педали газа",
+  "causes": [
+   "напряжение ниже допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN91-FMI7": {
+  "description_ru": "Ошибка проверки правдоподобности педали газа и педали тормоза",
+  "causes": [
+   "сигнал с педали акселератора недостоверный"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN95-FMI7": {
+  "description_ru": "Засорение фильтра тонкой очистки топлива",
+  "causes": [
+   "засорён топливный фильтр"
+  ],
+  "solutions": [
+   "заменить фильтр тонкой очистки"
+  ],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN97-FMI3": {
+  "description_ru": "Неисправность в цепи датчика водосборника фильтра предварительной очистки топлива",
+  "causes": [
+   "напряжение выше допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN97-FMI11": {
+  "description_ru": "Концентрация воды в топливе выше допустимой",
+  "causes": [
+   "обнаружена вода в топливе"
+  ],
+  "solutions": [
+   "слить воду, заменить топливо"
+  ],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN98-FMI3": {
+  "description_ru": "Неисправность в цепи датчика уровня масла",
+  "causes": [
+   "напряжение выше допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN98-FMI4": {
+  "description_ru": "Неисправность в цепи датчика уровня масла",
+  "causes": [
+   "напряжение ниже допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN100-FMI3": {
+  "description_ru": "Неисправность в цепи датчика давления масла",
+  "causes": [
+   "напряжение выше допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN100-FMI4": {
+  "description_ru": "Неисправность в цепи датчика давления масла",
+  "causes": [
+   "напряжение ниже допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN100-FMI17": {
+  "description_ru": "Давление масла слишком низкое",
+  "causes": [
+   "низкое давление масла"
+  ],
+  "solutions": [
+   "проверить уровень масла, маслонасос"
+  ],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN102-FMI3": {
+  "description_ru": "Неисправность в цепи датчика давления наддува",
+  "causes": [
+   "напряжение выше допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN102-FMI4": {
+  "description_ru": "Неисправность в цепи датчика давления наддува",
+  "causes": [
+   "напряжение ниже допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN105-FMI3": {
+  "description_ru": "Неисправность в цепи датчика температуры воздуха",
+  "causes": [
+   "напряжение выше допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN105-FMI4": {
+  "description_ru": "Неисправность в цепи датчика температуры воздуха",
+  "causes": [
+   "напряжение ниже допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN105-FMI18": {
+  "description_ru": "Неисправен охладитель рециркуляции отработавших газов",
+  "causes": [
+   "ошибка недостоверности"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN108-FMI3": {
+  "description_ru": "Неисправность в цепи датчика атмосферного давления",
+  "causes": [
+   "напряжение выше допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN108-FMI2": {
+  "description_ru": "Неисправность в цепи датчика атмосферного давления",
+  "causes": [
+   "показания не сходятся с давлением наддува"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN110-FMI3": {
+  "description_ru": "Неисправность в цепи датчика температуры охлаждающей жидкости",
+  "causes": [
+   "напряжение выше допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN110-FMI4": {
+  "description_ru": "Неисправность в цепи датчика температуры охлаждающей жидкости",
+  "causes": [
+   "напряжение ниже допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN110-FMI15": {
+  "description_ru": "Перегрев охлаждающей жидкости",
+  "causes": [
+   "перегрев"
+  ],
+  "solutions": [
+   "проверить систему охлаждения"
+  ],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN111-FMI2": {
+  "description_ru": "Неисправность в цепи датчика уровня охлаждающей жидкости",
+  "causes": [
+   "недостоверный сигнал"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN111-FMI12": {
+  "description_ru": "Неисправность в цепи датчика уровня охлаждающей жидкости",
+  "causes": [
+   "разрыв цепи"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN131-FMI3": {
+  "description_ru": "Неисправность в цепи датчика давления газов в выпускной трубе",
+  "causes": [
+   "напряжение выше допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN131-FMI4": {
+  "description_ru": "Неисправность в цепи датчика давления газов в выпускной трубе",
+  "causes": [
+   "напряжение ниже допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN132-FMI3": {
+  "description_ru": "Сигнал датчика массового расхода воздуха выше допустимого",
+  "causes": [
+   "напряжение выше допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN132-FMI4": {
+  "description_ru": "Сигнал датчика массового расхода воздуха ниже допустимого",
+  "causes": [
+   "напряжение ниже допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN157-FMI3": {
+  "description_ru": "Неисправность в цепи датчика давления топлива в топливном аккумуляторе (рампе)",
+  "causes": [
+   "напряжение выше допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN157-FMI4": {
+  "description_ru": "Неисправность в цепи датчика давления топлива в рампе",
+  "causes": [
+   "напряжение ниже допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN157-FMI15": {
+  "description_ru": "Давление топлива в рампе выше максимально допустимого",
+  "causes": [
+   "значение сигнала выше максимально допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN157-FMI17": {
+  "description_ru": "Давление топлива в рампе ниже минимально допустимого",
+  "causes": [
+   "значение сигнала ниже минимально допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN158-FMI12": {
+  "description_ru": "Неисправность в цепи клеммы 15",
+  "causes": [
+   "отсутствие сигнала Т15 при инициализации ЭБУ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN168-FMI3": {
+  "description_ru": "Недопустимое напряжение АКБ",
+  "causes": [
+   "высокое напряжение АКБ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN168-FMI4": {
+  "description_ru": "Недопустимое напряжение АКБ",
+  "causes": [
+   "низкое напряжение АКБ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN171-FMI3": {
+  "description_ru": "Неисправность датчика температуры окружающего воздуха",
+  "causes": [
+   "напряжение выше допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN171-FMI4": {
+  "description_ru": "Неисправность датчика температуры окружающего воздуха",
+  "causes": [
+   "напряжение ниже допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN172-FMI3": {
+  "description_ru": "Ошибка температурного элемента в датчике массового расхода воздуха",
+  "causes": [
+   "напряжение выше допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN174-FMI3": {
+  "description_ru": "Неисправность в цепи датчика температуры топлива",
+  "causes": [
+   "напряжение выше допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN174-FMI4": {
+  "description_ru": "Неисправность в цепи датчика температуры топлива",
+  "causes": [
+   "напряжение ниже допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN175-FMI3": {
+  "description_ru": "Неисправность в цепи датчика температуры масла",
+  "causes": [
+   "напряжение ниже допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN175-FMI17": {
+  "description_ru": "Высокая температура масла",
+  "causes": [
+   "недостоверный сигнал"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN190-FMI7": {
+  "description_ru": "Рассогласование сигналов датчиков коленчатого и распределительного валов",
+  "causes": [
+   "неправильная установка шестерни распределительного вала"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN190-FMI11": {
+  "description_ru": "Неисправность в цепи датчика частоты вращения коленчатого вала",
+  "causes": [
+   "некорректный сигнал с датчика"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN190-FMI12": {
+  "description_ru": "Неисправность в цепи датчика частоты вращения коленчатого вала",
+  "causes": [
+   "нет сигнала с датчика",
+   "работа в резервном режиме"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN533-FMI15": {
+  "description_ru": "Превышение максимально допустимой частоты вращения коленвала",
+  "causes": [
+   "обнаружена перекрутка"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN596-FMI2": {
+  "description_ru": "Неисправность в цепи исполнительного устройства круиз-контроля",
+  "causes": [
+   "неверная комбинация переключателей"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN597-FMI12": {
+  "description_ru": "Неисправность в цепи датчика педали тормоза",
+  "causes": [
+   "сигнал неверный"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN598-FMI2": {
+  "description_ru": "Ошибка диагностики сигнала состояния сцепления",
+  "causes": [
+   "недостоверный сигнал"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN630-FMI2": {
+  "description_ru": "Неисправность ЭСППЗУ",
+  "causes": [
+   "ошибка последней записи в ЭСППЗУ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN630-FMI12": {
+  "description_ru": "Неисправность ЭСППЗУ",
+  "causes": [
+   "сброс к заводским значениям"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN636-FMI11": {
+  "description_ru": "Неисправность в цепи датчика частоты вращения распределительного вала",
+  "causes": [
+   "некорректный сигнал с датчика"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN636-FMI12": {
+  "description_ru": "Неисправность в цепи датчика частоты вращения распределительного вала",
+  "causes": [
+   "нет сигнала с датчика"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN639-FMI12": {
+  "description_ru": "Отсутствие CAN линии A",
+  "causes": [
+   "шина отключена"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN645-FMI3": {
+  "description_ru": "Неисправность датчика скорости автомобиля",
+  "causes": [
+   "ширина импульса больше максимальной"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN651-FMI3": {
+  "description_ru": "Неисправность в цепи силового каскада управления форсункой 1-го цилиндра",
+  "causes": [
+   "замыкание минусового провода на АКБ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN651-FMI12": {
+  "description_ru": "Неисправность в цепи силового каскада управления форсункой 1-го цилиндра",
+  "causes": [
+   "разрыв цепи"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN652-FMI3": {
+  "description_ru": "Неисправность в цепи силового каскада управления форсункой 2-го цилиндра",
+  "causes": [
+   "замыкание минусового провода на АКБ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN652-FMI12": {
+  "description_ru": "Неисправность в цепи силового каскада управления форсункой 2-го цилиндра",
+  "causes": [
+   "разрыв цепи"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN653-FMI3": {
+  "description_ru": "Неисправность в цепи силового каскада управления форсункой 3-го цилиндра",
+  "causes": [
+   "замыкание минусового провода на АКБ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN653-FMI12": {
+  "description_ru": "Неисправность в цепи силового каскада управления форсункой 3-го цилиндра",
+  "causes": [
+   "разрыв цепи"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN654-FMI3": {
+  "description_ru": "Неисправность в цепи силового каскада управления форсункой 4-го цилиндра",
+  "causes": [
+   "замыкание минусового провода на АКБ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN654-FMI12": {
+  "description_ru": "Неисправность в цепи силового каскада управления форсункой 4-го цилиндра",
+  "causes": [
+   "разрыв цепи"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN655-FMI3": {
+  "description_ru": "Неисправность в цепи силового каскада управления форсункой 5-го цилиндра",
+  "causes": [
+   "замыкание минусового провода на АКБ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN655-FMI12": {
+  "description_ru": "Неисправность в цепи силового каскада управления форсункой 5-го цилиндра",
+  "causes": [
+   "разрыв цепи"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN656-FMI3": {
+  "description_ru": "Неисправность в цепи силового каскада управления форсункой 6-го цилиндра",
+  "causes": [
+   "замыкание минусового провода на АКБ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN656-FMI12": {
+  "description_ru": "Неисправность в цепи силового каскада управления форсункой 6-го цилиндра",
+  "causes": [
+   "разрыв цепи"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN676-FMI7": {
+  "description_ru": "Предварительный подогрев воздуха постоянно включён",
+  "causes": [
+   "сигнал неверный"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN677-FMI3": {
+  "description_ru": "Неисправность в цепи силового каскада управления реле стартера",
+  "causes": [
+   "замыкание на «+» АКБ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN677-FMI5": {
+  "description_ru": "Неисправность в цепи силового каскада управления реле стартера",
+  "causes": [
+   "разрыв цепи"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN729-FMI3": {
+  "description_ru": "Неисправность в цепи силового каскада предварительного подогрева воздуха",
+  "causes": [
+   "замыкание на «+» АКБ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN729-FMI4": {
+  "description_ru": "Неисправность в цепи силового каскада предварительного подогрева воздуха",
+  "causes": [
+   "замыкание на массу"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN776-FMI2": {
+  "description_ru": "Ошибка определения скорости вращения турбинного колеса гидротрансформатора",
+  "causes": [
+   "недостоверный сигнал"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN970-FMI12": {
+  "description_ru": "Внутренняя неисправность ЭБУ",
+  "causes": [
+   "ошибка сторожевого таймера контроллера"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN974-FMI2": {
+  "description_ru": "Неисправность ручной заслонки (ручного управления)",
+  "causes": [
+   "недостоверный сигнал"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1041-FMI7": {
+  "description_ru": "Неисправность в цепи клеммы 50",
+  "causes": [
+   "клемма Т50 постоянно подключена на «+» АКБ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1071-FMI3": {
+  "description_ru": "Неисправность в цепи силового каскада управления приводом вентилятора",
+  "causes": [
+   "замыкание на «+» АКБ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1071-FMI4": {
+  "description_ru": "Неисправность в цепи силового каскада управления приводом вентилятора",
+  "causes": [
+   "замыкание на массу"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1072-FMI3": {
+  "description_ru": "Неисправность в цепи силового каскада декомпрессионного дросселя моторного тормоза",
+  "causes": [
+   "замыкание на «+» АКБ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1072-FMI4": {
+  "description_ru": "Неисправность в цепи силового каскада декомпрессионного дросселя моторного тормоза",
+  "causes": [
+   "замыкание на массу"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1074-FMI3": {
+  "description_ru": "Ошибка клапана управления заслонкой горного тормоза",
+  "causes": [
+   "замыкание на «+» АКБ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1074-FMI4": {
+  "description_ru": "Ошибка клапана управления заслонкой горного тормоза",
+  "causes": [
+   "замыкание на массу"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1081-FMI3": {
+  "description_ru": "Неисправность в цепи лампы холодного старта",
+  "causes": [
+   "замыкание на «+» АКБ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1108-FMI16": {
+  "description_ru": "Ошибка наблюдения за работой ЭБУ",
+  "causes": [
+   "превышено время активации форсунок"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1192-FMI3": {
+  "description_ru": "Неисправность в цепи управления давлением наддувочного воздуха",
+  "causes": [
+   "сигнал выше заданного диапазона",
+   "замыкание на «+» АКБ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1192-FMI4": {
+  "description_ru": "Неисправность в цепи управления давлением наддувочного воздуха",
+  "causes": [
+   "сигнал ниже заданного диапазона",
+   "замыкание на массу"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1213-FMI3": {
+  "description_ru": "Неисправность в цепи подключения лампы MIL",
+  "causes": [
+   "замыкание на «+» АКБ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1231-FMI12": {
+  "description_ru": "Отсутствие CAN линии B",
+  "causes": [
+   "шина отключена"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1235-FMI12": {
+  "description_ru": "Отсутствие CAN линии C",
+  "causes": [
+   "шина отключена"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1322-FMI3": {
+  "description_ru": "Зафиксирован пропуск вспышки в нескольких цилиндрах",
+  "causes": [
+   "пропуск зажигания"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1323-FMI3": {
+  "description_ru": "Зафиксирован пропуск вспышки в 1-м цилиндре",
+  "causes": [
+   "пропуск зажигания"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1324-FMI3": {
+  "description_ru": "Зафиксирован пропуск вспышки во 2-м цилиндре",
+  "causes": [
+   "пропуск зажигания"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1325-FMI3": {
+  "description_ru": "Зафиксирован пропуск вспышки в 3-м цилиндре",
+  "causes": [
+   "пропуск зажигания"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1326-FMI3": {
+  "description_ru": "Зафиксирован пропуск вспышки в 4-м цилиндре",
+  "causes": [
+   "пропуск зажигания"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1327-FMI3": {
+  "description_ru": "Зафиксирован пропуск вспышки в 5-м цилиндре",
+  "causes": [
+   "пропуск зажигания"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1328-FMI3": {
+  "description_ru": "Зафиксирован пропуск вспышки в 6-м цилиндре",
+  "causes": [
+   "пропуск зажигания"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1382-FMI1": {
+  "description_ru": "Засорение фильтра предварительной очистки топлива",
+  "causes": [
+   "топливный фильтр засорён"
+  ],
+  "solutions": [
+   "заменить фильтр грубой очистки"
+  ],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1485-FMI3": {
+  "description_ru": "Неисправность в цепи главного реле 2",
+  "causes": [
+   "замыкание на «+» АКБ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1485-FMI4": {
+  "description_ru": "Неисправность в цепи главного реле 2",
+  "causes": [
+   "замыкание на массу"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1624-FMI12": {
+  "description_ru": "Неисправность датчика скорости автомобиля",
+  "causes": [
+   "сигнал из шины CAN недостоверный"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1639-FMI3": {
+  "description_ru": "Неисправность в цепи датчика частоты вращения вентилятора",
+  "causes": [
+   "замыкание на «+» АКБ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN1653-FMI11": {
+  "description_ru": "Активен режим ограничения технических характеристик двигателя",
+  "causes": [
+   "активировано ограничение"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN2630-FMI0": {
+  "description_ru": "Неисправен охладитель наддувочного воздуха",
+  "causes": [
+   "ошибка достоверности"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN2634-FMI3": {
+  "description_ru": "Неисправность в цепи главного реле 1",
+  "causes": [
+   "замыкание на «+» АКБ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN2634-FMI4": {
+  "description_ru": "Неисправность в цепи главного реле 1",
+  "causes": [
+   "замыкание на массу"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN2791-FMI7": {
+  "description_ru": "Заклинивание пневматического привода заслонки EGR",
+  "causes": [
+   "заклинивание перепускной заслонки"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN2791-FMI3": {
+  "description_ru": "Неисправность клапана управления заслонкой EGR",
+  "causes": [
+   "ошибка драйвера CJ230",
+   "замыкание на «+» АКБ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN2791-FMI4": {
+  "description_ru": "Неисправность клапана управления заслонкой EGR",
+  "causes": [
+   "превышение управляющего тока",
+   "замыкание на массу"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN2791-FMI0": {
+  "description_ru": "Ошибка регулирования положения заслонки EGR",
+  "causes": [
+   "превышено максимальное положительное отклонение"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN2791-FMI1": {
+  "description_ru": "Ошибка регулирования положения заслонки EGR",
+  "causes": [
+   "превышено максимальное отрицательное отклонение"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN3050-FMI0": {
+  "description_ru": "Фильтр-нейтрализатор заблокирован",
+  "causes": [
+   "напряжение выше допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN3050-FMI1": {
+  "description_ru": "Фильтр-нейтрализатор удалён",
+  "causes": [
+   "напряжение выше допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN3050-FMI3": {
+  "description_ru": "Ошибка датчика перепада давления на фильтре-нейтрализаторе",
+  "causes": [
+   "напряжение выше допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN3050-FMI4": {
+  "description_ru": "Ошибка датчика перепада давления на фильтре-нейтрализаторе",
+  "causes": [
+   "напряжение ниже допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN3058-FMI18": {
+  "description_ru": "Неисправен охладитель рециркуляции отработавших газов",
+  "causes": [
+   "ошибка недостоверности"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN3464-FMI7": {
+  "description_ru": "Заклинивание дроссельной заслонки на выпуске двигателя",
+  "causes": [
+   "заклинивание заслонки"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN3509-FMI3": {
+  "description_ru": "Неисправность питания датчиков 1",
+  "causes": [
+   "высокое напряжение питания датчиков"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN3509-FMI4": {
+  "description_ru": "Неисправность питания датчиков 1",
+  "causes": [
+   "низкое напряжение питания датчиков"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN3510-FMI3": {
+  "description_ru": "Неисправность питания датчиков 2",
+  "causes": [
+   "высокое напряжение питания датчиков"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN3510-FMI4": {
+  "description_ru": "Неисправность питания датчиков 2",
+  "causes": [
+   "низкое напряжение питания датчиков"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN3511-FMI3": {
+  "description_ru": "Неисправность питания датчиков 3",
+  "causes": [
+   "высокое напряжение питания датчиков"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN3512-FMI3": {
+  "description_ru": "Неисправность напряжения питания датчиков 12 В",
+  "causes": [
+   "высокое напряжение питания датчиков"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN520193-FMI3": {
+  "description_ru": "Ошибка показаний датчика массового расхода воздуха",
+  "causes": [
+   "расход воздуха больше допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN520193-FMI4": {
+  "description_ru": "Ошибка показаний датчика массового расхода воздуха",
+  "causes": [
+   "расход воздуха меньше допустимого"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN520195-FMI15": {
+  "description_ru": "Ошибка регулирования системы рециркуляции отработавших газов",
+  "causes": [
+   "положительное отклонение выше нормы"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN520196-FMI17": {
+  "description_ru": "Ошибка регулирования системы рециркуляции отработавших газов",
+  "causes": [
+   "отрицательное отклонение выше нормы"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN520197-FMI3": {
+  "description_ru": "Неисправность в цепи перепускного клапана промежуточного охладителя наддувочного воздуха",
+  "causes": [
+   "замыкание на «+» АКБ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN520198-FMI2": {
+  "description_ru": "Ошибка проверки правдоподобия датчика температуры охлаждающей жидкости",
+  "causes": [
+   "температура не меняется",
+   "минимальная температура не достигнута"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN520226-FMI1": {
+  "description_ru": "Утечка топлива из контура высокого давления",
+  "causes": [
+   "низкое давление топлива в аккумуляторе"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN520226-FMI12": {
+  "description_ru": "Число работающих цилиндров меньше заданного минимума",
+  "causes": [
+   "работают не все цилиндры"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN520229-FMI15": {
+  "description_ru": "Ошибка регулирования давления наддувочного воздуха",
+  "causes": [
+   "положительное отклонение"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN520230-FMI17": {
+  "description_ru": "Ошибка регулирования давления наддувочного воздуха",
+  "causes": [
+   "отрицательное отклонение"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN520231-FMI3": {
+  "description_ru": "Неисправность в цепи электрического насоса предварительной подкачки топлива",
+  "causes": [
+   "замыкание на «+» АКБ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN520231-FMI4": {
+  "description_ru": "Неисправность в цепи электрического насоса предварительной подкачки топлива",
+  "causes": [
+   "замыкание на массу"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN523218-FMI12": {
+  "description_ru": "Ошибка CAN сообщения RxCCVS",
+  "causes": [
+   "таймаут сообщения шины CAN"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN523222-FMI12": {
+  "description_ru": "Ошибка CAN сообщения TCO1",
+  "causes": [
+   "таймаут сообщения шины CAN"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN523350-FMI3": {
+  "description_ru": "Неисправность силового каскада управления форсунками 1-й группы",
+  "causes": [
+   "короткое замыкание"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN523350-FMI12": {
+  "description_ru": "Неисправность силового каскада управления форсунками 1-й группы",
+  "causes": [
+   "разрыв цепи"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN523352-FMI3": {
+  "description_ru": "Неисправность силового каскада управления форсунками 2-й группы",
+  "causes": [
+   "короткое замыкание"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN523352-FMI12": {
+  "description_ru": "Неисправность силового каскада управления форсунками 2-й группы",
+  "causes": [
+   "разрыв цепи"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN523354-FMI2": {
+  "description_ru": "Неисправность микросхемы силового каскада управления форсунками",
+  "causes": [
+   "ошибка связи с CY33X"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN523420-FMI2": {
+  "description_ru": "Ошибка сторожевого таймера ЭБУ",
+  "causes": [
+   "ошибка счётчика, ЭБУ должен отключиться"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN523470-FMI0": {
+  "description_ru": "Заклинивание аварийного клапана на топливном аккумуляторе",
+  "causes": [
+   "обнаружено открытие аварийного клапана"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN523470-FMI1": {
+  "description_ru": "Износ или заклинивание аварийного клапана на топливном аккумуляторе",
+  "causes": [
+   "превышено максимальное число открытий"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN523470-FMI7": {
+  "description_ru": "Заклинивание аварийного клапана на топливном аккумуляторе",
+  "causes": [
+   "аварийный клапан принудительно не открылся"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN523500-FMI12": {
+  "description_ru": "Ошибка посылаемых CAN сообщений",
+  "causes": [
+   "таймаут исходящего сообщения шины CAN"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN523600-FMI12": {
+  "description_ru": "Внутренняя ошибка ЭБУ",
+  "causes": [
+   "сбой связи в шине SPI"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN523612-FMI3": {
+  "description_ru": "Ошибка питания модуля CJ940 ЭБУ",
+  "causes": [
+   "напряжение внутреннего питания выше нормы"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN523612-FMI4": {
+  "description_ru": "Ошибка питания модуля CJ940 ЭБУ",
+  "causes": [
+   "напряжение внутреннего питания ниже нормы"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN523613-FMI0": {
+  "description_ru": "Нарушение режима управления дозатором ТНВД",
+  "causes": [
+   "превышено максимальное давление в аккумуляторе топлива"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN523613-FMI3": {
+  "description_ru": "Нарушение режима управления дозатором ТНВД",
+  "causes": [
+   "давление в аккумуляторе топлива выше максимального"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN523613-FMI4": {
+  "description_ru": "Нарушение режима управления дозатором ТНВД",
+  "causes": [
+   "давление в аккумуляторе топлива ниже минимального"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN523613-FMI18": {
+  "description_ru": "Нарушение режима управления дозатором ТНВД",
+  "causes": [
+   "падение давления в аккумуляторе топлива"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN523615-FMI3": {
+  "description_ru": "Неисправность в цепи ШИМ управления дозатором ТНВД",
+  "causes": [
+   "замыкание на «+» АКБ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN523615-FMI4": {
+  "description_ru": "Неисправность в цепи ШИМ управления дозатором ТНВД",
+  "causes": [
+   "замыкание на массу"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN523615-FMI5": {
+  "description_ru": "Неисправность в цепи ШИМ управления дозатором ТНВД",
+  "causes": [
+   "разрыв цепи"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN523618-FMI2": {
+  "description_ru": "Ошибка CAN сообщения DM1DCU, блок SPN 1",
+  "causes": [
+   "обнаружен SPN 1"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "SPN523623-FMI3": {
+  "description_ru": "Ошибка CAN сообщения DM1DCU",
+  "causes": [
+   "таймаут сообщения шины CAN"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "ЯМЗ-536 (ЭБУ)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-12": {
+  "description_ru": "Работоспособность диагностической цепи — начальный код вывода",
+  "causes": [
+   "включён режим самодиагностики",
+   "КЗ L-линии на массу"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-13": {
+  "description_ru": "Низкий уровень сигнала датчика массового расхода воздуха (ДМРВ)",
+  "causes": [
+   "неправильная установка ДМРВ",
+   "неисправность соединений или датчика"
+  ],
+  "solutions": [
+   "проверить/заменить ДМРВ"
+  ],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-14": {
+  "description_ru": "Высокий уровень сигнала ДМРВ",
+  "causes": [
+   "увеличение расхода топлива, ухудшение динамики, проблемы с пуском"
+  ],
+  "solutions": [
+   "проверить/заменить ДМРВ"
+  ],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-15": {
+  "description_ru": "Низкий уровень сигнала датчика абсолютного давления",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-16": {
+  "description_ru": "Высокий уровень сигнала датчика абсолютного давления",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-17": {
+  "description_ru": "Низкий уровень сигнала датчика температуры воздуха",
+  "causes": [
+   "неисправность в электроцепи датчика",
+   "датчик вышел из строя"
+  ],
+  "solutions": [
+   "проверить датчик температуры воздуха"
+  ],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-18": {
+  "description_ru": "Высокий уровень сигнала датчика температуры воздуха",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-21": {
+  "description_ru": "Низкий уровень сигнала датчика температуры охлаждающей жидкости",
+  "causes": [
+   "обрыв или КЗ в цепи",
+   "датчик вышел из строя"
+  ],
+  "solutions": [
+   "проверить ДТОЖ"
+  ],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-22": {
+  "description_ru": "Высокий уровень сигнала датчика температуры охлаждающей жидкости",
+  "causes": [
+   "трудности с пуском в мороз",
+   "при перегреве снижение мощности, детонация"
+  ],
+  "solutions": [
+   "проверить ДТОЖ"
+  ],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-23": {
+  "description_ru": "Низкий уровень сигнала датчика положения дроссельной заслонки (ДПДЗ)",
+  "causes": [
+   "обрыв или КЗ в цепи",
+   "датчик неисправен"
+  ],
+  "solutions": [
+   "проверить ДПДЗ"
+  ],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-24": {
+  "description_ru": "Высокий уровень сигнала ДПДЗ",
+  "causes": [
+   "снижение мощности, рывки и провалы при разгоне, неустойчивый ХХ"
+  ],
+  "solutions": [
+   "проверить ДПДЗ"
+  ],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-25": {
+  "description_ru": "Низкое напряжение бортовой сети",
+  "causes": [
+   "неисправность генератора",
+   "разряд АКБ"
+  ],
+  "solutions": [
+   "проверить генератор и АКБ"
+  ],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-26": {
+  "description_ru": "Высокое напряжение бортовой сети",
+  "causes": [
+   "неисправность генератора",
+   "нештатные потребители"
+  ],
+  "solutions": [
+   "проверить генератор"
+  ],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-27": {
+  "description_ru": "Неисправность датчика угловой синхронизации (ДПКВ)",
+  "causes": [
+   "неисправность цепи или датчика",
+   "неисправность ВВ-проводов, катушки зажигания"
+  ],
+  "solutions": [
+   "проверить ДПКВ",
+   "возможен полный отказ впрыска — двигатель не запускается"
+  ],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-28": {
+  "description_ru": "Неисправность датчика угловой синхронизации (ДПКВ)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-29": {
+  "description_ru": "Неисправность датчика угловой синхронизации (ДПКВ)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-31": {
+  "description_ru": "Низкий уровень сигнала первого корректора CO (потенциометра СО)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-32": {
+  "description_ru": "Высокий уровень сигнала первого корректора CO",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-33": {
+  "description_ru": "Низкий уровень сигнала второго корректора CO",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-34": {
+  "description_ru": "Высокий уровень сигнала второго корректора CO",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-35": {
+  "description_ru": "Низкий уровень сигнала первого лямбда-зонда (датчика кислорода)",
+  "causes": [
+   "обрыв/КЗ в цепи",
+   "загрязнение или оплавление датчика"
+  ],
+  "solutions": [
+   "проверить/заменить датчик кислорода"
+  ],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-36": {
+  "description_ru": "Высокий уровень сигнала первого лямбда-зонда",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-37": {
+  "description_ru": "Низкий уровень сигнала второго лямбда-зонда",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-38": {
+  "description_ru": "Высокий уровень сигнала второго лямбда-зонда",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-41": {
+  "description_ru": "Неисправность цепи первого датчика детонации",
+  "causes": [
+   "неисправность цепи или датчика",
+   "плохое крепление датчика",
+   "топливо низкого качества"
+  ],
+  "solutions": [
+   "проверить датчик детонации"
+  ],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-42": {
+  "description_ru": "Неисправность цепи второго датчика детонации",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-43": {
+  "description_ru": "Низкий уровень сигнала ОС клапана рециркуляции",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-44": {
+  "description_ru": "Высокий уровень сигнала ОС клапана рециркуляции",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-45": {
+  "description_ru": "Низкий уровень сигнала ОС клапана адсорбера",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-46": {
+  "description_ru": "Высокий уровень сигнала ОС клапана адсорбера",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-51": {
+  "description_ru": "Неисправность 1 (сбой) контроллера ЭБУ",
+  "causes": [
+   "неисправность в электроцепи ЭБУ"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-52": {
+  "description_ru": "Неисправность 2 (ограничение) контроллера ЭБУ",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-53": {
+  "description_ru": "Неисправность цепи датчика положения коленчатого вала (ДПКВ)",
+  "causes": [
+   "ослаблено крепление датчика",
+   "повреждение диска синхронизации"
+  ],
+  "solutions": [
+   "проверить ДПКВ",
+   "двигатель может не запускаться"
+  ],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-54": {
+  "description_ru": "Неисправность цепи датчика фазы (положения распредвала)",
+  "causes": [
+   "ослаблено крепление датчика",
+   "неправильная установка шестерни распредвала"
+  ],
+  "solutions": [
+   "повышенный расход топлива и токсичность",
+   "проверить датчик фазы"
+  ],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-55": {
+  "description_ru": "Неисправность цепи датчика скорости автомобиля",
+  "causes": [
+   "неисправность в электроцепи или датчик вышел из строя"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-61": {
+  "description_ru": "Сброс контроллера ЭБУ в рабочем состоянии",
+  "causes": [
+   "помехи от системы зажигания",
+   "пульсация напряжения от неисправного генератора"
+  ],
+  "solutions": [
+   "проверить генератор",
+   "возможна самопроизвольная остановка двигателя"
+  ],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-62": {
+  "description_ru": "Неисправность ОЗУ контроллера ЭБУ",
+  "causes": [
+   "повреждение ЭБУ или его ПО"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-63": {
+  "description_ru": "Неисправность ПЗУ контроллера ЭБУ",
+  "causes": [
+   "повреждение ЭБУ или его ПО"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-64": {
+  "description_ru": "Неисправность чтения энергонезависимой памяти ЭБУ",
+  "causes": [
+   "нарушение контактов в цепи питания ЭБУ",
+   "повреждение провода «массы» между кузовом и двигателем"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-65": {
+  "description_ru": "Неисправность записи энергонезависимой памяти ЭБУ",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-66": {
+  "description_ru": "Неисправность при чтении кода идентификации ЭБУ",
+  "causes": [
+   "повреждение ЭБУ или его ПО"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-67": {
+  "description_ru": "Ошибка иммобилизатора",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-68": {
+  "description_ru": "Ошибка иммобилизатора",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-69": {
+  "description_ru": "Ошибка иммобилизатора",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-71": {
+  "description_ru": "Низкая частота вращения коленвала на холостом ходу",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-72": {
+  "description_ru": "Высокая частота вращения коленвала на холостом ходу",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-73": {
+  "description_ru": "Богатая смесь при регулировке по первому лямбда-зонду",
+  "causes": [
+   "неисправность датчика кислорода",
+   "повышенное/пониженное давление топлива"
+  ],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-74": {
+  "description_ru": "Бедная смесь при регулировке по первому лямбда-зонду",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-75": {
+  "description_ru": "Богатая смесь при регулировке по второму лямбда-зонду",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-76": {
+  "description_ru": "Бедная смесь при регулировке по второму лямбда-зонду",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-79": {
+  "description_ru": "Неисправность при управлении EGR по SEGR",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-99": {
+  "description_ru": "Неисправность формирователя высокого напряжения",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-131": {
+  "description_ru": "Неисправность форсунки 1 (КЗ)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-132": {
+  "description_ru": "Неисправность форсунки 1 (обрыв)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-133": {
+  "description_ru": "Неисправность форсунки 1 (КЗ на массу)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-161": {
+  "description_ru": "Неисправность обмотки 1 регулятора дополнительного воздуха/ХХ (КЗ)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-162": {
+  "description_ru": "Неисправность обмотки 1 РДВ (обрыв)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-163": {
+  "description_ru": "Неисправность обмотки 1 РДВ (КЗ на массу)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-167": {
+  "description_ru": "Неисправность цепи реле бензонасоса (КЗ)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-168": {
+  "description_ru": "Неисправность цепи реле бензонасоса (обрыв)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-169": {
+  "description_ru": "Неисправность цепи реле бензонасоса (КЗ на массу)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-174": {
+  "description_ru": "Неисправность цепи клапана адсорбера (КЗ нагрузки)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-175": {
+  "description_ru": "Неисправность цепи клапана адсорбера (обрыв)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-176": {
+  "description_ru": "Неисправность цепи клапана адсорбера (КЗ на массу)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-177": {
+  "description_ru": "Неисправность цепи главного реле (КЗ)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-178": {
+  "description_ru": "Неисправность цепи главного реле (обрыв)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-179": {
+  "description_ru": "Неисправность цепи главного реле (КЗ на массу)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-181": {
+  "description_ru": "Неисправность цепи лампы диагностики «Проверьте двигатель» (КЗ)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-182": {
+  "description_ru": "Неисправность цепи лампы диагностики (обрыв)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-183": {
+  "description_ru": "Неисправность цепи лампы диагностики (КЗ на массу)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-251": {
+  "description_ru": "Неисправность цепи прожига датчика массового расхода воздуха (КЗ)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-252": {
+  "description_ru": "Неисправность цепи прожига ДМРВ (обрыв)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
+ "J7-253": {
+  "description_ru": "Неисправность цепи прожига ДМРВ (КЗ на массу)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": "medium",
+  "ecu": "Микас 7.x (ЗМЗ-5234/409)",
+  "category": null,
+  "sources": [
+   "truck"
+  ]
+ },
  "P0171": {
   "description_ru": "Топливная система — бедная смесь (Bank 1)",
   "causes": [
@@ -2610,7 +6054,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0172": {
@@ -2631,7 +6076,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0300": {
@@ -2654,7 +6100,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0301": {
@@ -2674,7 +6121,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0302": {
@@ -2694,7 +6142,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0303": {
@@ -2714,7 +6163,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0304": {
@@ -2734,7 +6184,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0430": {
@@ -2753,7 +6204,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0442": {
@@ -2774,7 +6226,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0455": {
@@ -2794,7 +6247,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0130": {
@@ -2815,7 +6269,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0133": {
@@ -2836,7 +6291,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0135": {
@@ -2857,7 +6313,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0117": {
@@ -2875,7 +6332,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P0118": {
@@ -2896,7 +6354,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0201": {
@@ -2918,7 +6377,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "C0035": {
@@ -3017,7 +6477,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0101": {
@@ -3038,7 +6499,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0102": {
@@ -3059,7 +6521,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0103": {
@@ -3077,7 +6540,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P0105": {
@@ -3098,7 +6562,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0106": {
@@ -3119,7 +6584,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0107": {
@@ -3137,7 +6603,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P0108": {
@@ -3155,7 +6622,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P0110": {
@@ -3176,7 +6644,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0113": {
@@ -3197,7 +6666,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0115": {
@@ -3218,7 +6688,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0120": {
@@ -3239,7 +6710,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0121": {
@@ -3260,7 +6732,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0122": {
@@ -3281,7 +6754,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0123": {
@@ -3299,7 +6773,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P0128": {
@@ -3342,7 +6817,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0132": {
@@ -3363,7 +6839,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0134": {
@@ -3384,7 +6861,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0136": {
@@ -3402,7 +6880,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P0137": {
@@ -3420,7 +6899,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P0138": {
@@ -3438,7 +6918,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P0140": {
@@ -3456,7 +6937,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P0141": {
@@ -3474,7 +6956,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P0200": {
@@ -3496,7 +6979,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0202": {
@@ -3518,7 +7002,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0203": {
@@ -3540,7 +7025,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0204": {
@@ -3562,7 +7048,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0305": {
@@ -3581,7 +7068,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P0306": {
@@ -3600,7 +7088,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P0307": {
@@ -3619,7 +7108,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P0308": {
@@ -3638,7 +7128,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P0325": {
@@ -3659,7 +7150,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0327": {
@@ -3680,7 +7172,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0328": {
@@ -3698,7 +7191,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P0335": {
@@ -3719,7 +7213,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0336": {
@@ -3737,7 +7232,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P0340": {
@@ -3758,7 +7254,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0341": {
@@ -3776,7 +7273,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P0351": {
@@ -3798,7 +7296,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0352": {
@@ -3820,7 +7319,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0400": {
@@ -3841,7 +7341,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0404": {
@@ -3859,7 +7360,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P0440": {
@@ -3880,7 +7382,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0441": {
@@ -3901,7 +7404,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0443": {
@@ -3919,7 +7423,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P0446": {
@@ -3940,7 +7445,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0456": {
@@ -3980,7 +7486,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0506": {
@@ -4002,7 +7509,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0507": {
@@ -4024,7 +7532,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0600": {
@@ -4042,7 +7551,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P0620": {
@@ -4063,7 +7573,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0621": {
@@ -4081,7 +7592,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P0705": {
@@ -4102,7 +7614,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0715": {
@@ -4123,7 +7636,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0720": {
@@ -4144,7 +7658,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0730": {
@@ -4165,7 +7680,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0740": {
@@ -4186,7 +7702,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0741": {
@@ -4207,7 +7724,8 @@
   "category": null,
   "sources": [
    "schemas",
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0748": {
@@ -4225,7 +7743,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P0750": {
@@ -4243,7 +7762,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P0755": {
@@ -4261,7 +7781,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P1100": {
@@ -4297,7 +7818,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "schemas"
+   "schemas",
+   "chiptuner"
   ]
  },
  "P1130": {
@@ -4386,7 +7908,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0174": {
@@ -4400,7 +7923,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0217": {
@@ -4414,7 +7938,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0218": {
@@ -4428,7 +7953,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0230": {
@@ -4442,7 +7968,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0261": {
@@ -4456,7 +7983,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0410": {
@@ -4470,7 +7998,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0520": {
@@ -4484,7 +8013,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0601": {
@@ -4498,7 +8028,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0700": {
@@ -4512,7 +8043,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "P0706": {
@@ -4526,7 +8058,8 @@
   "ecu": null,
   "category": null,
   "sources": [
-   "obd2codes"
+   "obd2codes",
+   "chiptuner"
   ]
  },
  "B1200": {
@@ -4569,6 +8102,4770 @@
   "category": null,
   "sources": [
    "obd2codes"
+  ]
+ },
+ "P0111": {
+  "description_ru": "Выход сигнала датчика температуры всасываемого воздуха из допустимого диапазона",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0112": {
+  "description_ru": "Низкий уровень датчика температуры всасываемого воздуха",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0125": {
+  "description_ru": "Низкая температура охлаждающей жидкости для управления по замкнутому контуру",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0139": {
+  "description_ru": "Медленный отклик датчика кислорода 2 (банк 1) на обогащение/обеднение",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0142": {
+  "description_ru": "Датчик кислорода 3 (банк 1) неисправен",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0143": {
+  "description_ru": "Низкий уровень выходного сигнала датчика кислорода 3 (банк 1)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0144": {
+  "description_ru": "Высокий уровень выходного сигнала датчика кислорода 3 (банк 1)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0145": {
+  "description_ru": "Медленный отклик датчика кислорода 3 (банк 1) на обогащение/обеднение",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0146": {
+  "description_ru": "Нет активности выходного сигнала датчика кислорода 3 (банк 1)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0147": {
+  "description_ru": "Нагреватель датчика кислорода 3 (банк 1) неисправен",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0150": {
+  "description_ru": "Датчик кислорода 1 (банк 2) неисправен",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0151": {
+  "description_ru": "Низкий уровень сигнала датчика кислорода 1 (банк 2)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0152": {
+  "description_ru": "Высокий уровень сигнала датчика кислорода 1 (банк 2)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0153": {
+  "description_ru": "Медленный отклик датчика кислорода 1 (банк 2) на обогащение/обеднение",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0154": {
+  "description_ru": "Нет активности выходного сигнала датчика кислорода 1 (банк 2)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0155": {
+  "description_ru": "Нагреватель датчика кислорода 1 (банк 2) неисправен",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0156": {
+  "description_ru": "Датчик кислорода 2 (банк 2) неисправен",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0157": {
+  "description_ru": "Низкий уровень выходного сигнала датчика кислорода 2 (банк 2)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0158": {
+  "description_ru": "Высокий уровень выходного сигнала датчика кислорода 2 (банк 2)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0159": {
+  "description_ru": "Медленный отклик датчика кислорода 2 (банк 2) на обогащение/обеднение",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0160": {
+  "description_ru": "Нет активности выходного сигнала датчика кислорода 2 (банк 2)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0161": {
+  "description_ru": "Нагреватель датчика кислорода 2 (банк 2) неисправен",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0162": {
+  "description_ru": "Датчик кислорода 3 (банк 2) неисправен",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0163": {
+  "description_ru": "Низкий уровень выходного сигнала датчика кислорода 3 (банк 2)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0164": {
+  "description_ru": "Высокий уровень выходного сигнала датчика кислорода 3 (банк 2)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0165": {
+  "description_ru": "Медленный отклик датчика кислорода 3 (банк 2) на обогащение/обеднение",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0166": {
+  "description_ru": "Нет активности выходного сигнала датчика кислорода 3 (банк 2)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0167": {
+  "description_ru": "Нагреватель датчика кислорода 3 (банк 2) неисправен",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0173": {
+  "description_ru": "Утечка топлива из топливной системы блока цилиндров №2",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0175": {
+  "description_ru": "Смесь блока цилиндров №2 слишком богатая",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0176": {
+  "description_ru": "Датчик выброса СНх (Fuel Composition) неисправен",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0177": {
+  "description_ru": "Сигнал датчика СНх (Fuel Composition) вне допустимого диапазона",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0178": {
+  "description_ru": "Низкий уровень сигнала датчика СНх (Fuel Composition)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0179": {
+  "description_ru": "Высокий уровень сигнала датчика СНх (Fuel Composition)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0180": {
+  "description_ru": "Неисправность цепи датчика температуры топлива «А»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0181": {
+  "description_ru": "Сигнал датчика температуры топлива «А» вне допустимого диапазона",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0182": {
+  "description_ru": "Низкий уровень сигнала датчика температуры топлива «А»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0183": {
+  "description_ru": "Высокий уровень сигнала датчика температуры топлива «А»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0185": {
+  "description_ru": "Неисправность цепи датчика температуры топлива «В»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0186": {
+  "description_ru": "Сигнал датчика температуры топлива «В» вне допустимого диапазона",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0187": {
+  "description_ru": "Низкий уровень сигнала датчика температуры топлива «В»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0188": {
+  "description_ru": "Высокий уровень сигнала датчика температуры топлива «В»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0190": {
+  "description_ru": "Неисправность цепи датчика давления топлива в топливной рампе",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0191": {
+  "description_ru": "Сигнал датчика давления в топливной рампе вне допустимого диапазона",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0192": {
+  "description_ru": "Низкий сигнал датчика давления топлива в топливной рампе",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0193": {
+  "description_ru": "Высокий сигнал датчика давления топлива в топливной рампе",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0194": {
+  "description_ru": "Перемежающийся сигнал датчика давления топлива в топливной рампе",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0195": {
+  "description_ru": "Неисправность цепи датчика температуры масла в двигателе",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0196": {
+  "description_ru": "Сигнал датчика температуры масла в двигателе вне допустимого диапазона",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0197": {
+  "description_ru": "Низкий сигнал датчика температуры масла в двигателе",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0198": {
+  "description_ru": "Высокий сигнал датчика температуры масла в двигателе",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0199": {
+  "description_ru": "Перемежающийся сигнал датчика температуры масла в двигателе",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0205": {
+  "description_ru": "Неисправность цепи управления форсункой №5",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0206": {
+  "description_ru": "Неисправность цепи управления форсункой №6",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0207": {
+  "description_ru": "Неисправность цепи управления форсункой №7",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0208": {
+  "description_ru": "Неисправность цепи управления форсункой №8",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0209": {
+  "description_ru": "Неисправность цепи управления форсункой №9",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0210": {
+  "description_ru": "Неисправность цепи управления форсункой №10",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0211": {
+  "description_ru": "Неисправность цепи управления форсункой №11",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0212": {
+  "description_ru": "Неисправность цепи управления форсункой №12",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0213": {
+  "description_ru": "Неисправность цепи управления форсункой холодного старта №1",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0214": {
+  "description_ru": "Неисправность цепи управления форсункой холодного старта №2",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0215": {
+  "description_ru": "Неисправность соленоида выключения двигателя",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0216": {
+  "description_ru": "Неисправность цепи контроля времени впрыска",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0219": {
+  "description_ru": "Слишком высокие обороты двигателя (Engine Overspeed Condition)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0220": {
+  "description_ru": "Неисправность датчика положения дроссельной заслонки «B»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0221": {
+  "description_ru": "Сигнал датчика положения дроссельной заслонки «B» вне допустимого диапазона",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0222": {
+  "description_ru": "Низкий уровень сигнала датчика положения дроссельной заслонки «B»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0223": {
+  "description_ru": "Высокий уровень сигнала датчика положения дроссельной заслонки «B»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0224": {
+  "description_ru": "Перемежающийся уровень сигнала датчика положения дроссельной заслонки «B»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0225": {
+  "description_ru": "Неисправность датчика положения дроссельной заслонки «C»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0226": {
+  "description_ru": "Сигнал датчика положения дроссельной заслонки вне допустимого диапазона «C»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0227": {
+  "description_ru": "Низкий уровень сигнала датчика положения дроссельной заслонки «C»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0228": {
+  "description_ru": "Высокий уровень сигнала датчика положения дроссельной заслонки «C»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0229": {
+  "description_ru": "Перемежающийся уровень сигнала датчика положения дроссельной заслонки «C»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0231": {
+  "description_ru": "Постоянный низкий уровень вторичной цепи бензонасоса",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0232": {
+  "description_ru": "Постоянный высокий уровень вторичной цепи бензонасоса",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0233": {
+  "description_ru": "Перемежающийся уровень вторичной цепи бензонасоса",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0235": {
+  "description_ru": "Неисправность цепи датчика давления турбонаддува «A»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0236": {
+  "description_ru": "Сигнал с датчика турбины «A» вне допустимого диапазона",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0239": {
+  "description_ru": "Неисправность цепи датчика давления турбонаддува «B»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0240": {
+  "description_ru": "Сигнал с датчика турбины «B» вне допустимого диапазона",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0241": {
+  "description_ru": "Низкий уровень сигнала с датчика турбины «B»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0242": {
+  "description_ru": "Высокий уровень сигнала с датчика турбины «B»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0244": {
+  "description_ru": "Сигнал соленоида затвора выхлопных газов турбины «A» вне доп. диапазона",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0245": {
+  "description_ru": "Соленоид затвора выхлопных газов турбины «A» всегда открыт",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0246": {
+  "description_ru": "Соленоид затвора выхлопных газов турбины «A» всегда закрыт",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0247": {
+  "description_ru": "Неисправность соленоида затвора выхлопных газов турбины «B»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0248": {
+  "description_ru": "Сигнал соленоида затвора выхлопных газов турбины «B» вне доп. диапазона",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0249": {
+  "description_ru": "Соленоид затвора выхлопных газов турбины «B» всегда открыт",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0250": {
+  "description_ru": "Соленоид затвора выхлопных газов турбины «B» всегда закрыт",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0251": {
+  "description_ru": "Неисправность насоса впрыска турбины«A»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0252": {
+  "description_ru": "Сигнал насоса впрыска турбины «A» не допустимого диапазона",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0253": {
+  "description_ru": "Низкий уровень сигнала насоса впрыска турбины «A»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0254": {
+  "description_ru": "Высокий уровень сигнала насоса впрыска турбины «A»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0255": {
+  "description_ru": "Перемежающийся уровень сигнала насоса впрыска турбины «A»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0256": {
+  "description_ru": "Неисправность насоса впрыска турбины «B»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0257": {
+  "description_ru": "Сигнал насоса впрыска турбины «B» вне допустимого диапазона",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0258": {
+  "description_ru": "Низкий уровень сигнала насоса впрыска турбины «B»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0259": {
+  "description_ru": "Высокий уровень сигнала насоса впрыска турбины «B»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0260": {
+  "description_ru": "Перемежающийся уровень сигнала насоса впрыска турбины «B»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0262": {
+  "description_ru": "Форсунка цилиндра №1 – обрыв или замыкание на +12V",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0263": {
+  "description_ru": "Форсунка цилиндра №1 – неисправность драйвера форсунки",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0264": {
+  "description_ru": "Форсунка цилиндра №2 – замыкание на землю",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0265": {
+  "description_ru": "Форсунка цилиндра №2 – обрыв или замыкание на +12V",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0266": {
+  "description_ru": "Форсунка цилиндра №2 – неисправность драйвера форсунки",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0267": {
+  "description_ru": "Форсунка цилиндра №3 – замыкание на землю",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0268": {
+  "description_ru": "Форсунка цилиндра №3 – обрыв или замыкание на +12V",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0269": {
+  "description_ru": "Форсунка цилиндра №3 – неисправность драйвера форсунки",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0270": {
+  "description_ru": "Форсунка цилиндра №4 – замыкание на землю",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0271": {
+  "description_ru": "Форсунка цилиндра №4 – обрыв или замыкание на +12V",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0272": {
+  "description_ru": "Форсунка цилиндра №4 – неисправность драйвера форсунки",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0273": {
+  "description_ru": "Форсунка цилиндра №5 – замыкание на землю",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0274": {
+  "description_ru": "Форсунка цилиндра №5 – обрыв или замыкание на +12V",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0275": {
+  "description_ru": "Форсунка цилиндра №5 – неисправность драйвера форсунки",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0276": {
+  "description_ru": "Форсунка цилиндра №6 – замыкание на землю",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0277": {
+  "description_ru": "Форсунка цилиндра №6 – обрыв или замыкание на +12V",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0278": {
+  "description_ru": "Форсунка цилиндра №6 – неисправность драйвера форсунки",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0279": {
+  "description_ru": "Форсунка цилиндра №7 – замыкание на землю",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0280": {
+  "description_ru": "Форсунка цилиндра №7 – обрыв или замыкание на +12V",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0281": {
+  "description_ru": "Форсунка цилиндра №7 – неисправность драйвера форсунки",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0282": {
+  "description_ru": "Форсунка цилиндра №8 – замыкание на землю",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0283": {
+  "description_ru": "Форсунка цилиндра №8 – обрыв или замыкание на +12V",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0284": {
+  "description_ru": "Форсунка цилиндра №8 – неисправность драйвера форсунки",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0285": {
+  "description_ru": "Форсунка цилиндра №9 – замыкание на землю",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0286": {
+  "description_ru": "Форсунка цилиндра №9 – обрыв или замыкание на +12V",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0287": {
+  "description_ru": "Форсунка цилиндра №9 – неисправность драйвера форсунки",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0288": {
+  "description_ru": "Форсунка цилиндра №10 – замыкание на землю",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0289": {
+  "description_ru": "Форсунка цилиндра №10 – обрыв или замыкание на +12V",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0290": {
+  "description_ru": "Форсунка цилиндра №10 – неисправность драйвера форсунки",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0291": {
+  "description_ru": "Форсунка цилиндра №11 – замыкание на землю",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0292": {
+  "description_ru": "Форсунка цилиндра №11 – обрыв или замыкание на +12",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0293": {
+  "description_ru": "Форсунка цилиндра №11 – неисправность драйвера форсунки",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0294": {
+  "description_ru": "Форсунка цилиндра №12 – замыкание на землю",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0295": {
+  "description_ru": "Форсунка цилиндра №12 – обрыв или замыкание на +12V",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0296": {
+  "description_ru": "Форсунка цилиндра №12 – неисправность драйвера форсунки",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0309": {
+  "description_ru": "Обнаружены пропуски воспламененияя в цилиндре №9",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0310": {
+  "description_ru": "Обнаружены пропуски воспламенения в цилиндре №10",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0311": {
+  "description_ru": "Обнаружены пропуски воспламенения в цилиндре №11",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0312": {
+  "description_ru": "Обнаружены пропуски воспламенения в цилиндре №12",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0320": {
+  "description_ru": "Неисправноcть цепи распределителя зажигания",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0321": {
+  "description_ru": "Сигнал распределителя зажигания вне допустимого диапазона",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0322": {
+  "description_ru": "Сигнал распределителя зажигания отсутствует",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0323": {
+  "description_ru": "Сигнал распределителя зажигания перемежающийся",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0326": {
+  "description_ru": "Сигнал датчика детонации №1 вне допустимого диапазона",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0329": {
+  "description_ru": "Перемежающийся уровень сигнала датчика детонации №1",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0330": {
+  "description_ru": "Неисправность цепи датчика детонации №2",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0331": {
+  "description_ru": "Сигнал датчика детонации №2 вне допустимого диапазона",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0332": {
+  "description_ru": "Низкий уровень сигнала датчика детонации №2",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0333": {
+  "description_ru": "Высокий уровень сигнала датчика детонации №2",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0334": {
+  "description_ru": "Перемежающийся уровень сигнала датчика детонации №2",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0337": {
+  "description_ru": "Низкий уровень или замыкание на массу ДПКВ «A»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0338": {
+  "description_ru": "Высокий уровень или замыкание на +12V ДПКВ «A»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0339": {
+  "description_ru": "Перемежающийся сигнал ДПКВ «A»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0342": {
+  "description_ru": "Низкий уровень сигнала датчика распределительного вала",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0343": {
+  "description_ru": "Высокий уровень сигнала датчика распределительного вала",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0344": {
+  "description_ru": "Перемежающийся уровень сигнала датчика распределительного вала",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0350": {
+  "description_ru": "Неисправность первичной / вторичной цепи катушки зажигания",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0353": {
+  "description_ru": "Неисправность первичной / вторичной цепи катушки зажигания «C»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0354": {
+  "description_ru": "Неисправность первичной / вторичной цепи катушки зажигания «D»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0355": {
+  "description_ru": "Неисправность первичной / вторичной цепи катушки зажигания «E»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0356": {
+  "description_ru": "Неисправность первичной / вторичной цепи катушки зажигания» F»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0357": {
+  "description_ru": "Неисправность первичной / вторичной цепи катушки зажигания «G»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0358": {
+  "description_ru": "Неисправность первичной / вторичной цепи катушки зажигания «H»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0359": {
+  "description_ru": "Неисправность первичной / вторичной цепи катушки зажигания «I»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0360": {
+  "description_ru": "Неисправность первичной / вторичной цепи катушки зажигания «J»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0361": {
+  "description_ru": "Неисправность первичной / вторичной цепи катушки зажигания «K»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0362": {
+  "description_ru": "Неисправность первичной / вторичной цепи катушки зажигания «L»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0370": {
+  "description_ru": "Неисправность сигнала А таймера",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0371": {
+  "description_ru": "Число импульсов сигнала А таймера выше нормы",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0372": {
+  "description_ru": "Число импульсов сигнала А таймера ниже нормы",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0373": {
+  "description_ru": "Нестабильные импульсы сигнала А таймера",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0374": {
+  "description_ru": "Нет импульсов сигнала А таймера",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0375": {
+  "description_ru": "Неисправность сигнала B таймера",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0376": {
+  "description_ru": "Число импульсов сигнала B таймера выше нормы",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0377": {
+  "description_ru": "Число импульсов сигнала B таймера ниже нормы",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0378": {
+  "description_ru": "Нестабильные импульсы сигнала B таймера",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0379": {
+  "description_ru": "Нет импульсов сигнала А таймера",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0380": {
+  "description_ru": "Неисправность свечи накаливания или цепи нагрева",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0381": {
+  "description_ru": "Неисправность свечи накаливания или индикатора нагрева",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0385": {
+  "description_ru": "Неисправность цепи датчика положения коленвала «B»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0386": {
+  "description_ru": "Сигнал датчика положения коленвала «B» вне допустимого диапазона",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0387": {
+  "description_ru": "Низкий уровень или замыкание на массу ДПКВ «В»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0388": {
+  "description_ru": "Высокий уровень или замыкаение на +12V ДПКВ «В»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0389": {
+  "description_ru": "Перемежающийся сигнал датчика положения коленвала «B»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0403": {
+  "description_ru": "Неисправность цепи датчика системы рециркуляции отработанных газов",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0405": {
+  "description_ru": "Низкий уровень сигнала датчика «A» системы рециркуляции ОГ",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0406": {
+  "description_ru": "Высокий уровень сигнала датчика «A» системы рециркуляции ОГ",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0407": {
+  "description_ru": "Низкий уровень сигнала датчика «В» системы рециркуляции ОГ",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0408": {
+  "description_ru": "Высокий уровень сигнала датчика «В» системы рециркуляции ОГ",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0411": {
+  "description_ru": "Некорректный поток через систему вторичной подачи воздуха",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0412": {
+  "description_ru": "Неисправность клапана системы вторичной подачи воздуха«A»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0413": {
+  "description_ru": "Клапан системы вторичной подачи воздуха «A» всегда открыт",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0414": {
+  "description_ru": "Клапан системы вторичной подачи воздуха «A» всегда закрыт",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0415": {
+  "description_ru": "Неисправность клапана системы вторичной подачи воздуха «В»",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0416": {
+  "description_ru": "Клапан системы вторичной подачи воздуха «В» всегда открыт",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0417": {
+  "description_ru": "Клапан системы вторичной подачи воздуха «В» всегда закрыт",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0421": {
+  "description_ru": "Эффективность прогрева катализаторов В1 ниже допустимого порога",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0422": {
+  "description_ru": "Эффективность главного катализатора В1 ниже допустимого порога",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0423": {
+  "description_ru": "Эффективность нагревателя катализатора В1 ниже допустимого порога",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0424": {
+  "description_ru": "Температура нагревателя катализатора В1 ниже допустимого порога",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0431": {
+  "description_ru": "Эффективность прогрева катализаторов В3 ниже допустимого порога",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0432": {
+  "description_ru": "Эффективность главного катализатора В2 ниже допустимого порога",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0433": {
+  "description_ru": "Эффективность нагревателя катализатора В2 ниже допустимого порога",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0434": {
+  "description_ru": "Температура нагревателя катализатора В2 ниже допустимого порога",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0444": {
+  "description_ru": "Клапан продувки системы улавливания паров бензина всегда открыт",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0445": {
+  "description_ru": "Клапан продувки системы улавливания паров бензина всегда закрыт",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0447": {
+  "description_ru": "Воздушный клапан системы улавливания паров всегда открыт",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0448": {
+  "description_ru": "Воздушный клапан системы улавливания паров всегда закрыт",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0450": {
+  "description_ru": "Неисправность датчика давления паров бензина",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0451": {
+  "description_ru": "Сигнал датчика давления паров бензина вне допустимого диапазона",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0452": {
+  "description_ru": "Низкий уровень сигнал датчика давления паров бензина",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0453": {
+  "description_ru": "Высокий уровень сигнал датчика давления паров бензина",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0454": {
+  "description_ru": "Перемежающийся уровень сигнал датчика давления паров бензина",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0460": {
+  "description_ru": "Неисправность цепи датчика уровня топлива",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0461": {
+  "description_ru": "Сигнал датчика уровня топлива вне допустимого диапазона",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0462": {
+  "description_ru": "Низкий уровень сигнала датчика уровня топлива",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0463": {
+  "description_ru": "Высокий уровень сигнала датчика уровня топлива",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0464": {
+  "description_ru": "Перемежающийся уровень сигнала датчика уровня топлива",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0465": {
+  "description_ru": "Неисправность цепи датчика потока воздуха продувки",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0466": {
+  "description_ru": "Сигнал датчика потока воздуха продувки вне допустимого диапазона",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0467": {
+  "description_ru": "Низкий уровень сигнала датчика потока воздуха продувки",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0468": {
+  "description_ru": "Высокий уровень сигнала датчика потока воздуха продувки",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0469": {
+  "description_ru": "Перемежающийся уровень сигнала датчика потока воздуха продувки",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0472": {
+  "description_ru": "Низкий уровень сигнала датчика давления выхлопных газов",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0473": {
+  "description_ru": "Высокий уровень сигнала датчика давления выхлопных газов",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0474": {
+  "description_ru": "Перемежающийся уровень сигнала датчика давления выхлопных газов",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0475": {
+  "description_ru": "Неисправность клапана датчика давления выхлопных газов",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0476": {
+  "description_ru": "Сигнал клапана датчика давления выхлопных газов вне допустимого диапазона",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0477": {
+  "description_ru": "Низкий уровень сигнала клапана датчика давления выхлопных газов",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0478": {
+  "description_ru": "Высокий уровень сигнала клапана датчика давления выхлопных газов",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0479": {
+  "description_ru": "Перемежающийся уровень сигнала клапана датчика давления выхлопных газов",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0501": {
+  "description_ru": "Сигнал датчика скорости автомобиля вне допустимого диапазона",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0502": {
+  "description_ru": "Низкий уровень сигнала датчика скорости автомобиля",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0503": {
+  "description_ru": "Высокий уровень сигнала датчика скорости автомобиля",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0510": {
+  "description_ru": "Неисправность концевика дроссельной заслонки",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0521": {
+  "description_ru": "Неправильный показатель/не отрегулирован датчик давления масла",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0522": {
+  "description_ru": "Низкое напряжение датчика давления масла",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0523": {
+  "description_ru": "Высокое напряжение датчика давления масла",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0530": {
+  "description_ru": "Неисправность в цепи датчика давления охлаждающей жидкости кондиционера",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0531": {
+  "description_ru": "Неправильный показатель/не отрегулирован датчик давления охлаждающей жидкости кондиционера",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0532": {
+  "description_ru": "Низкий показатель датчика давления охлаждающей жидкости кондиционера",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0533": {
+  "description_ru": "Высокий показатель датчика давления охлаждающей жидкости кондиционера",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0534": {
+  "description_ru": "Утечка охлаждающей жидкости кондиционера",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0550": {
+  "description_ru": "Неисправность в цепи датчика давления в гидроусилителе руля",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0551": {
+  "description_ru": "Неправильный показатель/не отрегулирован датчик давления в гидроусилителе руля",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0552": {
+  "description_ru": "Низкий показатель датчика давления в гидроусилителе руля",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0553": {
+  "description_ru": "Высокий показатель датчика давления в гидроусилителе руля",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0554": {
+  "description_ru": "Неисправность датчика давления в гидроусилителе руля",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0560": {
+  "description_ru": "Напряжение питания системы ниже порога работоспособности",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0561": {
+  "description_ru": "Напряжение питания системы нестабильное",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0565": {
+  "description_ru": "Неисправность сигнала включения системы круиз-контроля",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0566": {
+  "description_ru": "Неисправность сигнала выключения системы круиз-контроля",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0567": {
+  "description_ru": "Неисправность сигнала продолжения движения системы круиз-контроля",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0568": {
+  "description_ru": "Неисправность сигнала установки скорости системы круиз-контроля",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0569": {
+  "description_ru": "Неисправность сигнала торможения системы круиз-контроля",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0570": {
+  "description_ru": "Неисправность сигнала ускорения системы круиз-контроля",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0571": {
+  "description_ru": "CНеисправность в цепи переключателя торможения A системы круиз-контроля",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0572": {
+  "description_ru": "Низкий показатель переключателя торможения A системы круиз-контроля",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0573": {
+  "description_ru": "Высокий показатель переключателя торможения A системы круиз-контроля",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0574": {
+  "description_ru": "Неисправность системы круиз-контроля",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0575": {
+  "description_ru": "Неисправность системы круиз-контроля",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0576": {
+  "description_ru": "Неисправность системы круиз-контроля",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0577": {
+  "description_ru": "Неисправность системы круиз-контроля",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0578": {
+  "description_ru": "Неисправность системы круиз-контроля",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0579": {
+  "description_ru": "Неисправность системы круиз-контроля",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0580": {
+  "description_ru": "Неисправность системы круиз-контроля",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0602": {
+  "description_ru": "Программная ошибка блока управления",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0603": {
+  "description_ru": "Ошибка внешнего ОЗУ",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0604": {
+  "description_ru": "Ошибка внутреннего ОЗУ",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0605": {
+  "description_ru": "Ошибка в памяти (ROM) блока управления",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0607": {
+  "description_ru": "Неисправность канала детонации",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0608": {
+  "description_ru": "Неисправность датчика VSS «A» блока управления",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0609": {
+  "description_ru": "Неисправность датчика VSS «В» блока управления",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0622": {
+  "description_ru": "Неисправность в блоке «F» генератора",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0650": {
+  "description_ru": "Неисправность в цепи индикаторной лампы неисправностей (MIL)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0654": {
+  "description_ru": "Неправильно отрегулированы обороты двигателя",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0655": {
+  "description_ru": "Неисправность в цепи лампы прогрева двигателя",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0656": {
+  "description_ru": "Неисправность в цепи датчика уровня топлива",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0701": {
+  "description_ru": "Система контроля трансмиссии вне допустимого диапазона",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0702": {
+  "description_ru": "Электрическая система контроля трансмиссии",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0703": {
+  "description_ru": "Неисправность в цепи датчика B уменьшения крутящего момента при торможении",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0707": {
+  "description_ru": "Низкий показатель датчика трансмиссии",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0708": {
+  "description_ru": "Высокий показатель датчика трансмиссии",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0709": {
+  "description_ru": "Неисправность датчика трансмиссии",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0710": {
+  "description_ru": "Неисправность в цепи датчика температуры трансмиссионной жидкости",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0711": {
+  "description_ru": "Неправильный показатель / не отрегулирован датчик температуры трансмиссионной жидкости",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0712": {
+  "description_ru": "Низкий показатель датчика температуры трансмиссионной жидкости",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0713": {
+  "description_ru": "Высокий показатель датчика температуры трансмиссионной жидкости",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0714": {
+  "description_ru": "Неисправность датчика температуры трансмиссионной жидкости",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0716": {
+  "description_ru": "Неправильный показатель / не отрегулирован датчик оборотов турбины",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0717": {
+  "description_ru": "Нет сигнала от датчика оборотов турбины",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0718": {
+  "description_ru": "Неисправность датчика оборотов турбины",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0719": {
+  "description_ru": "Низкий показатель цепи датчика B уменьшения крутящего момента при торможении",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0721": {
+  "description_ru": "Неправильный показатель / не отрегулирован датчик частоты вращения вала",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0722": {
+  "description_ru": "Нет сигнала от датчика частоты вращения вала",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0723": {
+  "description_ru": "Неисправность датчика частоты вращения вала",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0724": {
+  "description_ru": "Высокий показатель цепи датчика B уменьшения крутящего момента при торможении",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0725": {
+  "description_ru": "Неисправность в цепи датчика оборотов двигателя",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0726": {
+  "description_ru": "Неправильный показатель / не отрегулирован датчик оборотов двигателя",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0727": {
+  "description_ru": "Нет сигнала от датчика оборотов двигателя",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0728": {
+  "description_ru": "Неисправность датчика оборотов двигателя",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0731": {
+  "description_ru": "Неправильно отрегулирована 1 передача",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0732": {
+  "description_ru": "Неправильно отрегулирована 2 передача",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0733": {
+  "description_ru": "Неправильно отрегулирована 3 передача",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0734": {
+  "description_ru": "Неправильно отрегулирована 4 передача",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0735": {
+  "description_ru": "Неправильно отрегулирована 5 передача",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0736": {
+  "description_ru": "Неправильно отрегулирована задняя передача",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0742": {
+  "description_ru": "Повреждена муфта сцепления",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0743": {
+  "description_ru": "Повреждение электрической цепи муфты сцепления",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0744": {
+  "description_ru": "Неисправность в цепи муфты сцепления",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0745": {
+  "description_ru": "Неисправность в цепи соленоида давления",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0746": {
+  "description_ru": "Неправильно отрегулирован соленоид давления",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0747": {
+  "description_ru": "Поврежден соленоид давления",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0749": {
+  "description_ru": "Неисправность соленоида давления",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0751": {
+  "description_ru": "Неправильно отрегулирован переключатель А соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0752": {
+  "description_ru": "Повреждение переключателя А соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0753": {
+  "description_ru": "Повреждение электрической цепи переключателя А соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0754": {
+  "description_ru": "Неисправность переключателя А соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0756": {
+  "description_ru": "Неправильно отрегулирован переключатель B соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0757": {
+  "description_ru": "Повреждение переключателя B соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0758": {
+  "description_ru": "Повреждение электрической цепи переключателя B соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0759": {
+  "description_ru": "Неисправность переключателя B соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0760": {
+  "description_ru": "Неисправность переключателя C соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0761": {
+  "description_ru": "Неправильно отрегулирован переключатель C соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0762": {
+  "description_ru": "Повреждение переключателя C соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0763": {
+  "description_ru": "Повреждение электрической цепи переключателя C соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0764": {
+  "description_ru": "Неисправность переключателя C соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0765": {
+  "description_ru": "Неисправность переключателя D соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0766": {
+  "description_ru": "Неправильно отрегулирован переключатель D соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0767": {
+  "description_ru": "Повреждение переключателя D соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0768": {
+  "description_ru": "Повреждение электрической цепи переключателя D соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0769": {
+  "description_ru": "Неисправность переключателя D соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0770": {
+  "description_ru": "Неисправность переключателя E соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0771": {
+  "description_ru": "Неправильно отрегулирован переключатель E соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0772": {
+  "description_ru": "Повреждение переключателя E соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0773": {
+  "description_ru": "Повреждение электрической цепи переключателя E соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0774": {
+  "description_ru": "Неисправность переключателя E соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0780": {
+  "description_ru": "Неисправность переключателя",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0781": {
+  "description_ru": "Неисправность 1 – 2 переключателей",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0782": {
+  "description_ru": "Неисправность 2 – 3 переключателей",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0783": {
+  "description_ru": "Неисправность 3 – 4 переключателей",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0784": {
+  "description_ru": "Неисправность 4 – 5 переключателей",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0785": {
+  "description_ru": "Неисправность соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0786": {
+  "description_ru": "Неправильный показатель / не отрегулирован соленоид",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0787": {
+  "description_ru": "Низкий показатель датчика соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0788": {
+  "description_ru": "Высокий показатель датчика соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0789": {
+  "description_ru": "Неисправность соленоида",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0790": {
+  "description_ru": "Неисправность в цепи переключателя в режим normal",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0801": {
+  "description_ru": "Неисправность в цепи контроля системы Reverse Inhibit",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0803": {
+  "description_ru": "Неисправность в цепи соленоида переключателя 1 – 4",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P0804": {
+  "description_ru": "Неисправность в цепи контрольной лампы переключателя 1 – 4 Коды устанавливаемые производителям. Зависят от марки авто",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1000": {
+  "description_ru": "OBD II Monitor не проходит тест",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1102": {
+  "description_ru": "Низкое сопротивление подогревателя датчика кислорода Р1106 Высокое напряжение в цепи датчика абсолютного давления впускного коллектора (MAP) Р1107 Низкое напряжение в цепи датчика абсолютного давления впускного коллектора (MAP)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1111": {
+  "description_ru": "Высокое напряжение в цепи датчика температуры воздуха на впуске (IAT)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1112": {
+  "description_ru": "Switch over valve 1 Низкое напряжение в цепи датчика температуры воздуха на впуске (IAT)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1114": {
+  "description_ru": "Низкое напряжение в цепи датчика температуры охлаждающей жидкости (ECT)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1115": {
+  "description_ru": "Высокое напряжение в цепи датчика температуры охлаждающей жидкости (ECT)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1116": {
+  "description_ru": "О2 Sensor heater Circuit (Open) Датчик температуры двигателя (ECT) не прошел самотестирование",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1117": {
+  "description_ru": "Датчик температуры двигателя (ECT) sensor intermittent",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1120": {
+  "description_ru": "Датчик положения дросселя (TP) out of range low",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1122": {
+  "description_ru": "Низкое напряжение в цепи датчика положения дроссельной заслонки (TP)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1124": {
+  "description_ru": "Датчик положения дросселя (TP) sensor out of Self ‑Test range Long Term Fuel Trim Additive Air (System too Lean)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1125": {
+  "description_ru": "Датчик положения дросселя (TP) sensor circuit intermittent",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1133": {
+  "description_ru": "Датчик 1 HO2S",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1134": {
+  "description_ru": "Таймер включения датчика HO2S",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1140": {
+  "description_ru": "Неверный сигнал нагрузки",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1171": {
+  "description_ru": "Низкий уровень сигнала СО-потенциометра",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1172": {
+  "description_ru": "Высокий уровень сигнала СО-потенциометра",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1200": {
+  "description_ru": "Цепь управления форсункой",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1224": {
+  "description_ru": "Датчик положения дросселя B (TP‑B) out of Self – Test range",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1236": {
+  "description_ru": "Fuel Pump control out of Self – Test range Не считывается показатель датчика положения коленвала (CKP)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1260": {
+  "description_ru": "Попытка угона – запуск заблокирован",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1285": {
+  "description_ru": "Неисправность датчика температуры ГБЦ",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1288": {
+  "description_ru": "Датчик температуры ГБЦ (CHT) sensor out of Self – Test range",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1289": {
+  "description_ru": "Датчик температуры ГБЦ (CHT) sensor circuit low input",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1290": {
+  "description_ru": "Датчик температуры ГБЦ (CHT) sensor circuit high input",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1350": {
+  "description_ru": "Запасная линия мониторинга",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1361": {
+  "description_ru": "Низкое напряжение в цепи контроля зажигания (IC)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1374": {
+  "description_ru": "Изменение частоты датчика положения коленвала (CKP)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1380": {
+  "description_ru": "Неисправность в системе – невозможно считать данные",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1406": {
+  "description_ru": "Differential Pressure Feedback EGR (DPFE) sensor downstream hose off or plugged Регулировка датчика системы рециркуляции выхлопных газов (EGR)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1425": {
+  "description_ru": "Canister purge valve power stage (low) Цепь управления клапаном продувки адсорбера, замыкание на землю",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1426": {
+  "description_ru": "Цепь управления клапаном продувки адсорбера, обрыв",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1441": {
+  "description_ru": "Расход в системе отвода паров топлива (EVAP) только для автомобиля Chevrolet Расход в системе отвода паров топлива (EVAP) только для автомобиля Oldsmobile",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1500": {
+  "description_ru": "Неисправность цепи реле топливного насоса",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1501": {
+  "description_ru": "Иммобилайзер – нет кода или неправильный код Реле топливного насоса – замыкание на землю",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1502": {
+  "description_ru": "Реле топливного насоса – замыкание на +12V Иммобилайзер – нет сигнала",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1503": {
+  "description_ru": "Иммобилайзер – неправильный сигнал",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1509": {
+  "description_ru": "Цепь управления регулятором холостого хода, перегрузка",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1513": {
+  "description_ru": "Intake Manifold Runner Control (IMRC) malfunction (Bank # 2 stuck closed) Цепь управления регулятором холостого хода – замыкание на землю",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1514": {
+  "description_ru": "Цепь управления регулятором холостого хода – обрыв",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1541": {
+  "description_ru": "Цепь управления реле бензонасоса, обрыв",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1554": {
+  "description_ru": "Цепь обратной связи с системой круиз-контроля",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1570": {
+  "description_ru": "Обрыв цепи иммобилизатора",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "P1600": {
+  "description_ru": "Нет связи с иммобилизатором Reprogram or Replace Electronic Control Unit (ECM)",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
+  ]
+ },
+ "U1451": {
+  "description_ru": "Lack of response from Passive Anti-Theft system (PATS) module – engine disabled Главная Прошивки Прошивки ВАЗ Серийные прошивки ВАЗ АМТ ВАЗ EMS3125, 3132 M86/M86.4 M75, M74.5 M74.9/M74.91 M74.8/M74.8+ M74M M74 M73 Январь 7.2+ Январь 7.2 Январь 5.1.х VS5.1, VS5.1 New Январь 4, 4.1 и GM Bosch M17.9.7, 17.9.71 Bosch M7.9.7+ Bosch M7.9.7 Bosch MP7.0H Bosch M1.5.4, M1.5.4N Коммерческие ВАЗ M86 М75 / M74.5 M74.9/74.91 M74.8+ M74.8 M74M M74 M74 RCO (P83) М73 Bosch ME17.9.7(1) Bosch ME17.9.7 VB Bosch ME17.9.71 VB Bosch M7.9.7/M7.9.7+ Bosch MP7.0H Bosch M1.5.4/M1.5.4N EMS3125 EMS3120, EMS3132 Январь 7.2 + Январь 7.2 Январь 5.1 VS5.1/VS5.1new «Классика» Для а/м ОПП ВСХ комм. прошивок J5D13T71 M7V20L29_spm Прошивки ГАЗ Серийные прошивки ГАЗ M74.9 A12.2 МД22 Микас-12 Микас 11/VS8, 10.3 Микас 10.3/11.4/12.3 Микас 7.1/5.x, VS56, Соатэ Bosch EDC17CV44/54 Cummins CM2220x Коммерческие ГАЗ M74.9.1 A12.2 Cummins ISF2.8/3.8 Микас-12 Микас-11, M114, M124 Микас-7/ VS5.6 Микас ГБО (LPG/CNG) Прошивки УАЗ Серийные прошивки УАЗ AECS M86i Bosch M17.9.7(1) Микас 11/Микас 10.3 Микас 7.2 Коммерческие УАЗ AECS M86i Bosch M(E)17.9.71 PWR M(E)17.9.71 LPG/CNG Bosch M(E)17.9.7 PWR Bosch M(E)17.9.7 МИКАС Прошивки иномарок Серийные прошивки BMW MS43 Chery China TCU China / Разное Chevrolet Chevrolet MT60/MT80 Chevrolet MR140/HV240 Chevrolet Simtek Chevrolet Sirius Daewoo/ZAZ Delphi ACDelco DSG6/DSG7 [VAG] Geely Great Wall/Haval Hyundai Bosch M7.x.x Hyundai Bosch ME17 Hyundai Delphi, Siemens H/K Kefico CPx H/K Bosch EDC15C2 H/K Bosch EDC16C39 H/K Bosch EDC17C08 H/K Bosch EDC17C57 H/K EDC17CP14 H/K Delphi MT86 КlА Bosch M7.x.x КlА Bosch ME17 КlА Siemens Delphi Lexus Denso Mitsubishi Lifan Renault SID 208 [Ford/PSA] Toyota Denso Suzuki Denso Коммерческие прошивки BMW Chevrolet Chery/Omoda Daewoo Ford SID208 Ford ESU 131/41x Mazda Mitsubishi Hyundai Bosch Kefico/Delphi Siemens КlА Bosch Kefico/Delphi Siemens Nissan Opel/Cadillac GM PSA MEV17.4.x PSA Bosch ME7.4.5 Renault Renault EMS3120 Strit Suzuki ME17.9.61 Toyota VAG MM7GV VAG Bosch VAG SIMOS China Легковой транспорт Cummins China Truck Другое / Разное SMS: Мультирежимное ПО SMS: Нестандартное ПО SMS: Спортивное ПО Послать прошивку CombiLoader Combiloader 2.16 Модули Combiloader Возможности модулей Bosch MEDC BSM Pinout ECU Pinout Bosch Delphi Siemens Разное Отечественные CPU Info Combiloader Toolbox ChipTuningPRO ChipTuningPro 7.xx Модули ChipTuningPro 7 ECULite Редактор ECULite Модули ECULite Подписка и токены FAQ Форум Библиотека Чип-Тюнинг Документация Статьи и обзоры Карта сайта Интернет магазин Базовые комплекты Модули ECULite Модули CombiLoader Модули ChipTuningPRO Прошивки Antel Cummins Прошивки ART_PRO Прошивки Башкиров Прошивки от Dirr Прошивки Strit Прошивки Str-Alex Прошивки от Ras.667 Приобретение модулей Информация о магазине Партнеры SMS-Soft SPTronic BMSoft Поиск по товарам Поиск товаров × Поиск по сайту Обращаем ваше внимание на то, что данный интернет-сайт носит исключительно справочно – информационный характер и ни при каких условиях не является публичной офертой, определяемой положениями, описанными в части 2 на стр. 437 Гражданского Кодекса Российской Федерации. Упоминаемые на этом сайте торговые знаки являются собственностью их законных владельцев и используются исключительно с целью идентификации их товаров и/или услуг. Chiptuner © 2001 – 2025. Копирование материалов сайта запрещена. Ни при каких обстоятельствах не является публичной офертой. 0 Корзина Этот сайт использует cookie для обеспечения работоспособности и улучшения качества обслуживания. Продолжая использовать сайт, Вы даете свое согласие на работу с этими файлами. Политика конфиденциальности Хорошо",
+  "causes": [],
+  "solutions": [],
+  "symptoms": null,
+  "severity": null,
+  "ecu": null,
+  "category": null,
+  "sources": [
+   "chiptuner"
   ]
  }
 }

@@ -52,6 +52,16 @@ for code, r in kim.items():
           ecu=r.get("ecu"), category=r.get("category"), source="kim")
 print(f"kim: {len(kim)} записей")
 
+# ─── 1.5. Грузовая техника (Cummins SPN/FMI, Январь-7 flash) ────────
+truck_path = ROOT / "scripts" / "source-data" / "truck_codes.json"
+if truck_path.exists():
+    truck = json.loads(truck_path.read_text(encoding="utf-8"))
+    for code, r in truck.items():
+        merge(code, description=r["description"], causes=r.get("causes"),
+              solutions=r.get("solutions"), severity=r.get("severity"),
+              ecu=r.get("ecu"), source="truck")
+    print(f"truck: {len(truck)} записей")
+
 # ─── 2. schemas/data.py (_SCHEMAS) ──────────────────────────────────
 sys.path.insert(0, str(ROOT / "server"))
 from schemas.data import _SCHEMAS  # noqa: E402
@@ -83,6 +93,14 @@ for m in entry_re.finditer(cs_text):
           symptoms=fields["Symptoms"], source="obd2codes")
     cs_count += 1
 print(f"obd2codes: {cs_count} записей")
+
+# ─── 4. chiptuner.ru — русские описания generic-кодов (заполняет пробелы) ──
+chip_path = ROOT / "scripts" / "source-data" / "chiptuner_generic_ru.json"
+if chip_path.exists():
+    chip = json.loads(chip_path.read_text(encoding="utf-8"))
+    for code, desc in chip.items():
+        merge(code, description=desc, source="chiptuner")
+    print(f"chiptuner: {len(chip)} записей")
 
 # ─── Итог ────────────────────────────────────────────────────────────
 OUT.parent.mkdir(parents=True, exist_ok=True)
