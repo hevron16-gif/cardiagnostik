@@ -151,6 +151,13 @@ AUTO_REGISTRY = [
          "схема двигателя Лада Веста 1.8 21179",
          "ВАЗ 21179 расположение датчиков"
      ]},
+    {"brand": "Lada", "model": "Vesta", "engine": "CVT_JF015E", "category": "passenger",
+     "queries": [
+         "Lada Vesta CVT JF015E sensors location",
+         "вариатор Jatco JF015E датчики схема",
+         "Лада Веста вариатор датчики оборотов шкивов",
+         "Jatco JF015E speed sensors diagram"
+     ]},
     {"brand": "UAZ", "model": "Patriot", "engine": "ZMZ_409", "category": "passenger",
      "queries": [
          "UAZ Patriot ZMZ 409 engine diagram",
