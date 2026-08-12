@@ -188,6 +188,13 @@ AUTO_REGISTRY = [
          "схема двигателя КАМАЗ 65115",
          "КАМАЗ Cummins 6.7 схема"
      ]},
+    {"brand": "KAMAZ", "model": "43253", "engine": "740.62", "category": "truck",
+     "queries": [
+         "КамАЗ 740.62 схема расположения датчиков",
+         "двигатель КамАЗ 740 датчики схема",
+         "KAMAZ 740 engine sensors diagram",
+         "КамАЗ 43253 установка датчиков чертеж"
+     ]},
     {"brand": "MMZ", "model": "D245", "engine": "diesel", "category": "truck",
      "queries": [
          "MMZ D-245 engine diagram",
