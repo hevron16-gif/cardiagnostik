@@ -335,6 +335,68 @@ public static BluetoothService Instance =>
         return null;
     }
 
+    /// <summary>
+    /// Готовность мониторов OBD-II (Mode 01 PID 01):
+    /// лампа MIL, число ошибок в памяти, статус мониторов (бензин/дизель).
+    /// </summary>
+    public async Task<ReadinessStatus?> ReadReadinessAsync()
+    {
+        var mask = await ReadPidBitmaskAsync("01");
+        if (!mask.HasValue) return null;
+
+        var a = (byte)(mask.Value >> 24);
+        var b = (byte)(mask.Value >> 16);
+        var c = (byte)(mask.Value >> 8);
+        var d = (byte)(mask.Value & 0xFF);
+
+        var status = new ReadinessStatus
+        {
+            MilOn = (a & 0x80) != 0,
+            DtcCount = a & 0x7F,
+            IsDiesel = (b & 0x08) != 0,
+        };
+
+        if (!status.IsDiesel)
+        {
+            // Бензин: общие мониторы из байта B (биты готовности: 1 = НЕ завершён)
+            (string Name, int Sup, int Rdy)[] common =
+            {
+                ("Пропуски зажигания", 0, 4),
+                ("Топливная система", 1, 5),
+                ("Компоненты", 2, 6),
+            };
+            foreach (var (name, sup, rdy) in common)
+            {
+                bool supported = (b & (1 << sup)) != 0;
+                status.Monitors.Add(new ReadinessMonitor
+                {
+                    Name = name,
+                    Supported = supported,
+                    Complete = supported && (b & (1 << rdy)) == 0,
+                });
+            }
+        }
+
+        // Таблица мониторов C/D (бит в C = поддерживается, бит в D = НЕ завершён)
+        string[] names = status.IsDiesel
+            ? new[] { "Катализатор NMHC", "Нейтрализатор NOx/SCR", "Давление наддува", "", "Датчик выхлопных газов", "Сажевый фильтр", "EGR/VVT", "" }
+            : new[] { "Катализатор", "Катализатор с подогревом", "Улавливание паров (EVAP)", "Вторичный воздух", "Хладагент A/C", "Кислородный датчик", "Подогрев O2", "EGR/VVT" };
+
+        for (int i = 0; i < 8; i++)
+        {
+            if (string.IsNullOrEmpty(names[i])) continue;
+            if ((c & (1 << i)) == 0) continue; // неподдерживаемые не показываем
+            status.Monitors.Add(new ReadinessMonitor
+            {
+                Name = names[i],
+                Supported = true,
+                Complete = (d & (1 << i)) == 0,
+            });
+        }
+
+        return status;
+    }
+
     public async Task<int[]> ReadPidRawAsync(string pidHex)
     {
         var hex = pidHex.Replace("0x", "").Trim();

@@ -1,4 +1,4 @@
-﻿using CarDiagnosticApp.Services;
+using CarDiagnosticApp.Services;
 using CarDiagnosticApp.Models;
 using CarDiagnosticApp.Agents;
 using System.Collections.ObjectModel;
@@ -857,6 +857,19 @@ public partial class MainPage : ContentPage
 
             var total = _currentErrors.Count + _pendingErrors.Count + _permanentErrors.Count;
 
+            // ── Readiness (Mode 01 PID 01): MIL и готовность мониторов ──
+            string readinessText = "";
+            try
+            {
+                var readiness = await EnsureBluetooth().ReadReadinessAsync();
+                if (readiness != null)
+                {
+                    var notReady = readiness.Monitors.Count(m => m.Supported && !m.Complete);
+                    readinessText = $" | MIL: {(readiness.MilOn ? "🔴 горит" : "погашена")}, мониторов не готово: {notReady}";
+                }
+            }
+            catch { /* readiness не критичен для сканирования */ }
+
             // ── Проверка на повторяющиеся ──
             int recurringCount = 0;
             if (!string.IsNullOrEmpty(_currentVin))
@@ -893,7 +906,7 @@ public partial class MainPage : ContentPage
 
             if (total == 0)
             {
-                StatusLabel.Text = "Статус: ошибок нет";
+                StatusLabel.Text = "Статус: ошибок нет" + readinessText;
                 if (recurringCount > 0)
                     StatusLabel.Text += $" (⚠ есть повторяющиеся: {recurringCount} в истории)";
                 DiagnoseButton.IsEnabled = false;
@@ -920,7 +933,7 @@ public partial class MainPage : ContentPage
                 }
 
                 var riskIcon = maxRisk switch { >= 8 => "🔴", >= 5 => "🟠", >= 3 => "🟡", _ => "🟢" };
-                StatusLabel.Text = $"Найдено ошибок: {total} (текущих: {_currentErrors.Count}, исторических: {_pendingErrors.Count}, подтверждённых: {_permanentErrors.Count})";
+                StatusLabel.Text = $"Найдено ошибок: {total} (текущих: {_currentErrors.Count}, исторических: {_pendingErrors.Count}, подтверждённых: {_permanentErrors.Count})" + readinessText;
                 if (maxRisk > 0)
                     StatusLabel.Text += $" | Риск: {riskIcon} {maxRisk}/10";
                 if (recurringCount > 0)
