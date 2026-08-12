@@ -181,6 +181,13 @@ AUTO_REGISTRY = [
          "схема двигателя МАЗ 5440 ЯМЗ 238",
          "ЯМЗ 238 турбо схема"
      ]},
+    {"brand": "MAZ", "model": "4371", "engine": "YMZ_5340", "category": "truck",
+     "queries": [
+         "MAZ 4371 YMZ 5340 engine diagram",
+         "YMZ 5340 engine sensors layout",
+         "схема двигателя МАЗ 4371 ЯМЗ 5340",
+         "ЯМЗ 5340 расположение датчиков схема"
+     ]},
     {"brand": "Ural", "model": "4320", "engine": "YMZ_236", "category": "truck",
      "queries": [
          "Ural 4320 YMZ 236 engine diagram",
