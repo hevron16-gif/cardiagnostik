@@ -144,6 +144,13 @@ AUTO_REGISTRY = [
          "ВАЗ 11189 схема датчиков ЭСУД",
          "Lada Largus K7M engine sensors"
      ]},
+    {"brand": "Lada", "model": "Vesta", "engine": "1.8_16V", "category": "passenger",
+     "queries": [
+         "Lada Vesta 21179 engine diagram",
+         "VAZ 21179 engine sensors scheme",
+         "схема двигателя Лада Веста 1.8 21179",
+         "ВАЗ 21179 расположение датчиков"
+     ]},
     {"brand": "UAZ", "model": "Patriot", "engine": "ZMZ_409", "category": "passenger",
      "queries": [
          "UAZ Patriot ZMZ 409 engine diagram",
