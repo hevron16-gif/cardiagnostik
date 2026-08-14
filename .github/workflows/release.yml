@@ -1,0 +1,92 @@
+name: Create Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Версия релиза (например: 1.0.19)'
+        required: true
+        default: '1.0.19'
+      prerelease:
+        description: 'Предварительный релиз?'
+        type: boolean
+        default: false
+
+jobs:
+  build-android:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - run: dotnet workload install maui-android
+      - run: dotnet restore mobile/CarDiagnosticApp.csproj
+      - run: |
+          dotnet publish mobile/CarDiagnosticApp.csproj `
+            -f net10.0-android -c Release `
+            -p:AndroidPackageFormat=apk `
+            -p:ApplicationDisplayVersion=${{ inputs.version }} `
+            -p:ApplicationVersion=${{ inputs.version }} `
+            -o output/android
+      - uses: actions/upload-artifact@v4
+        with:
+          name: android-apk
+          path: output/android/*-Signed.apk
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - run: dotnet workload install maui-windows
+      - run: dotnet restore mobile/CarDiagnosticApp.csproj
+      - run: |
+          dotnet publish mobile/CarDiagnosticApp.csproj `
+            -f net10.0-windows10.0.19041.0 -c Release `
+            --self-contained true `
+            -p:WindowsAppSDKSelfContained=true `
+            -o output/windows
+      - name: Zip Windows build
+        shell: powershell
+        run: |
+          Compress-Archive -Path 'output/windows/*' `
+            -DestinationPath "output/CarDiagnosticApp_v${{ inputs.version }}_Windows.zip"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-zip
+          path: output/*.zip
+
+  create-release:
+    needs: [build-android, build-windows]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download Android APK
+        uses: actions/download-artifact@v4
+        with:
+          name: android-apk
+          path: release/
+      - name: Download Windows ZIP
+        uses: actions/download-artifact@v4
+        with:
+          name: windows-zip
+          path: release/
+      - name: Rename APK
+        run: |
+          cd release
+          mv *-Signed.apk CarDiagnosticApp_v${{ inputs.version }}.apk
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ inputs.version }}
+          name: CarDiagnosticApp v${{ inputs.version }}
+          body_path: RELEASE_NOTES_v1.0.19.md
+          prerelease: ${{ inputs.prerelease }}
+          files: |
+            release/*.apk
+            release/*.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
