@@ -47,6 +47,9 @@ public partial class MainPage : ContentPage
         DiagnoseButton.Clicked += OnDiagnoseClicked;
         TestModeButton.Clicked += OnTestModeClicked;
 
+        // Версия из манифеста
+        try { VersionLabel.Text = $"v{AppInfo.Current.VersionString}"; } catch { }
+
         _ = LoadCarBrandsAsync();
         _ = _errorHistory.InitAsync();
         _ = _offlineDb.InitAsync();
