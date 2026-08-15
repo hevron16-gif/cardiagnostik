@@ -11,10 +11,11 @@ namespace CarDiagnosticApp.Services;
 public class ConnectivityService
 {
     private readonly HttpClient _http;
-    // Fallback: если kitdiag.ru не работает, пробуем старый URL
+    // Free Render tier — основной URL (kitdiag.ru отключён до апгрейда плана)
+    // TODO: переключить при переходе на paid plan
     private static readonly string[] PingUrls = {
         "https://car-diagnostic-ai.onrender.com/",
-        "https://api.kitdiag.ru/",
+        // "https://api.kitdiag.ru/",  // включается при апгрейде Render
     };
     // Увеличенный таймаут: Render free tier просыпается 30-60с
     private const int TimeoutMs = 45_000;

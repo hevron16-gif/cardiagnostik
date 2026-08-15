@@ -75,8 +75,9 @@ namespace CarDiagnosticApp
                 step = "AddHttpClient";
                 builder.Services.AddHttpClient<Services.ApiService>(client =>
                 {
-                    // Production: основной домен kitdiag.ru
-                    client.BaseAddress = new Uri("https://api.kitdiag.ru");
+                    // Free Render tier — основной URL (kitdiag.ru отключён до апгрейда плана)
+                    // TODO: переключить на https://api.kitdiag.ru при переходе на paid plan
+                    client.BaseAddress = new Uri("https://car-diagnostic-ai.onrender.com");
                     // Render free cold-start + DeepSeek: до 90 с
                     client.Timeout = TimeSpan.FromSeconds(90);
                 });
