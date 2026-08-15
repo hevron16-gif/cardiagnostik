@@ -2,14 +2,14 @@ services:
   - type: web
     name: autodiag-api
     runtime: python
-    plan: starter
+    plan: standard
     buildCommand: pip install -r server/requirements.txt
     startCommand: cd server && gunicorn main:app -w 2 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT --access-logfile -
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
       - key: CORS_ORIGINS
-        value: https://cardiagnostik-web.onrender.com,https://localhost,https://*.github.io
+        value: https://kitdiag.ru,https://api.kitdiag.ru,https://cardiagnostik-web.onrender.com,https://localhost,https://*.github.io
       - key: ENVIRONMENT
         value: production
       - key: PORT

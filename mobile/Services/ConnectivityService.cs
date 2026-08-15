@@ -10,7 +10,8 @@ public class ConnectivityService
 {
     private readonly HttpClient _http;
     private static readonly string[] PingUrls = {
-        "https://car-diagnostic-ai.onrender.com/",
+        "https://api.kitdiag.ru/",
+        "https://car-diagnostic-ai.onrender.com/", // fallback
     };
 
     // Таймауты

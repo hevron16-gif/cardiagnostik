@@ -263,16 +263,13 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.warning(f"ChromaDB недоступен: {e}")
 
-    # Фоновое авто-обновление отключено — на Render free tier сервер засыпает,
-    # и при каждом пробуждении запускается заново, тратя ресурсы впустую.
-    # Включить при переходе на paid plan или dedicated сервер.
-    # try:
-    #     import weekly_agent
-    #     asyncio.create_task(_run_weekly_agent_loop())
-    #     logger.info("Фоновое авто-обновление запущено (интервал: 14 дней)")
-    # except Exception as e:
-    #     logger.warning(f"Не удалось запустить авто-обновление: {e}")
-    logger.info("Фоновое авто-обновление отключено (Render free tier)")
+    # Запуск фонового авто-обновления (weekly agent) — включено, Render paid plan
+    try:
+        import weekly_agent
+        asyncio.create_task(_run_weekly_agent_loop())
+        logger.info("Фоновое авто-обновление запущено (интервал: 14 дней)")
+    except Exception as e:
+        logger.warning(f"Не удалось запустить авто-обновление: {e}")
 
     yield
     logger.info("Завершение работы...")
