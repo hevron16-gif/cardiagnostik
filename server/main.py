@@ -1,7 +1,7 @@
 """
-AutoDiag AI v1.0.16 — Главный модуль
+AutoDiag AI v1.0.20 — Главный модуль
 CarDiagnosticAI: ИИ-диагностика автомобилей OBD2
-Версия: 1.0.16 (API compat: error_code aliases, GET /diagnose, await cache)
+Версия: 1.0.20 (API compat: error_code aliases, GET /diagnose, await cache)
 """
 import asyncio
 import hmac
@@ -238,11 +238,11 @@ class BatchRequest(BaseModel):
 class SyncRequest(BaseModel):
     device_id: str = Field(..., min_length=8, max_length=128)
     data: dict = Field(default_factory=dict)
-    version: str = Field(default="1.0.16", max_length=20)
+    version: str = Field(default="1.0.20", max_length=20)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    logger.info("AutoDiag AI v1.0.16 запускается...")
+    logger.info("AutoDiag AI v1.0.20 запускается...")
     global _APP_COMPROMISED, _APP_TAMPER_MODE
     try:
         integrity_result = integrity.verify()
@@ -296,7 +296,7 @@ async def _run_weekly_agent_loop():
 
 app = FastAPI(
     title="AutoDiag AI", description="ИИ-диагностика автомобилей OBD2",
-    version="1.0.16", lifespan=lifespan,
+    version="1.0.20", lifespan=lifespan,
     docs_url="/docs" if os.getenv("ENVIRONMENT") != "production" else None,
     redoc_url="/redoc" if os.getenv("ENVIRONMENT") != "production" else None,
 )
@@ -347,7 +347,7 @@ async def health_check():
     except: db_status = "error"
     return {
         "status": "healthy" if db_status == "ok" else "degraded",
-        "version": "1.0.16", "timestamp": datetime.now(timezone.utc).isoformat(),
+        "version": "1.0.20", "timestamp": datetime.now(timezone.utc).isoformat(),
         "database": db_status, "compromised": _APP_COMPROMISED,
         "tamper_mode": _APP_TAMPER_MODE,
         "environment": os.getenv("ENVIRONMENT", "development")
@@ -492,7 +492,7 @@ async def sync_data(request: Request, data: SyncRequest):
 @app.get("/version", tags=["version"], response_model=dict)
 async def get_version():
     return {
-        "version": "1.0.16", "min_app_version": "1.0.10",
+        "version": "1.0.20", "min_app_version": "1.0.10",
         "latest_apk_url": os.getenv("LATEST_APK_URL", ""),
         "changelog": ["Исправлены SQL-инъекции", "Добавлен rate limiting", "Улучшена безопасность CORS", "Добавлен health check", "Исправлены утечки памяти"]
     }
