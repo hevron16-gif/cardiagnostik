@@ -41,8 +41,8 @@ import httpx
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 AGENT_STATE_FILE = os.path.join(BASE_DIR, ".weekly_agent_state")
 
-# Минимальный интервал между запусками (секунды) — 7 дней
-MIN_RUN_INTERVAL = 7 * 24 * 3600
+# Минимальный интервал между запусками (секунды) — 14 дней (2 недели)
+MIN_RUN_INTERVAL = 14 * 24 * 3600
 
 # Таймауты запросов
 FETCH_TIMEOUT = 20.0
@@ -781,6 +781,25 @@ def get_agent() -> WeeklyAgent:
     if _agent_instance is None:
         _agent_instance = WeeklyAgent()
     return _agent_instance
+
+
+def should_run() -> bool:
+    """Проверяет, прошло ли достаточно времени с последнего запуска."""
+    if not os.path.exists(AGENT_STATE_FILE):
+        return True
+    try:
+        with open(AGENT_STATE_FILE, "r") as f:
+            state = json.load(f)
+        last_run = state.get("last_run", 0)
+        return time.time() - last_run >= MIN_RUN_INTERVAL
+    except Exception:
+        return True
+
+
+async def run(force: bool = False) -> dict:
+    """Запускает weekly agent (для вызова из main.py)."""
+    agent = get_agent()
+    return await agent.run(force=force)
 
 
 # ════════════════ CLI ════════════════

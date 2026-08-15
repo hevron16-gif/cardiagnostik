@@ -10,7 +10,7 @@ namespace CarDiagnosticApp.Services;
 /// Windows classic Bluetooth RFCOMM transport for ELM327.
 /// Uses Windows.Devices.Bluetooth.Rfcomm + StreamSocket.
 /// </summary>
-public class WindowsBluetoothTransport : IBluetoothTransport
+public class WindowsBluetoothTransport : IBluetoothTransportExtended
 {
     private StreamSocket? _socket;
     private DataWriter? _writer;
@@ -74,6 +74,9 @@ public class WindowsBluetoothTransport : IBluetoothTransport
     }
 
     public async Task<string> SendAsync(byte[] data, CancellationToken ct = default)
+        => await SendAsync(data, 3000, ct);
+
+    public async Task<string> SendAsync(byte[] data, int timeoutMs, CancellationToken ct = default)
     {
         if (_writer == null || _reader == null)
             return "";
@@ -87,7 +90,7 @@ public class WindowsBluetoothTransport : IBluetoothTransport
             // ── Read response until ">" prompt ──
             var buffer = new List<byte>();
             var readCts = CancellationTokenSource.CreateLinkedTokenSource(ct);
-            readCts.CancelAfter(3000); // timeout per command
+            readCts.CancelAfter(timeoutMs); // configurable timeout
 
             while (!readCts.IsCancellationRequested)
             {

@@ -1,4 +1,4 @@
-﻿using System.Text.RegularExpressions;
+using System.Text.RegularExpressions;
 
 namespace CarDiagnosticApp.Services;
 
@@ -389,6 +389,39 @@ public static class VinDecoderService
         if (v.Length != 17) return false;
         if (!Regex.IsMatch(v, @"^[A-HJ-NPR-Z0-9]{17}$")) return false;
         return true;
+    }
+
+    /// <summary>
+    /// Проверяет check-digit VIN (позиция 9) по алгоритму ISO 3779.
+    /// </summary>
+    public static bool ValidateVinCheckDigit(string? vin)
+    {
+        var v = NormalizeVin(vin);
+        if (v.Length != 17) return false;
+
+        // Весовые коэффициенты для позиций 1-17
+        var weights = new[] { 8, 7, 6, 5, 4, 3, 2, 10, 0, 9, 8, 7, 6, 5, 4, 3, 2 };
+        // Транслитерация букв в цифры
+        var transliteration = new Dictionary<char, int>
+        {
+            ['A'] = 1, ['B'] = 2, ['C'] = 3, ['D'] = 4, ['E'] = 5, ['F'] = 6, ['G'] = 7, ['H'] = 8,
+            ['J'] = 1, ['K'] = 2, ['L'] = 3, ['M'] = 4, ['N'] = 5, ['P'] = 7, ['R'] = 9,
+            ['S'] = 2, ['T'] = 3, ['U'] = 4, ['V'] = 5, ['W'] = 6, ['X'] = 7, ['Y'] = 8, ['Z'] = 9,
+            ['0'] = 0, ['1'] = 1, ['2'] = 2, ['3'] = 3, ['4'] = 4, ['5'] = 5, ['6'] = 6, ['7'] = 7, ['8'] = 8, ['9'] = 9,
+        };
+
+        int sum = 0;
+        for (int i = 0; i < 17; i++)
+        {
+            if (i == 8) continue; // Позиция 9 — check-digit, пропускаем
+            if (!transliteration.TryGetValue(v[i], out int value))
+                return false;
+            sum += value * weights[i];
+        }
+
+        int checkDigit = sum % 11;
+        char expectedCheckDigit = checkDigit == 10 ? 'X' : (char)('0' + checkDigit);
+        return v[8] == expectedCheckDigit;
     }
 
     private static IEnumerable<string> GetBrandAliases(string brand)

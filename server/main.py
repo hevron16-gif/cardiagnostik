@@ -137,13 +137,13 @@ def _format_diagnosis_text(code: str, brand: Optional[str], model: Optional[str]
     return "\n".join(lines)
 
 
-async def _run_diagnose(data: DiagnosisRequest, client_host: Optional[str]) -> dict:
+async def _run_diagnose(data: DiagnosisRequest, client_host: Optional[str], user_tier: str = "free") -> dict:
     if _APP_TAMPER_MODE == "shutdown":
         raise HTTPException(status_code=503, detail="Сервис временно недоступен")
     if not check_ai_rate_limit(client_host or "unknown"):
         raise HTTPException(status_code=429, detail="Превышен лимит AI-запросов")
 
-    # Важно: await — иначе coroutine всегда truthy и ответ падает с 500
+    # 1) AI-кеш (доступен всем — уже оплачен ранее)
     cached = await lookup_ai_cache(data.code, data.brand)
     if cached:
         text = _format_diagnosis_text(data.code, data.brand, data.model, cached if isinstance(cached, dict) else {"description": str(cached)})
@@ -156,26 +156,91 @@ async def _run_diagnose(data: DiagnosisRequest, client_host: Optional[str]) -> d
             "result": cached,
         }
 
-    result = await lookup_error(data.code, brand=data.brand)
-    if not isinstance(result, dict):
-        result = {"code": data.code, "description": str(result)}
+    # 2) Локальная база (доступна всем — Free)
+    local_result = await lookup_error(data.code, brand=data.brand)
+    if not isinstance(local_result, dict):
+        local_result = {"code": data.code, "description": str(local_result)}
 
+    # 3) DeepSeek AI-диагностика — ТОЛЬКО Pro/Enterprise
+    ai_result = None
+    if user_tier in ("pro", "enterprise"):
+        try:
+            from deepseek_client import diagnose_with_deepseek
+            ai_result = await diagnose_with_deepseek(
+                code=data.code,
+                brand=data.brand,
+                model=data.model,
+                year=data.year,
+                vin=data.vin,
+                context=data.context,
+                local_data=local_result if local_result.get("description") else None,
+            )
+        except Exception as e:
+            logger.warning(f"DeepSeek недоступен, использую локальную базу: {e}")
+
+        if ai_result:
+            try:
+                await save_ai_cache(data.code, data.brand, ai_result)
+            except Exception as e:
+                logger.warning(f"Не удалось сохранить AI-кеш: {e}")
+
+            await save_diagnosis(
+                code=data.code,
+                brand=data.brand,
+                model=data.model,
+                vin=data.vin,
+                result=ai_result,
+                ip=client_host,
+            )
+            text = _format_diagnosis_text(data.code, data.brand, data.model, ai_result)
+            return {
+                "source": "ai",
+                "error_code": data.code,
+                "car_brand": data.brand,
+                "car_model": data.model,
+                "diagnosis": text,
+                "result": ai_result,
+            }
+    else:
+        # Free: добавляем подсказку о Pro
+        local_result["_note"] = "AI-диагностика доступна в версии Pro (499 ₽/мес). Умный анализ через DeepSeek."
+
+    # 4) Fallback — локальная база (Free)
     await save_diagnosis(
         code=data.code,
         brand=data.brand,
         model=data.model,
         vin=data.vin,
-        result=result,
+        result=local_result,
         ip=client_host,
     )
-    text = _format_diagnosis_text(data.code, data.brand, data.model, result)
+    text = _format_diagnosis_text(data.code, data.brand, data.model, local_result)
     return {
         "source": "database",
         "error_code": data.code,
         "car_brand": data.brand,
         "car_model": data.model,
         "diagnosis": text,
-        "result": result,
+        "result": local_result,
+    }
+
+    # 4) Fallback — только локальная база
+    await save_diagnosis(
+        code=data.code,
+        brand=data.brand,
+        model=data.model,
+        vin=data.vin,
+        result=local_result,
+        ip=client_host,
+    )
+    text = _format_diagnosis_text(data.code, data.brand, data.model, local_result)
+    return {
+        "source": "database",
+        "error_code": data.code,
+        "car_brand": data.brand,
+        "car_model": data.model,
+        "diagnosis": text,
+        "result": local_result,
     }
 
 class BatchRequest(BaseModel):
@@ -214,10 +279,37 @@ async def lifespan(app: FastAPI):
         if chroma: logger.info("ChromaDB инициализирована")
     except Exception as e:
         logger.warning(f"ChromaDB недоступен: {e}")
+
+    # Запуск фонового авто-обновления (weekly agent)
+    try:
+        import weekly_agent
+        asyncio.create_task(_run_weekly_agent_loop())
+        logger.info("Фоновое авто-обновление запущено (интервал: 14 дней)")
+    except Exception as e:
+        logger.warning(f"Не удалось запустить авто-обновление: {e}")
+
     yield
     logger.info("Завершение работы...")
     await db.close()
     logger.info("База данных закрыта")
+
+
+async def _run_weekly_agent_loop():
+    """Фоновый цикл: запускает weekly_agent раз в 14 дней."""
+    await asyncio.sleep(60)  # Подождём минуту после старта сервера
+    while True:
+        try:
+            import weekly_agent
+            if weekly_agent.should_run():
+                logger.info("[AutoUpdate] Запуск авто-обновления базы...")
+                await weekly_agent.run()
+                logger.info("[AutoUpdate] Авто-обновление завершено")
+            else:
+                logger.info("[AutoUpdate] Следующий запуск позже (14 дней интервал)")
+        except Exception as e:
+            logger.error(f"[AutoUpdate] Ошибка: {e}")
+        # Спим 24 часа, потом проверяем снова
+        await asyncio.sleep(24 * 3600)
 
 app = FastAPI(
     title="AutoDiag AI", description="ИИ-диагностика автомобилей OBD2",
@@ -313,7 +405,9 @@ async def diagnose_get(
             model=model or car_model,
             context=context,
         )
-        return await _run_diagnose(data, request.client.host if request.client else None)
+        # Определяем tier пользователя (пока по заголовку, позже по JWT)
+        user_tier = request.headers.get("X-User-Tier", "free")
+        return await _run_diagnose(data, request.client.host if request.client else None, user_tier)
     except HTTPException:
         raise
     except Exception as e:
@@ -325,7 +419,8 @@ async def diagnose_get(
 @limiter.limit("10/minute")
 async def diagnose(request: Request, data: DiagnosisRequest):
     try:
-        return await _run_diagnose(data, request.client.host if request.client else None)
+        user_tier = request.headers.get("X-User-Tier", "free")
+        return await _run_diagnose(data, request.client.host if request.client else None, user_tier)
     except HTTPException:
         raise
     except Exception as e:
@@ -456,6 +551,24 @@ async def admin_scrape_schemas(request: Request, admin_key: str = Query(...)):
         raise HTTPException(status_code=403, detail="Forbidden")
     asyncio.create_task(run_full_scrape(AUTO_REGISTRY))
     return {"status": "started", "message": "Scraping started in background. Check schema_images/ in ~5 min."}
+
+@app.post("/admin/update-db", tags=["admin"])
+@limiter.limit("3/minute")
+async def admin_update_db(request: Request, admin_key: str = Query(...), force: bool = Query(False)):
+    """Ручной запуск авто-обновления базы ошибок (weekly agent)."""
+    expected = os.getenv("ADMIN_KEY", "")
+    if not expected or not hmac.compare_digest(admin_key or "", expected):
+        raise HTTPException(status_code=403, detail="Forbidden")
+    try:
+        import weekly_agent
+        if force or weekly_agent.should_run():
+            asyncio.create_task(weekly_agent.run())
+            return {"status": "started", "message": "Database update started in background."}
+        return {"status": "skipped", "message": "Too soon (14 days interval). Use force=true to override."}
+    except Exception as e:
+        logger.error(f"Update DB error: {e}")
+        raise HTTPException(status_code=500, detail="Ошибка запуска обновления")
+
 if __name__ == "__main__":
     import uvicorn
     port = int(os.getenv("PORT", 8000))

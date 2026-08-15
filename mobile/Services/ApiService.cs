@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Text;
@@ -35,6 +35,11 @@ namespace CarDiagnosticApp.Services
             _httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
                 "Accept-Language",
                 "ru-RU, ru;q=0.9, en;q=0.8"
+            );
+            // Tier: free | pro | enterprise
+            _httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
+                "X-User-Tier",
+                AppSettings.UserTier
             );
         }
 

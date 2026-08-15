@@ -34,17 +34,30 @@ public static BluetoothService Instance =>
     {
         var name = await _transport.ConnectAsync(scanTimeoutMs);
 
-        // Инициализация ELM327
-        await SendAsync("ATZ");
-        await Task.Delay(500);
-        await SendAsync("ATE0");
-        await Task.Delay(_cmdDelay);
-        await SendAsync("ATL0");
-        await Task.Delay(_cmdDelay);
-        await SendAsync("ATH1");
-        await Task.Delay(_cmdDelay);
-        await SendAsync("ATSP0");
-        await Task.Delay(500);
+        // Инициализация ELM327 с retry
+        for (int attempt = 0; attempt < 3; attempt++)
+        {
+            try
+            {
+                await SendAsync("ATZ");
+                await Task.Delay(1000); // Увеличили с 500 до 1000 мс
+                await SendAsync("ATE0");
+                await Task.Delay(_cmdDelay);
+                await SendAsync("ATL0");
+                await Task.Delay(_cmdDelay);
+                await SendAsync("ATH1");
+                await Task.Delay(_cmdDelay);
+                await SendAsync("ATSP0");
+                await Task.Delay(500);
+                return name;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[BT] Init attempt {attempt + 1} failed: {ex.Message}");
+                if (attempt == 2) throw;
+                await Task.Delay(500 * (attempt + 1));
+            }
+        }
 
         return name;
     }
@@ -65,23 +78,27 @@ public static BluetoothService Instance =>
     /// </summary>
     public async Task<string> ReadVINAsync()
     {
-        var raw = await SendAsync("0902");
-        if (string.IsNullOrWhiteSpace(raw) || raw.Contains("NO DATA", StringComparison.OrdinalIgnoreCase)
-            || raw.Contains("UNABLE", StringComparison.OrdinalIgnoreCase))
+        // Retry с exponential backoff для VIN (multi-frame может занять время)
+        for (int attempt = 0; attempt < 3; attempt++)
         {
-            raw = await SendAsync("09 02");
+            var delay = 500 * (attempt + 1);
+            await Task.Delay(delay);
+
+            var raw = await SendAsync("0902", timeoutMs: 10000); // Увеличенный таймаут для VIN
+            if (string.IsNullOrWhiteSpace(raw) || raw.Contains("NO DATA", StringComparison.OrdinalIgnoreCase)
+                || raw.Contains("UNABLE", StringComparison.OrdinalIgnoreCase))
+            {
+                raw = await SendAsync("09 02", timeoutMs: 10000);
+            }
+
+            var vin = ParseVinFromResponse(raw);
+            if (VinDecoderService.IsPlausibleVin(vin) && VinDecoderService.ValidateVinCheckDigit(vin))
+                return VinDecoderService.NormalizeVin(vin);
+
+            System.Diagnostics.Debug.WriteLine($"[BT] VIN attempt {attempt + 1} failed, retrying...");
         }
 
-        var vin = ParseVinFromResponse(raw);
-        if (VinDecoderService.IsPlausibleVin(vin))
-            return VinDecoderService.NormalizeVin(vin);
-
-        await Task.Delay(400);
-        raw = await SendAsync("0902");
-        vin = ParseVinFromResponse(raw);
-        return VinDecoderService.IsPlausibleVin(vin)
-            ? VinDecoderService.NormalizeVin(vin)
-            : "";
+        return "";
     }
 
     /// <summary>
@@ -439,14 +456,22 @@ public static BluetoothService Instance =>
         return value;
     }
 
-    internal async Task<string> SendAsync(string command)
+    internal async Task<string> SendAsync(string command, int timeoutMs = 0)
     {
         if (!_transport.IsConnected) return "";
 
         try
         {
             var cmdBytes = Encoding.UTF8.GetBytes(command + "\r");
-            var text = await _transport.SendAsync(cmdBytes);
+            string text;
+            if (timeoutMs > 0 && _transport is IBluetoothTransportExtended ext)
+            {
+                text = await ext.SendAsync(cmdBytes, timeoutMs);
+            }
+            else
+            {
+                text = await _transport.SendAsync(cmdBytes);
+            }
 
             var allLines = new List<string>();
             foreach (var line in text.Split('\r', StringSplitOptions.RemoveEmptyEntries))
@@ -462,8 +487,9 @@ public static BluetoothService Instance =>
 
             return string.Join(" ", allLines);
         }
-        catch
+        catch (Exception ex)
         {
+            System.Diagnostics.Debug.WriteLine($"[BT] SendAsync error: {ex.Message}");
             return "";
         }
     }

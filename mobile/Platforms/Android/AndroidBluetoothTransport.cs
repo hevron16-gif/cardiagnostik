@@ -9,7 +9,7 @@ namespace CarDiagnosticApp.Services;
 /// <summary>
 /// Android classic Bluetooth RFCOMM/SPP transport for ELM327.
 /// </summary>
-public class AndroidBluetoothTransport : IBluetoothTransport
+public class AndroidBluetoothTransport : IBluetoothTransportExtended
 {
     private BluetoothSocket? _socket;
     private Stream? _inputStream;
@@ -321,6 +321,9 @@ public class AndroidBluetoothTransport : IBluetoothTransport
     }
 
     public async Task<string> SendAsync(byte[] data, CancellationToken ct = default)
+        => await SendAsync(data, 5000, ct);
+
+    public async Task<string> SendAsync(byte[] data, int timeoutMs, CancellationToken ct = default)
     {
         if (_outputStream == null || _inputStream == null)
             return "";
@@ -333,7 +336,7 @@ public class AndroidBluetoothTransport : IBluetoothTransport
             var buffer = new List<byte>(256);
             var buf = new byte[256];
             using var readCts = CancellationTokenSource.CreateLinkedTokenSource(ct);
-            readCts.CancelAfter(5000);
+            readCts.CancelAfter(timeoutMs);
 
             while (!readCts.IsCancellationRequested)
             {
@@ -367,8 +370,9 @@ public class AndroidBluetoothTransport : IBluetoothTransport
                 ? ""
                 : System.Text.Encoding.UTF8.GetString(buffer.ToArray());
         }
-        catch
+        catch (Exception ex)
         {
+            Android.Util.Log.Error("AutoDiag", $"BT SendAsync error: {ex.Message}");
             return "";
         }
     }

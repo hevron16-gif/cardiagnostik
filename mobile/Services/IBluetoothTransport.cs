@@ -19,3 +19,12 @@ public interface IBluetoothTransport
     /// <summary>Send raw bytes and return raw response.</summary>
     Task<string> SendAsync(byte[] data, CancellationToken ct = default);
 }
+
+/// <summary>
+/// Расширенный интерфейс с поддержкой таймаута на команду.
+/// </summary>
+public interface IBluetoothTransportExtended : IBluetoothTransport
+{
+    /// <summary>Send raw bytes with custom timeout (ms).</summary>
+    Task<string> SendAsync(byte[] data, int timeoutMs, CancellationToken ct = default);
+}

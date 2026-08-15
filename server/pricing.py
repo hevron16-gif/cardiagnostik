@@ -1,7 +1,7 @@
 import os
 
-# Тестовый режим: все Pro-функции открыты (перед продом выставить false)
-TESTING_UNLOCK_ALL = os.getenv("TESTING_UNLOCK_ALL", "true").lower() == "true"
+# Тестовый режим: выключен в продакшене
+TESTING_UNLOCK_ALL = os.getenv("TESTING_UNLOCK_ALL", "false").lower() == "true"
 
 """
 AutoDiag AI v1.0 — Модуль разделения free/paid

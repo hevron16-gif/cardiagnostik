@@ -47,8 +47,15 @@ public partial class MainPage : ContentPage
         DiagnoseButton.Clicked += OnDiagnoseClicked;
         TestModeButton.Clicked += OnTestModeClicked;
 
-        // Версия из манифеста
-        try { VersionLabel.Text = $"v{AppInfo.Current.VersionString}"; } catch { }
+        // Версия + tier
+        try { VersionLabel.Text = $"v{AppInfo.Current.VersionString} ({AppSettings.UserTier})"; } catch { }
+
+        // Блокировка Pro-функций для Free
+        if (!AppSettings.IsAiAvailable)
+        {
+            DiagnoseButton.Text = "🤖 Диагностика ИИ\n(Pro)";
+            DiagnoseButton.BackgroundColor = Color.FromArgb("#9E9E9E");
+        }
 
         _ = LoadCarBrandsAsync();
         _ = _errorHistory.InitAsync();
@@ -999,6 +1006,23 @@ public partial class MainPage : ContentPage
 
     private async void OnDiagnoseClicked(object? sender, EventArgs e)
     {
+        // Проверка подписки для AI-диагностики
+        if (!AppSettings.IsAiAvailable)
+        {
+            var buy = await DisplayAlert(
+                "Диагностика ИИ — Pro",
+                "AI-диагностика через DeepSeek доступна только в версии Pro (499 ₽/мес).\n\n" +
+                "В бесплатной версии доступна офлайн-расшифровка кодов.",
+                "Купить Pro",
+                "Отмена");
+            if (buy)
+            {
+                // Открыть страницу покупки (пока заглушка)
+                await SafeAlertAsync("Покупка", "Свяжитесь с разработчиком для активации Pro.\nTelegram: @your_support");
+            }
+            return;
+        }
+
         var totalErrors = _currentErrors.Count + _pendingErrors.Count + _permanentErrors.Count;
         if (totalErrors == 0) return;
 
