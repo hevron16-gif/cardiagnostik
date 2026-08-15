@@ -67,6 +67,37 @@ public partial class MainPage : ContentPage
 
         // Подписываемся на изменения сети через наш сервис
         App.Connectivity.ConnectivityChanged += OnAppConnectivityChanged;
+
+        // Периодическая проверка связи — восстанавливаем онлайн после сбоев
+        _ = StartPeriodicConnectivityCheckAsync();
+    }
+
+    /// <summary>
+    /// Каждые 30 секунд проверяем, не восстановилась ли связь.
+    /// Не запускаем, если уже онлайн.
+    /// </summary>
+    private async Task StartPeriodicConnectivityCheckAsync()
+    {
+        await Task.Delay(10000); // Первый запуск через 10 сек
+        while (true)
+        {
+            try
+            {
+                if (!App.Connectivity.IsOnline)
+                {
+                    await App.Connectivity.CheckNowAsync();
+                    MainThread.BeginInvokeOnMainThread(() =>
+                    {
+                        UpdateConnectivityIndicator(App.Connectivity.IsOnline);
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[MainPage] Periodic check error: {ex.Message}");
+            }
+            await Task.Delay(30000); // Каждые 30 секунд
+        }
     }
 
     private async Task LoadCarBrandsAsync()
@@ -2007,6 +2038,17 @@ public partial class MainPage : ContentPage
     {
         try
         {
+            // Ждём, пока проверка интернета завершится
+            for (int i = 0; i < 30; i++)
+            {
+                if (App.Connectivity.HasChecked) break;
+                await Task.Delay(1000);
+            }
+
+            // Не синхронизируем в офлайне
+            if (!App.Connectivity.IsOnline)
+                return;
+
             // 1. Проверяем сводку (быстрый запрос, без скачивания)
             var (newCount, _) = await _sync.GetServerSummaryAsync();
 
@@ -2028,13 +2070,12 @@ public partial class MainPage : ContentPage
 
             MainThread.BeginInvokeOnMainThread(() =>
             {
-                UpdateConnectivityIndicator(App.Connectivity.IsOnline);
                 StatusLabel.Text = "✅ База знаний обновлена";
             });
         }
         catch
         {
-            // Тихая ошибка
+            // Тихая ошибка — не трогаем индикатор сети
         }
     }
     /// <summary>
