@@ -17,10 +17,9 @@ public class LicenseService
     private const string CachedValidUntilStorage = "cached_valid_until";
 
     /// <summary>
-    /// ВРЕМЕННО: открыть все функции (Pro) для тестирования.
-    /// Перед продакшен-релизом поставить <c>false</c>.
+    /// Production: функции разблокируются только по лицензии.
     /// </summary>
-    public const bool TestingUnlockAll = true;
+    public const bool TestingUnlockAll = false;
 
     private readonly ApiService _api;
     private LicenseInfo? _cachedInfo;

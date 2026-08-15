@@ -15,7 +15,7 @@
 
             <!-- Версия -->
             <Label x:Name="VersionLabel"
-                   Text="v1.0.19"
+                   Text="v1.0.20"
                    FontSize="12"
                    TextColor="Gray"
                    HorizontalOptions="Center"/>

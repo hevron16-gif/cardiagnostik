@@ -17,11 +17,14 @@ public class ConnectivityService
         "https://api.kitdiag.ru/",
     };
     // Увеличенный таймаут: Render free tier просыпается 30-60с
-    private const int TimeoutMs = 15_000;
-    private const int StartupTimeoutMs = 30_000;
+    private const int TimeoutMs = 45_000;
+    private const int Attempts = 3;
 
     private bool _isOnline;
     private bool _checked;
+    private bool _isChecking;
+    private int _consecutiveFailures = 0;
+    private const int MaxFailuresBeforeOffline = 2; // Не переходить в офлайн сразу
 
     /// <summary>
     /// Реальное состояние: true только если сервер отвечает.
@@ -51,7 +54,8 @@ public class ConnectivityService
 
     public ConnectivityService()
     {
-        _http = new HttpClient { Timeout = TimeSpan.FromMilliseconds(TimeoutMs) };
+        // Не задаём таймаут здесь — управляем через CancellationToken
+        _http = new HttpClient();
     }
 
     /// <summary>
@@ -68,56 +72,84 @@ public class ConnectivityService
 
     /// <summary>
     /// Принудительная проверка прямо сейчас.
+    /// Не запускает параллельные проверки — если проверка уже идёт, ждёт её.
     /// </summary>
     public async Task<bool> CheckNowAsync(bool startup = false)
     {
-        // Быстрая проверка: NetworkAccess
-        var netAccess = Connectivity.Current.NetworkAccess;
-        if (netAccess != NetworkAccess.Internet)
+        // Не запускаем параллельно
+        if (_isChecking)
         {
-            IsOnline = false;
-            return false;
+            // Ждём завершения текущей проверки (до 60 сек)
+            for (int i = 0; i < 120; i++)
+            {
+                if (!_isChecking) break;
+                await Task.Delay(500);
+            }
+            return IsOnline;
         }
 
-        // Настоящий пинг сервера (пробуем все URL с retry)
-        // Всегда используем увеличенный таймаут — Render просыпается долго
-        var timeout = StartupTimeoutMs;  // 30с всегда
-        var attempts = 2;  // минимум 2 попытки
-
-        for (int attempt = 0; attempt < attempts; attempt++)
+        _isChecking = true;
+        try
         {
-            if (attempt > 0)
-                await Task.Delay(2000); // Пауза между попытками
-
-            foreach (var url in PingUrls)
+            // Быстрая проверка: NetworkAccess
+            var netAccess = Connectivity.Current.NetworkAccess;
+            if (netAccess != NetworkAccess.Internet)
             {
-                try
+                _consecutiveFailures++;
+                if (_consecutiveFailures >= MaxFailuresBeforeOffline)
                 {
-                    var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(timeout));
-                    var response = await _http.GetAsync(url, cts.Token);
-                    if (response.IsSuccessStatusCode)
+                    IsOnline = false;
+                }
+                return IsOnline;
+            }
+
+            // Настоящий пинг сервера (HEAD — быстрее чем GET)
+            for (int attempt = 0; attempt < Attempts; attempt++)
+            {
+                if (attempt > 0)
+                    await Task.Delay(3000); // Пауза между попытками
+
+                foreach (var url in PingUrls)
+                {
+                    try
                     {
-                        IsOnline = true;
-                        return true;
+                        using var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(TimeoutMs));
+                        var request = new HttpRequestMessage(HttpMethod.Head, url);
+                        var response = await _http.SendAsync(request, cts.Token);
+                        if (response.IsSuccessStatusCode)
+                        {
+                            _consecutiveFailures = 0;
+                            IsOnline = true;
+                            return true;
+                        }
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        // Таймаут — пробуем следующий URL
+                    }
+                    catch (HttpRequestException)
+                    {
+                        // Нет соединения — пробуем следующий URL
+                    }
+                    catch
+                    {
+                        // Другая ошибка — пробуем следующий URL
                     }
                 }
-                catch (OperationCanceledException)
-                {
-                    // Таймаут — пробуем следующий URL
-                }
-                catch (HttpRequestException)
-                {
-                    // Нет соединения — пробуем следующий URL
-                }
-                catch
-                {
-                    // Другая ошибка — пробуем следующий URL
-                }
             }
-        }
 
-        IsOnline = false;
-        return false;
+            // Все попытки исчерпаны
+            _consecutiveFailures++;
+            if (_consecutiveFailures >= MaxFailuresBeforeOffline)
+            {
+                IsOnline = false;
+            }
+            return IsOnline;
+        }
+        finally
+        {
+            _isChecking = false;
+        }
     }
 
     /// <summary>
@@ -133,12 +165,17 @@ public class ConnectivityService
     {
         if (e.NetworkAccess == NetworkAccess.Internet)
         {
-            // Сеть появилась — проверяем сервер
+            // Сеть появилась — проверяем сервер, но не чаще чем раз в 10 сек
             await CheckNowAsync();
         }
         else
         {
-            IsOnline = false;
+            // Не переходим в офлайн мгновенно — возможно, кратковременный сбой
+            _consecutiveFailures++;
+            if (_consecutiveFailures >= MaxFailuresBeforeOffline)
+            {
+                IsOnline = false;
+            }
         }
     }
 }
