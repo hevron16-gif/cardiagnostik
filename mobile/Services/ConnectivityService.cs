@@ -13,10 +13,12 @@ public class ConnectivityService
     private readonly HttpClient _http;
     // Fallback: если kitdiag.ru не работает, пробуем старый URL
     private static readonly string[] PingUrls = {
-        "https://api.kitdiag.ru/",
         "https://car-diagnostic-ai.onrender.com/",
+        "https://api.kitdiag.ru/",
     };
-    private const int TimeoutMs = 5_000;
+    // Увеличенный таймаут: Render free tier просыпается 30-60с
+    private const int TimeoutMs = 15_000;
+    private const int StartupTimeoutMs = 30_000;
 
     private bool _isOnline;
     private bool _checked;
@@ -58,16 +60,16 @@ public class ConnectivityService
     /// </summary>
     public async Task CheckOnStartupAsync()
     {
-        // Ждём 500 мс чтобы дать системе инициализироваться
-        await Task.Delay(500);
-        await CheckNowAsync();
+        // Ждём 1с чтобы дать системе инициализироваться
+        await Task.Delay(1000);
+        await CheckNowAsync(startup: true);
         _checked = true;
     }
 
     /// <summary>
     /// Принудительная проверка прямо сейчас.
     /// </summary>
-    public async Task<bool> CheckNowAsync()
+    public async Task<bool> CheckNowAsync(bool startup = false)
     {
         // Быстрая проверка: NetworkAccess
         var netAccess = Connectivity.Current.NetworkAccess;
@@ -77,27 +79,44 @@ public class ConnectivityService
             return false;
         }
 
-        // Настоящий пинг сервера (пробуем все URL)
-        foreach (var url in PingUrls)
+        // Настоящий пинг сервера (пробуем все URL с retry)
+        var timeout = startup ? StartupTimeoutMs : TimeoutMs;
+        var attempts = startup ? 3 : 1;
+
+        for (int attempt = 0; attempt < attempts; attempt++)
         {
-            try
+            if (attempt > 0)
+                await Task.Delay(2000); // Пауза между попытками
+
+            foreach (var url in PingUrls)
             {
-                var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(TimeoutMs));
-                var response = await _http.GetAsync(url, cts.Token);
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    IsOnline = true;
-                    return true;
+                    var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(timeout));
+                    var response = await _http.GetAsync(url, cts.Token);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        IsOnline = true;
+                        return true;
+                    }
+                }
+                catch (OperationCanceledException)
+                {
+                    // Таймаут — пробуем следующий URL
+                }
+                catch (HttpRequestException)
+                {
+                    // Нет соединения — пробуем следующий URL
+                }
+                catch
+                {
+                    // Другая ошибка — пробуем следующий URL
                 }
             }
-            catch
-            {
-                // Пробуем следующий URL
-            }
         }
-        IsOnline = false;
 
-        return IsOnline;
+        IsOnline = false;
+        return false;
     }
 
     /// <summary>
