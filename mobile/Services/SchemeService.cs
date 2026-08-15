@@ -1,4 +1,4 @@
-﻿using CarDiagnosticApp.Models;
+using CarDiagnosticApp.Models;
 using Newtonsoft.Json.Linq;
 using System.Text;
 using PointF = Microsoft.Maui.Graphics.PointF;
@@ -93,7 +93,7 @@ public class SchemeService
             CarBrand = carBrand,
             CarModel = carModel,
             Title = "🔒 Схема узлов — Premium",
-            Description = "Схемы узлов доступны в версии Pro (499 ₽/мес).",
+            Description = "Схемы узлов доступны в версии Pro (1 499 ₽ навсегда).",
             Views = new List<DiagramView>
             {
                 new DiagramView
@@ -176,7 +176,7 @@ public class SchemeService
                + "✅ Читать ошибки через ELM327\n"
                + "✅ Расшифровывать коды (офлайн)\n"
                + "✅ Просматривать историю (10 записей)\n\n"
-               + "Оформите Pro за 499 ₽/мес и получите:\n"
+               + "Оформите Pro за 1 499 ₽ (навсегда) и получите:\n"
                + "🔒 Интерактивные 2D-схемы узлов\n"
                + "🤖 AI-анализ (DeepSeek)\n"
                + "🧠 Самообучение (ChromaDB)\n"

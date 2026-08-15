@@ -206,7 +206,7 @@ async def _run_diagnose(data: DiagnosisRequest, client_host: Optional[str], user
     # Копируем результат чтобы не модифицировать оригинал в кеше
     result_for_client = dict(local_result)
     if user_tier not in ("pro", "enterprise"):
-        result_for_client["_note"] = "AI-диагностика доступна в версии Pro (499 ₽/мес). Умный анализ через DeepSeek."
+        result_for_client["_note"] = "AI-диагностика доступна в версии Pro (1 499 ₽ навсегда). Умный анализ через DeepSeek."
 
     await save_diagnosis(
         code=data.code,
