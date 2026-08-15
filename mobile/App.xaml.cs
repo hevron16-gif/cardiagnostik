@@ -24,8 +24,18 @@ public partial class App : Application
         InitializeComponent();
         Debug.WriteLine("[App] Constructor — InitializeComponent done");
         
-        // Запускаем проверку интернета в фоне
-        _ = Connectivity.CheckOnStartupAsync();
+        // Запускаем проверку интернета в фоне (не блокируем UI)
+        _ = Task.Run(async () =>
+        {
+            try
+            {
+                await Connectivity.CheckOnStartupAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[App] Startup connectivity check failed: {ex.Message}");
+            }
+        });
         Connectivity.StartListening();
     }
 

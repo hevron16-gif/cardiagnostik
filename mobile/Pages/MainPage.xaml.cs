@@ -1960,16 +1960,25 @@ public partial class MainPage : ContentPage
     /// </summary>
     private async Task RefreshConnectivityAsync()
     {
-        // Ждём завершения первичной проверки в App (до 15 секунд)
-        for (int i = 0; i < 50; i++)
+        // Ждём завершения первичной проверки в App (макс 20 секунд)
+        for (int i = 0; i < 40; i++)
         {
             if (App.Connectivity.HasChecked) break;
-            await Task.Delay(300);
+            await Task.Delay(500);
         }
 
-        // Если проверка ещё не завершена — делаем свою
+        // Если проверка ещё не завершена — показываем "проверяем..."
         if (!App.Connectivity.HasChecked)
-            await App.Connectivity.CheckNowAsync();
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                ConnectivityLabel.Text = "Проверка...";
+                ConnectivityLabel.TextColor = Color.FromArgb("#FF9800");
+                ConnectivityDot.Color = Color.FromArgb("#FF9800");
+            });
+            // Не запускаем параллельную проверку — ждём фоновую
+            return;
+        }
 
         MainThread.BeginInvokeOnMainThread(() =>
         {

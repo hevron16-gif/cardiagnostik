@@ -17,15 +17,19 @@ public class ConnectivityService
         "https://car-diagnostic-ai.onrender.com/",
         // "https://api.kitdiag.ru/",  // включается при апгрейде Render
     };
-    // Увеличенный таймаут: Render free tier просыпается 30-60с
-    private const int TimeoutMs = 45_000;
-    private const int Attempts = 3;
+    // Таймауты: Render free tier просыпается 30-60с, но не блокируем UI
+    private const int TimeoutMs = 20_000;        // Быстрый таймаут — не ждём вечно
+    private const int StartupTimeoutMs = 45_000; // При старте даём больше времени
+    private const int Attempts = 2;              // 2 попытки — не тратим батарею
 
     private bool _isOnline;
     private bool _checked;
     private bool _isChecking;
+    private readonly object _checkLock = new();
     private int _consecutiveFailures = 0;
-    private const int MaxFailuresBeforeOffline = 2; // Не переходить в офлайн сразу
+    private const int MaxFailuresBeforeOffline = 3; // Больше терпимости
+    private DateTime _lastCheckTime = DateTime.MinValue;
+    private readonly TimeSpan _minCheckInterval = TimeSpan.FromSeconds(10); // Не чаще 1 раз в 10 сек
 
     /// <summary>
     /// Реальное состояние: true только если сервер отвечает.
@@ -77,10 +81,20 @@ public class ConnectivityService
     /// </summary>
     public async Task<bool> CheckNowAsync(bool startup = false)
     {
+        // Rate limiting: не чаще раз в 10 секунд (кроме старта)
+        if (!startup)
+        {
+            lock (_checkLock)
+            {
+                if (DateTime.Now - _lastCheckTime < _minCheckInterval)
+                    return IsOnline;
+            }
+        }
+
         // Не запускаем параллельно
         if (_isChecking)
         {
-            // Ждём завершения текущей проверки (до 60 сек)
+            // Ждём завершения текущей проверки (макс 60 сек)
             for (int i = 0; i < 120; i++)
             {
                 if (!_isChecking) break;
@@ -92,6 +106,11 @@ public class ConnectivityService
         _isChecking = true;
         try
         {
+            lock (_checkLock)
+            {
+                _lastCheckTime = DateTime.Now;
+            }
+
             // Быстрая проверка: NetworkAccess
             var netAccess = Connectivity.Current.NetworkAccess;
             if (netAccess != NetworkAccess.Internet)
@@ -105,16 +124,18 @@ public class ConnectivityService
             }
 
             // Настоящий пинг сервера (HEAD — быстрее чем GET)
+            var timeout = startup ? StartupTimeoutMs : TimeoutMs;
+
             for (int attempt = 0; attempt < Attempts; attempt++)
             {
                 if (attempt > 0)
-                    await Task.Delay(3000); // Пауза между попытками
+                    await Task.Delay(2000); // Пауза между попытками
 
                 foreach (var url in PingUrls)
                 {
                     try
                     {
-                        using var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(TimeoutMs));
+                        using var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(timeout));
                         var request = new HttpRequestMessage(HttpMethod.Head, url);
                         var response = await _http.SendAsync(request, cts.Token);
                         if (response.IsSuccessStatusCode)
@@ -162,21 +183,43 @@ public class ConnectivityService
         Connectivity.ConnectivityChanged += OnSystemConnectivityChanged;
     }
 
+    /// <summary>
+    /// Отписаться от системных событий (при уничтожении).
+    /// </summary>
+    public void StopListening()
+    {
+        Connectivity.ConnectivityChanged -= OnSystemConnectivityChanged;
+    }
+
     private async void OnSystemConnectivityChanged(object? sender, ConnectivityChangedEventArgs e)
     {
-        if (e.NetworkAccess == NetworkAccess.Internet)
+        try
         {
-            // Сеть появилась — проверяем сервер, но не чаще чем раз в 10 сек
-            await CheckNowAsync();
-        }
-        else
-        {
-            // Не переходим в офлайн мгновенно — возможно, кратковременный сбой
-            _consecutiveFailures++;
-            if (_consecutiveFailures >= MaxFailuresBeforeOffline)
+            // Rate limiting: не реагируем на каждое мелкое изменение
+            lock (_checkLock)
             {
-                IsOnline = false;
+                if (DateTime.Now - _lastCheckTime < _minCheckInterval)
+                    return;
             }
+
+            if (e.NetworkAccess == NetworkAccess.Internet)
+            {
+                // Сеть появилась — проверяем сервер
+                await CheckNowAsync();
+            }
+            else
+            {
+                // Не переходим в офлайн мгновенно — возможно, кратковременный сбой
+                _consecutiveFailures++;
+                if (_consecutiveFailures >= MaxFailuresBeforeOffline)
+                {
+                    IsOnline = false;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"[ConnectivityService] OnSystemConnectivityChanged error: {ex.Message}");
         }
     }
 }
