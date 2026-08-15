@@ -23,6 +23,10 @@ public partial class App : Application
     {
         InitializeComponent();
         Debug.WriteLine("[App] Constructor — InitializeComponent done");
+        
+        // Запускаем проверку интернета в фоне
+        _ = Connectivity.CheckOnStartupAsync();
+        Connectivity.StartListening();
     }
 
     protected override Window CreateWindow(IActivationState? activationState)
