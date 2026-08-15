@@ -17,9 +17,9 @@ public class LicenseService
     private const string CachedValidUntilStorage = "cached_valid_until";
 
     /// <summary>
-    /// Production: функции разблокируются только по лицензии.
+    /// TEST BUILD: все функции разблокированы для проверки Диагностики ИИ.
     /// </summary>
-    public const bool TestingUnlockAll = false;
+    public const bool TestingUnlockAll = true;
 
     private readonly ApiService _api;
     private LicenseInfo? _cachedInfo;
