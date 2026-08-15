@@ -16,7 +16,7 @@ namespace CarDiagnosticApp.Services
         public ApiService(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _baseUrl = httpClient.BaseAddress?.ToString().TrimEnd('/') ?? "https://api.kitdiag.ru";
+            _baseUrl = httpClient.BaseAddress?.ToString().TrimEnd('/') ?? "https://kitdiag.ru";
             // Диагностика AI на free-Render может «просыпаться» 30–60 с
             if (_httpClient.Timeout < TimeSpan.FromSeconds(90))
                 _httpClient.Timeout = TimeSpan.FromSeconds(90);
