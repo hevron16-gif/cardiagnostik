@@ -1,4 +1,4 @@
-﻿using CarDiagnosticApp.Models;
+using CarDiagnosticApp.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Text;
@@ -271,6 +271,6 @@ public class LicenseService
     private static string GetBaseUrl()
     {
         // Берём из MauiProgram (зарегистрированный HttpClient)
-        return "https://car-diagnostic-ai.onrender.com";
+        return "https://api.kitdiag.ru";
     }
 }

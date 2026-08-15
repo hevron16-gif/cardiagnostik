@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KITDIAG — AI-диагностика автомобилей OBD2</title>
+    <meta name="description" content="Диагностируй авто через ELM327 с ИИ-помощником. 1579 кодов ошибок, схемы датчиков, анализ графиков.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0f;
+            color: #fff;
+            line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Header */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid #1a1a2e;
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: #7c4dff;
+            text-decoration: none;
+        }
+        .logo span { color: #fff; }
+        .nav a {
+            color: #888;
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+        .nav a:hover { color: #fff; }
+        
+        /* Hero */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        .hero h1 .highlight { color: #7c4dff; }
+        .hero p {
+            font-size: 20px;
+            color: #888;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary {
+            background: #7c4dff;
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background: #651fff;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: #1a1a2e;
+            color: #fff;
+            border: 1px solid #333;
+        }
+        .btn-secondary:hover {
+            background: #252540;
+        }
+        
+        /* Features */
+        .features {
+            padding: 60px 0;
+        }
+        .features h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        .feature-card {
+            background: #12121f;
+            border: 1px solid #1a1a2e;
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+        .feature-card:hover {
+            border-color: #7c4dff;
+            transform: translateY(-4px);
+        }
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .feature-card p {
+            color: #888;
+            font-size: 15px;
+        }
+        
+        /* Pricing */
+        .pricing {
+            padding: 60px 0;
+        }
+        .pricing h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .pricing-card {
+            background: #12121f;
+            border: 1px solid #1a1a2e;
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .pricing-card.popular {
+            border-color: #7c4dff;
+            position: relative;
+        }
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #7c4dff;
+            color: #fff;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .pricing-card h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .price {
+            font-size: 42px;
+            font-weight: 800;
+            color: #7c4dff;
+            margin: 20px 0;
+        }
+        .price span {
+            font-size: 16px;
+            color: #888;
+            font-weight: 400;
+        }
+        .pricing-card ul {
+            list-style: none;
+            text-align: left;
+            margin: 30px 0;
+        }
+        .pricing-card ul li {
+            padding: 8px 0;
+            color: #ccc;
+            font-size: 15px;
+        }
+        .pricing-card ul li::before {
+            content: "✓";
+            color: #4caf50;
+            margin-right: 10px;
+        }
+        
+        /* Cars */
+        .cars {
+            padding: 60px 0;
+            text-align: center;
+        }
+        .cars h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+        .car-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .car-tag {
+            background: #1a1a2e;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #ccc;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid #1a1a2e;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+        footer a {
+            color: #888;
+            text-decoration: none;
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            .hero p { font-size: 18px; }
+            .nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-inner">
+            <a href="/" class="logo">KIT<span>DIAG</span></a>
+            <nav class="nav">
+                <a href="#features">Возможности</a>
+                <a href="#pricing">Цены</a>
+                <a href="#cars">Автомобили</a>
+                <a href="https://api.kitdiag.ru/docs">API</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Диагностируй авто<br>с <span class="highlight">ИИ-помощником</span></h1>
+            <p>Подключи ELM327, прочитай ошибки и получи умный диагноз с рекомендациями по ремонту. Поддержка русских авто и грузовиков.</p>
+            <div class="cta-buttons">
+                <a href="/download/CarDiagnosticApp.apk" class="btn btn-primary">📱 Скачать для Android</a>
+                <a href="/download/CarDiagnosticApp.exe" class="btn btn-secondary">🖥️ Скачать для Windows</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <h2>Что умеет KITDIAG</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Чтение ошибок OBD2</h3>
+                    <p>1579 кодов ошибок в офлайн-базе. Расшифровка на русском языке с причинами и симптомами.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI-диагностика</h3>
+                    <p>DeepSeek анализирует ошибки и даёт умный диагноз с рекомендациями. Защита от галлюцинаций.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>AI-анализ графиков</h3>
+                    <p>Сравнивает живые данные с эталоном для твоего авто. Находит отклонения до поломки.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Схемы с маркерами</h3>
+                    <p>91 схема с указанием где стоит датчик. Не нужно искать в интернете.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🆔</div>
+                    <h3>Определение по VIN</h3>
+                    <p>Автоматически определяет марку, модель и год по VIN-коду. Проверка контрольной цифры.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Сброс ошибок</h3>
+                    <p>Стандартный сброс Check Engine и других кодов через ELM327 адаптер.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2>Тарифы</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Free</h3>
+                    <div class="price">0 ₽</div>
+                    <ul>
+                        <li>Подключение к ELM327</li>
+                        <li>Чтение и сброс ошибок</li>
+                        <li>Офлайн база (1579 кодов)</li>
+                        <li>Определение VIN</li>
+                        <li>Графики live data</li>
+                    </ul>
+                </div>
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Популярный</div>
+                    <h3>Pro</h3>
+                    <div class="price">1 499 ₽ <span>навсегда</span></div>
+                    <ul>
+                        <li>Всё из Free</li>
+                        <li>AI-диагностика (DeepSeek)</li>
+                        <li>Схемы с маркерами (91 шт)</li>
+                        <li>AI-анализ графиков</li>
+                        <li>Облачная синхронизация</li>
+                        <li>Авто-обновление базы</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cars" id="cars">
+        <div class="container">
+            <h2>Поддерживаемые автомобили</h2>
+            <div class="car-tags">
+                <div class="car-tag">🇷🇺 LADA Vesta</div>
+                <div class="car-tag">🇷🇺 LADA Granta</div>
+                <div class="car-tag">🇷🇺 LADA Priora</div>
+                <div class="car-tag">🇷🇺 LADA Niva</div>
+                <div class="car-tag">🇷🇺 УАЗ Patriot</div>
+                <div class="car-tag">🇷🇺 УАЗ Hunter</div>
+                <div class="car-tag">🇷🇺 ГАЗель NEXT</div>
+                <div class="car-tag">🇷🇺 КАМАЗ 5490</div>
+                <div class="car-tag">🇰🇷 KIA Rio</div>
+                <div class="car-tag">🇰🇷 Hyundai Solaris</div>
+                <div class="car-tag">🇫🇷 Renault Logan</div>
+                <div class="car-tag">🇩🇪 VW Polo</div>
+                <div class="car-tag">🇯🇵 Toyota Corolla</div>
+                <div class="car-tag">+ все OBD2 авто</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 KITDIAG — AI-диагностика автомобилей</p>
+            <p><a href="mailto:support@kitdiag.ru">support@kitdiag.ru</a> | <a href="https://github.com/hevron16-gif/cardiagnostik">GitHub</a></p>
+        </div>
+    </footer>
+</body>
+</html>

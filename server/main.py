@@ -306,7 +306,7 @@ app.mount("/schema_images", StaticFiles(directory="schema_images"), name="schema
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://localhost:8080").split(",")
+CORS_ORIGINS = os.getenv("CORS_ORIGINS", "https://kitdiag.ru,https://api.kitdiag.ru,http://localhost:3000,http://localhost:8080").split(",")
 CORS_ORIGINS = [o.strip() for o in CORS_ORIGINS if o.strip()]
 
 app.add_middleware(

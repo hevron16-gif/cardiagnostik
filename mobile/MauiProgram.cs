@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Syncfusion.Maui.Toolkit.Hosting;
 using System;
@@ -75,7 +75,7 @@ namespace CarDiagnosticApp
                 step = "AddHttpClient";
                 builder.Services.AddHttpClient<Services.ApiService>(client =>
                 {
-                    client.BaseAddress = new Uri("https://car-diagnostic-ai.onrender.com");
+                    client.BaseAddress = new Uri("https://api.kitdiag.ru");
                     // Render free cold-start + DeepSeek: до 90 с
                     client.Timeout = TimeSpan.FromSeconds(90);
                 });

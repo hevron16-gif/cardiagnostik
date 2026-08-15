@@ -1,4 +1,4 @@
-﻿using Microsoft.Maui.Networking;
+using Microsoft.Maui.Networking;
 
 namespace CarDiagnosticApp.Services;
 
@@ -11,7 +11,7 @@ namespace CarDiagnosticApp.Services;
 public class ConnectivityService
 {
     private readonly HttpClient _http;
-    private const string PingUrl = "https://car-diagnostic-ai.onrender.com/";
+    private const string PingUrl = "https://api.kitdiag.ru/";
     private const int TimeoutMs = 5_000;
 
     private bool _isOnline;
