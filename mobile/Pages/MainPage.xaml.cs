@@ -1960,8 +1960,8 @@ public partial class MainPage : ContentPage
     /// </summary>
     private async Task RefreshConnectivityAsync()
     {
-        // Ждём завершения первичной проверки в App
-        for (int i = 0; i < 10; i++)
+        // Ждём завершения первичной проверки в App (до 15 секунд)
+        for (int i = 0; i < 50; i++)
         {
             if (App.Connectivity.HasChecked) break;
             await Task.Delay(300);

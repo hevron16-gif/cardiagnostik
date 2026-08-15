@@ -80,8 +80,9 @@ public class ConnectivityService
         }
 
         // Настоящий пинг сервера (пробуем все URL с retry)
-        var timeout = startup ? StartupTimeoutMs : TimeoutMs;
-        var attempts = startup ? 3 : 1;
+        // Всегда используем увеличенный таймаут — Render просыпается долго
+        var timeout = StartupTimeoutMs;  // 30с всегда
+        var attempts = 2;  // минимум 2 попытки
 
         for (int attempt = 0; attempt < attempts; attempt++)
         {
