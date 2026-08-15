@@ -611,5 +611,69 @@ namespace CarDiagnosticApp.Services
         {
             return await GetRawAsync("/schemas");
         }
+
+        /// <summary>
+        /// AI-анализ отклонений графиков (сравнение с эталоном).
+        /// Доступно только для Pro/Enterprise.
+        /// </summary>
+        public async Task<GraphAiAnalysis?> AnalyzeGraphDeviationsAsync(
+            string brand, string model, string? vin, List<PidDeviation> deviations)
+        {
+            try
+            {
+                var request = new
+                {
+                    brand,
+                    model,
+                    vin,
+                    deviations = deviations.Select(d => new
+                    {
+                        pid_hex = d.PidHex,
+                        pid_name = d.PidName,
+                        unit = d.Unit,
+                        actual_value = d.ActualValue,
+                        reference_min = d.ReferenceMin,
+                        reference_max = d.ReferenceMax,
+                        status = d.Status == DeviationStatus.Critical ? "critical" : "warning",
+                        mode = d.Mode,
+                        deviation_percent = d.DeviationPercent,
+                    }).ToList()
+                };
+
+                var json = JsonConvert.SerializeObject(request);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await _httpClient.PostAsync($"{_baseUrl}/analyze/graph", content);
+
+                if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
+                {
+                    // Free tier — вернём null, UI покажет предложение купить Pro
+                    return null;
+                }
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var bytes = await response.Content.ReadAsByteArrayAsync();
+                    var body = Encoding.UTF8.GetString(bytes);
+                    var jo = JObject.Parse(body);
+
+                    return new GraphAiAnalysis
+                    {
+                        Summary = jo["summary"]?.ToString() ?? "",
+                        PossibleCauses = (jo["possible_causes"] as JArray)?.Select(t => t.ToString()).ToList() ?? new(),
+                        Recommendations = (jo["recommendations"] as JArray)?.Select(t => t.ToString()).ToList() ?? new(),
+                        Severity = jo["severity"]?.ToString() ?? "СРЕДНЯЯ",
+                        CanDrive = jo["can_drive"]?.ToString() ?? "Осторожно",
+                        Source = jo["source"]?.ToString() ?? "",
+                    };
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[ApiService] AnalyzeGraphDeviations: {ex.Message}");
+                return null;
+            }
+        }
     }
 }

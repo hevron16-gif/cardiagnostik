@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
@@ -7,7 +7,7 @@
              Title="Графики"
              Shell.PresentationMode="Modal">
 
-    <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="0">
+    <Grid RowDefinitions="Auto,Auto,*,Auto,Auto" Padding="0">
 
         <!-- ── Заголовок ── -->
         <Border Grid.Row="0"
@@ -70,7 +70,6 @@
 
         <!-- ── График ── -->
         <Grid Grid.Row="2" Padding="8,4">
-            <!-- Оси (Axis) задаются в code-behind: тип Axis живёт в LiveChartsCore.SkiaSharpView, не в .Maui -->
             <lvc:CartesianChart x:Name="MainChart"
                                 ZoomMode="X"
                                 TooltipPosition="Top" />
@@ -93,8 +92,63 @@
             </VerticalStackLayout>
         </Grid>
 
-        <!-- ── Нижняя панель ── -->
+        <!-- ── Панель AI-анализа ── -->
         <Border Grid.Row="3"
+                x:Name="AiAnalysisPanel"
+                IsVisible="False"
+                BackgroundColor="{StaticResource Surface}"
+                Stroke="{StaticResource Primary}"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 12"
+                Padding="12,10"
+                Margin="8,4">
+            <VerticalStackLayout Spacing="8">
+                <Grid ColumnDefinitions="*,Auto">
+                    <HorizontalStackLayout Grid.Column="0" Spacing="6">
+                        <Label Text="🤖" FontSize="16" VerticalOptions="Center" />
+                        <Label x:Name="AiAnalysisHeader"
+                               Text="AI-анализ графиков"
+                               FontFamily="InterSemiBold" FontSize="14"
+                               TextColor="{StaticResource Primary}"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <Button Grid.Column="1"
+                            x:Name="BtnCloseAiPanel"
+                            Text="✕" FontSize="12"
+                            Padding="6,2" CornerRadius="10"
+                            WidthRequest="32" HeightRequest="32"
+                            BackgroundColor="Transparent"
+                            TextColor="#9E9E9E"
+                            Clicked="OnCloseAiPanelClicked" />
+                </Grid>
+
+                <Label x:Name="AiAnalysisSummary"
+                       FontFamily="InterRegular" FontSize="13"
+                       TextColor="{StaticResource OnSurface}" />
+
+                <Label Text="Вероятные причины:"
+                       FontFamily="InterSemiBold" FontSize="12"
+                       TextColor="{StaticResource OnSurface}" />
+                <VerticalStackLayout x:Name="AiAnalysisCauses" Spacing="4" />
+
+                <Label Text="Рекомендации:"
+                       FontFamily="InterSemiBold" FontSize="12"
+                       TextColor="{StaticResource OnSurface}" />
+                <VerticalStackLayout x:Name="AiAnalysisRecommendations" Spacing="4" />
+
+                <HorizontalStackLayout Spacing="12">
+                    <Label x:Name="AiAnalysisSeverity"
+                           FontFamily="InterSemiBold" FontSize="12"
+                           TextColor="#F44336" />
+                    <Label x:Name="AiAnalysisCanDrive"
+                           FontFamily="InterSemiBold" FontSize="12"
+                           TextColor="#4CAF50" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- ── Нижняя панель ── -->
+        <Border Grid.Row="4"
                 BackgroundColor="{StaticResource Surface}"
                 Stroke="Transparent"
                 Padding="12,8">
@@ -113,6 +167,11 @@
                         TextColor="{StaticResource OnSurface}"
                         BorderColor="{StaticResource Gray300}" BorderWidth="1"
                         Clicked="OnFitClicked" />
+                <Button x:Name="BtnAiAnalyze"
+                        Text="🤖 AI Анализ" FontSize="12" Padding="10,4" CornerRadius="12"
+                        BackgroundColor="#7C4DFF" TextColor="White"
+                        IsEnabled="False"
+                        Clicked="OnAiAnalyzeClicked" />
             </HorizontalStackLayout>
         </Border>
 

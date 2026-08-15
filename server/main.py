@@ -57,6 +57,7 @@ from license import router as license_router
 from admin import router as admin_router
 from schema_image_scraper import run_full_scrape, AUTO_REGISTRY
 from dtc import get_code as dtc_get_code, search_codes as dtc_search_codes, stats as dtc_stats
+from deepseek_client import build_system_prompt as _ds_build_system_prompt
 import integrity
 from device import get_device_id, verify_device_binding
 
@@ -201,46 +202,28 @@ async def _run_diagnose(data: DiagnosisRequest, client_host: Optional[str], user
                 "diagnosis": text,
                 "result": ai_result,
             }
-    else:
-        # Free: добавляем подсказку о Pro
-        local_result["_note"] = "AI-диагностика доступна в версии Pro (499 ₽/мес). Умный анализ через DeepSeek."
-
     # 4) Fallback — локальная база (Free)
-    await save_diagnosis(
-        code=data.code,
-        brand=data.brand,
-        model=data.model,
-        vin=data.vin,
-        result=local_result,
-        ip=client_host,
-    )
-    text = _format_diagnosis_text(data.code, data.brand, data.model, local_result)
-    return {
-        "source": "database",
-        "error_code": data.code,
-        "car_brand": data.brand,
-        "car_model": data.model,
-        "diagnosis": text,
-        "result": local_result,
-    }
+    # Копируем результат чтобы не модифицировать оригинал в кеше
+    result_for_client = dict(local_result)
+    if user_tier not in ("pro", "enterprise"):
+        result_for_client["_note"] = "AI-диагностика доступна в версии Pro (499 ₽/мес). Умный анализ через DeepSeek."
 
-    # 4) Fallback — только локальная база
     await save_diagnosis(
         code=data.code,
         brand=data.brand,
         model=data.model,
         vin=data.vin,
-        result=local_result,
+        result=local_result,  # чистый результат в базу
         ip=client_host,
     )
-    text = _format_diagnosis_text(data.code, data.brand, data.model, local_result)
+    text = _format_diagnosis_text(data.code, data.brand, data.model, result_for_client)
     return {
         "source": "database",
         "error_code": data.code,
         "car_brand": data.brand,
         "car_model": data.model,
         "diagnosis": text,
-        "result": local_result,
+        "result": result_for_client,
     }
 
 class BatchRequest(BaseModel):
@@ -551,6 +534,220 @@ async def admin_scrape_schemas(request: Request, admin_key: str = Query(...)):
         raise HTTPException(status_code=403, detail="Forbidden")
     asyncio.create_task(run_full_scrape(AUTO_REGISTRY))
     return {"status": "started", "message": "Scraping started in background. Check schema_images/ in ~5 min."}
+
+# ═══ AI-анализ графиков (сравнение с эталоном) ═══════════════════════
+class GraphDeviationItem(BaseModel):
+    pid_hex: str
+    pid_name: str
+    unit: str
+    actual_value: float
+    reference_min: float
+    reference_max: float
+    status: str  # "warning" | "critical"
+    mode: str
+    deviation_percent: float
+
+class GraphAnalysisRequest(BaseModel):
+    brand: str = Field(..., min_length=1, max_length=50)
+    model: str = Field(..., min_length=1, max_length=100)
+    vin: Optional[str] = Field(None, max_length=17)
+    deviations: List[GraphDeviationItem] = Field(..., min_length=1, max_length=20)
+
+    @field_validator('vin')
+    @classmethod
+    def validate_vin(cls, v):
+        if v is None: return v
+        v = v.upper().strip()
+        if len(v) != 17: raise ValueError('VIN должен содержать 17 символов')
+        if not all(c.isalnum() and c not in 'IOQ' for c in v): raise ValueError('VIN содержит недопустимые символы')
+        return v
+
+
+def _build_graph_analysis_prompt(brand: str, model: str, deviations: List[GraphDeviationItem]) -> str:
+    """Формирует промпт для DeepSeek на основе отклонений PID."""
+    lines = [
+        f"Автомобиль: {brand} {model}",
+        f"Режим работы: {deviations[0].mode if deviations else 'неизвестен'}",
+        "",
+        "ОТКЛОНЕНИЯ ПАРАМЕТРОВ (сравнение с эталонными значениями):",
+    ]
+    for d in deviations:
+        status_ru = "КРИТИЧНО" if d.status == "critical" else "ВНИМАНИЕ"
+        lines.append(
+            f"• {d.pid_name} (PID {d.pid_hex}): "
+            f"фактическое {d.actual_value:.2f} {d.unit}, "
+            f"эталон {d.reference_min:.2f}–{d.reference_max:.2f} {d.unit} "
+            f"[{status_ru}, отклонение {d.deviation_percent:+.1f}%]"
+        )
+    lines += [
+        "",
+        "Дай диагностический анализ строго по формату:",
+        "1. ОБЩАЯ ОЦЕНКА — что означают эти отклонения в совокупности (1-2 предложения)",
+        "2. ВЕРОЯТНЫЕ ПРИЧИНЫ — список из 3-5 пунктов, отсортированных по вероятности",
+        "3. РЕКОМЕНДАЦИИ — что проверить и в каком порядке (3-5 пунктов)",
+        "4. КРИТИЧНОСТЬ — одно из: НИЗКАЯ / СРЕДНЯЯ / ВЫСОКАЯ / КРИТИЧЕСКАЯ",
+        "5. МОЖНО ЛИ ЕХАТЬ — Да / Осторожно / Нет (с пояснением)",
+        "",
+        "ВАЖНО: отвечай ТОЛЬКО на основе фактов. Если не уверен — скажи 'Недостаточно данных'.",
+        "НЕ выдумывай коды ошибок или детали. Указывай источник: 'На основе данных OBD2'.",
+    ]
+    return "\n".join(lines)
+
+
+def _parse_graph_analysis_response(content: str) -> dict:
+    """Парсит ответ DeepSeek для анализа графиков."""
+    result = {
+        "summary": "",
+        "possible_causes": [],
+        "recommendations": [],
+        "severity": "СРЕДНЯЯ",
+        "can_drive": "Осторожно",
+    }
+    lines = content.split("\n")
+    current_section = None
+
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
+        upper = line.upper()
+        if "ОБЩАЯ ОЦЕНКА" in upper or "ОПИСАНИЕ" in upper:
+            current_section = "summary"
+            continue
+        elif "ПРИЧИН" in upper:
+            current_section = "causes"
+            continue
+        elif "РЕКОМЕНДАЦИ" in upper or "РЕШЕНИ" in upper:
+            current_section = "recommendations"
+            continue
+        elif "КРИТИЧНОСТЬ" in upper:
+            for level in ["КРИТИЧЕСКАЯ", "ВЫСОКАЯ", "СРЕДНЯЯ", "НИЗКАЯ"]:
+                if level in upper:
+                    result["severity"] = level
+                    break
+            current_section = None
+            continue
+        elif "МОЖНО ЛИ ЕХАТЬ" in upper or "ЕХАТЬ" in upper:
+            for val in ["Нет", "Осторожно", "Да"]:
+                if val in line:
+                    result["can_drive"] = val
+                    break
+            current_section = None
+            continue
+
+        if current_section == "summary":
+            result["summary"] += line + " "
+        elif current_section == "causes" and line.startswith(("•", "-", "*", "1.", "2.", "3.", "4.", "5.")):
+            result["possible_causes"].append(line.lstrip("•-* 1234567890.").strip())
+        elif current_section == "recommendations" and line.startswith(("•", "-", "*", "1.", "2.", "3.", "4.", "5.")):
+            result["recommendations"].append(line.lstrip("•-* 1234567890.").strip())
+
+    result["summary"] = result["summary"].strip()
+    if not result["summary"] and not result["possible_causes"]:
+        result["summary"] = content[:500]
+
+    return result
+
+
+@app.post("/analyze/graph", tags=["analysis"])
+@limiter.limit("5/minute")
+async def analyze_graph_deviations(request: Request, data: GraphAnalysisRequest):
+    """
+    AI-анализ отклонений графиков OBD2.
+    Принимает список отклонений PID, возвращает диагностику через DeepSeek.
+    Доступно только для Pro/Enterprise.
+    """
+    # Определяем tier по заголовку
+    user_tier = "free"
+    try:
+        tier_header = request.headers.get("X-User-Tier", "free")
+        if tier_header in ("pro", "enterprise"):
+            user_tier = tier_header
+    except:
+        pass
+
+    if user_tier not in ("pro", "enterprise"):
+        raise HTTPException(
+            status_code=403,
+            detail="AI-анализ графиков доступен только в версии Pro."
+        )
+
+    if not check_ai_rate_limit(request.client.host or "unknown"):
+        raise HTTPException(status_code=429, detail="Превышен лимит AI-запросов")
+
+    # Проверяем ключ DeepSeek
+    if not os.getenv("DEEPSEEK_API_KEY"):
+        return {
+            "source": "local",
+            "summary": "AI-анализ недоступен: серверный ключ DeepSeek не настроен.",
+            "possible_causes": ["Проверьте настройки сервера"],
+            "recommendations": ["Обратитесь к администратору"],
+            "severity": "НЕИЗВЕСТНО",
+            "can_drive": "Осторожно",
+        }
+
+    try:
+        from deepseek_client import get_model_and_timeout
+        model, timeout = get_model_and_timeout()
+
+        prompt = _build_graph_analysis_prompt(data.brand, data.model, data.deviations)
+
+        import httpx
+        payload = {
+            "model": model,
+            "messages": [
+                {"role": "system", "content": _ds_build_system_prompt()},  # reuse existing
+                {"role": "user", "content": prompt},
+            ],
+            "temperature": 0.3,
+            "max_tokens": 1500,
+            "stream": False,
+        }
+        headers = {
+            "Authorization": f"Bearer {os.getenv('DEEPSEEK_API_KEY')}",
+            "Content-Type": "application/json",
+        }
+
+        async with httpx.AsyncClient(timeout=timeout) as client:
+            response = await client.post(
+                "https://api.deepseek.com/chat/completions",
+                json=payload,
+                headers=headers
+            )
+            response.raise_for_status()
+            resp_data = response.json()
+
+            if "choices" not in resp_data or not resp_data["choices"]:
+                raise HTTPException(status_code=502, detail="DeepSeek вернул пустой ответ")
+
+            content = resp_data["choices"][0]["message"]["content"]
+            result = _parse_graph_analysis_response(content)
+            result["source"] = "ai"
+            result["_model"] = model
+            result["_tokens"] = resp_data.get("usage", {}).get("total_tokens", 0)
+
+            return result
+
+    except httpx.HTTPStatusError as e:
+        logger.error(f"DeepSeek HTTP error: {e.response.status_code}")
+        raise HTTPException(status_code=502, detail="Ошибка связи с AI-сервисом")
+    except Exception as e:
+        logger.error(f"Graph analysis error: {e}")
+        # Fallback: локальный анализ
+        return {
+            "source": "local",
+            "summary": f"Обнаружены отклонения в {len(data.deviations)} параметрах. "
+                       f"Рекомендуется диагностика специалистом.",
+            "possible_causes": [f"{d.pid_name}: отклонение {d.deviation_percent:+.1f}%" for d in data.deviations[:5]],
+            "recommendations": [
+                "Проверьте указанные датчики и системы",
+                "Выполните компьютерную диагностику",
+                "При критичных отклонениях — не эксплуатируйте авто",
+            ],
+            "severity": "КРИТИЧЕСКАЯ" if any(d.status == "critical" for d in data.deviations) else "ВЫСОКАЯ",
+            "can_drive": "Нет" if any(d.status == "critical" for d in data.deviations) else "Осторожно",
+        }
+
 
 @app.post("/admin/update-db", tags=["admin"])
 @limiter.limit("3/minute")

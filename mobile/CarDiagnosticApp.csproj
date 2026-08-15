@@ -23,8 +23,8 @@
 		<ApplicationId>io.github.hevron16gif.cardiagnosticapp</ApplicationId>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0.19</ApplicationDisplayVersion>
-		<ApplicationVersion>120</ApplicationVersion>
+		<ApplicationDisplayVersion>1.0.20</ApplicationDisplayVersion>
+		<ApplicationVersion>121</ApplicationVersion>
 
 		<WindowsPackageType>None</WindowsPackageType>
 
@@ -61,6 +61,8 @@
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 
+		<!-- Эталонные значения PID для сравнения графиков -->
+		<MauiAsset Include="Data\reference_pids.json" LogicalName="reference_pids.json" />
 		<!-- Встроенные 2D-схемы двигателей (ВАЗ/КАМАЗ/ГАЗ/УАЗ) — копируются рядом с exe -->
 		<Content Include="Data\mapping_*.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

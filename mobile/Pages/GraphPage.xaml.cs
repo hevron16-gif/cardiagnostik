@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using CarDiagnosticApp.Models;
 using CarDiagnosticApp.Services;
 using LiveChartsCore;
@@ -13,6 +13,8 @@ public partial class GraphPage : ContentPage, IDisposable
 {
     private LiveDataService? _liveData;
     private readonly BluetoothService _bt;
+    private readonly ApiService _api;
+    private GraphAnalysisService? _graphAnalysis;
 
     // Состояние
     private int _timeWindowSec = 60;
@@ -48,6 +50,9 @@ public partial class GraphPage : ContentPage, IDisposable
     public GraphPage(BluetoothService bt)
     {
         _bt = bt;
+        _api = IPlatformApplication.Current!.Services.GetRequiredService<ApiService>();
+        _graphAnalysis = new GraphAnalysisService(_api);
+
         try
         {
             InitializeComponent();
@@ -71,7 +76,7 @@ public partial class GraphPage : ContentPage, IDisposable
             return;
         }
 
-        // DateTimePoint требует DateTimeAxis (строковый Labeler="sec" в XAML крашил открытие)
+        // DateTimePoint требует DateTimeAxis
         try
         {
             MainChart.XAxes = new[]
@@ -97,19 +102,16 @@ public partial class GraphPage : ContentPage, IDisposable
         }
     }
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
 
         _liveData = new LiveDataService(_bt);
+        if (_graphAnalysis != null)
+            await _graphAnalysis.LoadReferenceDatabaseAsync();
 
-        // Строим чипы из всех доступных PID
         BuildPidChips();
-
-        // Подписка на новые значения
         _liveData.OnValueUpdated += OnLiveValueUpdated;
-
-        // Автостарт
         StartPolling();
     }
 
@@ -158,7 +160,6 @@ public partial class GraphPage : ContentPage, IDisposable
 
         if (_selectedPids.Contains(pid.PidHex))
         {
-            // Убираем
             _selectedPids.Remove(pid.PidHex);
             RemoveSeries(pid);
             chip.BackgroundColor = Color.FromArgb("#E0E0E0");
@@ -166,7 +167,6 @@ public partial class GraphPage : ContentPage, IDisposable
         }
         else
         {
-            // Добавляем
             _selectedPids.Add(pid.PidHex);
             AddSeries(pid);
             chip.BackgroundColor = Color.FromArgb("#1976D2");
@@ -174,6 +174,7 @@ public partial class GraphPage : ContentPage, IDisposable
         }
 
         UpdateStatusBar();
+        UpdateAiButtonState();
     }
 
     // ═══════════════════════════════════════════════════
@@ -228,7 +229,6 @@ public partial class GraphPage : ContentPage, IDisposable
     {
         if (!_isRunning || _disposed) return;
 
-        // ObservableCollection LiveCharts только с UI-потока (иначе crash Android)
         MainThread.BeginInvokeOnMainThread(() =>
         {
             if (!_isRunning || _disposed) return;
@@ -245,7 +245,10 @@ public partial class GraphPage : ContentPage, IDisposable
 
                 _tickCounter++;
                 if (_tickCounter % 10 == 0)
+                {
                     UpdateStatusBar();
+                    UpdateAiButtonState();
+                }
             }
             catch (Exception ex)
             {
@@ -260,6 +263,24 @@ public partial class GraphPage : ContentPage, IDisposable
         LabelPointCount.Text = _pidValues.Values.Any()
             ? $"точек: {_pidValues.Values.Max(v => v.Count)}"
             : "";
+    }
+
+    private void UpdateAiButtonState()
+    {
+        // AI анализ доступен если есть данные и подключение
+        BtnAiAnalyze.IsEnabled = _selectedPids.Count > 0 && _pidValues.Values.Any(v => v.Count >= 10);
+
+        // Для Free показываем Pro-метку
+        if (!AppSettings.IsAiAvailable)
+        {
+            BtnAiAnalyze.Text = "🤖 AI Анализ (Pro)";
+            BtnAiAnalyze.BackgroundColor = Color.FromArgb("#9E9E9E");
+        }
+        else
+        {
+            BtnAiAnalyze.Text = "🤖 AI Анализ";
+            BtnAiAnalyze.BackgroundColor = Color.FromArgb("#7C4DFF");
+        }
     }
 
     // ═══════════════════════════════════════════════════
@@ -279,7 +300,6 @@ public partial class GraphPage : ContentPage, IDisposable
                 return;
             }
 
-            // Определяем поддерживаемые PID
             await _liveData.DetectSupportedPidsAsync();
 
             _isRunning = true;
@@ -324,6 +344,8 @@ public partial class GraphPage : ContentPage, IDisposable
             values.Clear();
 
         UpdateStatusBar();
+        UpdateAiButtonState();
+        AiAnalysisPanel.IsVisible = false;
     }
 
     private void OnWindow30Clicked(object? sender, EventArgs e)
@@ -363,6 +385,231 @@ public partial class GraphPage : ContentPage, IDisposable
     private void OnFitClicked(object? sender, EventArgs e)
     {
         MainChart.CoreChart.Update();
+    }
+
+    // ═══════════════════════════════════════════════════
+    //  AI Анализ графиков
+    // ═══════════════════════════════════════════════════
+
+    private async void OnAiAnalyzeClicked(object? sender, EventArgs e)
+    {
+        if (!AppSettings.IsAiAvailable)
+        {
+            await DisplayAlert(
+                "Требуется Pro",
+                "AI-анализ графиков доступен только в версии Pro.\n\n" +
+                "Преимущества Pro:\n" +
+                "• AI-диагностика ошибок\n" +
+                "• AI-анализ графиков с эталоном\n" +
+                "• Схемы с маркерами датчиков\n\n" +
+                "Обновитесь до Pro для полного доступа.",
+                "OK");
+            return;
+        }
+
+        if (_graphAnalysis == null || _pidValues.Count == 0)
+        {
+            await DisplayAlert("Нет данных", "Сначала выберите параметры и соберите данные.", "OK");
+            return;
+        }
+
+        BtnAiAnalyze.IsEnabled = false;
+        BtnAiAnalyze.Text = "⏳ Анализ...";
+
+        try
+        {
+            // Получаем средние значения по каждому PID
+            var averages = new Dictionary<string, double>();
+            foreach (var (pidHex, values) in _pidValues)
+            {
+                if (values.Count == 0) continue;
+                var avg = values.Average(v => v.Value);
+                averages[pidHex] = avg.GetValueOrDefault();
+            }
+
+            // Получаем марку/модель из MainPage (через App или Navigation)
+            var (brand, model, vin) = GetCurrentVehicle();
+
+            // Сравниваем с эталоном
+            var deviations = _graphAnalysis.CompareWithReference(brand, model, averages);
+
+            if (deviations.Count == 0)
+            {
+                await DisplayAlert("Результат", "✅ Все параметры в пределах нормы. Отклонений не обнаружено.", "OK");
+                AiAnalysisPanel.IsVisible = false;
+                return;
+            }
+
+            // Показываем отклонения
+            ShowDeviations(deviations);
+
+            // Отправляем на AI-анализ
+            var aiResult = await _graphAnalysis.AnalyzeDeviationsWithAiAsync(brand, model, vin, deviations);
+
+            if (aiResult != null)
+            {
+                ShowAiAnalysis(aiResult);
+            }
+            else
+            {
+                // Локальный анализ без AI
+                AiAnalysisSummary.Text = $"Обнаружены отклонения в {deviations.Count} параметрах. " +
+                    "AI-анализ недоступен (проверьте подключение к интернету).";
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"[GraphPage] AI analyze: {ex}");
+            await DisplayAlert("Ошибка", "Не удалось выполнить анализ: " + ex.Message, "OK");
+        }
+        finally
+        {
+            BtnAiAnalyze.IsEnabled = true;
+            UpdateAiButtonState();
+        }
+    }
+
+    private void ShowDeviations(List<PidDeviation> deviations)
+    {
+        // Заголовок с количеством отклонений
+        var criticalCount = deviations.Count(d => d.Status == DeviationStatus.Critical);
+        var warningCount = deviations.Count(d => d.Status == DeviationStatus.Warning);
+
+        AiAnalysisHeader.Text = $"🤖 AI-анализ: {deviations.Count} отклонений " +
+            $"(🔴 {criticalCount} ⚠️ {warningCount})";
+
+        AiAnalysisPanel.IsVisible = true;
+    }
+
+    private void ShowAiAnalysis(GraphAiAnalysis analysis)
+    {
+        AiAnalysisSummary.Text = analysis.Summary;
+
+        // Причины
+        AiAnalysisCauses.Children.Clear();
+        foreach (var cause in analysis.PossibleCauses.Take(5))
+        {
+            AiAnalysisCauses.Children.Add(new Label
+            {
+                Text = "• " + cause,
+                FontSize = 12,
+                TextColor = Color.FromArgb("#E65100"),
+            });
+        }
+
+        // Рекомендации
+        AiAnalysisRecommendations.Children.Clear();
+        foreach (var rec in analysis.Recommendations.Take(5))
+        {
+            AiAnalysisRecommendations.Children.Add(new Label
+            {
+                Text = "• " + rec,
+                FontSize = 12,
+                TextColor = Color.FromArgb("#1565C0"),
+            });
+        }
+
+        // Статус
+        AiAnalysisSeverity.Text = "Критичность: " + analysis.Severity;
+        AiAnalysisSeverity.TextColor = analysis.Severity switch
+        {
+            "КРИТИЧЕСКАЯ" => Color.FromArgb("#F44336"),
+            "ВЫСОКАЯ" => Color.FromArgb("#FF5722"),
+            "СРЕДНЯЯ" => Color.FromArgb("#FF9800"),
+            _ => Color.FromArgb("#4CAF50"),
+        };
+
+        AiAnalysisCanDrive.Text = "Езда: " + analysis.CanDrive;
+        AiAnalysisCanDrive.TextColor = analysis.CanDrive switch
+        {
+            "Нет" => Color.FromArgb("#F44336"),
+            "Осторожно" => Color.FromArgb("#FF9800"),
+            _ => Color.FromArgb("#4CAF50"),
+        };
+    }
+
+    private void OnCloseAiPanelClicked(object? sender, EventArgs e)
+    {
+        AiAnalysisPanel.IsVisible = false;
+    }
+
+    /// <summary>
+    /// Получает текущий автомобиль из MainPage (через WeakReference или Navigation).
+    /// </summary>
+    private (string brand, string model, string? vin) GetCurrentVehicle()
+    {
+        try
+        {
+            // Пробуем получить из App.Current или навигации
+            if (App.Current?.MainPage is Shell shell)
+            {
+                // Ищем MainPage в навигации
+                var mainPage = FindMainPage(shell);
+                if (mainPage != null)
+                {
+                    // Получаем свойства через рефлексию (чтобы не ломать сборку при изменениях MainPage)
+                    var brand = GetFieldValue(mainPage, "pickerBrand")?.GetType()
+                        .GetProperty("SelectedItem")?.GetValue(GetFieldValue(mainPage, "pickerBrand"))?.ToString() ?? "";
+                    var model = GetFieldValue(mainPage, "pickerModel")?.GetType()
+                        .GetProperty("SelectedItem")?.GetValue(GetFieldValue(mainPage, "pickerModel"))?.ToString() ?? "";
+                    var vin = GetFieldValue(mainPage, "_currentVin")?.ToString();
+
+                    return (brand, model, vin);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"[GraphPage] GetCurrentVehicle: {ex.Message}");
+        }
+
+        return ("", "", null);
+    }
+
+    private object? GetFieldValue(object obj, string fieldName)
+    {
+        try
+        {
+            var field = obj.GetType().GetField(fieldName,
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            return field?.GetValue(obj);
+        }
+        catch { return null; }
+    }
+
+    private object? FindMainPage(Shell shell)
+    {
+        try
+        {
+            // Ищем MainPage в стеке навигации
+            foreach (var item in shell.Items)
+            {
+                foreach (var section in item.Items)
+                {
+                    foreach (var content in section.Items)
+                    {
+                        if (content.BindingContext?.GetType().Name.Contains("Main") == true)
+                            return content.BindingContext;
+                        // ShellContent.Content — это страница
+                        var page = content.GetType().GetProperty("Content")?.GetValue(content) as Page;
+                        if (page?.GetType().Name == "MainPage")
+                            return page;
+                    }
+                }
+            }
+
+            // Fallback: ищем в NavigationStack
+            if (shell.CurrentPage?.Navigation?.NavigationStack != null)
+            {
+                foreach (var page in shell.CurrentPage.Navigation.NavigationStack)
+                {
+                    if (page.GetType().Name == "MainPage")
+                        return page;
+                }
+            }
+        }
+        catch { }
+        return null;
     }
 
     public void Dispose()
