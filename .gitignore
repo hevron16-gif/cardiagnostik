@@ -71,3 +71,7 @@ downloads/
 release/windows/
 *.zip
 
+# Keep only final release APKs (ignore intermediate builds)
+release/*-fix*.apk
+!release/CarDiagnosticApp-v1.0.20-fix8.apk
+
