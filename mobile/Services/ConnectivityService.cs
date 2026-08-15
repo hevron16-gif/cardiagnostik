@@ -11,7 +11,11 @@ namespace CarDiagnosticApp.Services;
 public class ConnectivityService
 {
     private readonly HttpClient _http;
-    private const string PingUrl = "https://api.kitdiag.ru/";
+    // Fallback: если kitdiag.ru не работает, пробуем старый URL
+    private static readonly string[] PingUrls = {
+        "https://api.kitdiag.ru/",
+        "https://car-diagnostic-ai.onrender.com/",
+    };
     private const int TimeoutMs = 5_000;
 
     private bool _isOnline;
@@ -73,17 +77,25 @@ public class ConnectivityService
             return false;
         }
 
-        // Настоящий пинг сервера
-        try
+        // Настоящий пинг сервера (пробуем все URL)
+        foreach (var url in PingUrls)
         {
-            var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(TimeoutMs));
-            var response = await _http.GetAsync(PingUrl, cts.Token);
-            IsOnline = response.IsSuccessStatusCode;
+            try
+            {
+                var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(TimeoutMs));
+                var response = await _http.GetAsync(url, cts.Token);
+                if (response.IsSuccessStatusCode)
+                {
+                    IsOnline = true;
+                    return true;
+                }
+            }
+            catch
+            {
+                // Пробуем следующий URL
+            }
         }
-        catch
-        {
-            IsOnline = false;
-        }
+        IsOnline = false;
 
         return IsOnline;
     }
